@@ -1,6 +1,5 @@
-import express from "express";
-import router from "./routes/index.js";
-
+const express = require('express')
+const router = require('./routes/index.js')
 //import  sequelize  from "./database/models/index.js";
 const { sequelize } = require("./database/models");
 

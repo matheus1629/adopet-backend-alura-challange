@@ -1,9 +1,8 @@
-import Router from "express";
-
-import adopterRouter from "./adopterRoute.js";
+const Router = require("express");
+const adopterRouter = require("./adopterRoute.js");
 
 const router = Router();
 
 router.use("/adopter", adopterRouter);
 
-export default router;
+module.exports = router;
