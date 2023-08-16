@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
   Pet.init(
     {
       name: DataTypes.STRING,
-      age: DataTypes.TINYINT,
+      age: DataTypes.TINYINT.UNSIGNED,
       size: DataTypes.STRING,
       description: DataTypes.STRING,
       photo: DataTypes.BLOB,

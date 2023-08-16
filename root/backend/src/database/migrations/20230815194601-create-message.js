@@ -11,6 +11,7 @@ module.exports = {
       },
       contact_message: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       id_adopter: {
         allowNull: false,

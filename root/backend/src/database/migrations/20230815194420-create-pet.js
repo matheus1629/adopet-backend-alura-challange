@@ -11,18 +11,23 @@ module.exports = {
       },
       name: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       age: {
-        type: Sequelize.TINYINT,
+        type: Sequelize.TINYINT.UNSIGNED,
+        allowNull: false,
       },
       size: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       description: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(25),
+        allowNull: false,
       },
       photo: {
         type: Sequelize.BLOB,
+        allowNull: false,
       },
       id_donor: {
         allowNull: false,

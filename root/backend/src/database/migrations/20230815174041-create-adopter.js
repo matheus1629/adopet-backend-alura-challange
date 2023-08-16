@@ -1,49 +1,55 @@
-'use strict';
+"use strict";
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('adopter', {
+    await queryInterface.createTable("adopter", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       profile_photo: {
-        type: Sequelize.BLOB
+        type: Sequelize.BLOB,
       },
       full_name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false,
       },
       telephone: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(11),
+        allowNull: false,
       },
       city: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false,
       },
       state: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(2),
+        allowNull: false,
       },
       personal_info: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(2000),
       },
       email: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false,
       },
       password: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(15),
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Adopter');
-  }
+    await queryInterface.dropTable("Adopter");
+  },
 };
