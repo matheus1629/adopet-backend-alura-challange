@@ -1,18 +1,17 @@
-const express = require('express')
-const router = require('./routes/index.js')
-//import  sequelize  from "./database/models/index.js";
-const { sequelize } = require("./database/models");
+import express from "express";
+import routes from "./routes/index.js";
+import database from "./database/models/index.js";
 
 const app = express();
 const port = 8000;
 
-app.use("/", router);
+app.use("/", routes);
 
 const connectDb = async () => {
   console.log("Checking databse conneciotn...");
 
   try {
-    await sequelize.authenticate();
+    await database.sequelize.authenticate();
     console.log("Database connection established.");
   } catch (error) {
     console.log("Databse connection failed", error);
@@ -27,4 +26,3 @@ const connectDb = async () => {
 
   app.listen(port, () => console.log(`Servidor está rodando na porta ${port}`));
 })();
-

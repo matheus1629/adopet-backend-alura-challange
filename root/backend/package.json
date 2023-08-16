@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "/backend/src/server.js",
+  "type": "module",
   "scripts": {
-    "start": "nodemon ./src/server.js",
+    "start": "nodemon babel-node ./src/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
@@ -15,9 +16,13 @@
     "sequelize": "^6.32.1"
   },
   "devDependencies": {
-    "sequelize-cli": "^6.6.1",
+    "@babel/cli": "^7.22.10",
+    "@babel/core": "^7.22.10",
+    "@babel/node": "^7.22.10",
+    "@babel/preset-env": "^7.22.10",
     "jest": "^29.6.2",
     "nodemon": "^3.0.1",
+    "sequelize-cli": "^6.6.1",
     "supertest": "^6.3.3"
   },
   "keywords": [],
