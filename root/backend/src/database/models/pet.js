@@ -10,13 +10,11 @@ module.exports = (sequelize, DataTypes) => {
   }
   Pet.init(
     {
-      id_pet: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-      },
+      name: DataTypes.STRING,
       age: DataTypes.TINYINT,
       size: DataTypes.STRING,
       description: DataTypes.STRING,
+      photo: DataTypes.BLOB,
     },
     {
       sequelize,
