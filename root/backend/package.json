@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "nodemon babel-node ./src/server.js",
-    "db:migrate": "npx babel-node ./node_modules/sequelize-cli/lib/sequelize db:migrate",
+    "db:migrate": "npx sequelize-cli db:migrate",
+    "db:seed": "npx sequelize-cli db:seed:all",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
