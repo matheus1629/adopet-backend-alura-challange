@@ -5,4 +5,5 @@ const router = express.Router();
 
 router.use("/adopter", adopterRoute);
 
+
 export default router;

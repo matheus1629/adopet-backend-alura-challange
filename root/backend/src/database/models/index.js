@@ -11,6 +11,7 @@ const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || "development";
 import configData from "../config/config.js";
 
+
 const config = configData[env];
 
 const db = {};
@@ -27,7 +28,6 @@ if (config.use_env_variable) {
   );
 }
 
-
 fs.readdirSync(__dirname)
   .filter((file) => {
     return (
@@ -37,10 +37,8 @@ fs.readdirSync(__dirname)
       file.indexOf(".test.js") === -1
     );
   })
-  .forEach(async file => {
-    // Usando import dinâmico em vez de require para carregar os arquivos JS
+  .forEach(async (file) => {
     const modelModule = await import(pathToFileURL(path.join(__dirname, file)));
-
 
     const model = modelModule.default(sequelize, Sequelize.DataTypes);
     db[model.name] = model;

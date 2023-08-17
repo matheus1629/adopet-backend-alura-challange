@@ -6,10 +6,10 @@
   "type": "module",
   "scripts": {
     "start": "nodemon babel-node ./src/server.js",
+    "db:migrate": "npx babel-node ./node_modules/sequelize-cli/lib/sequelize db:migrate",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "body-parser": "^1.20.2",
     "express": "^4.18.2",
     "mysql2": "^3.6.0",
     "path": "^0.12.7",
@@ -20,6 +20,7 @@
     "@babel/core": "^7.22.10",
     "@babel/node": "^7.22.10",
     "@babel/preset-env": "^7.22.10",
+    "@babel/register": "^7.22.5",
     "jest": "^29.6.2",
     "nodemon": "^3.0.1",
     "sequelize-cli": "^6.6.1",
