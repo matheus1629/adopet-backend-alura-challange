@@ -22,11 +22,16 @@ const getAbopterById = async (req, res) => {
 
 const createAbopter = async (req, res) => {
   const newAdopter = req.body;
+  
   try {
     const createdAdopter = await adopterService.createAbopter(newAdopter);
     return res.status(201).json(createdAdopter);
   } catch (error) {
-    return res.status(500).json(error.message);
+    if (error.name === "BadRequestError") {
+      return res.status(400).json(error.message);
+    } else {
+      return res.status(500).json("Internal Server Error");
+    }
   }
 };
 

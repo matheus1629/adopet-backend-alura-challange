@@ -1,12 +1,33 @@
 import database from "../database/models/index.js";
 
 const getAllAdopters = async () => {
-  return await database.Adopter.findAll();
+  return await database.Adopter.findAll({
+    attributes: [
+      "profilePhoto",
+      "firstName",
+      "lastName",
+      "telephone",
+      "city",
+      "state",
+      "personalInfo",
+      "email",
+    ],
+  });
 };
 
 const getAbopterById = async (idAdopter) => {
   return await database.Adopter.findOne({
     where: { id: idAdopter },
+    attributes: [
+      "profilePhoto",
+      "firstName",
+      "lastName",
+      "telephone",
+      "city",
+      "state",
+      "personalInfo",
+      "email",
+    ],
   });
 };
 
