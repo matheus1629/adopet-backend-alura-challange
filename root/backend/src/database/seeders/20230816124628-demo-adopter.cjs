@@ -8,7 +8,8 @@ module.exports = {
       [
         {
           profile_photo: "",
-          full_name: "John Doe",
+          first_name: "John",
+          last_name: "Doe",
           telephone: "56846325984",
           city: "São Paulo",
           state: "SP",
@@ -21,7 +22,8 @@ module.exports = {
         },
         {
           profile_photo: "",
-          full_name: "Roberta Maria",
+          first_name: "Roberta",
+          last_name: "Maria",
           telephone: "45953258706",
           city: "Blumenau",
           state: "SC",
@@ -34,7 +36,8 @@ module.exports = {
         },
         {
           profile_photo: "",
-          full_name: "Carlos Almeida",
+          first_name: "Carlos",
+          last_name: "Almeida",
           telephone: "8492515675",
           city: "Curitiba",
           state: "PR",

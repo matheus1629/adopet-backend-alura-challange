@@ -12,14 +12,42 @@ export default (sequelize, DataTypes) => {
   }
   Adopter.init(
     {
-      profile_photo: DataTypes.BLOB,
-      full_name: DataTypes.STRING,
-      telephone: DataTypes.STRING,
-      city: DataTypes.STRING,
-      state: DataTypes.STRING,
-      personal_info: DataTypes.STRING,
-      email: DataTypes.STRING,
-      password: DataTypes.STRING,
+      profilePhoto: {
+        type: DataTypes.BLOB,
+        field: "profile_photo",
+      },
+      firstName: {
+        type: DataTypes.STRING,
+        field: "first_name",
+      },
+      lastName: {
+        type: DataTypes.STRING,
+        field: "last_name",
+      },
+      telephone: {
+        type: DataTypes.STRING,
+        field: "telephone",
+      },
+      city: {
+        type: DataTypes.STRING,
+        field: "city",
+      },
+      state: {
+        type: DataTypes.STRING,
+        field: "state",
+      },
+      personalInfo: {
+        type: DataTypes.STRING,
+        field: "personal_info",
+      },
+      email: {
+        type: DataTypes.STRING,
+        field: "email",
+      },
+      password: {
+        type: DataTypes.STRING,
+        field: "password",
+      },
     },
     {
       sequelize,

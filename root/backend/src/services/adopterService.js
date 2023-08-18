@@ -1,3 +1,4 @@
+import { validateFirstName } from "../helper/validateData.js";
 import adopterRepository from "../repository/adopterRepository.js";
 
 const getAllAdopters = async () => {
@@ -9,10 +10,14 @@ const getAbopterById = async (idAdopter) => {
 };
 
 const createAbopter = async (newAdopter) => {
+ // validateFirstName(newAdopter?.firstName)
+ console.log(newAdopter)
   return await adopterRepository.createAbopter(newAdopter);
 };
 
 const updateAbopter = async (newAdopterInfo, id) => {
+
+
   return await adopterRepository.updateAbopter(newAdopterInfo, id);
 };
 

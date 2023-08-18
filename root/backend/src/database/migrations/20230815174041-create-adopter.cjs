@@ -12,7 +12,11 @@ module.exports = {
       profile_photo: {
         type: Sequelize.BLOB,
       },
-      full_name: {
+      first_name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      last_name: {
         type: Sequelize.STRING,
         allowNull: false,
       },

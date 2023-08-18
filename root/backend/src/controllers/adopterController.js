@@ -22,7 +22,6 @@ const getAbopterById = async (req, res) => {
 
 const createAbopter = async (req, res) => {
   const newAdopter = req.body;
-
   try {
     const createdAdopter = await adopterService.createAbopter(newAdopter);
     return res.status(201).json(createdAdopter);

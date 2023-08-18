@@ -8,7 +8,8 @@ module.exports = {
       [
         {
           profile_photo: "",
-          full_name: "Isabela Oliveira",
+          first_name: "Isabela",
+          last_name: "Oliveira",
           telephone: "65245698541",
           city: "Brasília",
           state: "DF",
@@ -19,7 +20,8 @@ module.exports = {
         },
         {
           profile_photo: "",
-          full_name: "João Rodriguez",
+          first_name: "João",
+          last_name: "Rodriguez",
           telephone: "3645985215",
           city: "Teresina",
           state: "PI",
@@ -30,7 +32,8 @@ module.exports = {
         },
         {
           profile_photo: "",
-          full_name: "Lara da Silva",
+          first_name: "Lara",
+          last_name: "da Silva",
           telephone: "1234265840",
           city: "Belo Horizonte",
           state: "MG",
