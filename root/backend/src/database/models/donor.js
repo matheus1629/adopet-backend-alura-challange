@@ -18,35 +18,36 @@ export default (sequelize, DataTypes) => {
     {
       profilePhoto: {
         type: DataTypes.BLOB,
-        field: 'profile_photo', // Nome da coluna no banco de dados
+        field: 'profile_photo', 
       },
       firstName: {
         type: DataTypes.STRING,
-        field: 'first_name', // Nome da coluna no banco de dados
+        field: 'first_name', 
       },
       lastName: {
         type: DataTypes.STRING,
-        field: 'last_name', // Nome da coluna no banco de dados
+        field: 'last_name', 
       },
       telephone: {
         type: DataTypes.STRING,
-        field: 'telephone', // Nome da coluna no banco de dados
+        field: 'telephone', 
       },
       city: {
         type: DataTypes.STRING,
-        field: 'city', // Nome da coluna no banco de dados
+        field: 'city', 
       },
       state: {
         type: DataTypes.STRING,
-        field: 'state', // Nome da coluna no banco de dados
+        field: 'state', 
       },
       email: {
         type: DataTypes.STRING,
-        field: 'email', // Nome da coluna no banco de dados
+        unique: true,
+        field: 'email',
       },
       password: {
         type: DataTypes.STRING,
-        field: 'password', // Nome da coluna no banco de dados
+        field: 'password', 
       },
     },
     {

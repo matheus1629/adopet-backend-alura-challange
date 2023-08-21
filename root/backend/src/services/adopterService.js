@@ -1,6 +1,7 @@
 import validateData from "../validation/validateData.js";
 import adopterRepository from "../repository/adopterRepository.js";
 import BadRequestError from "../Errors/BadRequestError.js";
+import bcryptjs from 'bcryptjs'
 
 const getAllAdopters = async () => {
   return await adopterRepository.getAllAdopters();
@@ -38,6 +39,8 @@ const createAbopter = async (newAdopter) => {
     throw new BadRequestError(errorMessage);
   }
 
+  newAdopter.password = await bcryptjs.hash(newAdopter.password, 8)
+  
   return await adopterRepository.createAbopter(newAdopter);
 };
 

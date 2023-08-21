@@ -20,21 +20,6 @@ const getAbopterById = async (req, res) => {
   }
 };
 
-const createAbopter = async (req, res) => {
-  const newAdopter = req.body;
-  
-  try {
-    const createdAdopter = await adopterService.createAbopter(newAdopter);
-    return res.status(201).json(createdAdopter);
-  } catch (error) {
-    if (error.name === "BadRequestError") {
-      return res.status(400).json(error.message);
-    } else {
-      return res.status(500).json("Internal Server Error");
-    }
-  }
-};
-
 const updateAbopter = async (req, res) => {
   const adopterId = req.params.id;
   const adopterData = req.body;
@@ -65,7 +50,6 @@ const deleteAbopter = async (req, res) => {
 export default {
   getAllAdopters,
   getAbopterById,
-  createAbopter,
   updateAbopter,
   deleteAbopter,
 };

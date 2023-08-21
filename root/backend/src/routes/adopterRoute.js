@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get("/", adopterController.getAllAdopters);
 router.get("/:id", validateEntity.checkEntityId("Adopter"), adopterController.getAbopterById);
-router.post("/", adopterController.createAbopter);
+//router.post("/", adopterController.createAbopter);
 router.put("/:id", validateEntity.checkEntityId("Adopter"), adopterController.updateAbopter);
 router.delete("/:id", validateEntity.checkEntityId("Adopter"), adopterController.deleteAbopter);
 
