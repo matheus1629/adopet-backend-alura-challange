@@ -5,7 +5,7 @@ import bcryptjs from "bcryptjs";
 const login = async (userType, email, password) => {
   const userPasswordHash = await loginRepository.getUserByEmail(userType, email);
 
-  if (!bcryptjs.compareSync(password, userPasswordHash.dataValues.password))
+  if (!userPasswordHash || !bcryptjs.compareSync(password, userPasswordHash.dataValues.password))
   throw new BadRequestError("Invalid email or password");
 
 

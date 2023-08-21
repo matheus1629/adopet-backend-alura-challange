@@ -42,7 +42,6 @@ export default (sequelize, DataTypes) => {
       },
       email: {
         type: DataTypes.STRING,
-        unique: true,
         field: 'email',
       },
       password: {

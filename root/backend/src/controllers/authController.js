@@ -24,7 +24,6 @@ const adopterLogin = async (req, res) => {
 
   try {
     await authService.login("Adopter", email, password);
-
     return res.sendStatus(200);
   } catch (error) {
     if (error.name === "BadRequestError") {
