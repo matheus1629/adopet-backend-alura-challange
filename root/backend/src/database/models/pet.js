@@ -7,6 +7,9 @@ export default (sequelize, DataTypes) => {
       Pet.belongsTo(models.Donor, {
         foreignKey: "id_donor",
       });
+      Pet.belongsTo(models.Adopter, {
+        foreignKey: "id_adopter",
+      });
     }
   }
   Pet.init(
@@ -16,6 +19,7 @@ export default (sequelize, DataTypes) => {
       size: DataTypes.STRING,
       description: DataTypes.STRING,
       photo: DataTypes.BLOB,
+      adoptionDate: { type: DataTypes.DATEONLY, field: "adoption_date" },
     },
     {
       sequelize,

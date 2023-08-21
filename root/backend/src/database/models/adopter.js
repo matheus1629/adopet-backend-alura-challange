@@ -6,7 +6,9 @@ export default (sequelize, DataTypes) => {
     static associate(models) {
       Adopter.hasMany(models.Message, {
         foreignKey: "id_adopter",
-        onDelete: "CASCADE",
+      });
+      Adopter.hasMany(models.Pet, {
+        foreignKey: "id_adopter",
       });
     }
   }

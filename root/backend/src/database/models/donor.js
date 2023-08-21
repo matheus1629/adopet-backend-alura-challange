@@ -6,11 +6,9 @@ export default (sequelize, DataTypes) => {
     static associate(models) {
       Donor.hasMany(models.Pet, {
         foreignKey: "id_donor",
-        onDelete: "CASCADE",
       });
       Donor.hasMany(models.Message, {
         foreignKey: "id_donor",
-        onDelete: "CASCADE",
       });
     }
   }
@@ -18,35 +16,35 @@ export default (sequelize, DataTypes) => {
     {
       profilePhoto: {
         type: DataTypes.BLOB,
-        field: 'profile_photo', 
+        field: "profile_photo",
       },
       firstName: {
         type: DataTypes.STRING,
-        field: 'first_name', 
+        field: "first_name",
       },
       lastName: {
         type: DataTypes.STRING,
-        field: 'last_name', 
+        field: "last_name",
       },
       telephone: {
         type: DataTypes.STRING,
-        field: 'telephone', 
+        field: "telephone",
       },
       city: {
         type: DataTypes.STRING,
-        field: 'city', 
+        field: "city",
       },
       state: {
         type: DataTypes.STRING,
-        field: 'state', 
+        field: "state",
       },
       email: {
         type: DataTypes.STRING,
-        field: 'email',
+        field: "email",
       },
       password: {
         type: DataTypes.STRING,
-        field: 'password', 
+        field: "password",
       },
     },
     {

@@ -36,6 +36,18 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        {
+          name: "Maya",
+          age: 2,
+          size: "Pequeno porte",
+          description: "Agitada",
+          photo: "",
+          adoption_date: "2023-08-20",
+          id_donor: 3,
+          id_adopter: 2,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
       ],
       {}
     );

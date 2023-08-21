@@ -29,10 +29,17 @@ module.exports = {
         type: Sequelize.BLOB,
         allowNull: false,
       },
+      adoption_date: {
+        type: Sequelize.DATEONLY,
+      },
       id_donor: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: { model: "donor", key: "id" },
+      },
+      id_adopter: {
+        type: Sequelize.INTEGER,
+        references: { model: "adopter", key: "id" },
       },
       createdAt: {
         allowNull: false,
