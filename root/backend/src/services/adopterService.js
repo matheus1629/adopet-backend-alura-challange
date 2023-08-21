@@ -1,4 +1,4 @@
-import validateData from "../validation/validateData.js";
+import validateData from "../validation/validateSignupData.js";
 import adopterRepository from "../repository/adopterRepository.js";
 import BadRequestError from "../Errors/BadRequestError.js";
 import bcryptjs from 'bcryptjs'

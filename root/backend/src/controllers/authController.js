@@ -1,7 +1,5 @@
 import adopterService from "../services/adopterService.js";
-import bcryptjs from "bcryptjs";
 import authService from "../services/authService.js";
-import BadRequestError from "../Errors/BadRequestError.js";
 
 const createAbopter = async (req, res) => {
   const newAdopter = req.body;
