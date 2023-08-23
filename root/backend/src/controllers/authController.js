@@ -1,3 +1,4 @@
+import authConfig from "../config/auth.config.js";
 import adopterService from "../services/adopterService.js";
 import authService from "../services/authService.js";
 import jwt from "jsonwebtoken";
@@ -25,15 +26,13 @@ const adopterLogin = async (req, res) => {
     const userLoggedData = userLogged.get();
 
     try {
-      const secret = "test";
-
       const payload = {
         userId: userLoggedData.id,
         firstName: userLoggedData.firstName,
         lastName: userLoggedData.lastName,
       };
 
-      const token = jwt.sign(payload, secret, { expiresIn: "24h" });
+      const token = jwt.sign(payload, authConfig.secret, { expiresIn: "24h" });
 
       return res.status(200).json(token);
     } catch (error) {
