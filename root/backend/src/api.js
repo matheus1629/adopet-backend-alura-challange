@@ -23,7 +23,7 @@ const connectDb = async () => {
 (async () => {
   await connectDb();
 
-  console.log(`Attempinh to run server on port ${port}`);
+  console.log(`Attempted to run server on port ${port}`);
 
   app.listen(port, () => console.log(`Servidor está rodando na porta ${port}`));
 })();

@@ -14,16 +14,12 @@ const login = async (userType, email, password) => {
     throw new BadRequestError(errorMessage);
   }
 
-  const userPasswordHash = await loginRepository.getUserByEmail(
-    userType,
-    email
-  );
+  const user = await loginRepository.getUserByEmail(userType, email);
 
-  if (
-    !userPasswordHash ||
-    !bcryptjs.compareSync(password, userPasswordHash.dataValues.password)
-  )
+  if (!user || !bcryptjs.compareSync(password, user.dataValues.password))
     throw new BadRequestError("Invalid email or password");
+
+  return user;
 };
 
 export default {
