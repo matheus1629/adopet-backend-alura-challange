@@ -1,5 +1,5 @@
 import BadRequestError from "../Errors/BadRequestError.js";
-import loginRepository from "../repository/loginRepository.js";
+import loginRepository from "../repository/authRepository.js";
 import bcryptjs from "bcryptjs";
 import validateLoginData from "../validation/validateLoginData.js";
 

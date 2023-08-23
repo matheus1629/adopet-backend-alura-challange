@@ -15,7 +15,7 @@ export default (sequelize, DataTypes) => {
   Donor.init(
     {
       profilePhoto: {
-        type: DataTypes.BLOB,
+        type: DataTypes.BLOB("medium"),
         field: "profile_photo",
       },
       firstName: {

@@ -6,33 +6,33 @@ const getAllAdopters = async () => {
   });
 };
 
-const getAbopterById = async (idAdopter) => {
+const getAdopterById = async (id) => {
   return await database.Adopter.findOne({
-    where: { id: idAdopter },
+    where: { id },
     attributes: { exclude: ["password", "createdAt", "updatedAt"] },
   });
 };
 
-const createAbopter = async (newAdopter) => {
+const createAdopter = async (newAdopter) => {
   return await database.Adopter.create(newAdopter);
 };
 
-const updateAbopter = async (adopterData, id) => {
+const updateAdopter = async (adopterData, id) => {
   return await database.Adopter.update(adopterData, {
-    where: { id: id },
+    where: { id },
   });
 };
 
-const deleteAbopter = async (id) => {
+const deleteAdopter = async (id) => {
   return database.Adopter.destroy({
-    where: { id: id },
+    where: { id },
   });
 };
 
 export default {
   getAllAdopters,
-  getAbopterById,
-  createAbopter,
-  updateAbopter,
-  deleteAbopter,
+  getAdopterById,
+  createAdopter,
+  updateAdopter,
+  deleteAdopter,
 };

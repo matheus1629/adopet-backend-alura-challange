@@ -1,3 +1,31 @@
+const validatePhotoData = (base64) => {
+  const errors = [];
+
+  const fileSupported = ["image/jpeg;base64", "image/png;base64"];
+  const extractData = base64.slice(
+    base64.indexOf("data:") + "data:".length,
+    base64.indexOf(",")
+  );
+  console.log(extractData)
+  if (!fileSupported.includes(extractData)) {
+    errors.push("File not supported");
+  }
+
+  return errors;
+};
+
+const validatePhotoSize = (buffer) => {
+  const errors = [];
+
+  const bufferSize = buffer.byteLength;
+
+  if (bufferSize >= 16777215) {
+    errors.push("Photo file is too large");
+  }
+
+  return errors;
+};
+
 const validateFirstName = (firstName) => {
   const errors = [];
 
@@ -124,4 +152,6 @@ export default {
   validatePersonalInfo,
   validateEmail,
   validatePassword,
+  validatePhotoSize,
+  validatePhotoData,
 };

@@ -32,6 +32,10 @@ module.exports = {
       adoption_date: {
         type: Sequelize.DATEONLY,
       },
+      adopted: {
+        type: Sequelize.TINYINT,
+        allowNull: false,
+      },
       id_donor: {
         allowNull: false,
         type: Sequelize.INTEGER,

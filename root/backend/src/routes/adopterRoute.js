@@ -9,24 +9,24 @@ router.get("/", adopterController.getAllAdopters);
 router.get(
   "/:id",
   validateEntity.checkEntityId("Adopter"),
-  adopterController.getAbopterById
+  adopterController.getAdopterById
 );
 router.put(
   "/:id",
   validateEntity.checkEntityId("Adopter"),
-  adopterController.updateAbopter
+  adopterController.updateAdopter
 );
 router.delete(
   "/:id",
   validateEntity.checkEntityId("Adopter"),
-  adopterController.deleteAbopter
+  adopterController.deleteAdopter
 );
 
 // Private Route Test
 router.get(
   "/:id/rota-privada",
   validateToken.checkToken,
-  adopterController.getAbopterById
+  adopterController.getAdopterById
 );
 
 export default router;

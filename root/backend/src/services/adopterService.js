@@ -7,11 +7,11 @@ const getAllAdopters = async () => {
   return await adopterRepository.getAllAdopters();
 };
 
-const getAbopterById = async (idAdopter) => {
-  return await adopterRepository.getAbopterById(idAdopter);
+const getAdopterById = async (idAdopter) => {
+  return await adopterRepository.getAdopterById(idAdopter);
 };
 
-const createAbopter = async (newAdopter) => {
+const createAdopter = async (newAdopter) => {
   const firstNameErrors = validateData.validateFirstName(newAdopter.firstName);
   const lastNameErrors = validateData.validateLastName(newAdopter.lastName);
   const telephoneErrors = validateData.validateTelephone(newAdopter.telephone);
@@ -42,15 +42,17 @@ const createAbopter = async (newAdopter) => {
   const salt = await bcryptjs.genSalt(10);
   newAdopter.password = await bcryptjs.hash(newAdopter.password, salt);
 
-  return await adopterRepository.createAbopter(newAdopter);
+  return await adopterRepository.createAdopter(newAdopter);
 };
 
-const updateAbopter = async (newAdopterInfo, id) => {
-  const oldAdopter = await getAbopterById(id);
+const updateAdopter = async (newAdopterInfo, id) => {
+  const oldAdopter = await getAdopterById(id);
 
   newAdopterInfo = await { ...oldAdopter.get(), ...newAdopterInfo };
   delete newAdopterInfo.email;
   delete newAdopterInfo.password;
+  delete newAdopterInfo.createdAt;
+  delete newAdopterInfo.updatedAt;
 
   const firstNameErrors = validateData.validateFirstName(
     newAdopterInfo.firstName
@@ -61,6 +63,9 @@ const updateAbopter = async (newAdopterInfo, id) => {
   );
   const cityErrors = validateData.validateCity(newAdopterInfo.city);
   const stateErrors = validateData.validateState(newAdopterInfo.state);
+  const personalInfoErrors = validateData.validatePersonalInfo(
+    newAdopterInfo.personalInfo
+  );
 
   const hasErrors = [
     ...firstNameErrors,
@@ -68,6 +73,7 @@ const updateAbopter = async (newAdopterInfo, id) => {
     ...telephoneErrors,
     ...cityErrors,
     ...stateErrors,
+    ...personalInfoErrors,
   ];
 
   if (hasErrors.length > 0) {
@@ -75,17 +81,17 @@ const updateAbopter = async (newAdopterInfo, id) => {
     throw new BadRequestError(errorMessage);
   }
 
-  return await adopterRepository.updateAbopter(newAdopterInfo, id);
+  return await adopterRepository.updateAdopter(newAdopterInfo, id);
 };
 
-const deleteAbopter = async (id) => {
-  return await adopterRepository.deleteAbopter(id);
+const deleteAdopter = async (id) => {
+  return await adopterRepository.deleteAdopter(id);
 };
 
 export default {
   getAllAdopters,
-  getAbopterById,
-  createAbopter,
-  updateAbopter,
-  deleteAbopter,
+  getAdopterById,
+  createAdopter,
+  updateAdopter,
+  deleteAdopter,
 };
