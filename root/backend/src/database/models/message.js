@@ -1,7 +1,7 @@
 "use strict";
 import { Model } from "sequelize";
 
-export default  (sequelize, DataTypes) => {
+export default (sequelize, DataTypes) => {
   class Message extends Model {
     static associate(models) {
       Message.belongsTo(models.Adopter, {
@@ -18,6 +18,8 @@ export default  (sequelize, DataTypes) => {
   Message.init(
     {
       contact_message: DataTypes.STRING,
+      idDonor: { type: DataTypes.INTEGER, field: "id_donor" },
+      idAdopter: { type: DataTypes.INTEGER, field: "id_adopter" },
     },
     {
       sequelize,

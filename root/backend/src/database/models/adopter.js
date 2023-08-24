@@ -6,6 +6,7 @@ export default (sequelize, DataTypes) => {
     static associate(models) {
       Adopter.hasMany(models.Message, {
         foreignKey: "id_adopter",
+        onDelete: "CASCADE",
       });
       Adopter.hasMany(models.Pet, {
         foreignKey: "id_adopter",
@@ -50,10 +51,15 @@ export default (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         field: "password",
       },
+      deletedAt: {
+        type: DataTypes.DATE,
+        allowNull: true
+      }
     },
     {
       sequelize,
       modelName: "Adopter",
+      paranoid: true,
     }
   );
   return Adopter;

@@ -2,14 +2,18 @@ import database from "../database/models/index.js";
 
 const getAllDonors = async () => {
   return await database.Donor.findAll({
-    attributes: { exclude: ["password", "createdAt", "updatedAt"] },
+    attributes: {
+      exclude: ["password", "createdAt", "updatedAt", "deletedAt"],
+    },
   });
 };
 
 const getDonorById = async (id) => {
   return await database.Donor.findOne({
     where: { id },
-    attributes: { exclude: ["password", "createdAt", "updatedAt"] },
+    attributes: {
+      exclude: ["password", "createdAt", "updatedAt", "deletedAt"],
+    },
   });
 };
 
@@ -24,13 +28,19 @@ const updateDonor = async (donorData, id) => {
 };
 
 const deleteDonor = async (id) => {
-  return database.Donor.destroy({
-    where: { id },
+  return database.sequelize.transaction(async (transaction) => {
+    await database.Message.destroy({ where: { idDonor: id } }, { transaction });
+    await database.Pet.destroy(
+      { where: { idDonor: id, adopted: 0 } },
+      { transaction }
+    );
+
+    await database.Donor.destroy({ where: { id } }, { transaction });
   });
 };
 
 export default {
-  getAllPets: getAllDonors,
+  getAllDonors,
   getDonorById,
   createDonor,
   updateDonor,

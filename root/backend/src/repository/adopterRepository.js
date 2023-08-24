@@ -2,14 +2,18 @@ import database from "../database/models/index.js";
 
 const getAllAdopters = async () => {
   return await database.Adopter.findAll({
-    attributes: { exclude: ["password", "createdAt", "updatedAt"] },
+    attributes: {
+      exclude: ["password", "createdAt", "updatedAt", "deletedAt"],
+    },
   });
 };
 
 const getAdopterById = async (id) => {
   return await database.Adopter.findOne({
     where: { id },
-    attributes: { exclude: ["password", "createdAt", "updatedAt"] },
+    attributes: {
+      exclude: ["password", "createdAt", "updatedAt", "deletedAt"],
+    },
   });
 };
 

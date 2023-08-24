@@ -4,7 +4,7 @@ import BadRequestError from "../Errors/BadRequestError.js";
 import bcryptjs from "bcryptjs";
 
 const getAllDonors = async () => {
-  const donorsData = await donorRepository.getAllPets();
+  const donorsData = await donorRepository.getAllDonors();
 
   for (const key in donorsData) {
     if (donorsData[key].dataValues.picture) {
