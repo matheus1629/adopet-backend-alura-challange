@@ -4,12 +4,12 @@ import BadRequestError from "../Errors/BadRequestError.js";
 import bcryptjs from "bcryptjs";
 
 const getAllDonors = async () => {
-  const donorsData = await donorRepository.getAllDonors();
+  const donorsData = await donorRepository.getAllPets();
 
   for (const key in donorsData) {
-    if (donorsData[key].dataValues.profilePhoto) {
-      donorsData[key].dataValues.profilePhoto =
-        donorsData[key].dataValues.profilePhoto.toString();
+    if (donorsData[key].dataValues.picture) {
+      donorsData[key].dataValues.picture =
+        donorsData[key].dataValues.picture.toString();
     }
   }
 
@@ -18,51 +18,38 @@ const getAllDonors = async () => {
 
 const getDonorById = async (id) => {
   const donorData = await donorRepository.getDonorById(id);
-  const donorDataPhotoString = donorData.profilePhoto.toString();
 
-  donorData.profilePhoto = donorDataPhotoString;
+  if (donorData.dataValues.picture) {
+    donorData.dataValues.picture = await donorData.dataValues.picture.toString();
+  }
 
-  return donorData;
+  return donorData.dataValues;
 };
 
 const createDonor = async (newDonor) => {
-  const firstNameErrors = validateData.validateFirstName(newDonor.firstName);
-  const lastNameErrors = validateData.validateLastName(newDonor.lastName);
-  const telephoneErrors = validateData.validateTelephone(newDonor.telephone);
-  const cityErrors = validateData.validateCity(newDonor.city);
-  const stateErrors = validateData.validateState(newDonor.state);
-  const emailErrors = validateData.validateEmail(newDonor.email);
-  const passwordErrors = validateData.validatePassword(newDonor.password);
-  const profilePhotoDataErrors = validateData.validatePhotoData(
-    newDonor.profilePhoto
-  );
+  let errors = [];
+  for (const key in newDonor) {
+    const error = validateData[key](newDonor[key]);
+    if (error) errors.push(error);
+  }
 
-  newDonor.profilePhoto = Buffer.from(newDonor.profilePhoto);
-  const profilePhotoSizeErrors = validateData.validatePhotoSize(
-    newDonor.profilePhoto
-  );
+  if (newDonor.picture && !errors.includes("File not supported")) {
+    newDonor.picture = Buffer.from(newDonor.picture);
+    const error = validateData.validatePictureSize(newDonor.picture);
+    if (error) errors.push(error);
+  }
 
-  const hasErrors = [
-    ...firstNameErrors,
-    ...lastNameErrors,
-    ...telephoneErrors,
-    ...cityErrors,
-    ...stateErrors,
-    ...emailErrors,
-    ...passwordErrors,
-    ...profilePhotoSizeErrors,
-    ...profilePhotoDataErrors,
-  ];
-
-  if (hasErrors.length > 0) {
-    const errorMessage = `Validation errors: ${hasErrors.join(", ")}`;
+  if (errors.length > 0) {
+    const errorMessage = `Validation errors: ${errors.join(", ")}`;
     throw new BadRequestError(errorMessage);
   }
 
   const salt = await bcryptjs.genSalt(10);
   newDonor.password = await bcryptjs.hash(newDonor.password, salt);
 
-  return await donorRepository.createDonor(newDonor);
+  const donorCreated = await donorRepository.createDonor(newDonor);
+
+  return donorCreated.dataValues.id;
 };
 
 const updateDonor = async (newDonorInfo, id) => {
@@ -75,6 +62,12 @@ const updateDonor = async (newDonorInfo, id) => {
   let errors = [];
   for (const key in newDonorInfo) {
     const error = validateData[key](newDonorInfo[key]);
+    if (error) errors.push(error);
+  }
+
+  if (newDonorInfo.picture && !errors.includes("File not supported")) {
+    newDonorInfo.picture = Buffer.from(newDonorInfo.picture);
+    const error = validateData.validatePictureSize(newDonorInfo.picture);
     if (error) errors.push(error);
   }
 

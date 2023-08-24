@@ -11,7 +11,7 @@ router.get(
   validateEntity.checkEntityId("Adopter"),
   adopterController.getAdopterById
 );
-router.put(
+router.patch(
   "/:id",
   validateEntity.checkEntityId("Adopter"),
   adopterController.updateAdopter

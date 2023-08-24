@@ -7,7 +7,7 @@ module.exports = {
       "Donor",
       [
         {
-          profile_photo: "",
+          picture: "",
           first_name: "Isabela",
           last_name: "Oliveira",
           telephone: "65245698541",
@@ -19,7 +19,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          profile_photo: "",
+          picture: "",
           first_name: "João",
           last_name: "Rodriguez",
           telephone: "3645985215",
@@ -31,7 +31,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          profile_photo: "",
+          picture: "",
           first_name: "Lara",
           last_name: "da Silva",
           telephone: "1234265840",

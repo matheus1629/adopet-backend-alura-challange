@@ -18,9 +18,10 @@ export default (sequelize, DataTypes) => {
       age: DataTypes.TINYINT.UNSIGNED,
       size: DataTypes.STRING,
       description: DataTypes.STRING,
-      photo: DataTypes.BLOB("medium"),
+      picture: DataTypes.BLOB("medium"),
       adoptionDate: { type: DataTypes.DATEONLY, field: "adoption_date" },
-      adopted: DataTypes.TINYINT,
+      adopted: { type: DataTypes.TINYINT, allowNull: false, defaultValue: 0 },
+      idDonor: { type: DataTypes.INTEGER, field: "id_donor" },
     },
     {
       sequelize,

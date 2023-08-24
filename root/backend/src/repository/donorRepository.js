@@ -30,7 +30,7 @@ const deleteDonor = async (id) => {
 };
 
 export default {
-  getAllDonors,
+  getAllPets: getAllDonors,
   getDonorById,
   createDonor,
   updateDonor,

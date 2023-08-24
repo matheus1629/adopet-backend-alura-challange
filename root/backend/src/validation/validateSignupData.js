@@ -1,4 +1,4 @@
-const profilePhoto = (base64) => {
+const picture = (base64) => {
   const errors = [];
 
   const fileSupported = ["image/jpeg;base64", "image/png;base64"];
@@ -14,13 +14,13 @@ const profilePhoto = (base64) => {
   if (errors.length !== 0) return errors;
 };
 
-const validatePhotoSize = (buffer) => {
+const validatePictureSize = (buffer) => {
   const errors = [];
 
   const bufferSize = buffer.byteLength;
 
   if (bufferSize >= 16777215) {
-    errors.push("Photo file is too large");
+    errors.push("Picture file is too large");
   }
 
   if (errors.length !== 0) return errors;
@@ -33,8 +33,8 @@ const firstName = (firstName) => {
     errors.push("First name is required");
   } else {
     const firstNameTrim = firstName.trim();
-    if (firstNameTrim.length < 3) {
-      errors.push("First name is too short");
+    if (firstNameTrim.length < 3 || firstNameTrim.length > 255) {
+      errors.push("Invalid first name");
     }
   }
 
@@ -48,8 +48,8 @@ const lastName = (lastName) => {
     errors.push("Last name is required");
   } else {
     const lastNameTrim = lastName.trim();
-    if (lastNameTrim.length < 3) {
-      errors.push("Last name is too short");
+    if (lastNameTrim.length < 3 || lastNameTrim.length > 255) {
+      errors.push("Invalid last name");
     }
   }
 
@@ -61,6 +61,8 @@ const telephone = (telephone) => {
 
   if (!telephone) {
     errors.push("Telephone is required");
+  } else if (!/^\d+$/.test(telephone)) {
+    errors.push("Telephone only accepts numbers");
   } else {
     const telephoneTrim = telephone.trim();
     if (telephoneTrim.length < 10 || telephoneTrim.length > 11) {
@@ -142,6 +144,65 @@ const password = (password) => {
   if (errors.length !== 0) return errors;
 };
 
+const name = (name) => {
+  const errors = [];
+
+  if (!name) {
+    errors.push("Pet's name is required");
+  } else {
+    const lastNameTrim = name.trim();
+    if (lastNameTrim.length < 3) {
+      errors.push("Pet's name is too short");
+    }
+  }
+
+  if (errors.length !== 0) return errors;
+};
+
+const age = (age) => {
+  const errors = [];
+
+  if (!age) {
+    errors.push("Pet's age is required");
+  } else if (!/^\d+$/.test(age)) {
+    errors.push("Age only accepts numbers");
+  } else {
+    if (age > 99) {
+      errors.push("There is no pet that old");
+    }
+  }
+
+  if (errors.length !== 0) return errors;
+};
+
+const size = (size) => {
+  const errors = [];
+
+  if (!size) {
+    errors.push("Pet's size is required");
+  } else {
+    if (size.length > 255) {
+      errors.push("Invalid size");
+    }
+  }
+
+  if (errors.length !== 0) return errors;
+};
+
+const description = (description) => {
+  const errors = [];
+
+  if (!description) {
+    errors.push("Pet's description is required");
+  } else {
+    if (description.length > 25) {
+      errors.push("Pet's description is too large");
+    }
+  }
+
+  if (errors.length !== 0) return errors;
+};
+
 export default {
   firstName,
   lastName,
@@ -151,6 +212,10 @@ export default {
   personalInfo,
   email,
   password,
-  validatePhotoSize,
-  profilePhoto,
+  validatePictureSize,
+  picture,
+  name,
+  age,
+  size,
+  description,
 };

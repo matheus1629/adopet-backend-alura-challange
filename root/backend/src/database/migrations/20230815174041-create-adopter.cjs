@@ -9,7 +9,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      profile_photo: {
+      picture: {
         type: Sequelize.BLOB,
       },
       first_name: {

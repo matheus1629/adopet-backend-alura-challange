@@ -7,7 +7,7 @@ module.exports = {
       "Adopter",
       [
         {
-          profile_photo: "",
+          picture: "",
           first_name: "John",
           last_name: "Doe",
           telephone: "56846325984",
@@ -21,7 +21,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          profile_photo: "",
+          picture: "",
           first_name: "Roberta",
           last_name: "Maria",
           telephone: "45953258706",
@@ -35,7 +35,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          profile_photo: "",
+          picture: "",
           first_name: "Carlos",
           last_name: "Almeida",
           telephone: "8492515675",
