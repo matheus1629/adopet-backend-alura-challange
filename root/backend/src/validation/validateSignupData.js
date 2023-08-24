@@ -1,4 +1,4 @@
-const validatePhotoData = (base64) => {
+const profilePhoto = (base64) => {
   const errors = [];
 
   const fileSupported = ["image/jpeg;base64", "image/png;base64"];
@@ -6,12 +6,12 @@ const validatePhotoData = (base64) => {
     base64.indexOf("data:") + "data:".length,
     base64.indexOf(",")
   );
-  console.log(extractData)
+
   if (!fileSupported.includes(extractData)) {
     errors.push("File not supported");
   }
 
-  return errors;
+  if (errors.length !== 0) return errors;
 };
 
 const validatePhotoSize = (buffer) => {
@@ -23,10 +23,10 @@ const validatePhotoSize = (buffer) => {
     errors.push("Photo file is too large");
   }
 
-  return errors;
+  if (errors.length !== 0) return errors;
 };
 
-const validateFirstName = (firstName) => {
+const firstName = (firstName) => {
   const errors = [];
 
   if (!firstName) {
@@ -38,10 +38,10 @@ const validateFirstName = (firstName) => {
     }
   }
 
-  return errors;
+  if (errors.length !== 0) return errors;
 };
 
-const validateLastName = (lastName) => {
+const lastName = (lastName) => {
   const errors = [];
 
   if (!lastName) {
@@ -53,10 +53,10 @@ const validateLastName = (lastName) => {
     }
   }
 
-  return errors;
+  if (errors.length !== 0) return errors;
 };
 
-const validateTelephone = (telephone) => {
+const telephone = (telephone) => {
   const errors = [];
 
   if (!telephone) {
@@ -68,10 +68,10 @@ const validateTelephone = (telephone) => {
     }
   }
 
-  return errors;
+  if (errors.length !== 0) return errors;
 };
 
-const validateCity = (city) => {
+const city = (city) => {
   const errors = [];
 
   if (!city) {
@@ -83,10 +83,10 @@ const validateCity = (city) => {
     }
   }
 
-  return errors;
+  if (errors.length !== 0) return errors;
 };
 
-const validateState = (state) => {
+const state = (state) => {
   const errors = [];
 
   if (!state) {
@@ -98,10 +98,10 @@ const validateState = (state) => {
     }
   }
 
-  return errors;
+  if (errors.length !== 0) return errors;
 };
 
-const validatePersonalInfo = (personalInfo) => {
+const personalInfo = (personalInfo) => {
   const errors = [];
 
   if (personalInfo) {
@@ -109,10 +109,10 @@ const validatePersonalInfo = (personalInfo) => {
     if (personalInfo.length > 2000) errors.push("Personal info too large");
   }
 
-  return errors;
+  if (errors.length !== 0) return errors;
 };
 
-const validateEmail = (email) => {
+const email = (email) => {
   const errors = [];
 
   if (!email) {
@@ -125,10 +125,10 @@ const validateEmail = (email) => {
     }
   }
 
-  return errors;
+  if (errors.length !== 0) return errors;
 };
 
-const validatePassword = (password) => {
+const password = (password) => {
   const errors = [];
 
   if (!password) {
@@ -139,19 +139,18 @@ const validatePassword = (password) => {
       errors.push("Invalid Password");
     }
   }
-
-  return errors;
+  if (errors.length !== 0) return errors;
 };
 
 export default {
-  validateFirstName,
-  validateLastName,
-  validateTelephone,
-  validateCity,
-  validateState,
-  validatePersonalInfo,
-  validateEmail,
-  validatePassword,
+  firstName,
+  lastName,
+  telephone,
+  city,
+  state,
+  personalInfo,
+  email,
+  password,
   validatePhotoSize,
-  validatePhotoData,
+  profilePhoto,
 };

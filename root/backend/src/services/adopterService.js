@@ -4,11 +4,25 @@ import BadRequestError from "../Errors/BadRequestError.js";
 import bcryptjs from "bcryptjs";
 
 const getAllAdopters = async () => {
-  return await adopterRepository.getAllAdopters();
+  const adoptersData = await adopterRepository.getAllAdopters();
+
+  for (const key in adoptersData) {
+    if (adoptersData[key].dataValues.profilePhoto) {
+      adoptersData[key].dataValues.profilePhoto =
+        adoptersData[key].dataValues.profilePhoto.toString();
+    }
+  }
+
+  return adoptersData;
 };
 
-const getAdopterById = async (idAdopter) => {
-  return await adopterRepository.getAdopterById(idAdopter);
+const getAdopterById = async (id) => {
+  const adopterData = await adopterRepository.getAdopterById(id);
+  const adopterDataPhotoString = adopterData.profilePhoto.toString();
+
+  adopterData.profilePhoto = adopterDataPhotoString;
+
+  return adopterData;
 };
 
 const createAdopter = async (newAdopter) => {
@@ -22,7 +36,15 @@ const createAdopter = async (newAdopter) => {
   );
   const emailErrors = validateData.validateEmail(newAdopter.email);
   const passwordErrors = validateData.validatePassword(newAdopter.password);
+  const profilePhotoDataErrors = validateData.validatePhotoData(
+    newAdopter.profilePhoto
+  );
 
+  newDonor.profilePhoto = Buffer.from(newDonor.profilePhoto);
+  const profilePhotoSizeErrors = validateData.validatePhotoSize(
+    newAdopter.profilePhoto
+  );
+  
   const hasErrors = [
     ...firstNameErrors,
     ...lastNameErrors,
@@ -32,6 +54,8 @@ const createAdopter = async (newAdopter) => {
     ...emailErrors,
     ...passwordErrors,
     ...personalInfoErrors,
+    ...profilePhotoDataErrors,
+    ...profilePhotoSizeErrors,
   ];
 
   if (hasErrors.length > 0) {
@@ -66,6 +90,14 @@ const updateAdopter = async (newAdopterInfo, id) => {
   const personalInfoErrors = validateData.validatePersonalInfo(
     newAdopterInfo.personalInfo
   );
+  const profilePhotoDataErrors = validateData.validatePhotoData(
+    newAdopterInfo.profilePhoto
+  );
+
+  newAdopterInfo.profilePhoto = Buffer.from(newAdopterInfo.profilePhoto);
+  const profilePhotoSizeErrors = validateData.validatePhotoSize(
+    newAdopterInfo.profilePhoto
+  );
 
   const hasErrors = [
     ...firstNameErrors,
@@ -74,6 +106,8 @@ const updateAdopter = async (newAdopterInfo, id) => {
     ...cityErrors,
     ...stateErrors,
     ...personalInfoErrors,
+    ...profilePhotoDataErrors,
+    ...profilePhotoSizeErrors,
   ];
 
   if (hasErrors.length > 0) {
