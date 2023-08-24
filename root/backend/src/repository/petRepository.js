@@ -1,5 +1,13 @@
 import database from "../database/models/index.js";
 
+const getAllPetsAvailable = async (pageSetting) => {
+  return await database.Pet.findAll({
+    where: { adopted: 0 },
+    attributes: { exclude: ["createdAt", "updatedAt"] },
+    ...pageSetting
+  });
+};
+
 const getAllPets = async () => {
   return await database.Pet.findAll({
     attributes: { exclude: ["createdAt", "updatedAt"] },
@@ -24,12 +32,20 @@ const updatePet = async (petData, id) => {
 };
 
 const deletePet = async (id) => {
-  return database.Pet.destroy({
-    where: { id },
+  let wasDeleted;
+  await database.sequelize.transaction(async (transaction) => {
+    await database.Message.destroy({ where: { idPet: id } }, { transaction });
+    const deletedCount = await database.Pet.destroy(
+      { where: { id: id, adopted: 0 } },
+      { transaction }
+    );
+    wasDeleted = deletedCount;
   });
+  return wasDeleted;
 };
 
 export default {
+  getAllPetsAvailable,
   getAllPets,
   getPetById,
   createPet,

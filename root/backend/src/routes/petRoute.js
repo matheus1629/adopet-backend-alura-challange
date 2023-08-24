@@ -5,7 +5,8 @@ import validateToken from "../middleware/validateToken.js";
 
 const router = express.Router();
 
-router.get("/", petController.getAllPets);
+router.get("/", petController.getAllPetsAvailable);
+router.get("/all", petController.getAllPets);
 router.get(
   "/:id",
   validateEntity.checkEntityId("Pet"),

@@ -20,6 +20,7 @@ export default (sequelize, DataTypes) => {
       contact_message: DataTypes.STRING,
       idDonor: { type: DataTypes.INTEGER, field: "id_donor" },
       idAdopter: { type: DataTypes.INTEGER, field: "id_adopter" },
+      idPet: { type: DataTypes.INTEGER, field: "id_pet" },
     },
     {
       sequelize,

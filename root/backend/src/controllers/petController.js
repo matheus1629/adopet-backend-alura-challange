@@ -1,5 +1,19 @@
 import petService from "../services/petService.js";
 
+const getAllPetsAvailable = async (req, res) => {
+  const { page, pageSize } = req.query;
+
+  try {
+    const allPets = await petService.getAllPetsAvailable(
+      Number(page),
+      Number(pageSize)
+    );
+    return res.status(200).json(allPets);
+  } catch (error) {
+    return res.status(500).json(error.message);
+  }
+};
+
 const getAllPets = async (req, res) => {
   try {
     const allPets = await petService.getAllPet();
@@ -22,11 +36,11 @@ const getPetById = async (req, res) => {
 
 const createPet = async (req, res) => {
   const newPet = req.body;
-  
+
   try {
     const createdPetId = await petService.createPet(newPet);
 
-    const createdPet = await petService.getPetById(createdPetId)
+    const createdPet = await petService.getPetById(createdPetId);
 
     return res.status(201).json(createdPet);
   } catch (error) {
@@ -60,11 +74,16 @@ const deletePet = async (req, res) => {
     await petService.deletePet(Number(petId));
     return res.sendStatus(204);
   } catch (error) {
-    return res.status(500).json(error.message);
+    if (error.name === "BadRequestError") {
+      return res.status(409).json(error.message);
+    } else {
+      return res.status(500).json(error.message);
+    }
   }
 };
 
 export default {
+  getAllPetsAvailable,
   getAllPets,
   getPetById,
   createPet,
