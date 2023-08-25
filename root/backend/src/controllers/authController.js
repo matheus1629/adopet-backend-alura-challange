@@ -26,7 +26,7 @@ const createUser = (userType) => async (req, res) => {
     if (error.name === "BadRequestError") {
       return res.status(400).json(error.message);
     } else {
-      return res.status(500).json(error.mes);
+      return res.status(500).json(error.message);
     }
   }
 };

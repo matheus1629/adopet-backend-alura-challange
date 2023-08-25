@@ -20,7 +20,9 @@ export default (sequelize, DataTypes) => {
     {
       name: DataTypes.STRING,
       age: DataTypes.TINYINT.UNSIGNED,
-      size: DataTypes.STRING,
+      size: {
+        type: DataTypes.ENUM("Porte pequeno", "Porte medio", "Porte Grande"),
+      },
       description: DataTypes.STRING,
       picture: DataTypes.BLOB("medium"),
       adoptionDate: { type: DataTypes.DATEONLY, field: "adoption_date" },

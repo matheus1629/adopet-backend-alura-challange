@@ -9,6 +9,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
+      adoption_status: {
+        type: Sequelize.ENUM("not_started", "pending_confirmation", "adopted"),
+        allowNull: false,
+      },
       contact_message: {
         type: Sequelize.STRING,
         allowNull: false,

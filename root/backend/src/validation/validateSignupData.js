@@ -1,3 +1,5 @@
+import { petSizes, states } from "../config/consts.js";
+
 const picture = (base64) => {
   const errors = [];
 
@@ -94,8 +96,7 @@ const state = (state) => {
   if (!state) {
     errors.push("State is required");
   } else {
-    const stateTrim = state.trim();
-    if (stateTrim.length !== 2) {
+    if (!states.includes(state)) {
       errors.push("Invalid state");
     }
   }
@@ -181,7 +182,7 @@ const size = (size) => {
   if (!size) {
     errors.push("Pet's size is required");
   } else {
-    if (size.length > 255) {
+    if (!petSizes.includes(size)) {
       errors.push("Invalid size");
     }
   }

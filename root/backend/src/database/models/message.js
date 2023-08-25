@@ -17,7 +17,12 @@ export default (sequelize, DataTypes) => {
   }
   Message.init(
     {
-      contact_message: DataTypes.STRING,
+      adoptionStatus: {
+        type: DataTypes.ENUM("not_started", "pending_confirmation", "adopted"),
+        field: "adoption_status",
+        defaultValue: "not_started",
+      },
+      contactMessage: { type: DataTypes.STRING, field: "contact_message" },
       idDonor: { type: DataTypes.INTEGER, field: "id_donor" },
       idAdopter: { type: DataTypes.INTEGER, field: "id_adopter" },
       idPet: { type: DataTypes.INTEGER, field: "id_pet" },
