@@ -16,6 +16,8 @@ const getAdopterById = async (req, res) => {
     const adopter = await adopterService.getAdopterById(Number(adopterId));
     return res.status(200).json(adopter);
   } catch (error) {
+    if (error.name === "BadRequestError") return res.status(404).json(error.message);
+
     return res.status(500).json(error.message);
   }
 };

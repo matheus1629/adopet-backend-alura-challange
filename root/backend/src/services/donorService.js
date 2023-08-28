@@ -18,6 +18,8 @@ const getAllDonors = async () => {
 
 const getDonorById = async (id) => {
   const donorData = await donorRepository.getDonorById(id);
+ 
+  if(!donorData) throw new BadRequestError('Donor not found')
 
   if (donorData.dataValues.picture) {
     donorData.dataValues.picture = await donorData.dataValues.picture.toString();

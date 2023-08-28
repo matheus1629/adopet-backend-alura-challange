@@ -8,7 +8,6 @@ const router = express.Router();
 router.get("/", adopterController.getAllAdopters);
 router.get(
   "/:id",
-  validateEntity.checkEntityId("Adopter"),
   adopterController.getAdopterById
 );
 router.patch(

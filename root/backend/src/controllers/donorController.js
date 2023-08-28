@@ -16,19 +16,32 @@ const getDonorById = async (req, res) => {
     const donor = await donorService.getDonorById(Number(donorId));
     return res.status(200).json(donor);
   } catch (error) {
+    if (error.name === "BadRequestError") return res.status(404).json(error.message);
+
+    return res.status(500).json(error.message);
+  }
+};
+
+const getLoggedDonor = async (req, res) => {
+  const donorId = req.userId;
+
+  try {
+    const donor = await donorService.getDonorById(Number(donorId));
+    return res.status(200).json(donor);
+  } catch (error) {
     return res.status(500).json(error.message);
   }
 };
 
 const updateDonor = async (req, res) => {
-  const donorId = req.params.id;
+  const donorId = req.userId;
   const donorData = req.body;
 
   try {
     await donorService.updateDonor(donorData, Number(donorId));
 
     const donorNewInfo = await donorService.getDonorById(Number(donorId));
-    
+
     return res.status(200).json(donorNewInfo);
   } catch (error) {
     return res.status(500).json(error.message);
@@ -36,7 +49,7 @@ const updateDonor = async (req, res) => {
 };
 
 const deleteDonor = async (req, res) => {
-  const donorId = req.params.id;
+  const donorId = req.userId;
 
   try {
     await donorService.deleteDonor(Number(donorId));
@@ -49,6 +62,7 @@ const deleteDonor = async (req, res) => {
 export default {
   getAllDonors,
   getDonorById,
+  getLoggedDonor,
   updateDonor,
   deleteDonor,
 };

@@ -19,6 +19,8 @@ const getAllAdopters = async () => {
 const getAdopterById = async (id) => {
   const adopterData = await adopterRepository.getAdopterById(id);
 
+  if (!adopterData) throw new BadRequestError("Adopter not found");
+
   if (adopterData.dataValues.picture) {
     adopterData.dataValues.picture = await adopterData.dataValues.picture.toString();
   }

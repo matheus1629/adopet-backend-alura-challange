@@ -5,28 +5,23 @@ import validateToken from "../middleware/validateToken.js";
 
 const router = express.Router();
 
+// Public Routes
 router.get("/", donorController.getAllDonors);
 router.get(
   "/:id",
-  validateEntity.checkEntityId("Donor"),
   donorController.getDonorById
 );
+
+// Private Routes
 router.patch(
-  "/:id",
-  validateEntity.checkEntityId("Donor"),
+  "/",
+  validateToken.checkToken("Donor"),
   donorController.updateDonor
 );
 router.delete(
-  "/:id",
-  validateEntity.checkEntityId("Donor"),
+  "/",
+  validateToken.checkToken("Donor"),
   donorController.deleteDonor
-);
-
-// Private Route Test
-router.get(
-  "/:id/rota-privada",
-  validateToken.checkToken,
-  donorController.getDonorById
 );
 
 export default router;

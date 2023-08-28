@@ -44,11 +44,10 @@ const createPet = async (req, res) => {
 
     return res.status(201).json(createdPet);
   } catch (error) {
-    if (error.name === "BadRequestError") {
-      return res.status(400).json(error.message);
-    } else {
-      return res.status(500).json(error.message);
-    }
+    if (error.name === "BadRequestError") return res.status(400).json(error.message);
+    
+     return res.status(500).json(error.message);
+    
   }
 };
 

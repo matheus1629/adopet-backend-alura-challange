@@ -44,7 +44,6 @@ const userLogin = (userType) => async (req, res) => {
         firstName: userLoggedData.firstName,
         lastName: userLoggedData.lastName,
       };
-
       const token = jwt.sign(payload, authConfig.secret, { expiresIn: "24h" });
 
       return res.status(200).json(token);
