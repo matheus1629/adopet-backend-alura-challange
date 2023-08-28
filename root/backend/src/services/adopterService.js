@@ -17,6 +17,8 @@ const getAllAdopters = async () => {
 };
 
 const getAdopterById = async (id) => {
+  if(isNaN(id)) throw new BadRequestError('Invalid id')
+  
   const adopterData = await adopterRepository.getAdopterById(id);
 
   if (!adopterData) throw new BadRequestError("Adopter not found");

@@ -23,11 +23,10 @@ const createUser = (userType) => async (req, res) => {
 
     return res.status(201).json(createdUser);
   } catch (error) {
-    if (error.name === "BadRequestError") {
-      return res.status(400).json(error.message);
-    } else {
-      return res.status(500).json(error.message);
-    }
+    if (error.name === "BadRequestError") return res.status(400).json(error.message);
+
+    return res.status(500).json(error.message);
+    
   }
 };
 
@@ -51,11 +50,9 @@ const userLogin = (userType) => async (req, res) => {
       return res.status(500).json(error.message);
     }
   } catch (error) {
-    if (error.name === "BadRequestError") {
-      return res.status(401).json(error.message);
-    } else {
-      return res.status(500).json(error.message);
-    }
+    if (error.name === "BadRequestError") return res.status(401).json(error.message);
+
+    return res.status(500).json(error.message);
   }
 };
 

@@ -9,7 +9,7 @@ module.exports = {
         {
           name: "Maria",
           age: 7,
-          size: "Pequeno porte",
+          size: "Porte pequeno",
           description: "Late muito",
           picture: "",
           adopted: 0,
@@ -20,7 +20,7 @@ module.exports = {
         {
           name: "Miguel",
           age: 3,
-          size: "Pequeno porte",
+          size: "Porte pequeno",
           description: "Brincalhão e carente",
           picture: "",
           adopted: 0,
@@ -31,7 +31,7 @@ module.exports = {
         {
           name: "Katarina",
           age: 4,
-          size: "Pequeno porte",
+          size: "Porte pequeno",
           description: "Calma e tranquila",
           picture: "",
           adopted: 0,
@@ -42,7 +42,7 @@ module.exports = {
         {
           name: "Maya",
           age: 2,
-          size: "Pequeno porte",
+          size: "Porte pequeno",
           description: "Agitada",
           picture: "",
           adopted: 1,

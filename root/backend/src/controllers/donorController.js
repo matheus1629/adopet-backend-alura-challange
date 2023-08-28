@@ -16,14 +16,15 @@ const getDonorById = async (req, res) => {
     const donor = await donorService.getDonorById(Number(donorId));
     return res.status(200).json(donor);
   } catch (error) {
-    if (error.name === "BadRequestError") return res.status(404).json(error.message);
+    if (error.name === "BadRequestError")
+      return res.status(404).json(error.message);
 
     return res.status(500).json(error.message);
   }
 };
 
 const getLoggedDonor = async (req, res) => {
-  const donorId = req.userId;
+  const donorId = await req.userId;
 
   try {
     const donor = await donorService.getDonorById(Number(donorId));

@@ -7,12 +7,14 @@ const router = express.Router();
 
 // Public Routes
 router.get("/", donorController.getAllDonors);
-router.get(
-  "/:id",
-  donorController.getDonorById
-);
+router.get("/:id", donorController.getDonorById);
 
 // Private Routes
+router.get(
+  "/loggedUser/info",
+  validateToken.checkToken("Donor"),
+  donorController.getLoggedDonor
+);
 router.patch(
   "/",
   validateToken.checkToken("Donor"),

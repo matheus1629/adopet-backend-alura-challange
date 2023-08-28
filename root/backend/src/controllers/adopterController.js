@@ -16,8 +16,20 @@ const getAdopterById = async (req, res) => {
     const adopter = await adopterService.getAdopterById(Number(adopterId));
     return res.status(200).json(adopter);
   } catch (error) {
-    if (error.name === "BadRequestError") return res.status(404).json(error.message);
+    if (error.name === "BadRequestError")
+      return res.status(404).json(error.message);
 
+    return res.status(500).json(error.message);
+  }
+};
+
+const getLoggedAdopter = async (req, res) => {
+  const adopterId = await req.userId;
+
+  try {
+    const adopter = await adopterService.getAdopterById(Number(adopterId));
+    return res.status(200).json(adopter);
+  } catch (error) {
     return res.status(500).json(error.message);
   }
 };
@@ -29,9 +41,7 @@ const updateAdopter = async (req, res) => {
   try {
     await adopterService.updateAdopter(adopterData, Number(adopterId));
 
-    const adopterNewInfo = await adopterService.getAdopterById(
-      Number(adopterId)
-    );
+    const adopterNewInfo = await adopterService.getAdopterById(Number(adopterId));
 
     return res.status(200).json(adopterNewInfo);
   } catch (error) {
@@ -53,6 +63,7 @@ const deleteAdopter = async (req, res) => {
 export default {
   getAllAdopters,
   getAdopterById,
+  getLoggedAdopter,
   updateAdopter,
   deleteAdopter,
 };

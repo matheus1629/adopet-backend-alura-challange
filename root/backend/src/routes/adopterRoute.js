@@ -10,22 +10,23 @@ router.get(
   "/:id",
   adopterController.getAdopterById
 );
+
+
+// Private Route
+router.get(
+  "/loggedUser/info",
+  validateToken.checkToken("Adopter"),
+  adopterController.getLoggedAdopter
+);
 router.patch(
   "/:id",
-  validateEntity.checkEntityId("Adopter"),
+  validateToken.checkToken("Adopter"),
   adopterController.updateAdopter
 );
 router.delete(
   "/:id",
-  validateEntity.checkEntityId("Adopter"),
+  validateToken.checkToken("Adopter"),
   adopterController.deleteAdopter
-);
-
-// Private Route Test
-router.get(
-  "/:id/rota-privada",
-  validateToken.checkToken,
-  adopterController.getAdopterById
 );
 
 export default router;
