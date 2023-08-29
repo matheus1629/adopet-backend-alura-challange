@@ -48,10 +48,9 @@ const getPetById = async (id) => {
   return petData;
 };
 
-const createPet = async (newPet) => {
+const createPet = async (newPet, idDonor) => {
   delete newPet.adoptionDate;
   delete newPet.adopted;
-  delete newPet.idDonor;
 
   let errors = [];
 
@@ -66,24 +65,24 @@ const createPet = async (newPet) => {
     }
     if (error) errors.push(error);
   }
-  newPet.idDonor = 2;
 
   if (errors.length > 0) {
     const errorMessage = `Validation errors: ${errors.join(", ")}`;
     throw new BadRequestError(errorMessage);
   }
 
+  newPet.idDonor = idDonor;
+
   const petCreated = await petRepository.createPet(newPet);
 
   return petCreated.dataValues.id;
 };
 
-const updatePet = async (newPetInfo, id) => {
+const updatePet = async (newPetInfo, idPet, idDonor) => {
   delete newPetInfo.adoptionDate;
   delete newPetInfo.adopted;
   delete newPetInfo.createdAt;
   delete newPetInfo.updatedAt;
-  delete newPetInfo.id;
   delete newPetInfo.idDonor;
 
   let errors = [];
@@ -105,11 +104,24 @@ const updatePet = async (newPetInfo, id) => {
     throw new BadRequestError(errorMessage);
   }
 
-  return await petRepository.updatePet(newPetInfo, id);
+  if (!(await petRepository.validateIfPetBelongsToDonor(idPet, idDonor))) {
+    throw new BadRequestError(
+      "You can't change a pet data that doesn't belongs to you"
+    );
+  }
+
+  return await petRepository.updatePet(newPetInfo, idPet);
 };
 
-const deletePet = async (id) => {
-  const wasDeleted = await petRepository.deletePet(id);
+const deletePet = async (idPet,idDonor) => {
+
+  if (!(await petRepository.validateIfPetBelongsToDonor(idPet, idDonor))) {
+    throw new BadRequestError(
+      "You can't change a pet data that doesn't belongs to you"
+    );
+  }
+
+  const wasDeleted = await petRepository.deletePet(idPet);
   if (wasDeleted === 0)
     throw new BadRequestError(
       `You can't delete a pet that was already adopted`

@@ -12,23 +12,22 @@ router.get(
   validateEntity.checkEntityId("Pet"),
   petController.getPetById
 );
-router.post('/', petController.createPet)
+
+// Private Route
+router.post("/", validateToken.checkToken("Donor"), petController.createPet);
+
 router.patch(
   "/:id",
   validateEntity.checkEntityId("Pet"),
+  validateToken.checkToken("Donor"),
   petController.updatePet
 );
+
 router.delete(
   "/:id",
   validateEntity.checkEntityId("Pet"),
+  validateToken.checkToken("Donor"),
   petController.deletePet
-);
-
-// Private Route Test
-router.get(
-  "/:id/rota-privada",
-  validateToken.checkToken,
-  petController.getPetById
 );
 
 export default router;

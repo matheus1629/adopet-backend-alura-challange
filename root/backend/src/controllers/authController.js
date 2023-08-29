@@ -23,26 +23,22 @@ const createUser = (userType) => async (req, res) => {
 
     return res.status(201).json(createdUser);
   } catch (error) {
-    if (error.name === "BadRequestError") return res.status(400).json(error.message);
+    if (error.name === "BadRequestError")
+      return res.status(400).json(error.message);
 
     return res.status(500).json(error.message);
-    
   }
 };
 
 const userLogin = (userType) => async (req, res) => {
   const { email, password } = req.body;
-  debugger;
+
   try {
     const userLogged = await authService.login(userType, email, password);
     const userLoggedData = userLogged.get();
 
     try {
-      const payload = {
-        userId: userLoggedData.id,
-        firstName: userLoggedData.firstName,
-        lastName: userLoggedData.lastName,
-      };
+      const payload = { userId: userLoggedData.id };
       const token = jwt.sign(payload, authConfig.secret, { expiresIn: "24h" });
 
       return res.status(200).json(token);
@@ -50,7 +46,8 @@ const userLogin = (userType) => async (req, res) => {
       return res.status(500).json(error.message);
     }
   } catch (error) {
-    if (error.name === "BadRequestError") return res.status(401).json(error.message);
+    if (error.name === "BadRequestError")
+      return res.status(401).json(error.message);
 
     return res.status(500).json(error.message);
   }

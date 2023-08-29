@@ -4,7 +4,7 @@ const getAllPetsAvailable = async (pageSetting) => {
   return await database.Pet.findAll({
     where: { adopted: 0 },
     attributes: { exclude: ["createdAt", "updatedAt"] },
-    ...pageSetting
+    ...pageSetting,
   });
 };
 
@@ -36,12 +36,19 @@ const deletePet = async (id) => {
   await database.sequelize.transaction(async (transaction) => {
     await database.Message.destroy({ where: { idPet: id } }, { transaction });
     const deletedCount = await database.Pet.destroy(
-      { where: { id: id, adopted: 0 } },
+      { where: { id, adopted: 0 } },
       { transaction }
     );
     wasDeleted = deletedCount;
   });
   return wasDeleted;
+};
+
+const validateIfPetBelongsToDonor = async (idPet, idDonor) => {
+  return await database.Pet.findOne({
+    where: { id: idPet, idDonor: idDonor },
+    attributes: ["id"],
+  });
 };
 
 export default {
@@ -51,4 +58,5 @@ export default {
   createPet,
   updatePet,
   deletePet,
+  validateIfPetBelongsToDonor,
 };
