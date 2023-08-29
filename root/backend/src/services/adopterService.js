@@ -2,14 +2,16 @@ import validateData from "../validation/validateSignupData.js";
 import adopterRepository from "../repository/adopterRepository.js";
 import BadRequestError from "../Errors/BadRequestError.js";
 import bcryptjs from "bcryptjs";
+import { bufferToBase64 } from "../helpers/buffer.js";
 
 const getAllAdopters = async () => {
   const adoptersData = await adopterRepository.getAllAdopters();
 
   for (const key in adoptersData) {
     if (adoptersData[key].dataValues.picture) {
-      adoptersData[key].dataValues.picture =
-        adoptersData[key].dataValues.picture.toString();
+      adoptersData[key].dataValues.picture = bufferToBase64(
+        adoptersData[key].dataValues.picture
+      );
     }
   }
 
@@ -17,29 +19,32 @@ const getAllAdopters = async () => {
 };
 
 const getAdopterById = async (id) => {
-  if(isNaN(id)) throw new BadRequestError('Invalid id')
-  
+  if (isNaN(id)) throw new BadRequestError("Invalid id");
+
   const adopterData = await adopterRepository.getAdopterById(id);
 
   if (!adopterData) throw new BadRequestError("Adopter not found");
 
-  if (adopterData.dataValues.picture) {
-    adopterData.dataValues.picture = await adopterData.dataValues.picture.toString();
-  }
+  if (adopterData.dataValues.picture)
+    adopterData.dataValues.picture = bufferToBase64(
+      adopterData.dataValues.picture
+    );
 
   return adopterData.dataValues;
 };
 
 const createAdopter = async (newAdopter) => {
   let errors = [];
-  for (const key in newAdopter) {
-    const error = validateData[key](newAdopter[key]);
-    if (error) errors.push(error);
-  }
 
-  if (newAdopter.picture && !errors.includes("File not supported")) {
-    newAdopter.picture = Buffer.from(newAdopter.picture);
-    const error = validateData.validatePictureSize(newAdopter.picture);
+  for (const key in newAdopter) {
+    let error;
+    if (key === "picture" && newAdopter.picture) {
+      const base64Data = newAdopter[key].replace(/^data:.*?;base64,/, "");
+      newAdopter.picture = Buffer.from(base64Data, "base64");
+      error = validateData[key](newAdopter[key]);
+    } else {
+      error = validateData[key](newAdopter[key]);
+    }
     if (error) errors.push(error);
   }
 
@@ -64,14 +69,16 @@ const updateAdopter = async (newAdopterInfo, id) => {
   delete newAdopterInfo.id;
 
   let errors = [];
-  for (const key in newAdopterInfo) {
-    const error = validateData[key](newAdopterInfo[key]);
-    if (error) errors.push(error);
-  }
 
-  if (newAdopterInfo.picture && !errors.includes("File not supported")) {
-    newAdopterInfo.picture = Buffer.from(newAdopterInfo.picture);
-    const error = validateData.validatePictureSize(newAdopterInfo.picture);
+  for (const key in newAdopterInfo) {
+    let error;
+    if (key === "picture" && newAdopterInfo.picture) {
+      const base64Data = newAdopterInfo[key].replace(/^data:.*?;base64,/, "");
+      newAdopterInfo.picture = Buffer.from(base64Data, "base64");
+      error = validateData[key](newAdopterInfo[key]);
+    } else {
+      error = validateData[key](newAdopterInfo[key]);
+    }
     if (error) errors.push(error);
   }
 

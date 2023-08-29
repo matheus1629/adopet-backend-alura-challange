@@ -35,7 +35,7 @@ const getLoggedAdopter = async (req, res) => {
 };
 
 const updateAdopter = async (req, res) => {
-  const adopterId = req.params.id;
+  const adopterId = req.userId;
   const adopterData = req.body;
 
   try {
@@ -50,7 +50,7 @@ const updateAdopter = async (req, res) => {
 };
 
 const deleteAdopter = async (req, res) => {
-  const adopterId = req.params.id;
+  const adopterId = req.userId;
 
   try {
     await adopterService.deleteAdopter(Number(adopterId));

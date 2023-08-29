@@ -1,6 +1,7 @@
 import validateData from "../validation/validateSignupData.js";
 import petRepository from "../repository/petRepository.js";
 import BadRequestError from "../Errors/BadRequestError.js";
+import { bufferToBase64 } from "../helpers/buffer.js";
 
 const getAllPetsAvailable = async (page, pageSize) => {
   if (!page) page = 1;
@@ -10,13 +11,14 @@ const getAllPetsAvailable = async (page, pageSize) => {
     offset: (page - 1) * pageSize,
     limit: pageSize,
   };
-console.log(pageSetting)
+
   const petsData = await petRepository.getAllPetsAvailable(pageSetting);
 
   for (const key in petsData) {
     if (petsData[key].dataValues.picture) {
-      petsData[key].dataValues.picture =
-        petsData[key].dataValues.picture.toString();
+      petsData[key].dataValues.picture = bufferToBase64(
+        petsData[key].dataValues.picture
+      );
     }
   }
 
@@ -28,8 +30,9 @@ const getAllPet = async () => {
 
   for (const key in petsData) {
     if (petsData[key].dataValues.picture) {
-      petsData[key].dataValues.picture =
-        petsData[key].dataValues.picture.toString();
+      petsData[key].dataValues.picture = bufferToBase64(
+        petsData[key].dataValues.picture
+      );
     }
   }
 
@@ -39,9 +42,8 @@ const getAllPet = async () => {
 const getPetById = async (id) => {
   const petData = await petRepository.getPetById(id);
 
-  if (petData.dataValues.picture) {
-    petData.dataValues.picture = petData.dataValues.picture.toString();
-  }
+  if (petData.dataValues.picture)
+    petData.dataValues.picture = bufferToBase64(petData.dataValues.picture);
 
   return petData;
 };
@@ -52,17 +54,19 @@ const createPet = async (newPet) => {
   delete newPet.idDonor;
 
   let errors = [];
+
   for (const key in newPet) {
-    const error = validateData[key](newPet[key]);
+    let error;
+    if (key === "picture" && newPet.picture) {
+      const base64Data = newPet[key].replace(/^data:.*?;base64,/, "");
+      newPet.picture = Buffer.from(base64Data, "base64");
+      error = validateData[key](newPet[key]);
+    } else {
+      error = validateData[key](newPet[key]);
+    }
     if (error) errors.push(error);
   }
   newPet.idDonor = 2;
-
-  if (newPet.picture && !errors.includes("File not supported")) {
-    newPet.picture = Buffer.from(newPet.picture);
-    const error = validateData.validatePictureSize(newPet.picture);
-    if (error) errors.push(error);
-  }
 
   if (errors.length > 0) {
     const errorMessage = `Validation errors: ${errors.join(", ")}`;
@@ -83,14 +87,16 @@ const updatePet = async (newPetInfo, id) => {
   delete newPetInfo.idDonor;
 
   let errors = [];
-  for (const key in newPetInfo) {
-    const error = validateData[key](newPetInfo[key]);
-    if (error) errors.push(error);
-  }
 
-  if (newPetInfo.picture && !errors.includes("File not supported")) {
-    newPetInfo.picture = Buffer.from(newPetInfo.picture);
-    const error = validateData.validatePictureSize(newPetInfo.picture);
+  for (const key in newPetInfo) {
+    let error;
+    if (key === "picture" && newPetInfo.picture) {
+      const base64Data = newPetInfo[key].replace(/^data:.*?;base64,/, "");
+      newPetInfo.picture = Buffer.from(base64Data, "base64");
+      error = validateData[key](newPetInfo[key]);
+    } else {
+      error = validateData[key](newPetInfo[key]);
+    }
     if (error) errors.push(error);
   }
 

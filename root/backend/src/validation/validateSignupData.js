@@ -1,28 +1,14 @@
 import { petSizes, states } from "../config/consts.js";
+import { checkBufferType } from "../helpers/buffer.js";
 
-const picture = (base64) => {
+const picture = (buffer) => {
   const errors = [];
 
-  const fileSupported = ["image/jpeg;base64", "image/png;base64"];
-  const extractData = base64.slice(
-    base64.indexOf("data:") + "data:".length,
-    base64.indexOf(",")
-  );
-
-  if (!fileSupported.includes(extractData)) {
-    errors.push("File not supported");
-  }
-
-  if (errors.length !== 0) return errors;
-};
-
-const validatePictureSize = (buffer) => {
-  const errors = [];
-
-  const bufferSize = buffer.byteLength;
-
-  if (bufferSize >= 16777215) {
-    errors.push("Picture file is too large");
+  const bufferType = checkBufferType(buffer)
+  if (bufferType!== 'PNG' && bufferType !== 'JPG' ) {
+    errors.push("File must be PNG or JPEG");
+  } else if (buffer.length > 10000000) {
+    errors.push("File exceeds the maximum size of 10mb");
   }
 
   if (errors.length !== 0) return errors;
@@ -213,7 +199,6 @@ export default {
   personalInfo,
   email,
   password,
-  validatePictureSize,
   picture,
   name,
   age,
