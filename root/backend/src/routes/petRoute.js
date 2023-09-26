@@ -15,14 +15,12 @@ router.get(
 
 // Private Route
 router.post("/", validateToken.checkToken("Donor"), petController.createPet);
-
 router.patch(
   "/:id",
   validateEntity.checkEntityId("Pet"),
   validateToken.checkToken("Donor"),
   petController.updatePet
 );
-
 router.delete(
   "/:id",
   validateEntity.checkEntityId("Pet"),
