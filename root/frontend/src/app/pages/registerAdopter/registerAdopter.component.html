@@ -11,63 +11,101 @@
   </p>
   <form [formGroup]="registerAdopterForm">
     <div class="container-input">
-      <label for="firstName">Nome</label>
-      <input
-        id="firstName"
-        name="firstName"
-        type="text"
-        formControlName="firstName"
-      />
+      <div class="input-label">
+        <label for="firstName">Nome:</label>
+        <input
+          id="firstName"
+          name="firstName"
+          type="text"
+          formControlName="firstName"
+          placeholder="Digite seu nome"
+        />
+      </div>
 
-      <label for="lastName">Sobrenome</label>
-      <input
-        id="lastName"
-        name="lastName"
-        type="text"
-        formControlName="lastName"
-      />
+      <div class="input-label">
+        <label for="lastName">Sobrenome:</label>
+        <input
+          id="lastName"
+          name="lastName"
+          type="text"
+          formControlName="lastName"
+          placeholder="Digite seu sobrenome"
+        />
+      </div>
     </div>
 
     <div class="container-input">
-      <label for="state">Estado</label>
-      <input id="state" name="state" type="text" formControlName="state" />
+      <div class="input-label">
+        <label for="state">Estado:</label>
+        <select id="state" name="state" formControlName="state">
+          <option value="" disabled selected>Selecione um estado</option>
+          <option *ngFor="let estado of estadosKeys" [value]="estado">
+            {{ estado }}
+          </option>
+        </select>
+      </div>
 
-      <label for="city">Cidade</label>
-      <input id="city" name="city" type="text" formControlName="city" />
+      <div class="input-label">
+        <label for="city">Cidade:</label>
+        <input
+          id="city"
+          name="city"
+          type="text"
+          formControlName="city"
+          placeholder="Digite sua cidade"
+        />
+      </div>
     </div>
+
     <div class="container-input">
-      <label for="telephone">Telefone</label>
-      <input
-        id="telephone"
-        name="telephone"
-        type="tel"
-        formControlName="telephone"
-      />
+      <div class="input-label">
+        <label for="phoneNumber">Telefone/ Celular:</label>
+        <input
+          id="phoneNumber"
+          name="phoneNumber"
+          type="tel"
+          formControlName="phoneNumber"
+          placeholder="Digite seu telefone/celular"
+          [mask]="telMask()"
+        />
+      </div>
 
-      <label for="email">Email</label>
-      <input id="email" name="email" type="email" formControlName="email" />
+      <div class="input-label">
+        <label for="email">Email:</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          formControlName="email"
+          placeholder="Digite seu email"
+        />
+      </div>
     </div>
 
     <div class="container-input">
-      <label for="password">Senha</label>
-      <input
-        id="password"
-        name="password"
-        type="password"
-        formControlName="password"
-      />
+      <div class="input-label">
+        <label for="password">Senha:</label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          formControlName="password"
+          placeholder="Digite sua senha"
+        />
+      </div>
 
-      <label for="passwordConfirmation">Confirmação de senha</label>
-      <input
-        id="passwordConfirmation"
-        name="passwordConfirmation"
-        type="password"
-        formControlName="passwordConfirmation"
-      />
+      <div class="input-label">
+        <label for="passwordConfirmation">Confirmar senha:</label>
+        <input
+          id="passwordConfirmation"
+          name="passwordConfirmation"
+          type="password"
+          formControlName="passwordConfirmation"
+          placeholder="Digite sua senha novamente"
+        />
+      </div>
     </div>
-
-    <button (click)="buttonRegisterAdopter()"></button>
   </form>
 
-  <app-button [buttonConfig]="buttonRegister"></app-button>
+  <app-button (click)="submit()" [buttonConfig]="buttonRegister"></app-button>
 </main>

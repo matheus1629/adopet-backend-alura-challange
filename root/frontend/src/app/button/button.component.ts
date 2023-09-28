@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IButtonConfig } from 'src/interfaces/buttonConfig.interface';
+import { IButtonConfig } from 'src/shared/interfaces/buttonConfig.interface';
 
 @Component({
   selector: 'app-button',

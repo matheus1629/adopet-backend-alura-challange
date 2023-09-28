@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import {
-  ButtonClass,
-  IButtonConfig,
-} from 'src/interfaces/buttonConfig.interface';
+import { ButtonClass } from 'src/shared/enums/buttonConfig.enum';
+import { IButtonConfig } from 'src/shared/interfaces/buttonConfig.interface';
 
 @Component({
   selector: 'app-welcome',
@@ -26,7 +24,7 @@ export class WelcomeComponent {
 
   constructor(private router: Router) {}
 
-  navigateTo(route:string):void {
+  navigateTo(route: string): void {
     this.router.navigate([route]);
   }
 }

@@ -1,6 +1,6 @@
-import { ButtonClass } from './../interfaces/buttonConfig.interface';
 import { Component, Input, Output } from '@angular/core';
-import { IButtonConfig } from 'src/interfaces/buttonConfig.interface';
+import { ButtonClass } from 'src/shared/enums/buttonConfig.enum';
+import { IButtonConfig } from 'src/shared/interfaces/buttonConfig.interface';
 
 @Component({
   selector: 'app-root',
