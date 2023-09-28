@@ -1,0 +1,49 @@
+@import "../../variables.scss";
+
+button {
+  color: $white-color;
+  background-color: $coral-color;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #ff9d9e;
+  transition: 0.4s;
+}
+
+.button-type-1 {
+  width: 362px;
+  height: 48px;
+}
+
+.button-type-2 {
+  width: 270px;
+  height: 48px;
+}
+
+@media only screen and (max-width:  $tablet-size) {
+  .button-type-1 {
+    width: 315px;
+    height: 40px;
+  }
+
+  .button-type-2 {
+    width: 270px;
+    height: 48px;
+  }
+  
+}
+
+@media only screen and (max-width:  $mobile-size) {
+  .button-type-1 {
+    width: 250px;
+    height: 35px;
+  }
+
+  .button-type-2 {
+    width: 270px;
+    height: 48px;
+  }
+  
+}

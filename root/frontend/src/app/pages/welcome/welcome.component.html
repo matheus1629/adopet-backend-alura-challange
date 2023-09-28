@@ -1,0 +1,20 @@
+<main>
+  <img class="logo" src="../../../assets/images/Logo.svg" alt="logo adopet" />
+  <h2 class="text1">Boas-vindas!</h2>
+  <p class="text2">
+    Adotar pode mudar uma vida. Que tal buscar seu novo melhor amigo hoje? Vem
+    com a gente!
+  </p>
+  <div class="button-container">
+    <app-button [buttonConfig]="buttonLogin"></app-button>
+    <app-button (click)="navigateTo('/register-adopter')" [buttonConfig]="buttonRegisterAdopter"></app-button>
+    <app-button  [buttonConfig]="buttonRegisterDonor"></app-button>
+  </div>
+  <div class="container-decoration">
+    <img
+      class="decoration"
+      src="../../../assets/images/Ilustração.png"
+      alt="A god and a cat together"
+    />
+  </div>
+</main>

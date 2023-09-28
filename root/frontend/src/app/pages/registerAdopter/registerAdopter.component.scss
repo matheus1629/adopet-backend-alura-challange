@@ -1,0 +1,74 @@
+@import "../../../variables.scss";
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: $white-color;
+  width: 450px;
+  height: 93vh;
+  margin: 0 auto;
+  
+ 
+}
+
+.logo {
+  width: 225px;
+  padding-top: 30px;
+  margin-bottom: 20px;
+}
+
+.text {
+  font-weight: 500;
+  margin-bottom: 20px;
+  color: $blue-color;
+  text-align: center;
+}
+
+.container-input{
+  position: relative;
+  display: flex;
+  gap: 50px;
+  margin-bottom: 20px;
+}
+
+
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  color: $dark-grey-color;
+}
+
+input{
+  background-color:$light-grey-color ;
+}
+
+@media only screen and (max-width: $tablet-size) {
+  main {
+    width: 350px;
+  }
+
+  .logo {
+    padding-top: 80px;
+    width: 200px;
+  }
+
+  .container-decoration {
+    height: 30%;
+  }
+}
+
+@media only screen and (max-width: $mobile-size) {
+  main {
+    width: 280px;
+  }
+
+  .logo {
+    width: 180px;
+  }
+}

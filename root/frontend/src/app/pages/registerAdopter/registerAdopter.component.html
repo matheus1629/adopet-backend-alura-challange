@@ -1,0 +1,73 @@
+<main>
+  <img
+    class="logo"
+    src="../../../assets/images/Logo_-_azul.svg"
+    alt="logo adopet"
+  />
+
+  <p class="text">
+    Ainda não tem cadastro? <br />
+    Então, antes de buscar seu melhor amigo, precisamos de alguns dados:
+  </p>
+  <form [formGroup]="registerAdopterForm">
+    <div class="container-input">
+      <label for="firstName">Nome</label>
+      <input
+        id="firstName"
+        name="firstName"
+        type="text"
+        formControlName="firstName"
+      />
+
+      <label for="lastName">Sobrenome</label>
+      <input
+        id="lastName"
+        name="lastName"
+        type="text"
+        formControlName="lastName"
+      />
+    </div>
+
+    <div class="container-input">
+      <label for="state">Estado</label>
+      <input id="state" name="state" type="text" formControlName="state" />
+
+      <label for="city">Cidade</label>
+      <input id="city" name="city" type="text" formControlName="city" />
+    </div>
+    <div class="container-input">
+      <label for="telephone">Telefone</label>
+      <input
+        id="telephone"
+        name="telephone"
+        type="tel"
+        formControlName="telephone"
+      />
+
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" formControlName="email" />
+    </div>
+
+    <div class="container-input">
+      <label for="password">Senha</label>
+      <input
+        id="password"
+        name="password"
+        type="password"
+        formControlName="password"
+      />
+
+      <label for="passwordConfirmation">Confirmação de senha</label>
+      <input
+        id="passwordConfirmation"
+        name="passwordConfirmation"
+        type="password"
+        formControlName="passwordConfirmation"
+      />
+    </div>
+
+    <button (click)="buttonRegisterAdopter()"></button>
+  </form>
+
+  <app-button [buttonConfig]="buttonRegister"></app-button>
+</main>

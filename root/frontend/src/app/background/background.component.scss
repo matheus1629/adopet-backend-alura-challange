@@ -1,0 +1,64 @@
+@import "../../variables.scss";
+
+.background {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 93vh;
+  z-index: -1;
+}
+
+.blueBackground {
+  background-color: $blue-color;
+}
+
+.whiteBackground {
+  background-color: $white-color;
+}
+
+.logo {
+  position: absolute;
+  width: 130px;
+  top: 25px;
+  left: 25px;
+  z-index: 1;
+}
+
+.top-decoration {
+  position: absolute;
+  left: 0;
+  width: 350px;
+}
+
+.side-decoration {
+  position: absolute;
+  right: 0;
+  width: 8%;
+  align-self: center;
+}
+
+@media only screen and (max-width: $tablet-size) {
+  .logo {
+    width: 90px;
+  }
+
+  .top-decoration {
+    width: 250px;
+  }
+
+  .side-decoration {
+    width: 15%;
+  }
+}
+
+@media only screen and (max-width: $mobile-size) {
+  .logo {
+    display: none;
+  }
+
+  .top-decoration {
+    width: 250px;
+  }
+}
