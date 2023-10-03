@@ -8,28 +8,29 @@ import { ButtonClass } from 'src/shared/enums/buttonConfig.enum';
 import { States } from 'src/shared/enums/states.enum';
 import { errorMessages, inputValidations } from 'src/shared/consts';
 import { clearValues, comparePassword, telMask, validateName } from 'src/shared/utils/form';
+import { DonorService } from 'src/app/services/donor.service';
 
 @Component({
   selector: 'app-register-donor',
   templateUrl: './register-donor.component.html',
-  styleUrls: ['./register-donor.component.scss']
+  styleUrls: ['./register-donor.component.scss'],
 })
 export class RegisterDonorComponent implements OnInit {
   buttonRegister: IButtonConfig = {
     innerText: 'Cadastrar',
     class: ButtonClass.BUTTON_TYPE_2,
   };
-  estados = States;
-  estadosKeys = Object.values(this.estados);
+
+  statesValues = Object.values(States);
   errorMessages = errorMessages;
   inputValidations = inputValidations;
   formSubmitted = false;
-  registerAdopterForm!: FormGroup;
+  registerDonorForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private adopterService: AdopterService) {}
+  constructor(private fb: FormBuilder, private donorService: DonorService) {}
 
   ngOnInit(): void {
-    this.registerAdopterForm = this.fb.group(
+    this.registerDonorForm = this.fb.group(
       {
         firstName: [
           'Fulano',
@@ -43,8 +44,8 @@ export class RegisterDonorComponent implements OnInit {
           '2222222222',
           [Validators.required, Validators.minLength(10), Validators.maxLength(11)],
         ],
-        city: ['joinville', [Validators.required, Validators.minLength(2), Validators.maxLength(255)]],
         state: ['Santa Catarina', [Validators.required]],
+        city: ['joinville', [Validators.required, Validators.minLength(2), Validators.maxLength(255)]],
         email: ['jonh@email.com', [Validators.required, Validators.email, Validators.maxLength(255)]],
         password: ['qweqwe12', [Validators.required, Validators.pattern('^(?=.*[A-Za-z])(?=.*\\d).{8,16}$')]],
         confirmPassword: ['qweqwe12', [Validators.required]],
@@ -56,21 +57,21 @@ export class RegisterDonorComponent implements OnInit {
   }
 
   telMaskForm(): string {
-    return telMask(this.registerAdopterForm.value.phoneNumber as string);
+    return telMask(this.registerDonorForm.value.phoneNumber as string);
   }
 
   submit() {
     this.formSubmitted = true;
 
-    if (this.registerAdopterForm.valid) {
-      const cleanedValuesForm = clearValues(this.registerAdopterForm.value);
+    if (this.registerDonorForm.valid) {
+      const cleanedValuesForm = clearValues(this.registerDonorForm.value);
 
-      this.adopterService.createAdopter(cleanedValuesForm).subscribe({
+      this.donorService.createDonor(cleanedValuesForm).subscribe({
         next: (data) => {
           console.log(data);
         },
         error: (err) => {
-          console.error('Ocorreu um erro: ', err);
+          console.error('Error: ', err);
         },
       });
     }

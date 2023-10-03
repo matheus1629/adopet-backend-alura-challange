@@ -1,0 +1,75 @@
+<main>
+  <img class="logo" src="../../../assets/images/Logo_-_azul.svg" alt="logo adopet" />
+
+  <p class="text">Digite seu login.</p>
+
+  <form [formGroup]="loginForm" (keyup.enter)="submit()">
+    <div class="container-input radio">
+      <p>Seu cadastro é para:</p>
+      <div class="container-radio">
+        <label class="label-radio">
+          <input type="radio" name="opcao" value="doar" />
+          doar um pet
+        </label>
+        <label class="label-radio">
+          <input type="radio" name="opcao" value="adotar" />
+          adotar um pet
+        </label>
+      </div>
+
+      <span
+        class="error-message"
+        *ngIf="
+          (loginForm.get('email')?.hasError('required') || loginForm.get('email')?.hasError('email')) &&
+          formSubmitted
+        "
+        >{{ errorMessages.email }}
+      </span>
+    </div>
+
+    <div class="container-input">
+      <div class="input-label">
+        <label for="email">Email:</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          formControlName="email"
+          placeholder="Digite seu email"
+          [maxlength]="inputValidations.maxLengthForm"
+          [ngClass]="{
+            'border-error': loginForm.get('email')?.errors && formSubmitted
+          }"
+        />
+        <span
+          class="error-message"
+          *ngIf="
+            (loginForm.get('email')?.hasError('required') || loginForm.get('email')?.hasError('email')) &&
+            formSubmitted
+          "
+          >{{ errorMessages.email }}
+        </span>
+      </div>
+
+      <div class="input-label">
+        <label for="password">Senha:</label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          formControlName="password"
+          placeholder="Digite sua senha"
+          [maxlength]="inputValidations.maxLengthForm"
+          [ngClass]="{
+            'border-error': loginForm.get('password')?.errors && formSubmitted
+          }"
+        />
+        <span class="error-message" *ngIf="loginForm.get('password')?.hasError('required') && formSubmitted"
+          >{{ errorMessages.requiredField }}
+        </span>
+      </div>
+    </div>
+  </form>
+
+  <app-button (click)="submit()" [buttonConfig]="buttonRegister"></app-button>
+</main>

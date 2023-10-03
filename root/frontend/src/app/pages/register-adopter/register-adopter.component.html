@@ -1,9 +1,5 @@
 <main>
-  <img
-    class="logo"
-    src="../../../assets/images/Logo_-_azul.svg"
-    alt="logo adopet"
-  />
+  <img class="logo" src="../../../assets/images/Logo_-_azul.svg" alt="logo adopet" />
 
   <p class="text">
     Ainda não tem cadastro? <br />
@@ -22,8 +18,7 @@
           placeholder="Digite seu nome"
           [maxlength]="inputValidations.maxLengthForm"
           [ngClass]="{
-            'border-error':
-              registerAdopterForm.get('firstName')?.errors && formSubmitted
+            'border-error': registerAdopterForm.get('firstName')?.errors && formSubmitted
           }"
         />
         <span
@@ -36,14 +31,11 @@
           >{{ errorMessages.minlength }}
         </span>
         <span
-        class="error-message"
-        *ngIf="
-          registerAdopterForm.get('firstName')?.hasError('validName') &&
-          formSubmitted
-        "
-      >
-        {{ errorMessages.validName }}
-      </span>
+          class="error-message"
+          *ngIf="registerAdopterForm.get('firstName')?.hasError('validName') && formSubmitted"
+        >
+          {{ errorMessages.validName }}
+        </span>
       </div>
 
       <div class="input-label">
@@ -56,8 +48,7 @@
           placeholder="Digite seu sobrenome"
           [maxlength]="inputValidations.maxLengthForm"
           [ngClass]="{
-            'border-error':
-              registerAdopterForm.get('lastName')?.errors && formSubmitted
+            'border-error': registerAdopterForm.get('lastName')?.errors && formSubmitted
           }"
         />
         <span
@@ -70,14 +61,11 @@
           >{{ errorMessages.minlength }}
         </span>
         <span
-        class="error-message"
-        *ngIf="
-          registerAdopterForm.get('lastName')?.hasError('validName') &&
-          formSubmitted
-        "
-      >
-        {{ errorMessages.validName }}
-      </span>
+          class="error-message"
+          *ngIf="registerAdopterForm.get('lastName')?.hasError('validName') && formSubmitted"
+        >
+          {{ errorMessages.validName }}
+        </span>
       </div>
     </div>
 
@@ -89,21 +77,17 @@
           name="state"
           formControlName="state"
           [ngClass]="{
-            'border-error':
-              registerAdopterForm.get('state')?.errors && formSubmitted
+            'border-error': registerAdopterForm.get('state')?.errors && formSubmitted
           }"
         >
           <option value="" disabled selected>Selecione um estado</option>
-          <option *ngFor="let estado of estadosKeys" [value]="estado">
-            {{ estado }}
+          <option *ngFor="let state of statesValues" [value]="state">
+            {{ state }}
           </option>
         </select>
         <span
           class="error-message"
-          *ngIf="
-            registerAdopterForm.get('state')?.hasError('required') &&
-            formSubmitted
-          "
+          *ngIf="registerAdopterForm.get('state')?.hasError('required') && formSubmitted"
           >{{ errorMessages.select }}
         </span>
       </div>
@@ -118,8 +102,7 @@
           placeholder="Digite sua cidade"
           [maxlength]="inputValidations.maxLengthForm"
           [ngClass]="{
-            'border-error':
-              registerAdopterForm.get('city')?.errors && formSubmitted
+            'border-error': registerAdopterForm.get('city')?.errors && formSubmitted
           }"
         />
         <span
@@ -145,8 +128,7 @@
           placeholder="Digite seu telefone/celular"
           [mask]="telMaskForm()"
           [ngClass]="{
-            'border-error':
-              registerAdopterForm.get('phoneNumber')?.errors && formSubmitted
+            'border-error': registerAdopterForm.get('phoneNumber')?.errors && formSubmitted
           }"
         />
         <span
@@ -170,8 +152,7 @@
           placeholder="Digite seu email"
           [maxlength]="inputValidations.maxLengthForm"
           [ngClass]="{
-            'border-error':
-              registerAdopterForm.get('email')?.errors && formSubmitted
+            'border-error': registerAdopterForm.get('email')?.errors && formSubmitted
           }"
         />
         <span
@@ -197,8 +178,7 @@
           placeholder="Digite sua senha"
           [maxlength]="inputValidations.maxLengthForm"
           [ngClass]="{
-            'border-error':
-              registerAdopterForm.get('password')?.errors && formSubmitted
+            'border-error': registerAdopterForm.get('password')?.errors && formSubmitted
           }"
         />
         <span
@@ -222,18 +202,12 @@
           placeholder="Digite sua senha novamente"
           [maxlength]="inputValidations.maxLengthForm"
           [ngClass]="{
-            'border-error':
-              registerAdopterForm.get('confirmPassword')?.errors &&
-              formSubmitted
+            'border-error': registerAdopterForm.get('confirmPassword')?.errors && formSubmitted
           }"
         />
         <span
           class="error-message"
-          *ngIf="
-            registerAdopterForm
-              .get('confirmPassword')
-              ?.hasError('passwordMismatch') && formSubmitted
-          "
+          *ngIf="registerAdopterForm.get('confirmPassword')?.hasError('passwordMismatch') && formSubmitted"
           >{{ errorMessages.confirmPassword }}
         </span>
       </div>

@@ -19,8 +19,8 @@ export class RegisterAdopterComponent implements OnInit {
     innerText: 'Cadastrar',
     class: ButtonClass.BUTTON_TYPE_2,
   };
-  estados = States;
-  estadosKeys = Object.values(this.estados);
+
+  statesValues = Object.values(States);
   errorMessages = errorMessages;
   inputValidations = inputValidations;
   formSubmitted = false;
@@ -43,8 +43,8 @@ export class RegisterAdopterComponent implements OnInit {
           '2222222222',
           [Validators.required, Validators.minLength(10), Validators.maxLength(11)],
         ],
-        city: ['joinville', [Validators.required, Validators.minLength(2), Validators.maxLength(255)]],
         state: ['Santa Catarina', [Validators.required]],
+        city: ['joinville', [Validators.required, Validators.minLength(2), Validators.maxLength(255)]],
         email: ['jonh@email.com', [Validators.required, Validators.email, Validators.maxLength(255)]],
         password: ['qweqwe12', [Validators.required, Validators.pattern('^(?=.*[A-Za-z])(?=.*\\d).{8,16}$')]],
         confirmPassword: ['qweqwe12', [Validators.required]],
@@ -70,7 +70,7 @@ export class RegisterAdopterComponent implements OnInit {
           console.log(data);
         },
         error: (err) => {
-          console.error('Ocorreu um erro: ', err);
+          console.error('Error: ', err);
         },
       });
     }

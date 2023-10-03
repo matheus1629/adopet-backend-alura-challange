@@ -7,10 +7,10 @@
   
     <p class="text">
       Ainda não tem cadastro? <br />
-      Então, antes de buscar seu melhor amigo, precisamos de alguns dados:
+      Então, antes de doar seu pet para alguém, precisamos de alguns dados:
     </p>
   
-    <form [formGroup]="registerAdopterForm" (keyup.enter)="submit()">
+    <form [formGroup]="registerDonorForm" (keyup.enter)="submit()">
       <div class="container-input">
         <div class="input-label">
           <label for="firstName">Nome:</label>
@@ -23,14 +23,14 @@
             [maxlength]="inputValidations.maxLengthForm"
             [ngClass]="{
               'border-error':
-                registerAdopterForm.get('firstName')?.errors && formSubmitted
+                registerDonorForm.get('firstName')?.errors && formSubmitted
             }"
           />
           <span
             class="error-message"
             *ngIf="
-              (registerAdopterForm.get('firstName')?.hasError('required') ||
-                registerAdopterForm.get('firstName')?.hasError('minlength')) &&
+              (registerDonorForm.get('firstName')?.hasError('required') ||
+                registerDonorForm.get('firstName')?.hasError('minlength')) &&
               formSubmitted
             "
             >{{ errorMessages.minlength }}
@@ -38,7 +38,7 @@
           <span
           class="error-message"
           *ngIf="
-            registerAdopterForm.get('firstName')?.hasError('validName') &&
+            registerDonorForm.get('firstName')?.hasError('validName') &&
             formSubmitted
           "
         >
@@ -57,14 +57,14 @@
             [maxlength]="inputValidations.maxLengthForm"
             [ngClass]="{
               'border-error':
-                registerAdopterForm.get('lastName')?.errors && formSubmitted
+                registerDonorForm.get('lastName')?.errors && formSubmitted
             }"
           />
           <span
             class="error-message"
             *ngIf="
-              (registerAdopterForm.get('lastName')?.hasError('required') ||
-                registerAdopterForm.get('lastName')?.hasError('minlength')) &&
+              (registerDonorForm.get('lastName')?.hasError('required') ||
+                registerDonorForm.get('lastName')?.hasError('minlength')) &&
               formSubmitted
             "
             >{{ errorMessages.minlength }}
@@ -72,7 +72,7 @@
           <span
           class="error-message"
           *ngIf="
-            registerAdopterForm.get('lastName')?.hasError('validName') &&
+            registerDonorForm.get('lastName')?.hasError('validName') &&
             formSubmitted
           "
         >
@@ -90,18 +90,18 @@
             formControlName="state"
             [ngClass]="{
               'border-error':
-                registerAdopterForm.get('state')?.errors && formSubmitted
+                registerDonorForm.get('state')?.errors && formSubmitted
             }"
           >
             <option value="" disabled selected>Selecione um estado</option>
-            <option *ngFor="let estado of estadosKeys" [value]="estado">
-              {{ estado }}
+            <option *ngFor="let state of statesValues" [value]="state">
+              {{ state }}
             </option>
           </select>
           <span
             class="error-message"
             *ngIf="
-              registerAdopterForm.get('state')?.hasError('required') &&
+              registerDonorForm.get('state')?.hasError('required') &&
               formSubmitted
             "
             >{{ errorMessages.select }}
@@ -119,14 +119,14 @@
             [maxlength]="inputValidations.maxLengthForm"
             [ngClass]="{
               'border-error':
-                registerAdopterForm.get('city')?.errors && formSubmitted
+                registerDonorForm.get('city')?.errors && formSubmitted
             }"
           />
           <span
             class="error-message"
             *ngIf="
-              (registerAdopterForm.get('city')?.hasError('required') ||
-                registerAdopterForm.get('city')?.hasError('minlength')) &&
+              (registerDonorForm.get('city')?.hasError('required') ||
+                registerDonorForm.get('city')?.hasError('minlength')) &&
               formSubmitted
             "
             >{{ errorMessages.minlength }}
@@ -146,14 +146,14 @@
             [mask]="telMaskForm()"
             [ngClass]="{
               'border-error':
-                registerAdopterForm.get('phoneNumber')?.errors && formSubmitted
+                registerDonorForm.get('phoneNumber')?.errors && formSubmitted
             }"
           />
           <span
             class="error-message"
             *ngIf="
-              (registerAdopterForm.get('phoneNumber')?.hasError('required') ||
-                registerAdopterForm.get('phoneNumber')?.hasError('minlength')) &&
+              (registerDonorForm.get('phoneNumber')?.hasError('required') ||
+                registerDonorForm.get('phoneNumber')?.hasError('minlength')) &&
               formSubmitted
             "
             >{{ errorMessages.phoneNumber }}
@@ -171,14 +171,14 @@
             [maxlength]="inputValidations.maxLengthForm"
             [ngClass]="{
               'border-error':
-                registerAdopterForm.get('email')?.errors && formSubmitted
+                registerDonorForm.get('email')?.errors && formSubmitted
             }"
           />
           <span
             class="error-message"
             *ngIf="
-              (registerAdopterForm.get('email')?.hasError('required') ||
-                registerAdopterForm.get('email')?.hasError('email')) &&
+              (registerDonorForm.get('email')?.hasError('required') ||
+                registerDonorForm.get('email')?.hasError('email')) &&
               formSubmitted
             "
             >{{ errorMessages.email }}
@@ -198,14 +198,14 @@
             [maxlength]="inputValidations.maxLengthForm"
             [ngClass]="{
               'border-error':
-                registerAdopterForm.get('password')?.errors && formSubmitted
+                registerDonorForm.get('password')?.errors && formSubmitted
             }"
           />
           <span
             class="error-message"
             *ngIf="
-              (registerAdopterForm.get('password')?.hasError('required') ||
-                registerAdopterForm.get('password')?.hasError('pattern')) &&
+              (registerDonorForm.get('password')?.hasError('required') ||
+                registerDonorForm.get('password')?.hasError('pattern')) &&
               formSubmitted
             "
             >{{ errorMessages.password }}
@@ -223,14 +223,14 @@
             [maxlength]="inputValidations.maxLengthForm"
             [ngClass]="{
               'border-error':
-                registerAdopterForm.get('confirmPassword')?.errors &&
+                registerDonorForm.get('confirmPassword')?.errors &&
                 formSubmitted
             }"
           />
           <span
             class="error-message"
             *ngIf="
-              registerAdopterForm
+              registerDonorForm
                 .get('confirmPassword')
                 ?.hasError('passwordMismatch') && formSubmitted
             "

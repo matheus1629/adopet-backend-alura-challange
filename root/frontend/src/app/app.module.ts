@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -7,9 +9,10 @@ import { ButtonComponent } from './button/button.component';
 import { BackgroundComponent } from './background/background.component';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { FooterComponent } from './footer/footer.component';
-import { RegisterAdopterComponent } from './pages/registerAdopter/registerAdopter.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { RegisterAdopterComponent } from './pages/register-adopter/register-adopter.component';
 import { NgxMaskModule } from 'ngx-mask';
+import { RegisterDonorComponent } from './pages/register-donor/register-donor.component';
+import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +21,8 @@ import { NgxMaskModule } from 'ngx-mask';
     WelcomeComponent,
     FooterComponent,
     RegisterAdopterComponent,
+    RegisterDonorComponent,
+    LoginComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],
@@ -27,6 +32,7 @@ import { NgxMaskModule } from 'ngx-mask';
     ButtonComponent,
     ReactiveFormsModule,
     NgxMaskModule.forRoot(),
+    HttpClientModule,
   ],
 })
 export class AppModule {}

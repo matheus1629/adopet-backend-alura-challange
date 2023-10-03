@@ -1,4 +1,4 @@
-export enum states {
+export enum States {
   AC = 'Acre',
   AL = 'Alagoas',
   AP = 'Amapá',

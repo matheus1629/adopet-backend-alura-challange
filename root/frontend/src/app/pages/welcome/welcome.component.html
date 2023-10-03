@@ -3,7 +3,7 @@
   <h2 class="text1">Boas-vindas!</h2>
   <p class="text2">Adotar pode mudar uma vida. Que tal buscar seu novo melhor amigo hoje? Vem com a gente!</p>
   <div class="button-container">
-    <app-button [buttonConfig]="buttonLogin"></app-button>
+    <app-button (click)="navigateTo('/login')" [buttonConfig]="buttonLogin"></app-button>
     <app-button (click)="navigateTo('/register-adopter')" [buttonConfig]="buttonRegisterAdopter"></app-button>
     <app-button (click)="navigateTo('/register-donor')" [buttonConfig]="buttonRegisterDonor"></app-button>
   </div>
