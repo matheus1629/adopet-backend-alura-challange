@@ -1,0 +1,124 @@
+@import "../../../variables.scss";
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  color: $white-color;
+  margin: 0 auto;
+  margin-top: 100px;
+  margin-bottom: 50px;
+  min-height: 93vh;
+  flex-grow: 1;
+  z-index: -2;
+}
+
+.logo {
+  width: 225px;
+  margin-bottom: 20px;
+}
+
+.text {
+  font-weight: 500;
+  margin-bottom: 20px;
+  color: $blue-color;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+label {
+  color: $dark-grey-color;
+  width: 100px;
+  text-align: right;
+}
+
+input,
+select {
+  background-color: $light-grey-color;
+  width: 265px;
+  height: 30px;
+  padding: 5px 0px 5px 5px;
+  border-radius: 5px;
+  align-self: start;
+}
+
+select {
+  height: 40px;
+  width: 270px;
+}
+
+.container-input {
+  display: flex;
+  gap: 30px;
+  width: 800px;
+  align-items: flex-start;
+}
+
+.input-label {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 30px;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.error-message {
+  width: 380px;
+  text-align: end;
+}
+
+.ajust-message {
+  text-align: start;
+}
+
+@media only screen and (max-width: $tablet-size) {
+  .logo {
+    width: 200px;
+  }
+
+  .container-decoration {
+    height: 30%;
+  }
+
+  .container-input {
+    display: block;
+    width: 375px;
+  }
+
+  .ajust-message {
+    text-align: end;
+  }
+
+  .input-label {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: $mobile-size) {
+  .logo {
+    width: 180px;
+  }
+
+  .container-input {
+    width: 310px;
+  }
+
+  input {
+    width: 200px;
+  }
+
+  select {
+    width: 205px;
+  }
+
+  .error-message {
+    width: 340px;
+  }
+}

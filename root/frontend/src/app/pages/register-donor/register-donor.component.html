@@ -1,1 +1,245 @@
-<p>register-donor works!</p>
+<main>
+    <img
+      class="logo"
+      src="../../../assets/images/Logo_-_azul.svg"
+      alt="logo adopet"
+    />
+  
+    <p class="text">
+      Ainda não tem cadastro? <br />
+      Então, antes de buscar seu melhor amigo, precisamos de alguns dados:
+    </p>
+  
+    <form [formGroup]="registerAdopterForm" (keyup.enter)="submit()">
+      <div class="container-input">
+        <div class="input-label">
+          <label for="firstName">Nome:</label>
+          <input
+            id="firstName"
+            name="firstName"
+            type="text"
+            formControlName="firstName"
+            placeholder="Digite seu nome"
+            [maxlength]="inputValidations.maxLengthForm"
+            [ngClass]="{
+              'border-error':
+                registerAdopterForm.get('firstName')?.errors && formSubmitted
+            }"
+          />
+          <span
+            class="error-message"
+            *ngIf="
+              (registerAdopterForm.get('firstName')?.hasError('required') ||
+                registerAdopterForm.get('firstName')?.hasError('minlength')) &&
+              formSubmitted
+            "
+            >{{ errorMessages.minlength }}
+          </span>
+          <span
+          class="error-message"
+          *ngIf="
+            registerAdopterForm.get('firstName')?.hasError('validName') &&
+            formSubmitted
+          "
+        >
+          {{ errorMessages.validName }}
+        </span>
+        </div>
+  
+        <div class="input-label">
+          <label for="lastName">Sobrenome:</label>
+          <input
+            id="lastName"
+            name="lastName"
+            type="text"
+            formControlName="lastName"
+            placeholder="Digite seu sobrenome"
+            [maxlength]="inputValidations.maxLengthForm"
+            [ngClass]="{
+              'border-error':
+                registerAdopterForm.get('lastName')?.errors && formSubmitted
+            }"
+          />
+          <span
+            class="error-message"
+            *ngIf="
+              (registerAdopterForm.get('lastName')?.hasError('required') ||
+                registerAdopterForm.get('lastName')?.hasError('minlength')) &&
+              formSubmitted
+            "
+            >{{ errorMessages.minlength }}
+          </span>
+          <span
+          class="error-message"
+          *ngIf="
+            registerAdopterForm.get('lastName')?.hasError('validName') &&
+            formSubmitted
+          "
+        >
+          {{ errorMessages.validName }}
+        </span>
+        </div>
+      </div>
+  
+      <div class="container-input">
+        <div class="input-label">
+          <label for="state">Estado:</label>
+          <select
+            id="state"
+            name="state"
+            formControlName="state"
+            [ngClass]="{
+              'border-error':
+                registerAdopterForm.get('state')?.errors && formSubmitted
+            }"
+          >
+            <option value="" disabled selected>Selecione um estado</option>
+            <option *ngFor="let estado of estadosKeys" [value]="estado">
+              {{ estado }}
+            </option>
+          </select>
+          <span
+            class="error-message"
+            *ngIf="
+              registerAdopterForm.get('state')?.hasError('required') &&
+              formSubmitted
+            "
+            >{{ errorMessages.select }}
+          </span>
+        </div>
+  
+        <div class="input-label">
+          <label for="city">Cidade:</label>
+          <input
+            id="city"
+            name="city"
+            type="text"
+            formControlName="city"
+            placeholder="Digite sua cidade"
+            [maxlength]="inputValidations.maxLengthForm"
+            [ngClass]="{
+              'border-error':
+                registerAdopterForm.get('city')?.errors && formSubmitted
+            }"
+          />
+          <span
+            class="error-message"
+            *ngIf="
+              (registerAdopterForm.get('city')?.hasError('required') ||
+                registerAdopterForm.get('city')?.hasError('minlength')) &&
+              formSubmitted
+            "
+            >{{ errorMessages.minlength }}
+          </span>
+        </div>
+      </div>
+  
+      <div class="container-input">
+        <div class="input-label">
+          <label for="phoneNumber">Telefone/ Celular:</label>
+          <input
+            id="phoneNumber"
+            name="phoneNumber"
+            type="tel"
+            formControlName="phoneNumber"
+            placeholder="Digite seu telefone/celular"
+            [mask]="telMaskForm()"
+            [ngClass]="{
+              'border-error':
+                registerAdopterForm.get('phoneNumber')?.errors && formSubmitted
+            }"
+          />
+          <span
+            class="error-message"
+            *ngIf="
+              (registerAdopterForm.get('phoneNumber')?.hasError('required') ||
+                registerAdopterForm.get('phoneNumber')?.hasError('minlength')) &&
+              formSubmitted
+            "
+            >{{ errorMessages.phoneNumber }}
+          </span>
+        </div>
+  
+        <div class="input-label">
+          <label for="email">Email:</label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            formControlName="email"
+            placeholder="Digite seu email"
+            [maxlength]="inputValidations.maxLengthForm"
+            [ngClass]="{
+              'border-error':
+                registerAdopterForm.get('email')?.errors && formSubmitted
+            }"
+          />
+          <span
+            class="error-message"
+            *ngIf="
+              (registerAdopterForm.get('email')?.hasError('required') ||
+                registerAdopterForm.get('email')?.hasError('email')) &&
+              formSubmitted
+            "
+            >{{ errorMessages.email }}
+          </span>
+        </div>
+      </div>
+  
+      <div class="container-input">
+        <div class="input-label">
+          <label for="password">Senha:</label>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            formControlName="password"
+            placeholder="Digite sua senha"
+            [maxlength]="inputValidations.maxLengthForm"
+            [ngClass]="{
+              'border-error':
+                registerAdopterForm.get('password')?.errors && formSubmitted
+            }"
+          />
+          <span
+            class="error-message"
+            *ngIf="
+              (registerAdopterForm.get('password')?.hasError('required') ||
+                registerAdopterForm.get('password')?.hasError('pattern')) &&
+              formSubmitted
+            "
+            >{{ errorMessages.password }}
+          </span>
+        </div>
+  
+        <div class="input-label">
+          <label for="confirmPassword">Confirmar senha:</label>
+          <input
+            id="confirmPassword"
+            name="confirmPassword"
+            type="password"
+            formControlName="confirmPassword"
+            placeholder="Digite sua senha novamente"
+            [maxlength]="inputValidations.maxLengthForm"
+            [ngClass]="{
+              'border-error':
+                registerAdopterForm.get('confirmPassword')?.errors &&
+                formSubmitted
+            }"
+          />
+          <span
+            class="error-message"
+            *ngIf="
+              registerAdopterForm
+                .get('confirmPassword')
+                ?.hasError('passwordMismatch') && formSubmitted
+            "
+            >{{ errorMessages.confirmPassword }}
+          </span>
+        </div>
+      </div>
+    </form>
+  
+    <app-button (click)="submit()" [buttonConfig]="buttonRegister"></app-button>
+  </main>
+  
