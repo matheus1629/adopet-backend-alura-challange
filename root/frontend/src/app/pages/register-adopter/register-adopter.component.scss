@@ -6,11 +6,10 @@ main {
   justify-content: flex-start;
   align-items: center;
   color: $white-color;
-  width: 760px;
   margin: 0 auto;
   margin-top: 100px;
   margin-bottom: 50px;
-  min-height:93vh;
+  min-height: 93vh;
   flex-grow: 1;
   z-index: -2;
 }
@@ -35,41 +34,51 @@ form {
 
 label {
   color: $dark-grey-color;
-  width: 180px;
+  width: 100px;
+  text-align: right;
 }
 
 input,
 select {
   background-color: $light-grey-color;
-  width: 100%;
+  width: 265px;
   height: 30px;
   padding: 5px 0px 5px 5px;
   border-radius: 5px;
+  align-self: start;
 }
 
 select {
   height: 40px;
+  width: 270px;
 }
 
 .container-input {
   display: flex;
-  justify-content: space-between;
-  gap: 20px;
+  gap: 30px;
+  width: 800px;
+  align-items: flex-start;
 }
 
 .input-label {
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
+  gap: 5px;
+  margin-bottom: 30px;
   align-items: center;
   width: 100%;
+  flex-wrap: wrap;
+}
+
+.error-message {
+  width: 380px;
+  text-align: end;
+}
+
+.ajust-message {
+  text-align: start;
 }
 
 @media only screen and (max-width: $tablet-size) {
-  main {
-    width: 400px;
-  }
-
   .logo {
     width: 200px;
   }
@@ -80,6 +89,11 @@ select {
 
   .container-input {
     display: block;
+    width: 375px;
+  }
+
+  .ajust-message {
+    text-align: end;
   }
 
   .input-label {
@@ -88,15 +102,23 @@ select {
 }
 
 @media only screen and (max-width: $mobile-size) {
-  main {
-    width: 350px;
-  }
-
   .logo {
     width: 180px;
   }
 
-  .input-label {
-    width: 250px;
+  .container-input {
+    width: 310px;
+  }
+
+  input {
+    width: 200px;
+  }
+
+  select {
+    width: 205px;
+  }
+
+  .error-message {
+    width: 340px;
   }
 }
