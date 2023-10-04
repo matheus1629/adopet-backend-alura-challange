@@ -19,6 +19,13 @@ main {
   margin-bottom: 20px;
 }
 
+.decoration{
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 20%;
+}
+
 .text {
   font-weight: 500;
   margin-bottom: 20px;
@@ -98,6 +105,10 @@ select {
 
   .input-label {
     width: 100%;
+  }
+
+  .decoration {
+    width: 30%;
   }
 }
 

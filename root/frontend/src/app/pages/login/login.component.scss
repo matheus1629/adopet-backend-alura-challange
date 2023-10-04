@@ -10,7 +10,7 @@ main {
   margin-top: 100px;
   margin-bottom: 50px;
   min-height: 93vh;
-  width: 98vw;
+  width: 100%;
   flex-grow: 1;
   z-index: -2;
 }
@@ -20,6 +20,12 @@ main {
   margin-bottom: 20px;
 }
 
+.decoration {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 20%;
+}
 
 .text {
   font-weight: 500;
@@ -67,8 +73,8 @@ input[type="radio"] {
 .radio {
   color: $dark-grey-color;
   display: flex;
-  margin-bottom: 40px;
-  margin-left: 46px;
+  padding-bottom: 40px;
+  padding-left: 46px;
 }
 
 .container-radio {
@@ -107,9 +113,14 @@ input[type="radio"] {
     height: 30%;
   }
 
+  .radio {
+    width: 100%;
+  }
+
   .container-radio {
     display: flex;
     flex-direction: column;
+    width: 100%;
   }
 
   .container-radio > label {
@@ -132,6 +143,10 @@ input[type="radio"] {
 
   .input-label {
     width: 100%;
+  }
+
+  .decoration {
+    width: 30%;
   }
 }
 
