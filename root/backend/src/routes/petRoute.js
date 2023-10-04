@@ -7,11 +7,7 @@ const router = express.Router();
 
 router.get("/", petController.getAllPetsAvailable);
 router.get("/all", petController.getAllPets);
-router.get(
-  "/:id",
-  validateEntity.checkEntityId("Pet"),
-  petController.getPetById
-);
+router.get("/:id", validateEntity.checkEntityId("Pet"), petController.getPetById);
 
 // Private Route
 router.post("/", validateToken.checkToken("Donor"), petController.createPet);

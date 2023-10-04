@@ -4,10 +4,8 @@ const getAllPetsAvailable = async (req, res) => {
   const { page, pageSize } = req.query;
 
   try {
-    const allPets = await petService.getAllPetsAvailable(
-      Number(page),
-      Number(pageSize)
-    );
+    const allPets = await petService.getAllPetsAvailable(Number(page), Number(pageSize));
+
     return res.status(200).json(allPets);
   } catch (error) {
     return res.status(500).json(error.message);
@@ -17,6 +15,7 @@ const getAllPetsAvailable = async (req, res) => {
 const getAllPets = async (req, res) => {
   try {
     const allPets = await petService.getAllPet();
+
     return res.status(200).json(allPets);
   } catch (error) {
     return res.status(500).json(error.message);
@@ -45,8 +44,7 @@ const createPet = async (req, res) => {
 
     return res.status(201).json(createdPet);
   } catch (error) {
-    if (error.name === "BadRequestError")
-      return res.status(400).json(error.message);
+    if (error.name === "BadRequestError") return res.status(400).json(error.message);
 
     return res.status(500).json(error.message);
   }

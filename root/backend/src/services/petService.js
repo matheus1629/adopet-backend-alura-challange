@@ -16,9 +16,7 @@ const getAllPetsAvailable = async (page, pageSize) => {
 
   for (const key in petsData) {
     if (petsData[key].dataValues.picture) {
-      petsData[key].dataValues.picture = bufferToBase64(
-        petsData[key].dataValues.picture
-      );
+      petsData[key].dataValues.picture = bufferToBase64(petsData[key].dataValues.picture);
     }
   }
 
@@ -30,9 +28,7 @@ const getAllPet = async () => {
 
   for (const key in petsData) {
     if (petsData[key].dataValues.picture) {
-      petsData[key].dataValues.picture = bufferToBase64(
-        petsData[key].dataValues.picture
-      );
+      petsData[key].dataValues.picture = bufferToBase64(petsData[key].dataValues.picture);
     }
   }
 
@@ -42,8 +38,7 @@ const getAllPet = async () => {
 const getPetById = async (id) => {
   const petData = await petRepository.getPetById(id);
 
-  if (petData.dataValues.picture)
-    petData.dataValues.picture = bufferToBase64(petData.dataValues.picture);
+  if (petData.dataValues.picture) petData.dataValues.picture = bufferToBase64(petData.dataValues.picture);
 
   return petData;
 };
@@ -105,27 +100,19 @@ const updatePet = async (newPetInfo, idPet, idDonor) => {
   }
 
   if (!(await petRepository.validateIfPetBelongsToDonor(idPet, idDonor))) {
-    throw new BadRequestError(
-      "You can't change a pet data that doesn't belongs to you"
-    );
+    throw new BadRequestError("You can't change a pet data that doesn't belongs to you");
   }
 
   return await petRepository.updatePet(newPetInfo, idPet);
 };
 
-const deletePet = async (idPet,idDonor) => {
-
+const deletePet = async (idPet, idDonor) => {
   if (!(await petRepository.validateIfPetBelongsToDonor(idPet, idDonor))) {
-    throw new BadRequestError(
-      "You can't change a pet data that doesn't belongs to you"
-    );
+    throw new BadRequestError("You can't change a pet data that doesn't belongs to you");
   }
 
   const wasDeleted = await petRepository.deletePet(idPet);
-  if (wasDeleted === 0)
-    throw new BadRequestError(
-      `You can't delete a pet that was already adopted`
-    );
+  if (wasDeleted === 0) throw new BadRequestError(`You can't delete a pet that was already adopted`);
 };
 
 export default {

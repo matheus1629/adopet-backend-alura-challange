@@ -28,6 +28,7 @@ export default (sequelize, DataTypes) => {
       adoptionDate: { type: DataTypes.DATEONLY, field: "adoption_date" },
       adopted: { type: DataTypes.TINYINT, allowNull: false, defaultValue: 0 },
       idDonor: { type: DataTypes.INTEGER, field: "id_donor" },
+      idAdopter: { type: DataTypes.INTEGER, field: "id_adopter" },
     },
     {
       sequelize,
