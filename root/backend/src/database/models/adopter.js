@@ -27,9 +27,9 @@ export default (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         field: "last_name",
       },
-      telephone: {
+      phoneNumber: {
         type: DataTypes.STRING,
-        field: "telephone",
+        field: "phone_number",
       },
       city: {
         type: DataTypes.STRING,

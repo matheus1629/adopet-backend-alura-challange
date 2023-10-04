@@ -6,7 +6,8 @@ export const inputValidations = {
 };
 
 export const errorMessages = {
-  requiredField:'Campo obrigatório',
+  requiredInput:'Campo obrigatório',
+  radioInput:'Selecione uma opção',
   validName: 'Este campo só pode conter letras',
   minlength: 'Este campo precisa ter no mínimo 2 caracteres',
   select: 'Selecione uma opção',

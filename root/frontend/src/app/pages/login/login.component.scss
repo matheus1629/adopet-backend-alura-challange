@@ -10,6 +10,7 @@ main {
   margin-top: 100px;
   margin-bottom: 50px;
   min-height: 93vh;
+  width: 98vw;
   flex-grow: 1;
   z-index: -2;
 }
@@ -18,6 +19,7 @@ main {
   width: 225px;
   margin-bottom: 20px;
 }
+
 
 .text {
   font-weight: 500;
@@ -38,8 +40,11 @@ label {
   text-align: right;
 }
 
-input,
-select {
+p {
+  width: 160px;
+}
+
+input {
   background-color: $light-grey-color;
   width: 265px;
   height: 30px;
@@ -53,16 +58,10 @@ input[type="radio"] {
   height: 20px;
 }
 
-select {
-  height: 40px;
-  width: 270px;
-}
-
 .container-input {
   display: flex;
   gap: 30px;
   width: 800px;
- 
 }
 
 .radio {
@@ -70,19 +69,15 @@ select {
   display: flex;
   margin-bottom: 40px;
   margin-left: 46px;
-  
-}
-
-.label-radio {
-  width: 160px;
-
 }
 
 .container-radio {
-  display: flex;
-  justify-content: space-between;
-  width: 400px;
+  width: 594px;
+}
 
+.container-radio > :nth-child(2) {
+  padding-left: 60px;
+  margin-right: 40px;
 }
 
 .input-label {
@@ -115,16 +110,24 @@ select {
   .container-radio {
     display: flex;
     flex-direction: column;
-  
+  }
+
+  .container-radio > label {
+    width: 150px;
+  }
+
+  .container-radio > :nth-child(2) {
+    margin-left: -45px;
+    margin-top: 20px;
+  }
+
+  .container-radio > span {
+    text-align: start;
   }
 
   .container-input {
     display: block;
     width: 375px;
-  }
-
-  .ajust-message {
-    text-align: end;
   }
 
   .input-label {

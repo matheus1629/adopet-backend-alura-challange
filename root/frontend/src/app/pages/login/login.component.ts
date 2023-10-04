@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
-import { AdopterService } from '../../services/adopter.service';
-
 import { IButtonConfig } from 'src/shared/interfaces/buttonConfig.interface';
 import { ButtonClass } from 'src/shared/enums/buttonConfig.enum';
-import { States } from 'src/shared/enums/states.enum';
 import { errorMessages, inputValidations } from 'src/shared/consts';
-import { clearValues, comparePassword, telMask, validateName } from 'src/shared/utils/form';
+import { telMask } from 'src/shared/utils/form';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -43,10 +40,12 @@ export class LoginComponent implements OnInit {
   submit() {
     this.formSubmitted = true;
 
+    console.log(this.loginForm.value);
+    console.log(this.loginForm.get('userType')?.value);
     if (this.loginForm.valid) {
       this.loginForm.get('email')?.value.trim();
 
-      this.authService.login(this.loginForm.value, 'donor').subscribe({
+      this.authService.login(this.loginForm.value, this.loginForm.get('userType')?.value).subscribe({
         next: (data) => {
           console.log(data);
           localStorage.setItem('user_token_adopet', data);

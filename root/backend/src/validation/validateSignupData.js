@@ -44,17 +44,17 @@ const lastName = (lastName) => {
   if (errors.length !== 0) return errors;
 };
 
-const telephone = (telephone) => {
+const phoneNumber = (phoneNumber) => {
   const errors = [];
 
-  if (!telephone) {
-    errors.push("Telephone is required");
-  } else if (!/^\d+$/.test(telephone)) {
-    errors.push("Telephone only accepts numbers");
+  if (!phoneNumber) {
+    errors.push("Phone Number is required");
+  } else if (!/^\d+$/.test(phoneNumber)) {
+    errors.push("Phone Number only accepts numbers");
   } else {
-    const telephoneTrim = telephone.trim();
-    if (telephoneTrim.length < 10 || telephoneTrim.length > 11) {
-      errors.push("Invalid telephone ");
+    const phoneNumberTrim = phoneNumber.trim();
+    if (phoneNumberTrim.length < 10 || phoneNumberTrim.length > 11) {
+      errors.push("Invalid phone number ");
     }
   }
 
@@ -67,8 +67,8 @@ const city = (city) => {
   if (!city) {
     errors.push("City is required");
   } else {
-    const telephoneTrim = city.trim();
-    if (telephoneTrim.length > 255) {
+    const cityTrim = city.trim();
+    if (cityTrim.length > 255) {
       errors.push("Invalid city");
     }
   }
@@ -123,7 +123,7 @@ const password = (password) => {
   if (!password) {
     errors.push("Password is required");
   } else {
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^\s]{6,15}$/;
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d).{8,16}$/;
     if (!passwordRegex.test(password)) {
       errors.push("Invalid Password");
     }
@@ -193,7 +193,7 @@ const description = (description) => {
 export default {
   firstName,
   lastName,
-  telephone,
+  phoneNumber,
   city,
   state,
   personalInfo,

@@ -1,30 +1,24 @@
 <main>
   <img class="logo" src="../../../assets/images/Logo_-_azul.svg" alt="logo adopet" />
-
+  
   <p class="text">Digite seu login.</p>
 
   <form [formGroup]="loginForm" (keyup.enter)="submit()">
     <div class="container-input radio">
-      <p>Seu cadastro é para:</p>
+      <p>Seu conta é para:</p>
       <div class="container-radio">
-        <label class="label-radio">
-          <input type="radio" name="opcao" value="doar" />
+        <label>
+          <input type="radio" name="userType" formControlName="userType" value="donor" />
           doar um pet
         </label>
-        <label class="label-radio">
-          <input type="radio" name="opcao" value="adotar" />
+        <label>
+          <input type="radio" name="userType" formControlName="userType" value="adopter" />
           adotar um pet
         </label>
+        <span class="error-message" *ngIf="loginForm.get('userType')?.hasError('required') && formSubmitted"
+          >{{ errorMessages.radioInput }}
+        </span>
       </div>
-
-      <span
-        class="error-message"
-        *ngIf="
-          (loginForm.get('email')?.hasError('required') || loginForm.get('email')?.hasError('email')) &&
-          formSubmitted
-        "
-        >{{ errorMessages.email }}
-      </span>
     </div>
 
     <div class="container-input">
@@ -65,7 +59,7 @@
           }"
         />
         <span class="error-message" *ngIf="loginForm.get('password')?.hasError('required') && formSubmitted"
-          >{{ errorMessages.requiredField }}
+          >{{ errorMessages.requiredInput }}
         </span>
       </div>
     </div>

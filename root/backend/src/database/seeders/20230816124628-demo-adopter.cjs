@@ -10,7 +10,7 @@ module.exports = {
           picture: "",
           first_name: "John",
           last_name: "Doe",
-          telephone: "56846325984",
+          phone_number: "56846325984",
           city: "São Paulo",
           state: "SP",
           personal_info:
@@ -24,7 +24,7 @@ module.exports = {
           picture: "",
           first_name: "Roberta",
           last_name: "Maria",
-          telephone: "45953258706",
+          phone_number: "45953258706",
           city: "Blumenau",
           state: "SC",
           personal_info:
@@ -38,7 +38,7 @@ module.exports = {
           picture: "",
           first_name: "Carlos",
           last_name: "Almeida",
-          telephone: "8492515675",
+          phone_number: "8492515675",
           city: "Curitiba",
           state: "PR",
           personal_info:
