@@ -1,6 +1,8 @@
 @import "../../variables.scss";
 
 footer {
+  position: relative;
+  bottom: 0;
   height: 7vh;
   width: 100%;
   background-color: $green-color;
@@ -8,5 +10,4 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-
 }

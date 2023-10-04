@@ -10,7 +10,7 @@ $white-color: #fff;
 $tablet-size: "768px";
 $mobile-size: "415px";
 
-@mixin mat-icon-size($size: 30px) {
+@mixin mat-icon-size($size: 28px) {
   font-size: $size;
   height: $size;
   width: $size;

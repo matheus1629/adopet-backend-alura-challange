@@ -7,20 +7,14 @@ main {
   align-items: center;
   color: $white-color;
   margin: 0 auto;
-  margin-top: 100px;
-  margin-bottom: 30px;
   width: 100%;
-  min-height: 72vh;
+  min-height: 93vh;
   flex-grow: 1;
   z-index: -2;
 }
 
-
-
 @media only screen and (max-width: $tablet-size) {
-
 }
 
 @media only screen and (max-width: $mobile-size) {
-
 }

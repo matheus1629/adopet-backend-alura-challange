@@ -208,7 +208,10 @@
         />
         <span
           class="error-message"
-          *ngIf="registerAdopterForm.get('confirmPassword')?.hasError('passwordMismatch') && formSubmitted"
+          *ngIf="
+            registerAdopterForm.get('confirmPassword')?.hasError('passwordMismatch') &&
+            formSubmitted
+          "
           >{{ errorMessages.confirmPassword }}
         </span>
       </div>

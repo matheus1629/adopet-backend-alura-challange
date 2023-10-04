@@ -18,24 +18,27 @@
 }
 
 .logo {
-  position: absolute;
+  position: fixed;
   width: 130px;
   top: 25px;
   left: 25px;
-  z-index: 1;
+  z-index: 2;
 }
 
 .top-decoration {
-  position: absolute;
+  position: fixed;
   left: 0;
+  top: 0;
   width: 350px;
+  z-index: 1;
 }
 
 .side-decoration {
-  position: absolute;
+  position: fixed;
   right: 0;
   width: 8%;
   align-self: center;
+  z-index: 1;
 }
 
 @media only screen and (max-width: $tablet-size) {
