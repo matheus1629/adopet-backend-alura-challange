@@ -9,13 +9,12 @@
   height: 93vh;
   z-index: -1;
 }
+.whiteBackground {
+  background-color: $white-color;
+}
 
 .blueBackground {
   background-color: $blue-color;
-}
-
-.whiteBackground {
-  background-color: $white-color;
 }
 
 .logo {

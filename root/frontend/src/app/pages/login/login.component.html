@@ -7,16 +7,15 @@
   <form [formGroup]="loginForm" (keyup.enter)="submit()">
     <div class="container-input radio">
       <p>Seu conta é para:</p>
+
       <div class="container-radio">
-        <label>
-          <input type="radio" name="userType" formControlName="userType" value="donor" />
-          doar um pet
-        </label>
-        <label>
-          <input type="radio" name="userType" formControlName="userType" value="adopter" />
-          adotar um pet
-        </label>
-        <span class="error-message" *ngIf="loginForm.get('userType')?.hasError('required') && formSubmitted"
+        <mat-radio-group class="radio-group" formControlName="userType" aria-label="Select an option">
+          <mat-radio-button value="donor">doar um pet</mat-radio-button>
+          <mat-radio-button value="adopter">adotar um pet</mat-radio-button>
+        </mat-radio-group>
+        <span
+          class="error-message"
+          *ngIf="loginForm.get('userType')?.hasError('required') && formSubmitted"
           >{{ errorMessages.radioInput }}
         </span>
       </div>
@@ -39,7 +38,8 @@
         <span
           class="error-message"
           *ngIf="
-            (loginForm.get('email')?.hasError('required') || loginForm.get('email')?.hasError('email')) &&
+            (loginForm.get('email')?.hasError('required') ||
+              loginForm.get('email')?.hasError('email')) &&
             formSubmitted
           "
           >{{ errorMessages.email }}
@@ -59,7 +59,9 @@
             'border-error': loginForm.get('password')?.errors && formSubmitted
           }"
         />
-        <span class="error-message" *ngIf="loginForm.get('password')?.hasError('required') && formSubmitted"
+        <span
+          class="error-message"
+          *ngIf="loginForm.get('password')?.hasError('required') && formSubmitted"
           >{{ errorMessages.requiredInput }}
         </span>
       </div>

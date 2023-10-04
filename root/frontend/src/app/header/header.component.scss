@@ -1,0 +1,9 @@
+@import "../../variables.scss";
+
+.custom-icon {
+  color: white;
+}
+
+mat-icon {
+  @include mat-icon-size();
+}

@@ -81,9 +81,9 @@ input[type="radio"] {
   width: 594px;
 }
 
-.container-radio > :nth-child(2) {
-  padding-left: 60px;
-  margin-right: 40px;
+.radio-group {
+  display: flex;
+  flex-direction: column;
 }
 
 .input-label {
@@ -125,11 +125,6 @@ input[type="radio"] {
 
   .container-radio > label {
     width: 150px;
-  }
-
-  .container-radio > :nth-child(2) {
-    margin-left: -45px;
-    margin-top: 20px;
   }
 
   .container-radio > span {

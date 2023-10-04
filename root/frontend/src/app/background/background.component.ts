@@ -12,7 +12,7 @@ export class BackgroundComponent implements OnInit {
   ngOnInit(): void {}
 
   getBackgroundColor() {
-    if (this.router.url === '/') return 'blueBackground';
-    else return 'whiteBackground';
+    if (this.router.url !== '/') return 'whiteBackground';
+    return 'blueBackground';
   }
 }

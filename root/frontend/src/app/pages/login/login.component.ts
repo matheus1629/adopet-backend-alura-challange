@@ -6,6 +6,7 @@ import { ButtonClass } from 'src/shared/enums/buttonConfig.enum';
 import { errorMessages, inputValidations } from 'src/shared/consts';
 import { telMask } from 'src/shared/utils/form';
 import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,7 @@ export class LoginComponent implements OnInit {
   formSubmitted = false;
   loginForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {}
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -45,15 +46,18 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       this.loginForm.get('email')?.value.trim();
 
-      this.authService.login(this.loginForm.value, this.loginForm.get('userType')?.value).subscribe({
-        next: (data) => {
-          console.log(data);
-          localStorage.setItem('user_token_adopet', data);
-        },
-        error: (err) => {
-          console.error('Error: ', err);
-        },
-      });
+      this.authService
+        .login(this.loginForm.value, this.loginForm.get('userType')?.value)
+        .subscribe({
+          next: (data) => {
+            console.log(data);
+            localStorage.setItem('user_token_adopet', data);
+            this.router.navigate(['/home']);
+          },
+          error: (err) => {
+            console.error('Error: ', err);
+          },
+        });
     }
   }
 }

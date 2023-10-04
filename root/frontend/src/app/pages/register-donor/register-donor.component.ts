@@ -9,6 +9,7 @@ import { States } from 'src/shared/enums/states.enum';
 import { errorMessages, inputValidations } from 'src/shared/consts';
 import { clearValues, comparePassword, telMask, validateName } from 'src/shared/utils/form';
 import { DonorService } from 'src/app/services/donor.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-donor',
@@ -27,7 +28,11 @@ export class RegisterDonorComponent implements OnInit {
   formSubmitted = false;
   registerDonorForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private donorService: DonorService) {}
+  constructor(
+    private fb: FormBuilder,
+    private donorService: DonorService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.registerDonorForm = this.fb.group(
@@ -45,9 +50,18 @@ export class RegisterDonorComponent implements OnInit {
           [Validators.required, Validators.minLength(10), Validators.maxLength(11)],
         ],
         state: ['Santa Catarina', [Validators.required]],
-        city: ['joinville', [Validators.required, Validators.minLength(2), Validators.maxLength(255)]],
-        email: ['jonh@email.com', [Validators.required, Validators.email, Validators.maxLength(255)]],
-        password: ['qweqwe12', [Validators.required, Validators.pattern('^(?=.*[A-Za-z])(?=.*\\d).{8,16}$')]],
+        city: [
+          'joinville',
+          [Validators.required, Validators.minLength(2), Validators.maxLength(255)],
+        ],
+        email: [
+          'jonh@email.com',
+          [Validators.required, Validators.email, Validators.maxLength(255)],
+        ],
+        password: [
+          'qweqwe12',
+          [Validators.required, Validators.pattern('^(?=.*[A-Za-z])(?=.*\\d).{8,16}$')],
+        ],
         confirmPassword: ['qweqwe12', [Validators.required]],
       },
       {
@@ -69,6 +83,7 @@ export class RegisterDonorComponent implements OnInit {
       this.donorService.createDonor(cleanedValuesForm).subscribe({
         next: (data) => {
           console.log(data);
+          this.router.navigate(['/']);
         },
         error: (err) => {
           console.error('Error: ', err);
