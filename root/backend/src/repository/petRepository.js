@@ -4,6 +4,10 @@ const getAllPetsAvailable = async (pageSetting) => {
   return await database.Pet.findAll({
     where: { adopted: 0 },
     attributes: { exclude: ["createdAt", "updatedAt"] },
+    include: {
+      model: database.Donor,
+      attributes: ["city", "state"],
+    },
     ...pageSetting,
   });
 };
@@ -11,6 +15,10 @@ const getAllPetsAvailable = async (pageSetting) => {
 const getAllPets = async () => {
   return await database.Pet.findAll({
     attributes: { exclude: ["createdAt", "updatedAt"] },
+    include: {
+      model: database.Donor,
+      attributes: ["city", "state"],
+    },
   });
 };
 
@@ -18,6 +26,10 @@ const getPetById = async (id) => {
   return await database.Pet.findOne({
     where: { id },
     attributes: { exclude: ["createdAt", "updatedAt"] },
+    include: {
+      model: database.Donor,
+      attributes: ["city", "state"],
+    },
   });
 };
 
@@ -35,10 +47,7 @@ const deletePet = async (id) => {
   let wasDeleted;
   await database.sequelize.transaction(async (transaction) => {
     await database.Message.destroy({ where: { idPet: id } }, { transaction });
-    const deletedCount = await database.Pet.destroy(
-      { where: { id, adopted: 0 } },
-      { transaction }
-    );
+    const deletedCount = await database.Pet.destroy({ where: { id, adopted: 0 } }, { transaction });
     wasDeleted = deletedCount;
   });
   return wasDeleted;

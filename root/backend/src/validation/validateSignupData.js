@@ -7,8 +7,8 @@ const picture = (buffer) => {
   const bufferType = checkBufferType(buffer)
   if (bufferType!== 'PNG' && bufferType !== 'JPG' ) {
     errors.push("File must be PNG or JPEG");
-  } else if (buffer.length > 10000000) {
-    errors.push("File exceeds the maximum size of 10mb");
+  } else if (buffer.length > 5000000) {
+    errors.push("File exceeds the maximum size of 5mb");
   }
 
   if (errors.length !== 0) return errors;

@@ -4,6 +4,7 @@ import database from "../database/models/index.js";
 
 const checkToken = (model) => async (req, res, next) => {
   const authHeader = await req.headers["authorization"];
+  
   const token = authHeader && authHeader.split(" ")[1];
 
   if (!token) return res.status(401).json("Token is required");
