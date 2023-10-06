@@ -9,4 +9,5 @@ export interface IPet {
   adopted: number;
   idDonor: number;
   idAdopter: number;
+  Donor: { city: string; state: string };
 }

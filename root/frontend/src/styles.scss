@@ -57,7 +57,7 @@ table {
 }
 
 .border-error {
-  box-shadow: inset 0 0 0 1.3px $coral-color;
+  box-shadow: inset 0 0 0 1.3px $coral-color !important;
 }
 
 @media only screen and (max-width: $tablet-size) {

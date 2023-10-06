@@ -1,6 +1,4 @@
-import { States } from '../enums/states.enum';
-
-export interface IForm {
+export interface IFormRegisterAccount {
   firstName: string;
   lastName: string;
   state: string | undefined;

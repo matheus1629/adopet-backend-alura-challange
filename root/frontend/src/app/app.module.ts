@@ -4,6 +4,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +20,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProfileAdopterComponent } from './pages/profile-adopter/profile-adopter.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +33,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LoginComponent,
     HomeComponent,
     HeaderComponent,
+    ProfileAdopterComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],
@@ -43,6 +47,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     MatIconModule,
     MatRadioModule,
+    MatMenuModule,
+    MatButtonModule,
   ],
 })
 export class AppModule {}

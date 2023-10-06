@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -8,8 +8,32 @@ import { Observable } from 'rxjs';
 export class AdopterService {
   constructor(private http: HttpClient) {}
 
-  createAdopter<IForm>(formData: IForm): Observable<IForm> {
-    return this.http.post<IForm>('http://localhost:8000/auth/signup/adopter', formData);
+  getAdopter<IAccountData>(): Observable<IAccountData> {
+    let headers = new HttpHeaders();
+    let token = localStorage.getItem('user_token_adopet');
+    headers = headers.set('Authorization', 'Bearer ' + token);
+
+    return this.http.get<IAccountData>('http://localhost:8000/adopter/loggedUser/info', {
+      headers: headers,
+    });
   }
-  
+
+  createAdopter<IFormRegisterAccount>(
+    formData: IFormRegisterAccount
+  ): Observable<IFormRegisterAccount> {
+    return this.http.post<IFormRegisterAccount>(
+      'http://localhost:8000/auth/signup/adopter',
+      formData
+    );
+  }
+
+  editAdopter<IAdopterEdit>(formData: IAdopterEdit): Observable<IAdopterEdit> {
+    let headers = new HttpHeaders();
+    let token = localStorage.getItem('user_token_adopet');
+    headers = headers.set('Authorization', 'Bearer ' + token);
+
+    return this.http.patch<IAdopterEdit>('http://localhost:8000/adopter', formData, {
+      headers: headers,
+    });
+  }
 }

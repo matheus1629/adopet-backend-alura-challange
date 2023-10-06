@@ -5,6 +5,8 @@ import { RegisterAdopterComponent } from './pages/register-adopter/register-adop
 import { RegisterDonorComponent } from './pages/register-donor/register-donor.component';
 import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
+import { ProfileAdopterComponent } from './pages/profile-adopter/profile-adopter.component';
+
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -12,6 +14,7 @@ const routes: Routes = [
   { path: 'register-adopter', component: RegisterAdopterComponent },
   { path: 'register-donor', component: RegisterDonorComponent },
   { path: 'home', component: HomeComponent },
+  { path: 'profile-adopter', component: ProfileAdopterComponent },
 ];
 
 @NgModule({

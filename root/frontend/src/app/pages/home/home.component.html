@@ -13,8 +13,12 @@
           <p class="pet-info">{{ pet.size }}</p>
           <p class="pet-info desc">{{ pet.description }}</p>
 
-          <p class="pet-region">Rio de Janeiro (RJ)</p>
-          <a href=""><span class="contact-donor">Falar com o responsável</span></a>
+          <p class="pet-region">{{ pet.Donor.city }} ({{ pet.Donor.state }})</p>
+
+          <a routerLink="/teste"
+            ><mat-icon class="chat-icon" fontIcon="chat"></mat-icon>
+            <span class="contact-donor">Falar com o responsável</span>
+          </a>
         </div>
       </div>
     </div>

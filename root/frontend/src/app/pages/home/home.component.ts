@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { PetService } from 'src/app/services/pet.service';
-import { IForm } from 'src/shared/interfaces/form.interface';
 import { IPet } from 'src/shared/interfaces/pet.interface';
 
 @Component({
@@ -17,7 +16,6 @@ export class HomeComponent implements OnInit {
     this.petService.getAllPetsAvailable().subscribe({
       next: (data) => {
         this.pets = data;
-        console.log(this.pets);
       },
       error: (err) => {
         console.error('Error: ', err);

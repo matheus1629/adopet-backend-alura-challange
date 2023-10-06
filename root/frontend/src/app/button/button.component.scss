@@ -13,37 +13,35 @@ button:hover {
 }
 
 .button-type-1 {
-  width: 362px;
-  height: 48px;
+  width: 360px;
+  height: 50px;
 }
 
 .button-type-2 {
   width: 270px;
-  height: 48px;
+  height: 50px;
 }
 
-@media only screen and (max-width:  $tablet-size) {
+@media only screen and (max-width: $tablet-size) {
   .button-type-1 {
     width: 315px;
     height: 40px;
   }
 
   .button-type-2 {
-    width: 270px;
-    height: 48px;
+    width: 250px;
+    height: 50px;
   }
-  
 }
 
-@media only screen and (max-width:  $mobile-size) {
+@media only screen and (max-width: $mobile-size) {
   .button-type-1 {
     width: 250px;
     height: 35px;
   }
 
   .button-type-2 {
-    width: 270px;
-    height: 48px;
+    width: 200px;
+    height: 50px;
   }
-  
 }

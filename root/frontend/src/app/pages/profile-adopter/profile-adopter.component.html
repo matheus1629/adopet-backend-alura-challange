@@ -1,0 +1,196 @@
+<app-header></app-header>
+<main>
+  <p class="text">
+    Ao enviar uma mensagem para alguém que está doando um pet, essas informações ficarão disponíveis
+  </p>
+
+  <form [formGroup]="editAdopterForm" (keyup.enter)="submit()">
+    <h1>Perfil</h1>
+
+    <div class="input-label">
+      <label for="">Foto</label>
+      <div class="input-file-container">
+        <label class="input-picture-box" for="picture">
+          <ng-container *ngIf="!editAdopterForm.get('picture')?.value; else imageTemplate">
+            <mat-icon class="picture-img" fontIcon="account_circle"></mat-icon>
+          </ng-container>
+          <ng-template #imageTemplate>
+            <img
+              class="picture-img"
+              [src]="editAdopterForm.get('picture')?.value"
+              [alt]="editAdopterForm.value.name"
+            />
+          </ng-template>
+        </label>
+
+        <input
+          class="input-file"
+          id="picture"
+          name="picture"
+          type="file"
+          accept="image/jpeg, image/png"
+          [ngClass]="{
+            'border-error': editAdopterForm.get('picture')?.errors && formSubmitted
+          }"
+          (change)="onFileSelected($event)"
+        />
+      </div>
+
+      <ng-container *ngIf="editAdopterForm.get('picture')?.hasError('fileSizeExceeded')"
+        ><span class="error-message" style="align-self: center">{{
+          errorMessages.fileSizeExceeded
+        }}</span>
+      </ng-container>
+      <ng-container *ngIf="editAdopterForm.get('picture')?.hasError('fileUnsupported')"
+        ><span class="error-message" style="align-self: center">{{
+          errorMessages.fileUnsupported
+        }}</span>
+      </ng-container>
+
+      <p class="picture-text">Clique na foto para editar</p>
+    </div>
+
+    <div class="input-label">
+      <label for="firstName">Nome</label>
+      <input
+        class="input-text"
+        id="firstName"
+        name="firstName"
+        type="text"
+        formControlName="firstName"
+        placeholder="Digite seu nome"
+        [maxlength]="inputValidations.maxLengthForm"
+        [ngClass]="{
+          'border-error': editAdopterForm.get('firstName')?.errors && formSubmitted
+        }"
+      />
+      <ng-container
+        *ngIf="
+          (editAdopterForm.get('firstName')?.hasError('required') ||
+            editAdopterForm.get('firstName')?.hasError('minlength')) &&
+          formSubmitted
+        "
+      >
+        <span class="error-message">{{ errorMessages.minlength }}</span>
+      </ng-container>
+      <ng-container
+        *ngIf="editAdopterForm.get('firstName')?.hasError('validName') && formSubmitted"
+      >
+        <span class="error-message">{{ errorMessages.validName }}</span>
+      </ng-container>
+    </div>
+
+    <div class="input-label">
+      <label for="lastName">Sobrenome</label>
+      <input
+        class="input-text"
+        id="lastName"
+        name="lastName"
+        type="text"
+        formControlName="lastName"
+        placeholder="Digite seu sobrenome"
+        [maxlength]="inputValidations.maxLengthForm"
+        [ngClass]="{
+          'border-error': editAdopterForm.get('lastName')?.errors && formSubmitted
+        }"
+      />
+      <ng-container
+        *ngIf="
+          (editAdopterForm.get('lastName')?.hasError('required') ||
+            editAdopterForm.get('lastName')?.hasError('minlength')) &&
+          formSubmitted
+        "
+        ><span class="error-message">{{ errorMessages.minlength }}</span>
+      </ng-container>
+      <ng-container *ngIf="editAdopterForm.get('lastName')?.hasError('validName') && formSubmitted">
+        <span class="error-message">{{ errorMessages.validName }}</span>
+      </ng-container>
+    </div>
+
+    <div class="input-label">
+      <label for="state">Estado</label>
+      <select
+        id="state"
+        name="state"
+        formControlName="state"
+        [ngClass]="{
+          'border-error': editAdopterForm.get('state')?.errors && formSubmitted
+        }"
+      >
+        <option value="" disabled selected>Selecione um estado</option>
+        <option *ngFor="let state of statesValues" [value]="state">
+          {{ state }}
+        </option>
+      </select>
+      <ng-container *ngIf="editAdopterForm.get('state')?.hasError('required') && formSubmitted"
+        ><span class="error-message">{{ errorMessages.select }}</span>
+      </ng-container>
+    </div>
+
+    <div class="input-label">
+      <label for="city">Cidade</label>
+      <input
+        class="input-text"
+        id="city"
+        name="city"
+        type="text"
+        formControlName="city"
+        placeholder="Digite sua cidade"
+        [maxlength]="inputValidations.maxLengthForm"
+        [ngClass]="{
+          'border-error': editAdopterForm.get('city')?.errors && formSubmitted
+        }"
+      />
+      <ng-container
+        *ngIf="
+          (editAdopterForm.get('city')?.hasError('required') ||
+            editAdopterForm.get('city')?.hasError('minlength')) &&
+          formSubmitted
+        "
+        ><span class="error-message">{{ errorMessages.minlength }}</span>
+      </ng-container>
+    </div>
+
+    <div class="input-label">
+      <label for="phoneNumber">Telefone/Celular</label>
+      <input
+        class="input-text"
+        id="phoneNumber"
+        name="phoneNumber"
+        type="tel"
+        formControlName="phoneNumber"
+        placeholder="Digite seu telefone/celular"
+        [mask]="telMaskForm()"
+        [ngClass]="{
+          'border-error': editAdopterForm.get('phoneNumber')?.errors && formSubmitted
+        }"
+      />
+      <ng-container
+        *ngIf="
+          (editAdopterForm.get('phoneNumber')?.hasError('required') ||
+            editAdopterForm.get('phoneNumber')?.hasError('minlength')) &&
+          formSubmitted
+        "
+        ><span class="error-message">{{ errorMessages.phoneNumber }}</span>
+      </ng-container>
+    </div>
+
+    <div class="input-label">
+      <label for="personalInfo">Sobre mim</label>
+      <textarea
+        class="input-text"
+        id="personalInfo"
+        name="personalInfo"
+        formControlName="personalInfo"
+        placeholder="Fale um pouco sobre você"
+        [maxlength]="textAreaValidation"
+        [ngClass]="{
+          'border-error': editAdopterForm.get('personalInfo')?.errors && formSubmitted
+        }"
+      >
+      </textarea>
+    </div>
+
+    <app-button (click)="submit()" [buttonConfig]="buttonRegister"></app-button>
+  </form>
+</main>

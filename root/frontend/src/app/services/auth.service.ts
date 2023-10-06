@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  login<IForm>(loginData: IForm, userType: string): Observable<IForm> {
-    return this.http.post<IForm>(`http://localhost:8000/auth/signin/${userType}`, loginData);
+  login<T>(loginData: T, userType: string): Observable<T> {
+    return this.http.post<T>(`http://localhost:8000/auth/signin/${userType}`, loginData);
   }
 }
