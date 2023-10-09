@@ -1,15 +1,21 @@
 @import "../../variables.scss";
 
-button {
+.enable {
   color: $white-color;
   background-color: $coral-color;
   border-radius: 5px;
   cursor: pointer;
 }
 
-button:hover {
+.enable:hover {
   background-color: #ff9d9e;
   transition: 0.4s;
+}
+
+.disable {
+  color: $white-color;
+  background-color: $medium-grey-color;
+  border-radius: 5px;
 }
 
 .button-type-1 {

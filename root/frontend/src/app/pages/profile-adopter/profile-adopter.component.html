@@ -29,9 +29,6 @@
           name="picture"
           type="file"
           accept="image/jpeg, image/png"
-          [ngClass]="{
-            'border-error': editAdopterForm.get('picture')?.errors && formSubmitted
-          }"
           (change)="onFileSelected($event)"
         />
       </div>

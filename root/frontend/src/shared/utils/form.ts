@@ -1,6 +1,7 @@
 import { AbstractControl, FormGroup } from '@angular/forms';
 import { States } from '../enums/states.enum';
 import { IFormRegisterAccount } from '../interfaces/formRegisterAccount.interface';
+import { IAccountEdit } from '../interfaces/accountEdit.interface';
 
 export function validateName(control: AbstractControl): { validName: boolean } | null {
   const regex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/;
@@ -38,14 +39,14 @@ function getStateKey(stateValue: States): string {
   return keys[index];
 }
 
-export function clearValues(formDirtyValues: IFormRegisterAccount): IFormRegisterAccount {
+export function clearValues(formDirtyValues: IFormRegisterAccount & IAccountEdit) {
   const cleanedValues = formDirtyValues;
 
   cleanedValues.firstName = formDirtyValues.firstName?.trim();
   cleanedValues.lastName = formDirtyValues.lastName?.trim();
   cleanedValues.state = getStateKey(formDirtyValues?.state as States);
   cleanedValues.city = formDirtyValues.city?.trim();
-  cleanedValues.email = formDirtyValues.email?.trim();
+  if ('email' in formDirtyValues) cleanedValues.email = formDirtyValues.email.trim();
 
   return cleanedValues;
 }

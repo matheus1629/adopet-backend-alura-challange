@@ -1,1 +1,6 @@
-<button [ngClass]="buttonConfig.class">{{ buttonConfig.innerText }}</button>
+<button
+  [disabled]="buttonConfig.disable"
+  [ngClass]="[buttonConfig.class, buttonConfig.disable ? 'disable' : 'enable']"
+>
+  {{ buttonConfig.innerText }}
+</button>

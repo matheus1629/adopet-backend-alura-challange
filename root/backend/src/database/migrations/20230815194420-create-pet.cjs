@@ -26,7 +26,7 @@ module.exports = {
         allowNull: false,
       },
       picture: {
-        type: Sequelize.BLOB,
+        type: Sequelize.BLOB("medium"),
         allowNull: false,
       },
       adoption_date: {

@@ -41,8 +41,6 @@ export class LoginComponent implements OnInit {
   submit() {
     this.formSubmitted = true;
 
-    console.log(this.loginForm.value);
-    console.log(this.loginForm.get('userType')?.value);
     if (this.loginForm.valid) {
       this.loginForm.get('email')?.value.trim();
 

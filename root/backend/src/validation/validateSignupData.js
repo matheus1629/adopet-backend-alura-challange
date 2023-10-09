@@ -4,8 +4,8 @@ import { checkBufferType } from "../helpers/buffer.js";
 const picture = (buffer) => {
   const errors = [];
 
-  const bufferType = checkBufferType(buffer)
-  if (bufferType!== 'PNG' && bufferType !== 'JPG' ) {
+  const bufferType = checkBufferType(buffer);
+  if (bufferType !== "PNG" && bufferType !== "JPG") {
     errors.push("File must be PNG or JPEG");
   } else if (buffer.length > 5000000) {
     errors.push("File exceeds the maximum size of 5mb");
@@ -94,8 +94,8 @@ const personalInfo = (personalInfo) => {
   const errors = [];
 
   if (personalInfo) {
-    const personalInfo = personalInfo.trim();
-    if (personalInfo.length > 2000) errors.push("Personal info too large");
+    const personalInfoTrim = personalInfo.trim();
+    if (personalInfoTrim.length > 2000) errors.push("Personal info too large");
   }
 
   if (errors.length !== 0) return errors;

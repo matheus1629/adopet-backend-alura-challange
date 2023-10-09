@@ -9,9 +9,7 @@ const getAllAdopters = async () => {
 
   for (const key in adoptersData) {
     if (adoptersData[key].dataValues.picture) {
-      adoptersData[key].dataValues.picture = bufferToBase64(
-        adoptersData[key].dataValues.picture
-      );
+      adoptersData[key].dataValues.picture = bufferToBase64(adoptersData[key].dataValues.picture);
     }
   }
 
@@ -26,9 +24,7 @@ const getAdopterById = async (id) => {
   if (!adopterData) throw new BadRequestError("Adopter not found");
 
   if (adopterData.dataValues.picture)
-    adopterData.dataValues.picture = bufferToBase64(
-      adopterData.dataValues.picture
-    );
+    adopterData.dataValues.picture = bufferToBase64(adopterData.dataValues.picture);
 
   return adopterData.dataValues;
 };
@@ -67,9 +63,9 @@ const updateAdopter = async (newAdopterInfo, id) => {
   delete newAdopterInfo.createdAt;
   delete newAdopterInfo.updatedAt;
   delete newAdopterInfo.id;
-
+  console.log(newAdopterInfo);
   let errors = [];
-
+  
   for (const key in newAdopterInfo) {
     let error;
     if (key === "picture" && newAdopterInfo.picture) {
@@ -81,7 +77,7 @@ const updateAdopter = async (newAdopterInfo, id) => {
     }
     if (error) errors.push(error);
   }
-
+console.log(newAdopterInfo);
   if (errors.length > 0) {
     const errorMessage = `Validation errors: ${errors.join(", ")}`;
     throw new BadRequestError(errorMessage);

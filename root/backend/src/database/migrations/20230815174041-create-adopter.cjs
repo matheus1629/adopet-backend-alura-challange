@@ -10,7 +10,7 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       picture: {
-        type: Sequelize.BLOB,
+        type: Sequelize.BLOB("medium"),
       },
       first_name: {
         type: Sequelize.STRING,

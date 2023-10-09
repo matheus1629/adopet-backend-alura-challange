@@ -1,3 +1,4 @@
+import { IAccountEdit } from './../../shared/interfaces/accountEdit.interface';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -27,12 +28,12 @@ export class AdopterService {
     );
   }
 
-  editAdopter<IAdopterEdit>(formData: IAdopterEdit): Observable<IAdopterEdit> {
+  editAdopter<IAccountEdit>(formData: IAccountEdit): Observable<IAccountEdit> {
     let headers = new HttpHeaders();
     let token = localStorage.getItem('user_token_adopet');
     headers = headers.set('Authorization', 'Bearer ' + token);
 
-    return this.http.patch<IAdopterEdit>('http://localhost:8000/adopter', formData, {
+    return this.http.patch<IAccountEdit>('http://localhost:8000/adopter', formData, {
       headers: headers,
     });
   }

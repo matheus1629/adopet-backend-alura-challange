@@ -1,5 +1,5 @@
 import { textAreaValidation } from './../../../shared/consts';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 import { AdopterService } from '../../services/adopter.service';
@@ -11,17 +11,19 @@ import { errorMessages, inputValidations } from 'src/shared/consts';
 import { clearValues, telMask, validateName } from 'src/shared/utils/form';
 import { Router } from '@angular/router';
 import { IAccountData } from 'src/shared/interfaces/accountData.interface';
-import { IAdopterEdit } from 'src/shared/interfaces/accountEdit.interface';
+import { IAccountEdit } from 'src/shared/interfaces/accountEdit.interface';
+import { IFormRegisterAccount } from 'src/shared/interfaces/formRegisterAccount.interface';
 
 @Component({
   selector: 'app-profile-adopter',
   templateUrl: './profile-adopter.component.html',
   styleUrls: ['./profile-adopter.component.scss'],
 })
-export class ProfileAdopterComponent implements OnInit {
+export class ProfileAdopterComponent implements OnInit, DoCheck {
   buttonRegister: IButtonConfig = {
     innerText: 'Salvar',
     class: ButtonClass.BUTTON_TYPE_2,
+    disable: true,
   };
 
   statesValues = Object.values(States);
@@ -41,7 +43,7 @@ export class ProfileAdopterComponent implements OnInit {
     this.adopterService.getAdopter<IAccountData>().subscribe({
       next: (data: IAccountData) => {
         console.log(data);
-        this.editAdopterForm.setValue({
+        this.editAdopterForm.patchValue({
           picture: data.picture,
           firstName: data.firstName,
           lastName: data.lastName,
@@ -73,6 +75,10 @@ export class ProfileAdopterComponent implements OnInit {
     });
   }
 
+  ngDoCheck() {
+    if (this.editAdopterForm.dirty) this.buttonRegister.disable = false;
+  }
+
   onFileSelected(event: any) {
     const file = event.target.files[0];
 
@@ -94,6 +100,7 @@ export class ProfileAdopterComponent implements OnInit {
 
     reader.onload = () => {
       this.editAdopterForm.patchValue({ picture: reader.result as string });
+      this.editAdopterForm.get('picture')?.markAsDirty();
     };
 
     reader.readAsDataURL(file);
@@ -106,21 +113,17 @@ export class ProfileAdopterComponent implements OnInit {
   submit() {
     this.formSubmitted = true;
 
-    let dirtyFields: IAdopterEdit;
-
     if (this.editAdopterForm.valid) {
+      const dirtyFields: IAccountEdit = {};
+
       const formControlFields = Object.entries(this.editAdopterForm.controls);
 
-       formControlFields.forEach((element) => {
+      for (let element of formControlFields) {
         if (element[1].dirty === true)
- 
-        
-          dirtyFields[element[0] as keyof IAdopterEdit] = element[1]?.value;
-        console.log(dirtyFields);
-      });
+          dirtyFields[element[0] as keyof IAccountEdit] = element[1].value;
+      }
 
-
-      const cleanedValuesForm = clearValues(this.editAdopterForm.value);
+      const cleanedValuesForm = clearValues(dirtyFields as IFormRegisterAccount & IAccountEdit);
 
       this.adopterService.editAdopter(cleanedValuesForm).subscribe({
         next: (data) => {
