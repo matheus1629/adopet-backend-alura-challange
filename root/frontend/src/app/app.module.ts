@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,6 +22,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProfileAdopterComponent } from './pages/profile-adopter/profile-adopter.component';
+import { ProfileDonorComponent } from './pages/profile-donor/profile-donor.component';
+import { PopupComponent } from './popup/popup.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +37,8 @@ import { ProfileAdopterComponent } from './pages/profile-adopter/profile-adopter
     HomeComponent,
     HeaderComponent,
     ProfileAdopterComponent,
+    ProfileDonorComponent,
+    PopupComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],
@@ -49,6 +54,7 @@ import { ProfileAdopterComponent } from './pages/profile-adopter/profile-adopter
     MatRadioModule,
     MatMenuModule,
     MatButtonModule,
+    MatDialogModule,
   ],
 })
 export class AppModule {}

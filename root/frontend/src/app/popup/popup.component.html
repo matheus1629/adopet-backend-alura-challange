@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>
+  {{ inputData.title
+  }}<mat-icon [ngClass]="inputData.icon === 'error' ? 'icon-error' : 'icon-ok'">{{
+    inputData.icon
+  }}</mat-icon>
+</h1>
+
+<div mat-dialog-actions>
+  <button mat-raised-button color="warn" (click)="closePopup()">Fechar</button>
+</div>

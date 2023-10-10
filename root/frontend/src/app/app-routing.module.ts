@@ -6,6 +6,7 @@ import { RegisterDonorComponent } from './pages/register-donor/register-donor.co
 import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ProfileAdopterComponent } from './pages/profile-adopter/profile-adopter.component';
+import { ProfileDonorComponent } from './pages/profile-donor/profile-donor.component';
 
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'register-donor', component: RegisterDonorComponent },
   { path: 'home', component: HomeComponent },
   { path: 'profile-adopter', component: ProfileAdopterComponent },
+  { path: 'profile-donor', component: ProfileDonorComponent },
 ];
 
 @NgModule({

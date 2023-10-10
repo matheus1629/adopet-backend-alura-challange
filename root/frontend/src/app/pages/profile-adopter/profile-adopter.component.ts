@@ -9,10 +9,11 @@ import { ButtonClass } from 'src/shared/enums/buttonConfig.enum';
 import { States } from 'src/shared/enums/states.enum';
 import { errorMessages, inputValidations } from 'src/shared/consts';
 import { clearValues, telMask, validateName } from 'src/shared/utils/form';
-import { Router } from '@angular/router';
 import { IAccountData } from 'src/shared/interfaces/accountData.interface';
 import { IAccountEdit } from 'src/shared/interfaces/accountEdit.interface';
 import { IFormRegisterAccount } from 'src/shared/interfaces/formRegisterAccount.interface';
+import { MatDialog } from '@angular/material/dialog';
+import { PopupComponent } from 'src/app/popup/popup.component';
 
 @Component({
   selector: 'app-profile-adopter',
@@ -36,7 +37,7 @@ export class ProfileAdopterComponent implements OnInit, DoCheck {
   constructor(
     private fb: FormBuilder,
     private adopterService: AdopterService,
-    private router: Router
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -77,6 +78,7 @@ export class ProfileAdopterComponent implements OnInit, DoCheck {
 
   ngDoCheck() {
     if (this.editAdopterForm.dirty) this.buttonRegister.disable = false;
+    else this.buttonRegister.disable = true;
   }
 
   onFileSelected(event: any) {
@@ -110,6 +112,15 @@ export class ProfileAdopterComponent implements OnInit, DoCheck {
     return telMask(this.editAdopterForm.value.phoneNumber as string);
   }
 
+  openPopup(message: string, icon: string = '') {
+    this.dialog.open(PopupComponent, {
+      data: {
+        title: message,
+        icon: icon,
+      },
+    });
+  }
+
   submit() {
     this.formSubmitted = true;
 
@@ -124,13 +135,15 @@ export class ProfileAdopterComponent implements OnInit, DoCheck {
       }
 
       const cleanedValuesForm = clearValues(dirtyFields as IFormRegisterAccount & IAccountEdit);
-
+//cleanedValuesForm.firstName='2'
       this.adopterService.editAdopter(cleanedValuesForm).subscribe({
         next: (data) => {
-          console.log(data);
+          this.openPopup('Alterações salvas!','check_circle');
+          this.editAdopterForm.markAsPristine();
         },
         error: (err) => {
           console.error('Error: ', err);
+          this.openPopup('Não foi possível salvar suas alterações.','error');
         },
       });
     }

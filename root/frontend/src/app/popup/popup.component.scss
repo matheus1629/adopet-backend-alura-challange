@@ -1,0 +1,33 @@
+@import "../../variables.scss";
+
+.icon-ok {
+  @include mat-icon-size(35px);
+  color: rgb(17, 218, 17);
+}
+
+.icon-error {
+  @include mat-icon-size(35px);
+  color: $coral-color;
+}
+
+h1 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 10px;
+}
+
+@media only screen and (max-width: $mobile-size) {
+  h1 {
+    font-size: 16px !important;
+    gap: 5px;
+  }
+
+  .icon {
+    @include mat-icon-size(25px);
+  }
+
+  .icon-error {
+    @include mat-icon-size(25px);
+  }
+}

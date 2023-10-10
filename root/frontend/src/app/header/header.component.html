@@ -2,7 +2,7 @@
 <mat-icon (click)="navigateTo('/home')" class="custom-icon" fontIcon="mail"></mat-icon>
 
 <mat-menu #profileMenu="matMenu">
-  <button mat-menu-item routerLink="/profile-adopter">Editar perfil</button>
+  <button mat-menu-item [routerLink]="routeEditProfile">Editar perfil</button>
   <button mat-menu-item (click)="logout()">Sair</button>
 </mat-menu>
 <mat-icon

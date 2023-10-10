@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
+  routeEditProfile = `/profile-${localStorage.getItem('user_type_adopet')?.toLocaleLowerCase()}`;
+
   constructor(private router: Router) {}
 
   navigateTo(route: string): void {
