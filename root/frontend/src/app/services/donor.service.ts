@@ -18,8 +18,8 @@ export class DonorService {
     });
   }
 
-  createDonor<IForm>(formData: IForm): Observable<IForm> {
-    return this.http.post<IForm>('http://localhost:8000/auth/signup/donor', formData);
+  createDonor<IFormRegisterAccount>(formData: IFormRegisterAccount): Observable<any> {
+    return this.http.post<IFormRegisterAccount>('http://localhost:8000/auth/signup/donor', formData);
   }
 
   editDonor<IAccountEdit>(formData: IAccountEdit): Observable<IAccountEdit> {

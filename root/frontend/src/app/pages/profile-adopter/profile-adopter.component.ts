@@ -112,7 +112,7 @@ export class ProfileAdopterComponent implements OnInit, DoCheck {
     return telMask(this.editAdopterForm.value.phoneNumber as string);
   }
 
-  openPopup(message: string, icon: string = '') {
+  openPopup(message: string, icon: string) {
     this.dialog.open(PopupComponent, {
       data: {
         title: message,
@@ -122,10 +122,11 @@ export class ProfileAdopterComponent implements OnInit, DoCheck {
   }
 
   submit() {
-    this.buttonRegister.loading = true;
     this.formSubmitted = true;
 
     if (this.editAdopterForm.valid) {
+      this.buttonRegister.loading = true;
+
       const dirtyFields: IAccountEdit = {};
 
       const formControlFields = Object.entries(this.editAdopterForm.controls);
@@ -136,17 +137,16 @@ export class ProfileAdopterComponent implements OnInit, DoCheck {
       }
 
       const cleanedValuesForm = clearValues(dirtyFields as IFormRegisterAccount & IAccountEdit);
-      
+
       this.adopterService.editAdopter(cleanedValuesForm).subscribe({
         next: (data) => {
           this.openPopup('Alterações salvas!', 'check_circle');
           this.editAdopterForm.markAsPristine();
+          this.buttonRegister.loading = false;
         },
         error: (err) => {
           console.error('Error: ', err);
-          this.openPopup('Não foi possível salvar suas alterações.', 'error');
-        },
-        complete: () => {
+          this.openPopup('Ocorreu um erro em nosso servidor.', 'error');
           this.buttonRegister.loading = false;
         },
       });

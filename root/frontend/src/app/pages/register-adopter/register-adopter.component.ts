@@ -9,6 +9,8 @@ import { States } from 'src/shared/enums/states.enum';
 import { errorMessages, inputValidations } from 'src/shared/consts';
 import { clearValues, comparePassword, telMask, validateName } from 'src/shared/utils/form';
 import { Router } from '@angular/router';
+import { PopupComponent } from 'src/app/popup/popup.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-register-adopter',
@@ -30,7 +32,8 @@ export class RegisterAdopterComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private adopterService: AdopterService,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -73,19 +76,39 @@ export class RegisterAdopterComponent implements OnInit {
     return telMask(this.registerAdopterForm.value.phoneNumber as string);
   }
 
+  openPopup(message: string, icon: string) {
+    this.dialog.open(PopupComponent, {
+      data: {
+        title: message,
+        icon: icon,
+      },
+    });
+  }
+
   submit() {
     this.formSubmitted = true;
 
     if (this.registerAdopterForm.valid) {
+      this.buttonRegister.loading = true;
+
       const cleanedValuesForm = clearValues(this.registerAdopterForm.value);
 
       this.adopterService.createAdopter(cleanedValuesForm).subscribe({
         next: (data) => {
           console.log(data);
+          localStorage.setItem('user_token_adopet', data['token']);
+          localStorage.setItem('user_type_adopet', data['userType']);
           this.router.navigate(['/home']);
         },
         error: (err) => {
           console.error('Error: ', err);
+
+          if (err.error.error === 'Email already used') {
+            this.openPopup('Email já está em uso.', 'error');
+          } else {
+            this.openPopup('Ocorreu um erro em nosso servidor.', 'error');
+          }
+          this.buttonRegister.loading = false;
         },
       });
     }

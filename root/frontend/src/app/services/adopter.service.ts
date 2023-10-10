@@ -1,4 +1,3 @@
-import { IAccountEdit } from './../../shared/interfaces/accountEdit.interface';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -19,9 +18,7 @@ export class AdopterService {
     });
   }
 
-  createAdopter<IFormRegisterAccount>(
-    formData: IFormRegisterAccount
-  ): Observable<IFormRegisterAccount> {
+  createAdopter<IFormRegisterAccount>(formData: IFormRegisterAccount): Observable<any> {
     return this.http.post<IFormRegisterAccount>(
       'http://localhost:8000/auth/signup/adopter',
       formData
