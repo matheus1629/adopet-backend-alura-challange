@@ -7,6 +7,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -39,13 +40,13 @@ import { PopupComponent } from './popup/popup.component';
     ProfileAdopterComponent,
     ProfileDonorComponent,
     PopupComponent,
+    ButtonComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ButtonComponent,
     ReactiveFormsModule,
     NgxMaskModule.forRoot(),
     HttpClientModule,
@@ -55,6 +56,7 @@ import { PopupComponent } from './popup/popup.component';
     MatMenuModule,
     MatButtonModule,
     MatDialogModule,
+    MatProgressSpinnerModule,
   ],
 })
 export class AppModule {}

@@ -1,5 +1,11 @@
 @import "../../variables.scss";
 
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .enable {
   color: $white-color;
   background-color: $coral-color;

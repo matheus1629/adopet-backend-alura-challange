@@ -1,6 +1,7 @@
 import { textAreaValidation } from './../../../shared/consts';
 import { Component, OnInit, DoCheck } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 
 import { AdopterService } from '../../services/adopter.service';
 
@@ -12,7 +13,6 @@ import { clearValues, telMask, validateName } from 'src/shared/utils/form';
 import { IAccountData } from 'src/shared/interfaces/accountData.interface';
 import { IAccountEdit } from 'src/shared/interfaces/accountEdit.interface';
 import { IFormRegisterAccount } from 'src/shared/interfaces/formRegisterAccount.interface';
-import { MatDialog } from '@angular/material/dialog';
 import { PopupComponent } from 'src/app/popup/popup.component';
 
 @Component({
@@ -21,18 +21,18 @@ import { PopupComponent } from 'src/app/popup/popup.component';
   styleUrls: ['./profile-adopter.component.scss'],
 })
 export class ProfileAdopterComponent implements OnInit, DoCheck {
-  buttonRegister: IButtonConfig = {
-    innerText: 'Salvar',
-    class: ButtonClass.BUTTON_TYPE_2,
-    disable: true,
-  };
-
   statesValues = Object.values(States);
   errorMessages = errorMessages;
   inputValidations = inputValidations;
   textAreaValidation = textAreaValidation;
   formSubmitted = false;
   editAdopterForm!: FormGroup;
+
+  buttonRegister: IButtonConfig = {
+    innerText: 'Salvar',
+    class: ButtonClass.BUTTON_TYPE_2,
+    disable: true,
+  };
 
   constructor(
     private fb: FormBuilder,
@@ -122,6 +122,7 @@ export class ProfileAdopterComponent implements OnInit, DoCheck {
   }
 
   submit() {
+    this.buttonRegister.loading = true;
     this.formSubmitted = true;
 
     if (this.editAdopterForm.valid) {
@@ -135,15 +136,18 @@ export class ProfileAdopterComponent implements OnInit, DoCheck {
       }
 
       const cleanedValuesForm = clearValues(dirtyFields as IFormRegisterAccount & IAccountEdit);
-//cleanedValuesForm.firstName='2'
+      
       this.adopterService.editAdopter(cleanedValuesForm).subscribe({
         next: (data) => {
-          this.openPopup('Alterações salvas!','check_circle');
+          this.openPopup('Alterações salvas!', 'check_circle');
           this.editAdopterForm.markAsPristine();
         },
         error: (err) => {
           console.error('Error: ', err);
-          this.openPopup('Não foi possível salvar suas alterações.','error');
+          this.openPopup('Não foi possível salvar suas alterações.', 'error');
+        },
+        complete: () => {
+          this.buttonRegister.loading = false;
         },
       });
     }
