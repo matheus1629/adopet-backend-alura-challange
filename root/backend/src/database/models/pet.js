@@ -27,8 +27,8 @@ export default (sequelize, DataTypes) => {
       picture: DataTypes.BLOB("medium"),
       adoptionDate: { type: DataTypes.DATEONLY, field: "adoption_date" },
       adopted: { type: DataTypes.TINYINT, allowNull: false, defaultValue: 0 },
-      idDonor: { type: DataTypes.INTEGER, field: "id_donor" },
-      idAdopter: { type: DataTypes.INTEGER, field: "id_adopter" },
+      idDonor: { type: DataTypes.UUID, field: "id_donor" },
+      idAdopter: { type: DataTypes.UUID, field: "id_adopter" },
     },
     {
       sequelize,

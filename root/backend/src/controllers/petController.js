@@ -26,7 +26,7 @@ const getPetById = async (req, res) => {
   const petId = req.params.id;
 
   try {
-    const pet = await petService.getPetById(Number(petId));
+    const pet = await petService.getPetById(petId);
     return res.status(200).json(pet);
   } catch (error) {
     return res.status(500).json(error.message);
@@ -56,9 +56,9 @@ const updatePet = async (req, res) => {
   const petData = req.body;
 
   try {
-    await petService.updatePet(petData, Number(petId), idDonor);
+    await petService.updatePet(petData, petId, idDonor);
 
-    const petNewInfo = await petService.getPetById(Number(petId));
+    const petNewInfo = await petService.getPetById(petId);
 
     return res.status(200).json(petNewInfo);
   } catch (error) {
@@ -71,7 +71,7 @@ const deletePet = async (req, res) => {
   const idDonor = req.userId;
 
   try {
-    await petService.deletePet(Number(petId), idDonor);
+    await petService.deletePet(petId, idDonor);
     return res.sendStatus(204);
   } catch (error) {
     if (error.name === "BadRequestError") {

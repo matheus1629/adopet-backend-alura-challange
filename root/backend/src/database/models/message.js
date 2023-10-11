@@ -23,9 +23,9 @@ export default (sequelize, DataTypes) => {
         defaultValue: "not_started",
       },
       contactMessage: { type: DataTypes.STRING, field: "contact_message" },
-      idDonor: { type: DataTypes.INTEGER, field: "id_donor" },
-      idAdopter: { type: DataTypes.INTEGER, field: "id_adopter" },
-      idPet: { type: DataTypes.INTEGER, field: "id_pet" },
+      idDonor: { type: DataTypes.UUID, field: "id_donor" },
+      idAdopter: { type: DataTypes.UUID, field: "id_adopter" },
+      idPet: { type: DataTypes.UUID, field: "id_pet" },
     },
     {
       sequelize,

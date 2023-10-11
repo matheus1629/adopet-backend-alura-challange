@@ -19,8 +19,6 @@ const getAllDonors = async () => {
 };
 
 const getDonorById = async (id) => {
-  if (isNaN(id)) throw new BadRequestError("Invalid id");
-
   const donorData = await donorRepository.getDonorById(id);
 
   if (!donorData) throw new BadRequestError("Donor not found");

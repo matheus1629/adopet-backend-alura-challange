@@ -15,6 +15,11 @@ export default (sequelize, DataTypes) => {
   }
   Donor.init(
     {
+      id: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        primaryKey: true,
+      },
       picture: {
         type: DataTypes.BLOB("medium"),
         field: "picture",
@@ -37,9 +42,33 @@ export default (sequelize, DataTypes) => {
       },
       state: {
         type: DataTypes.ENUM(
-          "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO",
-          "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI",
-          "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"
+          "AC",
+          "AL",
+          "AP",
+          "AM",
+          "BA",
+          "CE",
+          "DF",
+          "ES",
+          "GO",
+          "MA",
+          "MT",
+          "MS",
+          "MG",
+          "PA",
+          "PB",
+          "PR",
+          "PE",
+          "PI",
+          "RJ",
+          "RN",
+          "RS",
+          "RO",
+          "RR",
+          "SC",
+          "SP",
+          "SE",
+          "TO"
         ),
         field: "state",
       },
@@ -53,8 +82,8 @@ export default (sequelize, DataTypes) => {
       },
       deletedAt: {
         type: DataTypes.DATE,
-        allowNull: true
-      }
+        allowNull: true,
+      },
     },
     {
       sequelize,
