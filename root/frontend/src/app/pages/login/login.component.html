@@ -5,11 +5,18 @@
   <p class="text">Digite seu login.</p>
 
   <form [formGroup]="loginForm" (keyup.enter)="submit()">
+    <ng-container *ngIf="invalidLoginError && formSubmitted">
+      <span class="error-message error-login">{{ errorMessages.login }} </span>
+    </ng-container>
     <div class="container-input radio">
       <p>Seu conta é para:</p>
 
       <div class="container-radio">
-        <mat-radio-group class="radio-group" formControlName="userType" aria-label="Select an option">
+        <mat-radio-group
+          class="radio-group"
+          formControlName="userType"
+          aria-label="Select an option"
+        >
           <mat-radio-button value="donor">doar um pet</mat-radio-button>
           <mat-radio-button value="adopter">adotar um pet</mat-radio-button>
         </mat-radio-group>
@@ -35,15 +42,15 @@
             'border-error': loginForm.get('email')?.errors && formSubmitted
           }"
         />
-        <span
-          class="error-message"
+        <ng-container
           *ngIf="
             (loginForm.get('email')?.hasError('required') ||
               loginForm.get('email')?.hasError('email')) &&
             formSubmitted
           "
-          >{{ errorMessages.email }}
-        </span>
+        >
+          <span class="error-message">{{ errorMessages.email }} </span>
+        </ng-container>
       </div>
 
       <div class="input-label">
@@ -59,11 +66,9 @@
             'border-error': loginForm.get('password')?.errors && formSubmitted
           }"
         />
-        <span
-          class="error-message"
-          *ngIf="loginForm.get('password')?.hasError('required') && formSubmitted"
-          >{{ errorMessages.requiredInput }}
-        </span>
+        <ng-container *ngIf="loginForm.get('password')?.hasError('required') && formSubmitted">
+          <span class="error-message">{{ errorMessages.requiredInput }} </span>
+        </ng-container>
       </div>
     </div>
   </form>

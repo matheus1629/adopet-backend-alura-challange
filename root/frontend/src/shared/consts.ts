@@ -7,10 +7,11 @@ export const inputValidations = {
 export const textAreaValidation = 2000;
 
 export const errorMessages = {
+  login: 'Email ou senha incorreto. Verifique também o tipo da conta.',
   requiredInput: 'Campo obrigatório.',
   radioInput: 'Selecione uma opção',
-  fileSizeExceeded:'Tamanho máximo de 5mb excedido',
-  fileUnsupported:'O arquivo precisa ser JPEG ou PNG',
+  fileSizeExceeded: 'Tamanho máximo de 5mb excedido',
+  fileUnsupported: 'O arquivo precisa ser JPEG ou PNG',
   validName: 'Este campo só pode conter letras.',
   minlength: 'Este campo precisa ter no mínimo 2 caracteres.',
   select: 'Selecione uma opção.',

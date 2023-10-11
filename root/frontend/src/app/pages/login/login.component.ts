@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
   errorMessages = errorMessages;
   inputValidations = inputValidations;
   formSubmitted = false;
+  invalidLoginError = false;
   loginForm!: FormGroup;
 
   constructor(
@@ -67,14 +68,20 @@ export class LoginComponent implements OnInit {
         .login(this.loginForm.value, this.loginForm.get('userType')?.value)
         .subscribe({
           next: (data) => {
-            console.log(data);
             localStorage.setItem('user_token_adopet', data['token']);
             localStorage.setItem('user_type_adopet', data['userType']);
             this.router.navigate(['adopter/home']);
           },
           error: (err) => {
-            console.error('Error: ', err);
-            this.openPopup('Ocorreu um erro em nosso servidor.', 'error');
+            if (err.status === 401) {
+              this.openPopup(
+                'Email ou senha incorreto. Verifique também o tipo da conta.',
+                'error'
+              );
+              this.loginForm.setErrors({ loginInvalid: true });
+              this.invalidLoginError = true;
+            } else this.openPopup('Ocorreu um erro em nosso servidor.', 'error');
+
             this.buttonRegister.loading = false;
           },
         });
