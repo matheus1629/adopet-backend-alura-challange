@@ -11,21 +11,18 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ButtonComponent } from './button/button.component';
+import { ButtonComponent } from './shared/button/button.component';
 import { BackgroundComponent } from './background/background.component';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { FooterComponent } from './footer/footer.component';
-import { RegisterAdopterComponent } from './pages/register-adopter/register-adopter.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { RegisterDonorComponent } from './pages/register-donor/register-donor.component';
 import { LoginComponent } from './pages/login/login.component';
-import { HomeComponent } from './pages/home/home.component';
-import { HeaderComponent } from './header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ProfileAdopterComponent } from './pages/profile-adopter/profile-adopter.component';
 import { ProfileDonorComponent } from './pages/profile-donor/profile-donor.component';
 import { PopupComponent } from './popup/popup.component';
 import { PetsDonorComponent } from './pages/pets-donor/pets-donor.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -33,21 +30,17 @@ import { PetsDonorComponent } from './pages/pets-donor/pets-donor.component';
     BackgroundComponent,
     WelcomeComponent,
     FooterComponent,
-    RegisterAdopterComponent,
     RegisterDonorComponent,
     LoginComponent,
-    HomeComponent,
-    HeaderComponent,
-    ProfileAdopterComponent,
     ProfileDonorComponent,
     PopupComponent,
-    ButtonComponent,
     PetsDonorComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],
   imports: [
     BrowserModule,
+    SharedModule,
     AppRoutingModule,
     ReactiveFormsModule,
     NgxMaskModule.forRoot(),
