@@ -1,5 +1,5 @@
 export interface IAccountData {
-  id: number;
+  id: string;
   picture: string | null;
   firstName: string;
   lastName: string;

@@ -39,6 +39,34 @@ function getStateKey(stateValue: States): string {
   return keys[index];
 }
 
+export function fileToBase64(event: any): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const file = event.target.files[0];
+
+    const allowedTypes = ['image/jpeg', 'image/png'];
+    if (!allowedTypes.includes(file.type)) {
+      console.log('erro no tipo');
+      reject({ fileUnsupported: true });
+      return;
+    }
+
+    const maxSize = 5000000; // 5 MB
+    if (file.size > maxSize) {
+      console.log('erro no tamanho');
+      reject({ fileSizeExceeded: true });
+      return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      resolve(reader.result as string);
+    };
+
+    reader.readAsDataURL(file);
+  });
+}
+
 export function clearValues(formDirtyValues: IFormRegisterAccount & IAccountEdit) {
   const cleanedValues = formDirtyValues;
 

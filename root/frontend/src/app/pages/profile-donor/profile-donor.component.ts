@@ -9,7 +9,7 @@ import { IButtonConfig } from 'src/shared/interfaces/buttonConfig.interface';
 import { ButtonClass } from 'src/shared/enums/buttonConfig.enum';
 import { States } from 'src/shared/enums/states.enum';
 import { errorMessages, inputValidations } from 'src/shared/consts';
-import { clearValues, telMask, validateName } from 'src/shared/utils/form';
+import { clearValues, fileToBase64, telMask, validateName } from 'src/shared/utils/form';
 import { IAccountData } from 'src/shared/interfaces/accountData.interface';
 import { IAccountEdit } from 'src/shared/interfaces/accountEdit.interface';
 import { IFormRegisterAccount } from 'src/shared/interfaces/formRegisterAccount.interface';
@@ -82,30 +82,15 @@ export class ProfileDonorComponent implements OnInit, DoCheck {
   }
 
   onFileSelected(event: any) {
-    const file = event.target.files[0];
-
-    const maxSize = 5000000; // 5 MB
-    if (file.size > maxSize) {
-      console.log('erro no tamanho');
-      this.editAdopterForm.get('picture')?.setErrors({ fileSizeExceeded: true });
-      return;
-    }
-
-    const allowedTypes = ['image/jpeg', 'image/png'];
-    if (!allowedTypes.includes(file.type)) {
-      console.log('erro no tipo');
-      this.editAdopterForm.get('picture')?.setErrors({ fileUnsupported: true });
-      return;
-    }
-
-    const reader = new FileReader();
-
-    reader.onload = () => {
-      this.editAdopterForm.patchValue({ picture: reader.result as string });
-      this.editAdopterForm.get('picture')?.markAsDirty();
-    };
-
-    reader.readAsDataURL(file);
+    fileToBase64(event)
+      .then((base64String) => {
+        this.editAdopterForm.patchValue({ picture: base64String });
+        this.editAdopterForm.get('picture')?.markAsDirty();
+      })
+      .catch((error) => {
+        if (error.fileUnsupported) this.editAdopterForm.get('picture')?.setErrors(error);
+        else if (error.fileSizeExceeded) this.editAdopterForm.get('picture')?.setErrors(error);
+      });
   }
 
   telMaskForm(): string {
