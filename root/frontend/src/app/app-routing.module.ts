@@ -7,6 +7,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ProfileAdopterComponent } from './pages/profile-adopter/profile-adopter.component';
 import { ProfileDonorComponent } from './pages/profile-donor/profile-donor.component';
+import { PetsDonorComponent } from './pages/pets-donor/pets-donor.component';
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
     children: [
       { path: 'register', component: RegisterDonorComponent },
       { path: 'profile', component: ProfileDonorComponent },
+      { path: 'pets', component: PetsDonorComponent },
     ],
   },
   {

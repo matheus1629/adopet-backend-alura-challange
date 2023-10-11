@@ -10,6 +10,10 @@
   color: $coral-color;
 }
 
+.icon-container {
+  min-width: 35px;
+}
+
 h1 {
   display: flex;
   align-items: center;
@@ -23,7 +27,11 @@ h1 {
     gap: 5px;
   }
 
-  .icon {
+  .icon-container {
+    min-width: 25px;
+  }
+
+  .icon-ok {
     @include mat-icon-size(25px);
   }
 

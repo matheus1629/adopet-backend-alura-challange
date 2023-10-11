@@ -68,9 +68,11 @@ export class LoginComponent implements OnInit {
         .login(this.loginForm.value, this.loginForm.get('userType')?.value)
         .subscribe({
           next: (data) => {
-            localStorage.setItem('user_token_adopet', data['token']);
-            localStorage.setItem('user_type_adopet', data['userType']);
-            this.router.navigate(['adopter/home']);
+            localStorage.setItem('user_token_adopet', data.token);
+            localStorage.setItem('user_type_adopet', data.userType);
+
+            if (data.userType === 'Adopter') this.router.navigate(['adopter/home']);
+            if (data.userType === 'Donor') this.router.navigate(['donor/pets']);
           },
           error: (err) => {
             if (err.status === 401) {

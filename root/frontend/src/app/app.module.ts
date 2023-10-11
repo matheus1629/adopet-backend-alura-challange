@@ -25,6 +25,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProfileAdopterComponent } from './pages/profile-adopter/profile-adopter.component';
 import { ProfileDonorComponent } from './pages/profile-donor/profile-donor.component';
 import { PopupComponent } from './popup/popup.component';
+import { PetsDonorComponent } from './pages/pets-donor/pets-donor.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { PopupComponent } from './popup/popup.component';
     ProfileDonorComponent,
     PopupComponent,
     ButtonComponent,
+    PetsDonorComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],
