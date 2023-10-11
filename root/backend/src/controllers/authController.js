@@ -18,7 +18,6 @@ const createUser = (userType) => async (req, res) => {
 
     if (userType === "Donor") {
       const createdUserId = await donorService.createDonor(newUser);
-
       createdUser = await donorService.getDonorById(createdUserId);
     }
 

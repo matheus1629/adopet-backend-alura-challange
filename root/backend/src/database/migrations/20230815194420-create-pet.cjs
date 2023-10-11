@@ -4,10 +4,9 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable("Pet", {
       id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
+        primaryKey: true
       },
       name: {
         type: Sequelize.STRING,
@@ -38,11 +37,11 @@ module.exports = {
       },
       id_donor: {
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         references: { model: "donor", key: "id" },
       },
       id_adopter: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         references: { model: "adopter", key: "id" },
       },
       createdAt: {

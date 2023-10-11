@@ -1,5 +1,11 @@
 "use strict";
 
+const crypto = require("crypto");
+
+
+const donorId = [crypto.randomUUID(), crypto.randomUUID(), crypto.randomUUID()];
+exports.donorId = donorId;
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -7,6 +13,7 @@ module.exports = {
       "Donor",
       [
         {
+          id: donorId[0],
           picture: "",
           first_name: "Isabela",
           last_name: "Oliveira",
@@ -19,6 +26,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
+          id: donorId[1],
           picture: "",
           first_name: "João",
           last_name: "Rodriguez",
@@ -31,6 +39,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
+          id: donorId[2],
           picture: "",
           first_name: "Lara",
           last_name: "da Silva",

@@ -19,17 +19,17 @@ module.exports = {
       },
       id_adopter: {
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         references: { model: "adopter", key: "id" },
       },
       id_donor: {
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         references: { model: "donor", key: "id" },
       },
       id_pet: {
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         references: { model: "pet", key: "id" },
       },
       createdAt: {

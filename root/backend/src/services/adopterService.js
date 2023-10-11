@@ -65,7 +65,7 @@ const updateAdopter = async (newAdopterInfo, id) => {
   delete newAdopterInfo.id;
   console.log(newAdopterInfo);
   let errors = [];
-  
+
   for (const key in newAdopterInfo) {
     let error;
     if (key === "picture" && newAdopterInfo.picture) {
@@ -77,7 +77,7 @@ const updateAdopter = async (newAdopterInfo, id) => {
     }
     if (error) errors.push(error);
   }
-console.log(newAdopterInfo);
+  console.log(newAdopterInfo);
   if (errors.length > 0) {
     const errorMessage = `Validation errors: ${errors.join(", ")}`;
     throw new BadRequestError(errorMessage);
