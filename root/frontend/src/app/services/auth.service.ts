@@ -15,13 +15,17 @@ export class AuthService {
     return this.http.post<T>(`http://localhost:8000/auth/signin/${userType}`, loginData);
   }
 
- /*  getToken(): string {
+  /*  getToken(): string {
     return localStorage.getItem('user_token_adopet');
   } */
 
- /*  isAuthenticated(): boolean {
+  /*  isAuthenticated(): boolean {
     return this.getToken() != null;
   } */
+
+  getUserType(): string | null {
+    return localStorage.getItem('user_type_adopet');
+  }
 
   logout(): void {
     localStorage.removeItem('user_token_adopet');

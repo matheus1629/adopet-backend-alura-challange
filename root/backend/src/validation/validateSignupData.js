@@ -21,7 +21,7 @@ const firstName = (firstName) => {
     errors.push("First name is required");
   } else {
     const firstNameTrim = firstName.trim();
-    if (firstNameTrim.length < 3 || firstNameTrim.length > 255) {
+    if (firstNameTrim.length < 2 || firstNameTrim.length > 255) {
       errors.push("Invalid first name");
     }
   }
@@ -36,7 +36,7 @@ const lastName = (lastName) => {
     errors.push("Last name is required");
   } else {
     const lastNameTrim = lastName.trim();
-    if (lastNameTrim.length < 3 || lastNameTrim.length > 255) {
+    if (lastNameTrim.length < 2 || lastNameTrim.length > 255) {
       errors.push("Invalid last name");
     }
   }

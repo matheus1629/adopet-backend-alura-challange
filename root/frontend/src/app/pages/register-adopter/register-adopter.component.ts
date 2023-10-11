@@ -98,7 +98,7 @@ export class RegisterAdopterComponent implements OnInit {
           console.log(data);
           localStorage.setItem('user_token_adopet', data['token']);
           localStorage.setItem('user_type_adopet', data['userType']);
-          this.router.navigate(['/home']);
+          this.router.navigate(['adopter/home']);
         },
         error: (err) => {
           console.error('Error: ', err);

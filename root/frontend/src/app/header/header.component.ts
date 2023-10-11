@@ -8,7 +8,7 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  routeEditProfile = `/profile-${localStorage.getItem('user_type_adopet')?.toLocaleLowerCase()}`;
+  routeEditProfile = `/${this.auth.getUserType()?.toLocaleLowerCase()}/profile`;
 
   constructor(private router: Router, public auth: AuthService) {}
 
