@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { AdopterComponent } from './adopter.component';
 import { RegisterAdopterComponent } from './pages/register-adopter/register-adopter.component';
 import { ProfileAdopterComponent } from './pages/profile-adopter/profile-adopter.component';

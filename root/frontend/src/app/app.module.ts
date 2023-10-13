@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
@@ -11,18 +10,16 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { AppRoutingModule } from './app-routing.module';
+import { NgxMaskModule } from 'ngx-mask';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SharedModule } from './shared/shared.module';
+
 import { AppComponent } from './app.component';
 import { BackgroundComponent } from './background/background.component';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { FooterComponent } from './footer/footer.component';
-import { NgxMaskModule } from 'ngx-mask';
-import { RegisterDonorComponent } from './pages/register-donor/register-donor.component';
 import { LoginComponent } from './pages/login/login.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ProfileDonorComponent } from './pages/profile-donor/profile-donor.component';
 import { PopupComponent } from './popup/popup.component';
-import { PetsDonorComponent } from './pages/pets-donor/pets-donor.component';
-import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -30,11 +27,8 @@ import { SharedModule } from './shared/shared.module';
     BackgroundComponent,
     WelcomeComponent,
     FooterComponent,
-    RegisterDonorComponent,
     LoginComponent,
-    ProfileDonorComponent,
     PopupComponent,
-    PetsDonorComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],

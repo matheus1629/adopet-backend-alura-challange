@@ -1,4 +1,4 @@
-import { textAreaValidation } from './../../../shared/consts';
+import { textAreaValidation } from '../../../../shared/consts';
 import { Component, OnInit, DoCheck } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
