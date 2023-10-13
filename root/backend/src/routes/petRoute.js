@@ -10,6 +10,7 @@ router.get("/all", petController.getAllPets);
 router.get("/:id", validateEntity.checkEntityId("Pet"), petController.getPetById);
 
 // Private Route
+router.get("/petsData/loggedDonor", validateToken.checkToken("Donor"), petController.getPetsByLoggedDonor);
 router.post("/", validateToken.checkToken("Donor"), petController.createPet);
 router.patch(
   "/:id",

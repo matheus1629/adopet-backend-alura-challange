@@ -33,6 +33,17 @@ const getPetById = async (req, res) => {
   }
 };
 
+const getPetsByLoggedDonor = async (req, res) => {
+  const petId = req.userId;
+
+  try {
+    const pet = await petService.getPetsByDonor(petId);
+    return res.status(200).json(pet);
+  } catch (error) {
+    return res.status(500).json(error.message);
+  }
+};
+
 const createPet = async (req, res) => {
   const newPet = req.body;
   const idDonor = req.userId;
@@ -86,6 +97,7 @@ export default {
   getAllPetsAvailable,
   getAllPets,
   getPetById,
+  getPetsByLoggedDonor,
   createPet,
   updatePet,
   deletePet,

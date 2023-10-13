@@ -33,6 +33,13 @@ const getPetById = async (id) => {
   });
 };
 
+const getPetsByDonor = async (id) => {
+  return await database.Pet.findAll({
+    where: { id_donor: id },
+    attributes: { exclude: ["createdAt", "updatedAt"] },
+  });
+};
+
 const createPet = async (newPet) => {
   return await database.Pet.create(newPet);
 };
@@ -64,6 +71,7 @@ export default {
   getAllPetsAvailable,
   getAllPets,
   getPetById,
+  getPetsByDonor,
   createPet,
   updatePet,
   deletePet,

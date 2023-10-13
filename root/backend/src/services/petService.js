@@ -43,6 +43,18 @@ const getPetById = async (id) => {
   return petData;
 };
 
+const getPetsByDonor = async (id) => {
+  const petsData = await petRepository.getPetsByDonor(id);
+
+  for (const key in petsData) {
+    if (petsData[key].dataValues.picture) {
+      petsData[key].dataValues.picture = bufferToBase64(petsData[key].dataValues.picture);
+    }
+  }
+  
+  return petsData;
+};
+
 const createPet = async (newPet, idDonor) => {
   delete newPet.adoptionDate;
   delete newPet.adopted;
@@ -119,6 +131,7 @@ export default {
   getAllPetsAvailable,
   getAllPet,
   getPetById,
+  getPetsByDonor,
   createPet,
   updatePet,
   deletePet,

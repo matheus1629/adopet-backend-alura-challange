@@ -18,6 +18,11 @@ export default (sequelize, DataTypes) => {
   }
   Pet.init(
     {
+      id: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        primaryKey: true,
+      },
       name: DataTypes.STRING,
       age: DataTypes.TINYINT.UNSIGNED,
       size: {
