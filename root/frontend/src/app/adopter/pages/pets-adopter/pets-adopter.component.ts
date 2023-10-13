@@ -3,11 +3,11 @@ import { PetService } from 'src/app/services/pet.service';
 import { IPet } from 'src/shared/interfaces/pet.interface';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+  selector: 'app-pets-adopter',
+  templateUrl: './pets-adopter.component.html',
+  styleUrls: ['./pets-adopter.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class PetsAdopterComponent implements OnInit {
   pets!: IPet[];
 
   constructor(private petService: PetService) {}

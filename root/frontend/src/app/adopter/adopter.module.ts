@@ -7,7 +7,7 @@ import { AdopterRoutingModule } from './adopter-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { NgxMaskModule } from 'ngx-mask';
 
-import { HomeComponent } from './pages/home/home.component';
+import { PetsAdopterComponent } from './pages/pets-adopter/pets-adopter.component';
 import { AdopterComponent } from './adopter.component';
 import { ProfileAdopterComponent } from './pages/profile-adopter/profile-adopter.component';
 import { RegisterAdopterComponent } from './pages/register-adopter/register-adopter.component';
@@ -17,7 +17,7 @@ import { RegisterAdopterComponent } from './pages/register-adopter/register-adop
     AdopterComponent,
     ProfileAdopterComponent,
     RegisterAdopterComponent,
-    HomeComponent,
+    PetsAdopterComponent,
   ],
   imports: [
     CommonModule,

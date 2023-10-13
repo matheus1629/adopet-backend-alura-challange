@@ -71,7 +71,7 @@ export class LoginComponent implements OnInit {
             localStorage.setItem('user_token_adopet', data.token);
             localStorage.setItem('user_type_adopet', data.userType);
 
-            if (data.userType === 'Adopter') this.router.navigate(['adopter/home']);
+            if (data.userType === 'Adopter') this.router.navigate(['adopter/pets']);
             if (data.userType === 'Donor') this.router.navigate(['donor/pets']);
           },
           error: (err) => {
