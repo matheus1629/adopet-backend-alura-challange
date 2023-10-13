@@ -1,6 +1,6 @@
 @import "../../../variables.scss";
 
-.custom-icon {
+.nav-icon {
   @include mat-icon-size(28px);
   position: fixed;
   top: 25px;
@@ -10,27 +10,29 @@
   cursor: pointer;
 }
 
-.custom-icon:nth-child(2) {
+.nav-icon:nth-child(2) {
   left: 230px;
 }
 
 .button-profile {
-  @include mat-icon-size(55px);
+  @include mat-icon-size(70px);
   position: fixed;
   top: 25px;
   right: 10%;
   color: $green-color;
   z-index: 3;
+  border-radius: 50%;
+  object-fit: cover;
   cursor: pointer;
 }
 
 @media only screen and (max-width: $tablet-size) {
-  .custom-icon {
+  .nav-icon {
     top: 20px;
     left: 130px;
   }
 
-  .custom-icon:nth-child(2) {
+  .nav-icon:nth-child(2) {
     left: 170px;
   }
 
@@ -40,13 +42,13 @@
 }
 
 @media only screen and (max-width: $mobile-size) {
-  .custom-icon {
+  .nav-icon {
     @include mat-icon-size(35px);
     top: 20px;
     left: 50px;
   }
 
-  .custom-icon:nth-child(2) {
+  .nav-icon:nth-child(2) {
     left: 120px;
   }
 

@@ -17,6 +17,13 @@ const getAdopterById = async (id) => {
   });
 };
 
+const getAdopterPictureById = async (id) => {
+  return await database.Adopter.findOne({
+    where: { id },
+    attributes: ["picture"],
+  });
+};
+
 const createAdopter = async (newAdopter) => {
   return await database.Adopter.create(newAdopter);
 };
@@ -36,6 +43,7 @@ const deleteAdopter = async (id) => {
 export default {
   getAllAdopters,
   getAdopterById,
+  getAdopterPictureById,
   createAdopter,
   updateAdopter,
   deleteAdopter,

@@ -27,6 +27,17 @@ const getAdopterById = async (id) => {
   return adopterData.dataValues;
 };
 
+const getAdopterPictureById = async (id) => {
+  const adopterData = await adopterRepository.getAdopterPictureById(id);
+
+  if (!adopterData) throw new BadRequestError("Adopter not found");
+
+  if (adopterData.dataValues.picture)
+    adopterData.dataValues.picture = bufferToBase64(adopterData.dataValues.picture);
+
+  return adopterData.dataValues;
+};
+
 const createAdopter = async (newAdopter) => {
   let errors = [];
 
@@ -61,7 +72,7 @@ const updateAdopter = async (newAdopterInfo, id) => {
   delete newAdopterInfo.createdAt;
   delete newAdopterInfo.updatedAt;
   delete newAdopterInfo.id;
-  console.log(newAdopterInfo);
+
   let errors = [];
 
   for (const key in newAdopterInfo) {
@@ -75,7 +86,7 @@ const updateAdopter = async (newAdopterInfo, id) => {
     }
     if (error) errors.push(error);
   }
-  console.log(newAdopterInfo);
+
   if (errors.length > 0) {
     const errorMessage = `Validation errors: ${errors.join(", ")}`;
     throw new BadRequestError(errorMessage);
@@ -91,6 +102,7 @@ const deleteAdopter = async (id) => {
 export default {
   getAllAdopters,
   getAdopterById,
+  getAdopterPictureById,
   createAdopter,
   updateAdopter,
   deleteAdopter,

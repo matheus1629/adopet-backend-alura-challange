@@ -1,1 +1,26 @@
-<p>pets-donor works!</p>
+<app-header></app-header>
+<main>
+  <h1>Olá! Veja os amigos disponíveis para adoção!</h1>
+
+  <section>
+    <div class="card-container">
+      <div class="card" *ngFor="let pet of pets">
+        <img src="{{ pet.picture }}" alt="" />
+
+        <div class="card-info">
+          <p class="pet-name">{{ pet.name }}</p>
+          <p class="pet-info">{{ pet.age }} anos</p>
+          <p class="pet-info">{{ pet.size }}</p>
+          <p class="pet-info desc">{{ pet.description }}</p>
+
+          <p class="pet-region">{{ pet.Donor.city }} ({{ pet.Donor.state }})</p>
+
+          <a routerLink="/teste"
+            ><mat-icon class="chat-icon" fontIcon="chat"></mat-icon>
+            <span class="contact-donor">Falar com o responsável</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

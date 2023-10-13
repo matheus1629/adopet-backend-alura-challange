@@ -18,6 +18,19 @@ export class AdopterService {
     });
   }
 
+  getAdopterPicture(): Observable<{ picture: string | null }> {
+    let headers = new HttpHeaders();
+    let token = localStorage.getItem('user_token_adopet');
+    headers = headers.set('Authorization', 'Bearer ' + token);
+
+    return this.http.get<{ picture: string | null }>(
+      'http://localhost:8000/adopter/loggedUser/picture',
+      {
+        headers: headers,
+      }
+    );
+  }
+
   createAdopter<IFormRegisterAccount>(formData: IFormRegisterAccount): Observable<any> {
     return this.http.post<IFormRegisterAccount>(
       'http://localhost:8000/auth/signup/adopter',

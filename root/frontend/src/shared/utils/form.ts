@@ -45,14 +45,12 @@ export function fileToBase64(event: any): Promise<string> {
 
     const allowedTypes = ['image/jpeg', 'image/png'];
     if (!allowedTypes.includes(file.type)) {
-      console.log('erro no tipo');
       reject({ fileUnsupported: true });
       return;
     }
 
     const maxSize = 5000000; // 5 MB
     if (file.size > maxSize) {
-      console.log('erro no tamanho');
       reject({ fileSizeExceeded: true });
       return;
     }

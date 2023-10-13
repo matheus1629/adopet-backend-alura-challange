@@ -17,6 +17,13 @@ const getDonorById = async (id) => {
   });
 };
 
+const getDonorPictureById = async (id) => {
+  return await database.Donor.findOne({
+    where: { id },
+    attributes: ["picture"],
+  });
+};
+
 const createDonor = async (newDonor) => {
   return await database.Donor.create(newDonor);
 };
@@ -30,10 +37,7 @@ const updateDonor = async (donorData, id) => {
 const deleteDonor = async (id) => {
   return database.sequelize.transaction(async (transaction) => {
     await database.Message.destroy({ where: { idDonor: id } }, { transaction });
-    await database.Pet.destroy(
-      { where: { idDonor: id, adopted: 0 } },
-      { transaction }
-    );
+    await database.Pet.destroy({ where: { idDonor: id, adopted: 0 } }, { transaction });
 
     await database.Donor.destroy({ where: { id } }, { transaction });
   });
@@ -42,6 +46,7 @@ const deleteDonor = async (id) => {
 export default {
   getAllDonors,
   getDonorById,
+  getDonorPictureById,
   createDonor,
   updateDonor,
   deleteDonor,

@@ -9,9 +9,7 @@ const getAllDonors = async () => {
 
   for (const key in donorsData) {
     if (donorsData[key].dataValues.picture) {
-      donorsData[key].dataValues.picture = bufferToBase64(
-        donorsData[key].dataValues.picture
-      );
+      donorsData[key].dataValues.picture = bufferToBase64(donorsData[key].dataValues.picture);
     }
   }
 
@@ -27,6 +25,17 @@ const getDonorById = async (id) => {
     donorData.dataValues.picture = bufferToBase64(donorData.dataValues.picture);
 
   return donorData.dataValues;
+};
+
+const getDonorPictureById = async (id) => {
+  const adopterData = await donorRepository.getDonorPictureById(id);
+
+  if (!adopterData) throw new BadRequestError("Adopter not found");
+
+  if (adopterData.dataValues.picture)
+    adopterData.dataValues.picture = bufferToBase64(adopterData.dataValues.picture);
+
+  return adopterData.dataValues;
 };
 
 const createDonor = async (newDonor) => {
@@ -93,6 +102,7 @@ const deleteDonor = async (id) => {
 export default {
   getAllDonors,
   getDonorById,
+  getDonorPictureById,
   createDonor,
   updateDonor,
   deleteDonor,

@@ -4,6 +4,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 
 import { DonorService } from 'src/app/services/donor.service';
+import { SharedService } from 'src/app/services/shared-services.service';
 
 import { IButtonConfig } from 'src/shared/interfaces/buttonConfig.interface';
 import { ButtonClass } from 'src/shared/enums/buttonConfig.enum';
@@ -37,13 +38,13 @@ export class ProfileDonorComponent implements OnInit, DoCheck {
   constructor(
     private fb: FormBuilder,
     private donorService: DonorService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private sharedService: SharedService
   ) {}
 
   ngOnInit(): void {
     this.donorService.getDonor<IAccountData>().subscribe({
       next: (data: IAccountData) => {
-        console.log(data);
         this.editAdopterForm.patchValue({
           picture: data.picture,
           firstName: data.firstName,
@@ -126,6 +127,7 @@ export class ProfileDonorComponent implements OnInit, DoCheck {
       this.donorService.editDonor(cleanedValuesForm).subscribe({
         next: (data) => {
           this.openPopup('Alterações salvas!', 'check_circle');
+          this.sharedService.pictureSender(data.picture);
           this.editAdopterForm.markAsPristine();
           this.buttonRegister.loading = false;
         },

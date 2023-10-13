@@ -9,20 +9,9 @@ router.get("/", donorController.getAllDonors);
 router.get("/:id", donorController.getDonorById);
 
 // Private Routes
-router.get(
-  "/loggedUser/info",
-  validateToken.checkToken("Donor"),
-  donorController.getLoggedDonor
-);
-router.patch(
-  "/",
-  validateToken.checkToken("Donor"),
-  donorController.updateDonor
-);
-router.delete(
-  "/",
-  validateToken.checkToken("Donor"),
-  donorController.deleteDonor
-);
+router.get("/loggedUser/info", validateToken.checkToken("Donor"), donorController.getLoggedDonor);
+router.get("/loggedUser/picture", validateToken.checkToken("Donor"), donorController.getLoggedDonorPicture);
+router.patch("/", validateToken.checkToken("Donor"), donorController.updateDonor);
+router.delete("/", validateToken.checkToken("Donor"), donorController.deleteDonor);
 
 export default router;

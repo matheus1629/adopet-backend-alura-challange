@@ -10,8 +10,6 @@ export class AuthService {
   constructor(private router: Router, private http: HttpClient) {}
 
   login<T>(loginData: T, userType: string): Observable<T> {
-    console.log(loginData);
-
     return this.http.post<T>(`http://localhost:8000/auth/signin/${userType}`, loginData);
   }
 

@@ -1,12 +1,23 @@
-<mat-icon (click)="navigateTo('/adopter/pets')" class="custom-icon" fontIcon="home"></mat-icon>
-<mat-icon (click)="navigateTo('/adopter/pets')" class="custom-icon" fontIcon="mail"></mat-icon>
+<mat-icon (click)="navigateTo('/adopter/pets')" class="nav-icon" fontIcon="home"></mat-icon>
+<mat-icon (click)="navigateTo('/adopter/pets')" class="nav-icon" fontIcon="mail"></mat-icon>
 
 <mat-menu #profileMenu="matMenu">
   <button mat-menu-item [routerLink]="routeEditProfile">Editar perfil</button>
   <button mat-menu-item (click)="auth.logout()">Sair</button>
 </mat-menu>
-<mat-icon
-  class="button-profile"
-  fontIcon="account_circle"
-  [matMenuTriggerFor]="profileMenu"
-></mat-icon>
+
+<ng-container *ngIf="profitePicture; else imageTemplate">
+  <img
+    class="button-profile"
+    [src]="profitePicture"
+    alt="Image profile"
+    [matMenuTriggerFor]="profileMenu"
+  />
+</ng-container>
+<ng-template #imageTemplate>
+  <mat-icon
+    class="button-profile"
+    fontIcon="account_circle"
+    [matMenuTriggerFor]="profileMenu"
+  ></mat-icon>
+</ng-template>

@@ -33,6 +33,19 @@ const getLoggedDonor = async (req, res) => {
   }
 };
 
+const getLoggedDonorPicture = async (req, res) => {
+  const adopterId = await req.userId;
+
+  try {
+    const adopterPicture = await donorService.getDonorPictureById(adopterId);
+    return res.status(200).json(adopterPicture);
+  } catch (error) {
+    if (error.name === "BadRequestError") return res.status(404).json(error.message);
+
+    return res.status(500).json(error.message);
+  }
+};
+
 const updateDonor = async (req, res) => {
   const donorId = req.userId;
   const donorData = req.body;
@@ -63,6 +76,7 @@ export default {
   getAllDonors,
   getDonorById,
   getLoggedDonor,
+  getLoggedDonorPicture,
   updateDonor,
   deleteDonor,
 };
