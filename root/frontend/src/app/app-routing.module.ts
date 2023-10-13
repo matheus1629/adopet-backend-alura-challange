@@ -20,14 +20,6 @@ const routes: Routes = [
       { path: 'pets', component: PetsDonorComponent },
     ],
   },
-/*   {
-    path: 'adopter',
-    children: [
-      { path: 'register', component: RegisterAdopterComponent },
-      { path: 'profile', component: ProfileAdopterComponent },
-      { path: 'home', component: HomeComponent },
-    ],
-  }, */
   {
     path: 'adopter',
     loadChildren: () => import('./adopter/adopter.module').then((m) => m.AdopterModule),
