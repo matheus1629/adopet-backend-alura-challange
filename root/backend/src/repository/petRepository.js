@@ -1,7 +1,7 @@
 import database from "../database/models/index.js";
 
 const getAllPetsAvailable = async (pageSetting) => {
-  return await database.Pet.findAll({
+  return await database.Pet.findAndCountAll({
     where: { adopted: 0 },
     attributes: { exclude: ["createdAt", "updatedAt"] },
     include: {

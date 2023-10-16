@@ -3,6 +3,17 @@
   <h1>Olá! Veja os amigos disponíveis para adoção!</h1>
 
   <section>
+    <mat-paginator
+      [length]="length"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="[5, 10, 25, 100]"
+      [showFirstLastButtons]="true"
+      [pageIndex]="currentPage"
+      (page)="handlePageEvent($event)"
+      aria-label="Select page"
+    >
+    </mat-paginator>
+
     <div class="card-container">
       <div class="card" *ngFor="let pet of pets">
         <img src="{{ pet.picture }}" alt="" />
@@ -13,7 +24,7 @@
           <p class="pet-info">{{ pet.size }}</p>
           <p class="pet-info desc">{{ pet.description }}</p>
 
-          <p class="pet-region">{{ pet.Donor.city }} ({{ pet.Donor.state }})</p>
+          <p class="pet-region">{{ pet.Donor?.city }} ({{ pet.Donor?.state }})</p>
 
           <a routerLink="/teste"
             ><mat-icon class="chat-icon" fontIcon="chat"></mat-icon>

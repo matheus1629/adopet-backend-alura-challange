@@ -14,8 +14,10 @@ export class PetsDonorComponent implements OnInit {
   constructor(private petService: PetService) {}
 
   ngOnInit(): void {
-    this.petService.getAllPetsAvailable().subscribe({
+    this.petService.getPetsByDonor().subscribe({
       next: (data) => {
+        console.log(data);
+        
         this.pets = data;
       },
       error: (err) => {

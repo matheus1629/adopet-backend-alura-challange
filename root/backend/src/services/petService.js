@@ -3,24 +3,24 @@ import petRepository from "../repository/petRepository.js";
 import BadRequestError from "../Errors/BadRequestError.js";
 import { bufferToBase64 } from "../helpers/buffer.js";
 
-const getAllPetsAvailable = async (page, pageSize) => {
-  if (!page) page = 1;
+const getAllPetsAvailable = async (pageIndex, pageSize) => {
+  if (!pageIndex) pageIndex = 1;
   if (!pageSize || pageSize === 0) pageSize = 10;
 
   const pageSetting = {
-    offset: (page - 1) * pageSize,
+    offset: (pageIndex - 1) * pageSize,
     limit: pageSize,
   };
 
-  const petsData = await petRepository.getAllPetsAvailable(pageSetting);
-
-  for (const key in petsData) {
-    if (petsData[key].dataValues.picture) {
-      petsData[key].dataValues.picture = bufferToBase64(petsData[key].dataValues.picture);
+  const { count,  rows } = await petRepository.getAllPetsAvailable(pageSetting);
+  
+  for (const key in rows) {
+    if (rows[key].dataValues.picture) {
+      rows[key].dataValues.picture = bufferToBase64(rows[key].dataValues.picture);
     }
   }
 
-  return petsData;
+  return { count,  rows };
 };
 
 const getAllPet = async () => {
@@ -51,7 +51,7 @@ const getPetsByDonor = async (id) => {
       petsData[key].dataValues.picture = bufferToBase64(petsData[key].dataValues.picture);
     }
   }
-  
+
   return petsData;
 };
 

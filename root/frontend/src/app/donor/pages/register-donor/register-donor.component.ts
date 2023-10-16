@@ -98,7 +98,7 @@ export class RegisterDonorComponent implements OnInit {
 
           localStorage.setItem('user_token_adopet', data['token']);
           localStorage.setItem('user_type_adopet', data['userType']);
-          this.router.navigate(['adopter/pets']);
+          this.router.navigate(['donor/pets']);
         },
         error: (err) => {
           console.error('Error: ', err);

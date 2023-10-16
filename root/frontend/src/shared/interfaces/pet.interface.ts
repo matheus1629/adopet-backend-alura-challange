@@ -9,5 +9,10 @@ export interface IPet {
   adopted: number;
   idDonor: number;
   idAdopter: number;
-  Donor: { city: string; state: string };
+  Donor?: { city: string; state: string };
+}
+
+export interface IPetPagination {
+  count: number;
+  rows: IPet[];
 }

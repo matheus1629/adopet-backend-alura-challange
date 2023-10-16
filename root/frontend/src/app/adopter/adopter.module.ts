@@ -1,3 +1,4 @@
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
@@ -26,6 +27,7 @@ import { RegisterAdopterComponent } from './pages/register-adopter/register-adop
     ReactiveFormsModule,
     NgxMaskModule.forRoot(),
     MatIconModule,
+    MatPaginatorModule,
   ],
 })
 export class AdopterModule {}

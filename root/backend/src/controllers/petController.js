@@ -1,10 +1,10 @@
 import petService from "../services/petService.js";
 
 const getAllPetsAvailable = async (req, res) => {
-  const { page, pageSize } = req.query;
+  const { pageIndex, pageSize } = req.query;
 
   try {
-    const allPets = await petService.getAllPetsAvailable(Number(page), Number(pageSize));
+    const allPets = await petService.getAllPetsAvailable(Number(pageIndex), Number(pageSize));
 
     return res.status(200).json(allPets);
   } catch (error) {
