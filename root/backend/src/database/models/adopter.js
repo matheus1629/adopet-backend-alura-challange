@@ -9,7 +9,7 @@ export default (sequelize, DataTypes) => {
         onDelete: "CASCADE",
       });
       Adopter.hasMany(models.Pet, {
-        foreignKey: "id_adopter",
+        foreignKey: "idAdopter",
       });
     }
   }
