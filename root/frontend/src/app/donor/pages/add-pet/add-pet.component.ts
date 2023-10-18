@@ -17,22 +17,26 @@ import { textAreaValidation } from '../../../../shared/consts';
 import { PopupComponent } from 'src/app/popup/popup.component';
 
 @Component({
-  selector: 'app-profile-donor',
-  templateUrl: './profile-donor.component.html',
-  styleUrls: ['./profile-donor.component.scss'],
+  selector: 'app-add-pet',
+  templateUrl: './add-pet.component.html',
+  styleUrls: ['./add-pet.component.scss'],
 })
-export class ProfileDonorComponent implements OnInit, DoCheck {
-  statesValues = Object.values(States);
+export class AddPetComponent implements OnInit, DoCheck {
   errorMessages = errorMessages;
   inputValidations = inputValidations;
   textAreaValidation = textAreaValidation;
   formSubmitted = false;
-  editAdopterForm!: FormGroup;
+  addPetForm!: FormGroup;
 
   buttonRegister: IButtonConfig = {
     innerText: 'Salvar',
     class: ButtonClass.BUTTON_TYPE_2,
     disable: true,
+  };
+
+  buttonDelete: IButtonConfig = {
+    innerText: 'Deletar Pet',
+    class: ButtonClass.BUTTON_TYPE_2,
   };
 
   constructor(
@@ -43,59 +47,34 @@ export class ProfileDonorComponent implements OnInit, DoCheck {
   ) {}
 
   ngOnInit(): void {
-    this.donorService.getDonor<IAccountData>().subscribe({
-      next: (data: IAccountData) => {
-        this.editAdopterForm.patchValue({
-          picture: data.picture,
-          firstName: data.firstName,
-          lastName: data.lastName,
-          state: States[data.state as keyof typeof States].toString(),
-          city: data.city,
-          phoneNumber: data.phoneNumber,
-          personalInfo: data.personalInfo,
-        });
-      },
-      error: (err) => {
-        console.error('Error: ', err);
-      },
-    });
+    this.addPetForm = this.fb.group({
+      picture: [null, Validators.required],
+      name: [
+        '',
+        [Validators.required, Validators.minLength(2), Validators.maxLength(255), validateName],
+      ],
+      age: ['', [Validators.required, Validators.min(0), Validators.max(99)]],
+      size: ['', [Validators.required]],
 
-    this.editAdopterForm = this.fb.group({
-      picture: [null],
-      firstName: [
-        '',
-        [Validators.required, Validators.minLength(2), Validators.maxLength(255), validateName],
-      ],
-      lastName: [
-        '',
-        [Validators.required, Validators.minLength(2), Validators.maxLength(255), validateName],
-      ],
-      state: ['', [Validators.required]],
-      city: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(255)]],
-      phoneNumber: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(11)]],
       personalInfo: ['', [Validators.maxLength(2000)]],
     });
   }
 
   ngDoCheck() {
-    if (this.editAdopterForm.dirty) this.buttonRegister.disable = false;
+    if (this.addPetForm.dirty) this.buttonRegister.disable = false;
     else this.buttonRegister.disable = true;
   }
 
   onFileSelected(event: any) {
     fileToBase64(event)
       .then((base64String) => {
-        this.editAdopterForm.patchValue({ picture: base64String });
-        this.editAdopterForm.get('picture')?.markAsDirty();
+        this.addPetForm.patchValue({ picture: base64String });
+        this.addPetForm.get('picture')?.markAsDirty();
       })
       .catch((error) => {
-        if (error.fileUnsupported) this.editAdopterForm.get('picture')?.setErrors(error);
-        else if (error.fileSizeExceeded) this.editAdopterForm.get('picture')?.setErrors(error);
+        if (error.fileUnsupported) this.addPetForm.get('picture')?.setErrors(error);
+        else if (error.fileSizeExceeded) this.addPetForm.get('picture')?.setErrors(error);
       });
-  }
-
-  telMaskForm(): string {
-    return telMask(this.editAdopterForm.value.phoneNumber as string);
   }
 
   openPopup(message: string, icon: string) {
@@ -110,12 +89,12 @@ export class ProfileDonorComponent implements OnInit, DoCheck {
   submit() {
     this.formSubmitted = true;
 
-    if (this.editAdopterForm.valid) {
+    if (this.addPetForm.valid) {
       this.buttonRegister.loading = true;
 
       const dirtyFields: IAccountEdit = {};
 
-      const formControlFields = Object.entries(this.editAdopterForm.controls);
+      const formControlFields = Object.entries(this.addPetForm.controls);
 
       for (let element of formControlFields) {
         if (element[1].dirty === true)
@@ -128,7 +107,7 @@ export class ProfileDonorComponent implements OnInit, DoCheck {
         next: (data) => {
           this.openPopup('Alterações salvas!', 'check_circle');
           this.sharedService.pictureSender(data.picture);
-          this.editAdopterForm.markAsPristine();
+          this.addPetForm.markAsPristine();
           this.buttonRegister.loading = false;
         },
         error: (err) => {

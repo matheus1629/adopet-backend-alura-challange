@@ -1,5 +1,5 @@
-import { MatPaginatorModule } from '@angular/material/paginator';
 import { NgModule } from '@angular/core';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';

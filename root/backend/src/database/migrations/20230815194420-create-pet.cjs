@@ -17,7 +17,7 @@ module.exports = {
         allowNull: false,
       },
       size: {
-        type: Sequelize.ENUM("Porte pequeno", "Porte medio", "Porte Grande"),
+        type: Sequelize.ENUM("Porte pequeno", "Porte medio", "Porte grande"),
         allowNull: false,
       },
       description: {

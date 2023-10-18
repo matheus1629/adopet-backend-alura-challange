@@ -33,10 +33,11 @@ const getPetById = async (id) => {
   });
 };
 
-const getPetsByDonor = async (id) => {
-  return await database.Pet.findAll({
+const getPetsByDonor = async (id, pageSetting) => {
+  return await database.Pet.findAndCountAll({
     where: { id_donor: id },
     attributes: { exclude: ["createdAt", "updatedAt"] },
+    ...pageSetting,
   });
 };
 

@@ -9,42 +9,21 @@ export class DonorService {
   constructor(private http: HttpClient) {}
 
   getDonor<IAccountData>(): Observable<IAccountData> {
-    let headers = new HttpHeaders();
-    let token = localStorage.getItem('user_token_adopet');
-    headers = headers.set('Authorization', 'Bearer ' + token);
-
-    return this.http.get<IAccountData>('http://localhost:8000/donor/loggedUser/info', {
-      headers: headers,
-    });
+    return this.http.get<IAccountData>('/donor/loggedUser/info');
   }
 
   getDonorPicture(): Observable<{ picture: string | null }> {
-    let headers = new HttpHeaders();
-    let token = localStorage.getItem('user_token_adopet');
-    headers = headers.set('Authorization', 'Bearer ' + token);
-
-    return this.http.get<{ picture: string | null }>(
-      'http://localhost:8000/donor/loggedUser/picture',
-      {
-        headers: headers,
-      }
-    );
+    return this.http.get<{ picture: string | null }>('/donor/loggedUser/picture');
   }
 
   createDonor<IFormRegisterAccount>(formData: IFormRegisterAccount): Observable<any> {
-    return this.http.post<IFormRegisterAccount>(
-      'http://localhost:8000/auth/signup/donor',
-      formData
-    );
+    const headers = new HttpHeaders();
+    headers.set('skiptoken', 'true');
+
+    return this.http.post<IFormRegisterAccount>('/auth/signup/donor', formData, { headers });
   }
 
   editDonor<IAccountEdit>(formData: IAccountEdit): Observable<IAccountEdit> {
-    let headers = new HttpHeaders();
-    let token = localStorage.getItem('user_token_adopet');
-    headers = headers.set('Authorization', 'Bearer ' + token);
-
-    return this.http.patch<IAccountEdit>('http://localhost:8000/donor', formData, {
-      headers: headers,
-    });
+    return this.http.patch<IAccountEdit>('/donor', formData);
   }
 }

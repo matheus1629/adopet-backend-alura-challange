@@ -12,15 +12,15 @@ const getAllPetsAvailable = async (pageIndex, pageSize) => {
     limit: pageSize,
   };
 
-  const { count,  rows } = await petRepository.getAllPetsAvailable(pageSetting);
-  
+  const { count, rows } = await petRepository.getAllPetsAvailable(pageSetting);
+
   for (const key in rows) {
     if (rows[key].dataValues.picture) {
       rows[key].dataValues.picture = bufferToBase64(rows[key].dataValues.picture);
     }
   }
 
-  return { count,  rows };
+  return { count, rows };
 };
 
 const getAllPet = async () => {
@@ -43,16 +43,24 @@ const getPetById = async (id) => {
   return petData;
 };
 
-const getPetsByDonor = async (id) => {
-  const petsData = await petRepository.getPetsByDonor(id);
+const getPetsByDonor = async (id, pageIndex, pageSize) => {
+  if (!pageIndex) pageIndex = 1;
+  if (!pageSize || pageSize === 0) pageSize = 10;
 
-  for (const key in petsData) {
-    if (petsData[key].dataValues.picture) {
-      petsData[key].dataValues.picture = bufferToBase64(petsData[key].dataValues.picture);
+  const pageSetting = {
+    offset: (pageIndex - 1) * pageSize,
+    limit: pageSize,
+  };
+
+  const { count, rows } = await petRepository.getPetsByDonor(id, pageSetting);
+
+  for (const key in rows) {
+    if (rows[key].dataValues.picture) {
+      rows[key].dataValues.picture = bufferToBase64(rows[key].dataValues.picture);
     }
   }
 
-  return petsData;
+  return { count, rows };
 };
 
 const createPet = async (newPet, idDonor) => {

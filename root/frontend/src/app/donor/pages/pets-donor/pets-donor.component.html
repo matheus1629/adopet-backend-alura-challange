@@ -1,8 +1,24 @@
 <app-header></app-header>
 <main>
-  <h1>Abaixo estão listados os pets que você colocou para adoção</h1>
+  <h1>Abaixo estão listados os pets que você colocou para adoção.</h1>
 
   <section>
+    <div class="add-pet" routerLink="/donor/add-pet">
+      Adicionar Pet
+      <mat-icon fontIcon="add"></mat-icon>
+    </div>
+
+    <mat-paginator
+      [length]="length"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="[10, 25, 100]"
+      [showFirstLastButtons]="true"
+      [pageIndex]="currentPage"
+      (page)="handlePageEvent($event)"
+      aria-label="Select page"
+    >
+    </mat-paginator>
+
     <div class="card-container">
       <div class="card" *ngFor="let pet of pets">
         <img src="{{ pet.picture }}" alt="" />
@@ -13,12 +29,19 @@
           <p class="pet-info">{{ pet.size }}</p>
           <p class="pet-info desc">{{ pet.description }}</p>
 
-         
+          <ng-container *ngIf="pet.adopted === 0; else alreadyAdopted">
+            <a class="card-msg" routerLink="/teste">
+              <mat-icon fontIcon="edit"></mat-icon>
+              <span>Editar pet</span>
+            </a>
+          </ng-container>
 
-          <a routerLink="/teste"
-            ><mat-icon class="chat-icon" fontIcon="edit"></mat-icon>
-            <span class="edit-pet">Editar pet</span>
-          </a>
+          <ng-template #alreadyAdopted>
+            <div class="card-msg">
+              <mat-icon fontIcon="check_circle"></mat-icon>
+              <span>Pet já adotado</span>
+            </div>
+          </ng-template>
         </div>
       </div>
     </div>

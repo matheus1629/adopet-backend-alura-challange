@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
+
 import { PaginatorIntlService } from 'src/app/services/paginator-intl.service';
 import { PetService } from 'src/app/services/pet.service';
 import { IPet } from 'src/shared/interfaces/pet.interface';
@@ -13,7 +14,7 @@ import { IPet } from 'src/shared/interfaces/pet.interface';
 export class PetsAdopterComponent implements OnInit {
   pets!: IPet[];
   currentPage = 0;
-  pageSize = 5;
+  pageSize = 10;
   length = 0;
 
   constructor(private petService: PetService) {}
@@ -29,7 +30,6 @@ export class PetsAdopterComponent implements OnInit {
   }
 
   handlePageEvent(pageEvent: PageEvent) {
-    console.log(pageEvent);
     this.currentPage = pageEvent.pageIndex;
     this.pageSize = pageEvent.pageSize;
 

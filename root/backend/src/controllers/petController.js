@@ -34,10 +34,11 @@ const getPetById = async (req, res) => {
 };
 
 const getPetsByLoggedDonor = async (req, res) => {
+  const { pageIndex, pageSize } = req.query;
   const petId = req.userId;
 
   try {
-    const pet = await petService.getPetsByDonor(petId);
+    const pet = await petService.getPetsByDonor(petId, Number(pageIndex), Number(pageSize));
     return res.status(200).json(pet);
   } catch (error) {
     return res.status(500).json(error.message);

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -10,7 +10,10 @@ export class AuthService {
   constructor(private router: Router, private http: HttpClient) {}
 
   login<T>(loginData: T, userType: string): Observable<T> {
-    return this.http.post<T>(`http://localhost:8000/auth/signin/${userType}`, loginData);
+    const headers = new HttpHeaders();
+    headers.set('skiptoken', 'true');
+
+    return this.http.post<T>(`/auth/signin/${userType}`, loginData);
   }
 
   /*  getToken(): string {
