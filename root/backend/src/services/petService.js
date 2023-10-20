@@ -38,6 +38,8 @@ const getAllPet = async () => {
 const getPetById = async (id) => {
   const petData = await petRepository.getPetById(id);
 
+  if (!petData) throw new BadRequestError("Pet not found");
+
   if (petData.dataValues.picture) petData.dataValues.picture = bufferToBase64(petData.dataValues.picture);
 
   return petData;
@@ -100,6 +102,14 @@ const updatePet = async (newPetInfo, idPet, idDonor) => {
   delete newPetInfo.updatedAt;
   delete newPetInfo.idDonor;
 
+  if (!(await petRepository.validateIfPetBelongsToDonor(idPet, idDonor))) {
+    throw new BadRequestError("Pet not found");
+  }
+
+  if (await checkIfPetWasAdoped(idPet)) {
+    throw new BadRequestError("You can't edit a pet that was already adopted");
+  }
+
   let errors = [];
 
   for (const key in newPetInfo) {
@@ -119,20 +129,23 @@ const updatePet = async (newPetInfo, idPet, idDonor) => {
     throw new BadRequestError(errorMessage);
   }
 
-  if (!(await petRepository.validateIfPetBelongsToDonor(idPet, idDonor))) {
-    throw new BadRequestError("You can't change a pet data that doesn't belongs to you");
-  }
-
   return await petRepository.updatePet(newPetInfo, idPet);
 };
 
 const deletePet = async (idPet, idDonor) => {
   if (!(await petRepository.validateIfPetBelongsToDonor(idPet, idDonor))) {
-    throw new BadRequestError("You can't change a pet data that doesn't belongs to you");
+    throw new BadRequestError("Pet not found");
   }
 
   const wasDeleted = await petRepository.deletePet(idPet);
   if (wasDeleted === 0) throw new BadRequestError(`You can't delete a pet that was already adopted`);
+};
+
+const checkIfPetWasAdoped = async (idPet) => {
+  const petAdoptedValue = await petRepository.checkIfPetWasAdoped(idPet);
+
+  if (petAdoptedValue.dataValues.adopted === 1) return true;
+  return false;
 };
 
 export default {

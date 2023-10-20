@@ -68,6 +68,13 @@ const validateIfPetBelongsToDonor = async (idPet, idDonor) => {
   });
 };
 
+const checkIfPetWasAdoped = async (idPet, idDonor) => {
+  return await database.Pet.findOne({
+    where: { id: idPet },
+    attributes: ["adopted"],
+  });
+};
+
 export default {
   getAllPetsAvailable,
   getAllPets,
@@ -77,4 +84,5 @@ export default {
   updatePet,
   deletePet,
   validateIfPetBelongsToDonor,
+  checkIfPetWasAdoped,
 };
