@@ -1,18 +1,17 @@
-import { PetsAdopterComponent } from './../../../adopter/pages/pets-adopter/pets-adopter.component';
-import { Component, OnInit, DoCheck } from '@angular/core';
+import { Component, OnInit, DoCheck, Input } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 
 import { IButtonConfig } from 'src/shared/interfaces/buttonConfig.interface';
 import { ButtonClass } from 'src/shared/enums/buttonConfig.enum';
 import { errorMessages, inputValidations } from 'src/shared/consts';
-import { fileToBase64, validateName, validatePetAge } from 'src/shared/utils/form';
+import { clearPetValues, fileToBase64, validateName, validatePetAge } from 'src/shared/utils/form';
 
 import { textAreaValidation } from '../../../../shared/consts';
 import { PopupComponent } from 'src/app/popup/popup.component';
 import { PetSize } from 'src/shared/enums/petSize.enum';
 import { PetService } from 'src/app/services/pet.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IPet } from 'src/shared/interfaces/pet.interface';
 
 @Component({
@@ -21,6 +20,7 @@ import { IPet } from 'src/shared/interfaces/pet.interface';
   styleUrls: ['./edit-pet.component.scss'],
 })
 export class EditPetComponent implements OnInit {
+  @Input() idPet!: number;
   petSizeValues = Object.values(PetSize);
   errorMessages = errorMessages;
   inputValidations = inputValidations;
@@ -41,26 +41,29 @@ export class EditPetComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private fb: FormBuilder,
     private petService: PetService,
     public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
-/*     this.petService.getPetById(idPet).subscribe({
+    this.idPet = this.route.snapshot.params['id'];
+
+    this.petService.getPetById(this.idPet).subscribe({
       next: (data: IPet) => {
         this.addPetForm.patchValue({
           picture: data.picture,
           name: data.name,
           age: data.age,
-          size: PetSize[data.size as keyof typeof PetSize].toString(),
+          size: PetSize[data.size.toUpperCase() as keyof typeof PetSize].toString(),
           description: data.description,
         });
       },
       error: (err) => {
         console.error('Error: ', err);
       },
-    }); */
+    });
 
     this.addPetForm = this.fb.group({
       picture: [null, Validators.required],
@@ -100,13 +103,17 @@ export class EditPetComponent implements OnInit {
     });
   }
 
-  submit() {
+  submitEdit() {
     this.formSubmitted = true;
 
     if (this.addPetForm.valid) {
       this.buttonRegister.loading = true;
 
-      this.petService.createPet(this.addPetForm.value).subscribe({
+      console.log(this.addPetForm.value);
+
+      const clearedPetValues = clearPetValues(this.addPetForm.value);
+
+      this.petService.editPet(clearedPetValues, this.idPet).subscribe({
         next: (data) => {
           this.openPopup('Pet adicionado para adoção!', 'check_circle');
           this.buttonRegister.loading = false;
@@ -119,5 +126,20 @@ export class EditPetComponent implements OnInit {
         },
       });
     }
+  }
+
+  submitDelete() {
+    this.petService.deletePet(this.idPet).subscribe({
+      next: (data) => {
+        this.openPopup('Pet excluído!', 'check_circle');
+        this.buttonRegister.loading = false;
+        this.router.navigate(['/donor/pets']);
+      },
+      error: (err) => {
+        console.error('Error: ', err);
+        this.openPopup('Ocorreu um erro em nosso servidor.', 'error');
+        this.buttonRegister.loading = false;
+      },
+    });
   }
 }

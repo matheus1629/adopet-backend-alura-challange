@@ -7,7 +7,7 @@ module.exports = {
       "Pet",
       [
         {
-          id: "bb7a70b1-2240-4bd9-b057-c85a2a1975cf",
+          id: 1,
           name: "Maria",
           age: 7,
           size: "porte_pequeno",
@@ -19,7 +19,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          id: "c97f167f-6e86-4cc5-8fb4-d13587ef79f9",
+          id: 2,
           name: "Miguel",
           age: 3,
           size: "porte_pequeno",
@@ -31,7 +31,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          id: "ecf0883f-bccb-4359-81ff-21411b2edd73",
+          id: 3,
           name: "Katarina",
           age: 4,
           size: "porte_pequeno",
@@ -43,7 +43,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          id: "fac2234a-8f14-4a9a-8c37-f9dc89c7d05b",
+          id: 4,
           name: "Maya",
           age: 2,
           size: "porte_pequeno",

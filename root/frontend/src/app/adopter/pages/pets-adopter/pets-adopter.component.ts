@@ -3,6 +3,7 @@ import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 
 import { PaginatorIntlService } from 'src/app/services/paginator-intl.service';
 import { PetService } from 'src/app/services/pet.service';
+import { PetSize } from 'src/shared/enums/petSize.enum';
 import { IPet } from 'src/shared/interfaces/pet.interface';
 
 @Component({
@@ -35,7 +36,13 @@ export class PetsAdopterComponent implements OnInit {
 
     this.petService.getAllPetsAvailable(this.currentPage + 1, this.pageSize).subscribe({
       next: (data) => {
-        this.pets = data.rows;
+        const newData: IPet[] = [];
+
+        for (let pet of data.rows) {
+          newData.push({ ...pet, size: PetSize[pet.size.toUpperCase() as keyof typeof PetSize] });
+        }
+
+        this.pets = newData;
         this.length = data.count;
       },
       error: (err) => {

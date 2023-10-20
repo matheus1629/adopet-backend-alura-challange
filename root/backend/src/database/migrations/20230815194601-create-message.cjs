@@ -29,7 +29,7 @@ module.exports = {
       },
       id_pet: {
         allowNull: false,
-        type: Sequelize.UUID,
+        type: Sequelize.INTEGER,
         references: { model: "pet", key: "id" },
       },
       createdAt: {

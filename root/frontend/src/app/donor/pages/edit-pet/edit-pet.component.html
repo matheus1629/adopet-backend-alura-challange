@@ -2,7 +2,7 @@
 <main>
   <p class="text">Preencha o formulário abixo para adicionar seu pet para adoção.</p>
 
-  <form [formGroup]="addPetForm" (keyup.enter)="submit()">
+  <form [formGroup]="addPetForm" (keyup.enter)="submitEdit()">
     <h1>Adicionar Pet</h1>
 
     <div class="input-label">
@@ -149,7 +149,7 @@
       </ng-container>
     </div>
 
-    <app-button (click)="submit()" [buttonConfig]="buttonRegister"></app-button>
-    <app-button (click)="submit()" [buttonConfig]="buttonDelete"></app-button>
+    <app-button (click)="submitEdit()" [buttonConfig]="buttonRegister"></app-button>
+    <app-button (click)="submitDelete()" [buttonConfig]="buttonDelete"></app-button>
   </form>
 </main>

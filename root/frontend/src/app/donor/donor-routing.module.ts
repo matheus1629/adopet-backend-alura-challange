@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileDonorComponent },
   { path: 'pets', component: PetsDonorComponent },
   { path: 'add-pet', component: AddPetComponent },
-  { path: 'edit-pet', component: EditPetComponent },
+  { path: 'edit-pet/:id', component: EditPetComponent },
 ];
 
 @NgModule({

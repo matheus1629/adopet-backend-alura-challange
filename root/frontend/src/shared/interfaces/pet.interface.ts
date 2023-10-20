@@ -1,4 +1,6 @@
 export interface IPet {
+  [x: string]: any;
+  pet: any;
   id: number;
   name: string;
   age: number;

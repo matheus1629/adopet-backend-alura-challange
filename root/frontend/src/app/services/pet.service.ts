@@ -34,4 +34,12 @@ export class PetService {
   createPet(petData: IPet): Observable<IPet> {
     return this.http.post<IPet>('/pet', petData);
   }
+
+  editPet(petData: IPet, idPet: number): Observable<IPet> {
+    return this.http.patch<IPet>(`/pet/${idPet}`, petData);
+  }
+
+  deletePet(idPet: number): Observable<IPet> {
+    return this.http.delete<IPet>(`/pet/${idPet}`);
+  }
 }

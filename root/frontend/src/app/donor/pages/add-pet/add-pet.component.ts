@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { IButtonConfig } from 'src/shared/interfaces/buttonConfig.interface';
 import { ButtonClass } from 'src/shared/enums/buttonConfig.enum';
 import { errorMessages, inputValidations } from 'src/shared/consts';
-import { fileToBase64, validateName, validatePetAge } from 'src/shared/utils/form';
+import { clearPetValues, fileToBase64, validateName, validatePetAge } from 'src/shared/utils/form';
 
 import { textAreaValidation } from '../../../../shared/consts';
 import { PopupComponent } from 'src/app/popup/popup.component';
@@ -78,7 +78,11 @@ export class AddPetComponent implements OnInit {
     if (this.addPetForm.valid) {
       this.buttonRegister.loading = true;
 
-      this.petService.createPet(this.addPetForm.value).subscribe({
+      console.log(this.addPetForm.value);
+
+      const clearedPetValues = clearPetValues(this.addPetForm.value)
+      
+      this.petService.createPet(clearedPetValues).subscribe({
         next: (data) => {
           this.openPopup('Pet adicionado para adoção!', 'check_circle');
           this.buttonRegister.loading = false;
