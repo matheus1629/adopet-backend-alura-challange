@@ -78,8 +78,6 @@ export class AddPetComponent implements OnInit {
     if (this.addPetForm.valid) {
       this.buttonRegister.loading = true;
 
-      console.log(this.addPetForm.value);
-
       const clearedPetValues = clearPetValues(this.addPetForm.value)
       
       this.petService.createPet(clearedPetValues).subscribe({
