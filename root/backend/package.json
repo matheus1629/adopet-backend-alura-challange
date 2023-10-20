@@ -8,6 +8,7 @@
     "start": "nodemon babel-node ./src/api.js",
     "db:migrate": "npx sequelize-cli db:migrate",
     "db:seed": "npx sequelize-cli db:seed:all",
+    "db:all": "npx sequelize db:migrate:undo:all && npm run db:migrate && npm run db:seed",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {

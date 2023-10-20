@@ -1,5 +1,5 @@
-<mat-icon (click)="navigateTo('/adopter/pets')" class="nav-icon" fontIcon="home"></mat-icon>
-<mat-icon (click)="navigateTo('/adopter/pets')" class="nav-icon" fontIcon="mail"></mat-icon>
+<mat-icon [routerLink]="linkHome" class="nav-icon" fontIcon="home"></mat-icon>
+<mat-icon [routerLink]="linkChat" class="nav-icon" fontIcon="mail"></mat-icon>
 
 <mat-menu #profileMenu="matMenu">
   <button mat-menu-item [routerLink]="routeEditProfile">Editar perfil</button>

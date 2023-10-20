@@ -14,8 +14,9 @@ import { Subscription } from 'rxjs/internal/Subscription';
 export class HeaderComponent implements OnInit, OnDestroy {
   routeEditProfile = `/${this.auth.getUserType()?.toLocaleLowerCase()}/profile`;
   profitePicture!: string | null;
-
   subscriptionPicture!: Subscription;
+  linkHome!: string;
+  linkChat!: string;
 
   constructor(
     private router: Router,
@@ -28,12 +29,20 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     if (this.auth.getUserType() === 'Adopter') {
       this.adopterService.getAdopterPicture().subscribe({
-        next: (data) => (this.profitePicture = data.picture),
+        next: (data) => {
+          this.profitePicture = data.picture;
+          this.linkHome = '/adopter/pets';
+          this.linkChat = '/adopter/pets';
+        },
         error: (err) => console.error('Error: ', err),
       });
     } else if (this.auth.getUserType() === 'Donor') {
       this.donorService.getDonorPicture().subscribe({
-        next: (data) => (this.profitePicture = data.picture),
+        next: (data) => {
+          this.profitePicture = data.picture;
+          this.linkHome = '/donor/pets';
+          this.linkChat = '/donor/pets';
+        },
         error: (err) => console.error('Error: ', err),
       });
     }

@@ -25,7 +25,7 @@ export default (sequelize, DataTypes) => {
       name: DataTypes.STRING,
       age: DataTypes.TINYINT.UNSIGNED,
       size: {
-        type: DataTypes.ENUM("Porte pequeno", "Porte médio", "Porte grande"),
+        type: DataTypes.ENUM("porte_pequeno", "porte_medio", "porte_grande"),
       },
       description: DataTypes.STRING,
       picture: DataTypes.BLOB("medium"),

@@ -149,14 +149,12 @@ const name = (name) => {
 const age = (age) => {
   const errors = [];
 
-  if (!age) {
+  const ageNumber = Number(age);
+
+  if (!age && age != 0) {
     errors.push("Pet's age is required");
-  } else if (!/^\d+$/.test(age)) {
-    errors.push("Age only accepts numbers");
-  } else {
-    if (age > 99) {
-      errors.push("There is no pet that old");
-    }
+  } else if (ageNumber > 99 || ageNumber < 0 || !Number.isInteger(ageNumber)) {
+    errors.push("Pet's age must be an integer value from 0 to 99");
   }
 
   if (errors.length !== 0) return errors;
@@ -168,7 +166,7 @@ const size = (size) => {
   if (!size) {
     errors.push("Pet's size is required");
   } else {
-    if (!petSizes.includes(size)) {
+    if (!petSizes.includes(size.toLowerCase())) {
       errors.push("Invalid size");
     }
   }

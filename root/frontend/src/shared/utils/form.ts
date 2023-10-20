@@ -2,11 +2,19 @@ import { AbstractControl, FormGroup } from '@angular/forms';
 import { States } from '../enums/states.enum';
 import { IFormRegisterAccount } from '../interfaces/formRegisterAccount.interface';
 import { IAccountEdit } from '../interfaces/accountEdit.interface';
+import { IPet } from '../interfaces/pet.interface';
+import { PetSize } from '../enums/petSize.enum';
 
 export function validateName(control: AbstractControl): { validName: boolean } | null {
   const regex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/;
 
   if (!regex.test(control.value)) return { validName: true };
+
+  return null;
+}
+
+export function validatePetAge(control: AbstractControl): { validAge: boolean } | null {
+  if (!Number.isInteger(control.value)) return { validAge: true };
 
   return null;
 }
@@ -35,6 +43,15 @@ function getStateKey(stateValue: States): string {
   const values = Object.values(States);
 
   const index = values.indexOf(stateValue);
+
+  return keys[index];
+}
+
+function getPetSizeKey(petSizeValue: PetSize): string {
+  const keys = Object.keys(PetSize);
+  const values = Object.values(PetSize);
+
+  const index = values.indexOf(petSizeValue);
 
   return keys[index];
 }
@@ -75,4 +92,15 @@ export function clearValues(formDirtyValues: IFormRegisterAccount & IAccountEdit
   if ('email' in formDirtyValues) cleanedValues.email = formDirtyValues.email.trim();
 
   return cleanedValues;
+}
+
+export function clearPetValues(formDirtyValues: IPet) {
+  const cleanedPetValues = formDirtyValues;
+
+  cleanedPetValues.name = formDirtyValues.name?.trim();
+  cleanedPetValues.age = formDirtyValues.age;
+  cleanedPetValues.size = getPetSizeKey(formDirtyValues?.size as PetSize);
+  cleanedPetValues.description = formDirtyValues.description?.trim();
+
+  return cleanedPetValues;
 }

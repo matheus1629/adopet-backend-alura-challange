@@ -1,4 +1,4 @@
-import { IPetPagination } from './../../shared/interfaces/pet.interface';
+import { IPet, IPetPagination } from './../../shared/interfaces/pet.interface';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -22,5 +22,9 @@ export class PetService {
     const params = new HttpParams().set('pageIndex', currentPage).set('pageSize', pageSize);
 
     return this.http.get<IPetPagination>('/pet/petsData/loggedDonor', { params });
+  }
+
+  createPet(petData: IPet): Observable<IPet> {
+    return this.http.post<IPet>('/pet', petData);
   }
 }

@@ -1,11 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import {
-  HttpInterceptor,
-  HttpRequest,
-  HttpHandler,
-  HttpClient,
-  HttpHeaders,
-} from '@angular/common/http';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpHeaders } from '@angular/common/http';
 import { Environment } from 'src/environments/environment.interface';
 import { ENVIRONMENT } from './environment.token';
 

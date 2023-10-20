@@ -41,7 +41,7 @@ h1 {
 
 label {
   color: $blue-color;
-  width: 100px;
+  width: 100%;
 }
 
 .input-label {
@@ -123,10 +123,6 @@ app-button {
     width: 120px;
     height: 120px;
   }
-
-  .picture-icon {
-    @include mat-icon-size(100px);
-  }
 }
 
 @media only screen and (max-width: $mobile-size) {
@@ -137,9 +133,5 @@ app-button {
   .input-file-container {
     width: 110px;
     height: 110px;
-  }
-
-  .picture-icon {
-    @include mat-icon-size(75px);
   }
 }
