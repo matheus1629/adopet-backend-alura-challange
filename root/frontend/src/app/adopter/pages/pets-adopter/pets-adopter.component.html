@@ -14,24 +14,33 @@
     >
     </mat-paginator>
 
-    <div class="card-container">
-      <div class="card" *ngFor="let pet of pets">
-        <img src="{{ pet.picture }}" alt="" />
+    <ng-container *ngIf="length === 0; else petsCards">
+      <div class="empty-list">
+        <p>Nenhum pet encontrado para adoção :&lpar;</p>
+        <mat-icon class="empty-list-icon" fontIcon="info"></mat-icon>
+      </div>
+    </ng-container>
 
-        <div class="card-info">
-          <p class="pet-name" title="{{ pet.name }}">{{ pet.name }}</p>
-          <p class="pet-info">{{ pet.age }} anos</p>
-          <p class="pet-info">{{ pet.size }}</p>
-          <p class="pet-info desc">{{ pet.description }}</p>
+    <ng-template #petsCards>
+      <div class="card-container">
+        <div class="card" *ngFor="let pet of pets">
+          <img src="{{ pet.picture }}" alt="" />
 
-          <p class="pet-region">{{ pet.Donor?.city }} ({{ pet.Donor?.state }})</p>
+          <div class="card-info">
+            <p class="pet-name" title="{{ pet.name }}">{{ pet.name }}</p>
+            <p class="pet-info">{{ pet.age }} anos</p>
+            <p class="pet-info">{{ pet.size }}</p>
+            <p class="pet-info desc" title="{{ pet.description }}">{{ pet.description }}</p>
 
-          <a routerLink="/teste"
-            ><mat-icon class="chat-icon" fontIcon="chat"></mat-icon>
-            <span class="contact-donor">Falar com o responsável</span>
-          </a>
+            <p class="pet-region">{{ pet.Donor?.city }} ({{ pet.Donor?.state }})</p>
+
+            <a routerLink="/teste"
+              ><mat-icon class="chat-icon" fontIcon="chat"></mat-icon>
+              <span class="contact-donor">Falar com o responsável</span>
+            </a>
+          </div>
         </div>
       </div>
-    </div>
+    </ng-template>
   </section>
 </main>

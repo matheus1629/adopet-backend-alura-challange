@@ -29,6 +29,7 @@ section {
   display: flex;
   align-items: center;
   width: 150px;
+  margin-bottom: 50px;
   border: 3px solid $green-color;
   border-radius: 15px;
   padding: 10px;
@@ -45,6 +46,18 @@ section {
 
 mat-paginator {
   background-color: transparent;
+}
+
+.empty-list {
+  color: $blue-color;
+  margin-top: 100px;
+  text-align: center;
+}
+
+.empty-list-icon {
+  color: $medium-grey-color;
+  @include mat-icon-size(100px);
+  margin: auto 0;
 }
 
 .card-container {

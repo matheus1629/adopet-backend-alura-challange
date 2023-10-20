@@ -23,6 +23,7 @@ import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from './pages/login/login.component';
 import { PopupComponent } from './popup/popup.component';
+import { PopupConfirmComponent } from 'src/app/popupConfirm/popup-confirmation.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { PopupComponent } from './popup/popup.component';
     FooterComponent,
     LoginComponent,
     PopupComponent,
+    PopupConfirmComponent,
   ],
   providers: [
     { provide: ENVIRONMENT, useValue: environment },

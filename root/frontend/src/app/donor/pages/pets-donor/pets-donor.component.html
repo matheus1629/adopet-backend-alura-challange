@@ -19,31 +19,40 @@
     >
     </mat-paginator>
 
-    <div class="card-container">
-      <div class="card" *ngFor="let pet of pets">
-        <img src="{{ pet.picture }}" alt="" />
+    <ng-container *ngIf="length === 0; else petsCards">
+      <div class="empty-list">
+        <p>Você ainda não tem pets para adoção...</p>
+        <mat-icon class="empty-list-icon" fontIcon="info"></mat-icon>
+      </div>
+    </ng-container>
 
-        <div class="card-info">
-          <p class="pet-name" title="{{ pet.name }}">{{ pet.name }}</p>
-          <p class="pet-info">{{ pet.age }} anos</p>
-          <p class="pet-info">{{ pet.size }}</p>
-          <p class="pet-info desc">{{ pet.description }}</p>
+    <ng-template #petsCards>
+      <div class="card-container">
+        <div class="card" *ngFor="let pet of pets">
+          <img src="{{ pet.picture }}" alt="" />
 
-          <ng-container *ngIf="pet.adopted === 0; else alreadyAdopted">
-            <a class="card-msg" routerLink="/donor/edit-pet/{{ pet.id }}">
-              <mat-icon fontIcon="edit"></mat-icon>
-              <span>Editar pet</span>
-            </a>
-          </ng-container>
+          <div class="card-info">
+            <p class="pet-name" title="{{ pet.name }}">{{ pet.name }}</p>
+            <p class="pet-info">{{ pet.age }} anos</p>
+            <p class="pet-info">{{ pet.size }}</p>
+            <p class="pet-info desc" title="{{ pet.description }}">{{ pet.description }}</p>
 
-          <ng-template #alreadyAdopted>
-            <div class="card-msg">
-              <mat-icon fontIcon="check_circle"></mat-icon>
-              <span>Pet já adotado</span>
-            </div>
-          </ng-template>
+            <ng-container *ngIf="pet.adopted === 0; else alreadyAdopted">
+              <a class="card-msg" routerLink="/donor/edit-pet/{{ pet.id }}">
+                <mat-icon fontIcon="edit"></mat-icon>
+                <span>Editar pet</span>
+              </a>
+            </ng-container>
+
+            <ng-template #alreadyAdopted>
+              <div class="card-msg">
+                <mat-icon fontIcon="check_circle"></mat-icon>
+                <span>Pet já adotado</span>
+              </div>
+            </ng-template>
+          </div>
         </div>
       </div>
-    </div>
+    </ng-template>
   </section>
 </main>

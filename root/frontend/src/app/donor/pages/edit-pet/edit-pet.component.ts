@@ -13,6 +13,7 @@ import { PetSize } from 'src/shared/enums/petSize.enum';
 import { PetService } from 'src/app/services/pet.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IPet } from 'src/shared/interfaces/pet.interface';
+import { PopupConfirmComponent } from 'src/app/popupConfirm/popup-confirmation.component';
 
 @Component({
   selector: 'app-edit-pet',
@@ -129,17 +130,30 @@ export class EditPetComponent implements OnInit {
   }
 
   submitDelete() {
-    this.petService.deletePet(this.idPet).subscribe({
-      next: (data) => {
-        this.openPopup('Pet excluído!', 'check_circle');
-        this.buttonRegister.loading = false;
-        this.router.navigate(['/donor/pets']);
+    const dialogRef = this.dialog.open(PopupConfirmComponent, {
+      data: {
+        title: 'Você tem certeza que deseja excluir esse pet?',
+        content: 'Todas as conversas que envolvem esse pet serão excluídas.',
+        yes: 'Excluir',
+        no: 'Voltar',
       },
-      error: (err) => {
-        console.error('Error: ', err);
-        this.openPopup('Ocorreu um erro em nosso servidor.', 'error');
-        this.buttonRegister.loading = false;
-      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.petService.deletePet(this.idPet).subscribe({
+          next: (data) => {
+            this.openPopup('Pet excluído!', 'check_circle');
+            this.buttonRegister.loading = false;
+            this.router.navigate(['/donor/pets']);
+          },
+          error: (err) => {
+            console.error('Error: ', err);
+            this.openPopup('Ocorreu um erro em nosso servidor.', 'error');
+            this.buttonRegister.loading = false;
+          },
+        });
+      }
     });
   }
 }
