@@ -12,7 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { NgxMaskModule } from 'ngx-mask';
-import { SharedModule } from './shared/shared.module';
+import { SharedComponentsModule } from './sharedComponents/shared-components.module';
 import { ENVIRONMENT } from './environment.token';
 import { environment } from 'src/environments/environment';
 import { UrlInterceptor } from './url.interceptor';
@@ -46,7 +46,7 @@ import { PopupConfirmComponent } from 'src/app/popupConfirm/popup-confirmation.c
   bootstrap: [AppComponent],
   imports: [
     BrowserModule,
-    SharedModule,
+    SharedComponentsModule,
     AppRoutingModule,
     ReactiveFormsModule,
     NgxMaskModule.forRoot(),

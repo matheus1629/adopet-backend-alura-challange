@@ -5,8 +5,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { AdopterRoutingModule } from './adopter-routing.module';
-import { SharedModule } from '../shared/shared.module';
 import { NgxMaskModule } from 'ngx-mask';
+import { SharedComponentsModule } from '../sharedComponents/shared-components.module';
 
 import { PetsAdopterComponent } from './pages/pets-adopter/pets-adopter.component';
 import { AdopterComponent } from './adopter.component';
@@ -23,7 +23,7 @@ import { RegisterAdopterComponent } from './pages/register-adopter/register-adop
   imports: [
     CommonModule,
     AdopterRoutingModule,
-    SharedModule,
+    SharedComponentsModule,
     ReactiveFormsModule,
     NgxMaskModule.forRoot(),
     MatIconModule,

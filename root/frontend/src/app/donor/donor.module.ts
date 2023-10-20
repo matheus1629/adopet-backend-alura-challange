@@ -5,7 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { DonorRoutingModule } from './donor-routing.module';
-import { SharedModule } from '../shared/shared.module';
+import { SharedComponentsModule } from '../sharedComponents/shared-components.module';
 import { NgxMaskModule } from 'ngx-mask';
 
 import { DonorComponent } from './donor.component';
@@ -27,7 +27,7 @@ import { EditPetComponent } from './pages/edit-pet/edit-pet.component';
   imports: [
     CommonModule,
     DonorRoutingModule,
-    SharedModule,
+    SharedComponentsModule,
     ReactiveFormsModule,
     NgxMaskModule.forRoot(),
     MatIconModule,

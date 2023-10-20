@@ -13,4 +13,4 @@ import { ButtonComponent } from './button/button.component';
   exports: [HeaderComponent, ButtonComponent],
   imports: [CommonModule, RouterModule, MatMenuModule, MatIconModule, MatProgressSpinnerModule],
 })
-export class SharedModule {}
+export class SharedComponentsModule {}
