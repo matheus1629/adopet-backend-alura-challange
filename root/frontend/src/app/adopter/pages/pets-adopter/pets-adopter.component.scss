@@ -131,6 +131,8 @@ a {
 
   .pet-name {
     font-size: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .pet-info {

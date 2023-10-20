@@ -24,13 +24,13 @@
         <img src="{{ pet.picture }}" alt="" />
 
         <div class="card-info">
-          <p class="pet-name">{{ pet.name }}</p>
+          <p class="pet-name" title="{{ pet.name }}">{{ pet.name }}</p>
           <p class="pet-info">{{ pet.age }} anos</p>
           <p class="pet-info">{{ pet.size }}</p>
           <p class="pet-info desc">{{ pet.description }}</p>
 
           <ng-container *ngIf="pet.adopted === 0; else alreadyAdopted">
-            <a class="card-msg" routerLink="/teste">
+            <a class="card-msg" routerLink="/donor/edit-pet">
               <mat-icon fontIcon="edit"></mat-icon>
               <span>Editar pet</span>
             </a>

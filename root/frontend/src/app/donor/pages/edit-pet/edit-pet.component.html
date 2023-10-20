@@ -1,8 +1,6 @@
 <app-header></app-header>
 <main>
-  <p class="text">
-    Ao enviar uma mensagem para alguém que está doando um pet, essas informações ficarão disponíveis
-  </p>
+  <p class="text">Preencha o formulário abixo para adicionar seu pet para adoção.</p>
 
   <form [formGroup]="addPetForm" (keyup.enter)="submit()">
     <h1>Adicionar Pet</h1>
@@ -152,5 +150,6 @@
     </div>
 
     <app-button (click)="submit()" [buttonConfig]="buttonRegister"></app-button>
+    <app-button (click)="submit()" [buttonConfig]="buttonDelete"></app-button>
   </form>
 </main>

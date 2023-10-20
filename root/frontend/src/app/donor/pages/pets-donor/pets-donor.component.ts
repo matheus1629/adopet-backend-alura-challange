@@ -35,6 +35,8 @@ export class PetsDonorComponent implements OnInit {
 
     this.petService.getPetsByDonor(this.currentPage + 1, this.pageSize).subscribe({
       next: (data) => {
+        console.log(data);
+        
         this.pets = data.rows;
         this.length = data.count;
       },

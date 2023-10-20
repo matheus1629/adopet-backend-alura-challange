@@ -13,9 +13,10 @@ import { ProfileDonorComponent } from './pages/profile-donor/profile-donor.compo
 import { RegisterDonorComponent } from './pages/register-donor/register-donor.component';
 import { PetsDonorComponent } from './pages/pets-donor/pets-donor.component';
 import { AddPetComponent } from './pages/add-pet/add-pet.component';
+import { EditPetComponent } from './pages/edit-pet/edit-pet.component';
 
 @NgModule({
-  declarations: [DonorComponent, ProfileDonorComponent, RegisterDonorComponent, PetsDonorComponent, AddPetComponent],
+  declarations: [DonorComponent, ProfileDonorComponent, RegisterDonorComponent, PetsDonorComponent, AddPetComponent, EditPetComponent],
   imports: [
     CommonModule,
     DonorRoutingModule,

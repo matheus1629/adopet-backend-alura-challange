@@ -18,6 +18,13 @@ export class PetService {
     return this.http.get<IPetPagination>('/pet', { params, headers });
   }
 
+  getPetById(idPet: number): Observable<IPet> {
+    const headers = new HttpHeaders();
+    headers.set('skiptoken', 'true');
+
+    return this.http.get<IPet>(`/pet/${idPet}`);
+  }
+
   getPetsByDonor(currentPage: number, pageSize: number): Observable<IPetPagination> {
     const params = new HttpParams().set('pageIndex', currentPage).set('pageSize', pageSize);
 
