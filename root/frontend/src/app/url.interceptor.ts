@@ -4,10 +4,10 @@ import { Environment } from 'src/environments/environment.interface';
 import { ENVIRONMENT } from './environment.token';
 
 @Injectable()
-export class UrlInterceptor implements HttpInterceptor {
+export class UrlInterceptor<T> implements HttpInterceptor {
   constructor(@Inject(ENVIRONMENT) private environment: Environment) {}
 
-  intercept(req: HttpRequest<any>, next: HttpHandler) {
+  intercept(req: HttpRequest<T>, next: HttpHandler) {
     const newReqApiUrl = req.clone({ url: this.environment.apiUrl + req.url });
 
     if (req.headers.has('skipToken')) {

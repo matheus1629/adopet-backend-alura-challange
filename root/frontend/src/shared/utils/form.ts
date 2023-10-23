@@ -57,9 +57,15 @@ function getPetSizeKey(petSizeValue: PetSize): string {
   return keys[index];
 }
 
-export function fileToBase64(event: any): Promise<string> {
+export function fileToBase64(event: Event): Promise<string> {
   return new Promise((resolve, reject) => {
-    const file = event.target.files[0];
+    const inputElement = event.target as HTMLInputElement;
+
+    if (!inputElement.files) {
+      reject({ noFiles: true });
+      return;
+    }
+    const file = inputElement.files?.[0];
 
     const allowedTypes = ['image/jpeg', 'image/png'];
     if (!allowedTypes.includes(file.type)) {

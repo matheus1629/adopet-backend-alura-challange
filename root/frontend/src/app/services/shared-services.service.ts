@@ -2,15 +2,14 @@ import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SharedService {
+  private picture = new Subject<string | undefined>();
 
-  private picture = new Subject<any>();
+  public pictureUpdated$: Observable<string | undefined > = this.picture.asObservable();
 
-  public pictureUpdated$: Observable<any> = this.picture.asObservable();
-
-  public pictureSender(data:any) {
+  public pictureSender(data: string | undefined) {
     this.picture.next(data);
   }
 }

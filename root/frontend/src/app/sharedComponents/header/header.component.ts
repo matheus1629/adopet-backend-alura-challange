@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   routeEditProfile = `/${this.auth.getUserType()?.toLocaleLowerCase()}/profile`;
-  profitePicture!: string | null;
+  profitePicture!: string | null | undefined;
   subscriptionPicture!: Subscription;
   linkHome!: string;
   linkChat!: string;

@@ -28,7 +28,6 @@ export class ProfileAdopterComponent implements OnInit, DoCheck {
   textAreaValidation = textAreaValidation;
   formSubmitted = false;
   editAdopterForm!: FormGroup;
-  pictureUpdatedHeader?: any;
 
   buttonRegister: IButtonConfig = {
     innerText: 'Salvar',
@@ -83,7 +82,7 @@ export class ProfileAdopterComponent implements OnInit, DoCheck {
     else this.buttonRegister.disable = true;
   }
 
-  onFileSelected(event: any) {
+  onFileSelected(event: Event) {
     fileToBase64(event)
       .then((base64String) => {
         this.editAdopterForm.patchValue({ picture: base64String });

@@ -51,7 +51,7 @@ export class AddPetComponent implements OnInit {
     });
   }
 
-  onFileSelected(event: any) {
+  onFileSelected(event: Event) {
     fileToBase64(event)
       .then((base64String) => {
         this.addPetForm.patchValue({ picture: base64String });

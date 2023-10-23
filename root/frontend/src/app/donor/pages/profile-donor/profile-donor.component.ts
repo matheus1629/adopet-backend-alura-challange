@@ -82,7 +82,7 @@ export class ProfileDonorComponent implements OnInit, DoCheck {
     else this.buttonRegister.disable = true;
   }
 
-  onFileSelected(event: any) {
+  onFileSelected(event: Event) {
     fileToBase64(event)
       .then((base64String) => {
         this.editAdopterForm.patchValue({ picture: base64String });
@@ -126,6 +126,8 @@ export class ProfileDonorComponent implements OnInit, DoCheck {
 
       this.donorService.editDonor(cleanedValuesForm).subscribe({
         next: (data) => {
+          console.log(data);
+          
           this.openPopup('Alterações salvas!', 'check_circle');
           this.sharedService.pictureSender(data.picture);
           this.editAdopterForm.markAsPristine();
