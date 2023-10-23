@@ -1,6 +1,7 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { map } from 'rxjs';
 
 import { DonorService } from 'src/app/services/donor.service';
 import { SharedService } from 'src/app/services/shared-services.service';
@@ -15,6 +16,7 @@ import { IAccountEdit } from 'src/shared/interfaces/accountEdit.interface';
 import { IFormRegisterAccount } from 'src/shared/interfaces/formRegisterAccount.interface';
 import { textAreaValidation } from '../../../../shared/consts';
 import { PopupComponent } from 'src/app/popup/popup.component';
+import { PopupConfirmComponent } from 'src/app/popupConfirm/popup-confirmation.component';
 
 @Component({
   selector: 'app-profile-donor',
@@ -126,8 +128,6 @@ export class ProfileDonorComponent implements OnInit, DoCheck {
 
       this.donorService.editDonor(cleanedValuesForm).subscribe({
         next: (data) => {
-          console.log(data);
-          
           this.openPopup('Alterações salvas!', 'check_circle');
           this.sharedService.pictureSender(data.picture);
           this.editAdopterForm.markAsPristine();
@@ -139,6 +139,28 @@ export class ProfileDonorComponent implements OnInit, DoCheck {
           this.buttonRegister.loading = false;
         },
       });
+    }
+  }
+
+  canDeactivate() {
+    if (this.editAdopterForm.dirty) {
+      const dialogRef = this.dialog.open(PopupConfirmComponent, {
+        data: {
+          title: 'Você tem certeza que deseja descartar as alterações?',
+          content: 'As alterações serão perdidas se você sair sem salvar.',
+          yes: 'Sim',
+          no: 'Não',
+        },
+      });
+
+      return dialogRef.afterClosed().pipe(
+        map((result) => {
+          if (result) return true;
+          else return false;
+        })
+      );
+    } else {
+      return true;
     }
   }
 }

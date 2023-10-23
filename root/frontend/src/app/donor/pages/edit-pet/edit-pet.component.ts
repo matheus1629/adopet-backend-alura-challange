@@ -1,6 +1,7 @@
 import { Component, OnInit, DoCheck, Input } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { map } from 'rxjs';
 
 import { IButtonConfig } from 'src/shared/interfaces/buttonConfig.interface';
 import { ButtonClass } from 'src/shared/enums/buttonConfig.enum';
@@ -28,7 +29,7 @@ export class EditPetComponent implements OnInit {
   inputValidations = inputValidations;
   textAreaValidation = textAreaValidation;
   formSubmitted = false;
-  addPetForm!: FormGroup;
+  editPetForm!: FormGroup;
 
   buttonRegister: IButtonConfig = {
     innerText: 'Salvar',
@@ -54,7 +55,7 @@ export class EditPetComponent implements OnInit {
 
     this.petService.getPetById(this.idPet).subscribe({
       next: (data: IPet) => {
-        this.addPetForm.patchValue({
+        this.editPetForm.patchValue({
           picture: data.picture,
           name: data.name,
           age: data.age,
@@ -67,7 +68,7 @@ export class EditPetComponent implements OnInit {
       },
     });
 
-    this.addPetForm = this.fb.group({
+    this.editPetForm = this.fb.group({
       picture: [null, Validators.required],
       name: [
         '',
@@ -80,19 +81,19 @@ export class EditPetComponent implements OnInit {
   }
 
   ngDoCheck() {
-    if (this.addPetForm.dirty) this.buttonRegister.disable = false;
+    if (this.editPetForm.dirty) this.buttonRegister.disable = false;
     else this.buttonRegister.disable = true;
   }
 
   onFileSelected(event: Event) {
     fileToBase64(event)
       .then((base64String) => {
-        this.addPetForm.patchValue({ picture: base64String });
-        this.addPetForm.get('picture')?.markAsDirty();
+        this.editPetForm.patchValue({ picture: base64String });
+        this.editPetForm.get('picture')?.markAsDirty();
       })
       .catch((error) => {
-        if (error.fileUnsupported) this.addPetForm.get('picture')?.setErrors(error);
-        else if (error.fileSizeExceeded) this.addPetForm.get('picture')?.setErrors(error);
+        if (error.fileUnsupported) this.editPetForm.get('picture')?.setErrors(error);
+        else if (error.fileSizeExceeded) this.editPetForm.get('picture')?.setErrors(error);
       });
   }
 
@@ -108,12 +109,12 @@ export class EditPetComponent implements OnInit {
   submitEdit() {
     this.formSubmitted = true;
 
-    if (this.addPetForm.valid) {
+    if (this.editPetForm.valid) {
       this.buttonRegister.loading = true;
 
       const dirtyFields: IPetEdit = {};
 
-      const formControlFields = Object.entries(this.addPetForm.controls);
+      const formControlFields = Object.entries(this.editPetForm.controls);
 
       for (let element of formControlFields) {
         if (element[1].dirty === true) dirtyFields[element[0] as keyof IPetEdit] = element[1].value;
@@ -125,6 +126,7 @@ export class EditPetComponent implements OnInit {
         next: (data) => {
           this.openPopup('Pet editado!', 'check_circle');
           this.buttonRegister.loading = false;
+          this.editPetForm.markAsPristine();
           this.router.navigate(['/donor/pets']);
         },
         error: (err) => {
@@ -152,6 +154,7 @@ export class EditPetComponent implements OnInit {
           next: (data) => {
             this.openPopup('Pet excluído!', 'check_circle');
             this.buttonRegister.loading = false;
+            this.editPetForm.markAsPristine();
             this.router.navigate(['/donor/pets']);
           },
           error: (err) => {
@@ -162,5 +165,27 @@ export class EditPetComponent implements OnInit {
         });
       }
     });
+  }
+
+  canDeactivate() {
+    if (this.editPetForm.dirty) {
+      const dialogRef = this.dialog.open(PopupConfirmComponent, {
+        data: {
+          title: 'Você tem certeza que deseja descartar as alterações?',
+          content: 'As alterações serão perdidas se você sair sem salvar.',
+          yes: 'Sim',
+          no: 'Não',
+        },
+      });
+
+      return dialogRef.afterClosed().pipe(
+        map((result) => {
+          if (result) return true;
+          else return false;
+        })
+      );
+    } else {
+      return true;
+    }
   }
 }

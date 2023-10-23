@@ -2,6 +2,7 @@ import { textAreaValidation } from '../../../../shared/consts';
 import { Component, OnInit, DoCheck } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { map } from 'rxjs';
 
 import { AdopterService } from '../../../services/adopter.service';
 import { SharedService } from 'src/app/services/shared-services.service';
@@ -15,6 +16,7 @@ import { IAccountData } from 'src/shared/interfaces/accountData.interface';
 import { IAccountEdit } from 'src/shared/interfaces/accountEdit.interface';
 import { IFormRegisterAccount } from 'src/shared/interfaces/formRegisterAccount.interface';
 import { PopupComponent } from 'src/app/popup/popup.component';
+import { PopupConfirmComponent } from 'src/app/popupConfirm/popup-confirmation.component';
 
 @Component({
   selector: 'app-profile-adopter',
@@ -78,8 +80,11 @@ export class ProfileAdopterComponent implements OnInit, DoCheck {
   }
 
   ngDoCheck() {
-    if (this.editAdopterForm.dirty) this.buttonRegister.disable = false;
-    else this.buttonRegister.disable = true;
+    if (this.editAdopterForm.dirty) {
+      this.buttonRegister.disable = false;
+    } else {
+      this.buttonRegister.disable = true;
+    }
   }
 
   onFileSelected(event: Event) {
@@ -137,6 +142,28 @@ export class ProfileAdopterComponent implements OnInit, DoCheck {
           this.buttonRegister.loading = false;
         },
       });
+    }
+  }
+
+  canDeactivate() {
+    if (this.editAdopterForm.dirty) {
+      const dialogRef = this.dialog.open(PopupConfirmComponent, {
+        data: {
+          title: 'Você tem certeza que deseja descartar as alterações?',
+          content: 'As alterações serão perdidas se você sair sem salvar.',
+          yes: 'Sim',
+          no: 'Não',
+        },
+      });
+
+      return dialogRef.afterClosed().pipe(
+        map((result) => {
+          if (result) return true;
+          else return false;
+        })
+      );
+    } else {
+      return true;
     }
   }
 }

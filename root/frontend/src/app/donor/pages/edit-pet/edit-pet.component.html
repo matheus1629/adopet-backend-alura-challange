@@ -2,20 +2,20 @@
 <main>
   <p class="text">Preencha o formulário abixo para adicionar seu pet para adoção.</p>
 
-  <form [formGroup]="addPetForm" (keyup.enter)="submitEdit()">
-    <h1>Adicionar Pet</h1>
+  <form [formGroup]="editPetForm" (keyup.enter)="submitEdit()">
+    <h1>Editar Pet</h1>
 
     <div class="input-label">
       <label for="">Foto</label>
       <div class="input-file-container">
         <label class="input-picture-box" for="picture">
-          <ng-container *ngIf="!addPetForm.get('picture')?.value; else imageTemplate">
+          <ng-container *ngIf="!editPetForm.get('picture')?.value; else imageTemplate">
             <mat-icon class="picture-img" fontIcon="account_circle"></mat-icon>
           </ng-container>
           <ng-template #imageTemplate>
             <img
               class="picture-img"
-              [src]="addPetForm.get('picture')?.value"
+              [src]="editPetForm.get('picture')?.value"
               alt="Picture selected"
             />
           </ng-template>
@@ -31,23 +31,23 @@
         />
       </div>
 
-      <ng-container *ngIf="addPetForm.get('picture')?.hasError('fileSizeExceeded')"
+      <ng-container *ngIf="editPetForm.get('picture')?.hasError('fileSizeExceeded')"
         ><span class="error-message" style="align-self: center">{{
           errorMessages.fileSizeExceeded
         }}</span>
       </ng-container>
-      <ng-container *ngIf="addPetForm.get('picture')?.hasError('fileUnsupported')"
+      <ng-container *ngIf="editPetForm.get('picture')?.hasError('fileUnsupported')"
         ><span class="error-message" style="align-self: center">{{
           errorMessages.fileUnsupported
         }}</span>
       </ng-container>
-      <ng-container *ngIf="addPetForm.get('picture')?.hasError('required') && formSubmitted">
+      <ng-container *ngIf="editPetForm.get('picture')?.hasError('required') && formSubmitted">
         <span class="error-message" style="align-self: center">{{
           errorMessages.requiredInput
         }}</span>
       </ng-container>
 
-      <p class="picture-text">Clique no ícone da acima para adicionar um foto do pet</p>
+      <p class="picture-text">Clique no ícone acima para adicionar um foto do pet</p>
     </div>
 
     <div class="input-label">
@@ -61,19 +61,19 @@
         placeholder="Digite seu nome"
         [maxlength]="inputValidations.maxLengthForm"
         [ngClass]="{
-          'border-error': addPetForm.get('name')?.errors && formSubmitted
+          'border-error': editPetForm.get('name')?.errors && formSubmitted
         }"
       />
       <ng-container
         *ngIf="
-          (addPetForm.get('name')?.hasError('required') ||
-            addPetForm.get('name')?.hasError('minlength')) &&
+          (editPetForm.get('name')?.hasError('required') ||
+            editPetForm.get('name')?.hasError('minlength')) &&
           formSubmitted
         "
       >
         <span class="error-message">{{ errorMessages.minlength }}</span>
       </ng-container>
-      <ng-container *ngIf="addPetForm.get('name')?.hasError('validName') && formSubmitted">
+      <ng-container *ngIf="editPetForm.get('name')?.hasError('validName') && formSubmitted">
         <span class="error-message">{{ errorMessages.validName }}</span>
       </ng-container>
     </div>
@@ -89,15 +89,15 @@
         formControlName="age"
         placeholder="2 anos"
         [ngClass]="{
-          'border-error': addPetForm.get('age')?.errors && formSubmitted
+          'border-error': editPetForm.get('age')?.errors && formSubmitted
         }"
       />
       <ng-container
         *ngIf="
-          (addPetForm.get('age')?.hasError('required') ||
-            addPetForm.get('age')?.hasError('max') ||
-            addPetForm.get('age')?.hasError('min') ||
-            addPetForm.get('age')?.hasError('validAge')) &&
+          (editPetForm.get('age')?.hasError('required') ||
+            editPetForm.get('age')?.hasError('max') ||
+            editPetForm.get('age')?.hasError('min') ||
+            editPetForm.get('age')?.hasError('validAge')) &&
           formSubmitted
         "
         ><span class="error-message">{{ errorMessages.petAge }}</span>
@@ -111,7 +111,7 @@
         name="size"
         formControlName="size"
         [ngClass]="{
-          'border-error': addPetForm.get('size')?.errors && formSubmitted
+          'border-error': editPetForm.get('size')?.errors && formSubmitted
         }"
       >
         <option value="" disabled selected>Selecione o tamanho do pet</option>
@@ -119,7 +119,7 @@
           {{ petSize }}
         </option>
       </select>
-      <ng-container *ngIf="addPetForm.get('size')?.hasError('required') && formSubmitted"
+      <ng-container *ngIf="editPetForm.get('size')?.hasError('required') && formSubmitted"
         ><span class="error-message">{{ errorMessages.select }}</span>
       </ng-container>
     </div>
@@ -135,13 +135,13 @@
         placeholder="Carinhoso e simpático"
         [maxlength]="25"
         [ngClass]="{
-          'border-error': addPetForm.get('description')?.errors && formSubmitted
+          'border-error': editPetForm.get('description')?.errors && formSubmitted
         }"
       />
       <ng-container
         *ngIf="
-          (addPetForm.get('description')?.hasError('required') ||
-            addPetForm.get('description')?.hasError('minlength')) &&
+          (editPetForm.get('description')?.hasError('required') ||
+            editPetForm.get('description')?.hasError('minlength')) &&
           formSubmitted
         "
       >

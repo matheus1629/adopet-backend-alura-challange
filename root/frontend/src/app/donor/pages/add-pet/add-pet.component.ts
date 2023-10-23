@@ -12,6 +12,8 @@ import { PopupComponent } from 'src/app/popup/popup.component';
 import { PetSize } from 'src/shared/enums/petSize.enum';
 import { PetService } from 'src/app/services/pet.service';
 import { Router } from '@angular/router';
+import { PopupConfirmComponent } from 'src/app/popupConfirm/popup-confirmation.component';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-add-pet',
@@ -78,12 +80,13 @@ export class AddPetComponent implements OnInit {
     if (this.addPetForm.valid) {
       this.buttonRegister.loading = true;
 
-      const clearedPetValues = clearPetValues(this.addPetForm.value)
-      
+      const clearedPetValues = clearPetValues(this.addPetForm.value);
+
       this.petService.createPet(clearedPetValues).subscribe({
         next: (data) => {
           this.openPopup('Pet adicionado para adoção!', 'check_circle');
           this.buttonRegister.loading = false;
+          this.addPetForm.markAsPristine();
           this.router.navigate(['/donor/pets']);
         },
         error: (err) => {
@@ -92,6 +95,28 @@ export class AddPetComponent implements OnInit {
           this.buttonRegister.loading = false;
         },
       });
+    }
+  }
+
+  canDeactivate() {
+    if (this.addPetForm.dirty) {
+      const dialogRef = this.dialog.open(PopupConfirmComponent, {
+        data: {
+          title: 'Você tem certeza que deseja descartar as alterações?',
+          content: 'As alterações serão perdidas se você sair sem salvar.',
+          yes: 'Sim',
+          no: 'Não',
+        },
+      });
+
+      return dialogRef.afterClosed().pipe(
+        map((result) => {
+          if (result) return true;
+          else return false;
+        })
+      );
+    } else {
+      return true;
     }
   }
 }
