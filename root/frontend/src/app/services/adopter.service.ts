@@ -32,4 +32,8 @@ export class AdopterService {
   editAdopter(formData: IAccountEdit): Observable<IAccountEdit> {
     return this.http.patch<IAccountEdit>('/adopter', formData);
   }
+
+  deleteAdopter(): Observable<null> {
+    return this.http.delete<null>('/adopter');
+  }
 }

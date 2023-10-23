@@ -45,7 +45,7 @@ const getPetById = async (id) => {
   return petData;
 };
 
-const getPetsByDonor = async (id, pageIndex, pageSize) => {
+const getPetsByDonor = async (idDonor, pageIndex, pageSize) => {
   if (!pageIndex) pageIndex = 1;
   if (!pageSize || pageSize === 0) pageSize = 10;
 
@@ -54,7 +54,7 @@ const getPetsByDonor = async (id, pageIndex, pageSize) => {
     limit: pageSize,
   };
 
-  const { count, rows } = await petRepository.getPetsByDonor(id, pageSetting);
+  const { count, rows } = await petRepository.getPetsByDonor(idDonor, pageSetting);
 
   for (const key in rows) {
     if (rows[key].dataValues.picture) {
@@ -95,18 +95,18 @@ const createPet = async (newPet, idDonor) => {
   return petCreated.dataValues.id;
 };
 
-const updatePet = async (newPetInfo, idPet, idDonor) => {
+const updatePet = async (newPetInfo, id, idDonor) => {
   delete newPetInfo.adoptionDate;
   delete newPetInfo.adopted;
   delete newPetInfo.createdAt;
   delete newPetInfo.updatedAt;
   delete newPetInfo.idDonor;
 
-  if (!(await petRepository.validateIfPetBelongsToDonor(idPet, idDonor))) {
+  if (!(await petRepository.validateIfPetBelongsToDonor(id, idDonor))) {
     throw new BadRequestError("Pet not found");
   }
 
-  if (await checkIfPetWasAdoped(idPet)) {
+  if (await checkIfPetWasAdoped(id)) {
     throw new BadRequestError("You can't edit a pet that was already adopted");
   }
 
@@ -129,20 +129,20 @@ const updatePet = async (newPetInfo, idPet, idDonor) => {
     throw new BadRequestError(errorMessage);
   }
 
-  return await petRepository.updatePet(newPetInfo, idPet);
+  return await petRepository.updatePet(newPetInfo, id);
 };
 
-const deletePet = async (idPet, idDonor) => {
-  if (!(await petRepository.validateIfPetBelongsToDonor(idPet, idDonor))) {
+const deletePet = async (id, idDonor) => {
+  if (!(await petRepository.validateIfPetBelongsToDonor(id, idDonor))) {
     throw new BadRequestError("Pet not found");
   }
 
-  const wasDeleted = await petRepository.deletePet(idPet);
+  const wasDeleted = await petRepository.deletePet(id);
   if (wasDeleted === 0) throw new BadRequestError(`You can't delete a pet that was already adopted`);
 };
 
-const checkIfPetWasAdoped = async (idPet) => {
-  const petAdoptedValue = await petRepository.checkIfPetWasAdoped(idPet);
+const checkIfPetWasAdoped = async (id) => {
+  const petAdoptedValue = await petRepository.checkIfPetWasAdoped(id);
 
   if (petAdoptedValue.dataValues.adopted === 1) return true;
   return false;

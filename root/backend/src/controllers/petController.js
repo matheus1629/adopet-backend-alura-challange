@@ -23,10 +23,10 @@ const getAllPets = async (req, res) => {
 };
 
 const getPetById = async (req, res) => {
-  const petId = req.params.id;
+  const idPet = req.params.id;
 
   try {
-    const pet = await petService.getPetById(petId);
+    const pet = await petService.getPetById(idPet);
     return res.status(200).json(pet);
   } catch (error) {
     return res.status(500).json(error.message);
@@ -35,10 +35,10 @@ const getPetById = async (req, res) => {
 
 const getPetsByLoggedDonor = async (req, res) => {
   const { pageIndex, pageSize } = req.query;
-  const petId = req.userId;
+  const idDonor = req.userId;
 
   try {
-    const pet = await petService.getPetsByDonor(petId, Number(pageIndex), Number(pageSize));
+    const pet = await petService.getPetsByDonor(idDonor, Number(pageIndex), Number(pageSize));
     return res.status(200).json(pet);
   } catch (error) {
     return res.status(500).json(error.message);
@@ -50,9 +50,9 @@ const createPet = async (req, res) => {
   const idDonor = req.userId;
 
   try {
-    const createdPetId = await petService.createPet(newPet, idDonor);
+    const createdidPet = await petService.createPet(newPet, idDonor);
 
-    const createdPet = await petService.getPetById(createdPetId);
+    const createdPet = await petService.getPetById(createdidPet);
 
     return res.status(201).json(createdPet);
   } catch (error) {
@@ -63,14 +63,14 @@ const createPet = async (req, res) => {
 };
 
 const updatePet = async (req, res) => {
-  const petId = req.params.id;
+  const idPet = req.params.id;
   const idDonor = req.userId;
   const petData = req.body;
 
   try {
-    await petService.updatePet(petData, petId, idDonor);
+    await petService.updatePet(petData, idPet, idDonor);
 
-    const petNewInfo = await petService.getPetById(petId);
+    const petNewInfo = await petService.getPetById(idPet);
 
     return res.status(200).json(petNewInfo);
   } catch (error) {
@@ -79,11 +79,11 @@ const updatePet = async (req, res) => {
 };
 
 const deletePet = async (req, res) => {
-  const petId = req.params.id;
+  const idPet = req.params.id;
   const idDonor = req.userId;
 
   try {
-    await petService.deletePet(petId, idDonor);
+    await petService.deletePet(idPet, idDonor);
     return res.sendStatus(204);
   } catch (error) {
     if (error.name === "BadRequestError") {

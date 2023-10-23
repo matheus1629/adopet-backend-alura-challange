@@ -33,9 +33,9 @@ const getPetById = async (id) => {
   });
 };
 
-const getPetsByDonor = async (id, pageSetting) => {
+const getPetsByDonor = async (idDonor, pageSetting) => {
   return await database.Pet.findAndCountAll({
-    where: { id_donor: id },
+    where: { id_donor: idDonor },
     attributes: { exclude: ["createdAt", "updatedAt"] },
     ...pageSetting,
   });
@@ -61,16 +61,16 @@ const deletePet = async (id) => {
   return wasDeleted;
 };
 
-const validateIfPetBelongsToDonor = async (idPet, idDonor) => {
+const validateIfPetBelongsToDonor = async (id, idDonor) => {
   return await database.Pet.findOne({
-    where: { id: idPet, idDonor: idDonor },
+    where: { id, idDonor: idDonor },
     attributes: ["id"],
   });
 };
 
-const checkIfPetWasAdoped = async (idPet, idDonor) => {
+const checkIfPetWasAdoped = async (id) => {
   return await database.Pet.findOne({
-    where: { id: idPet },
+    where: { id },
     attributes: ["adopted"],
   });
 };

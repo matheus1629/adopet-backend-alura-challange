@@ -17,6 +17,7 @@ import { IFormRegisterAccount } from 'src/shared/interfaces/formRegisterAccount.
 import { textAreaValidation } from '../../../../shared/consts';
 import { PopupComponent } from 'src/app/popup/popup.component';
 import { PopupConfirmComponent } from 'src/app/popupConfirm/popup-confirmation.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile-donor',
@@ -37,7 +38,13 @@ export class ProfileDonorComponent implements OnInit, DoCheck {
     disable: true,
   };
 
+  buttonDelete: IButtonConfig = {
+    innerText: 'Deletar Conta',
+    class: ButtonClass.BUTTON_TYPE_2,
+  };
+
   constructor(
+    private router: Router,
     private fb: FormBuilder,
     private donorService: DonorService,
     public dialog: MatDialog,
@@ -162,5 +169,33 @@ export class ProfileDonorComponent implements OnInit, DoCheck {
     } else {
       return true;
     }
+  }
+
+  submitDelete() {
+    const dialogRef = this.dialog.open(PopupConfirmComponent, {
+      data: {
+        title: 'Você tem certeza que deseja deletar sua conta?',
+        content: 'Todo o seu histórico do chat e seus pets para adoção serão perdidos.',
+        yes: 'Deletar Conta',
+        no: 'Voltar',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.donorService.deleteDonor().subscribe({
+          next: (data) => {
+            this.buttonRegister.loading = false;
+            this.editAdopterForm.markAsPristine();
+            this.router.navigate(['/']);
+          },
+          error: (err) => {
+            console.error('Error: ', err);
+            this.openPopup('Ocorreu um erro em nosso servidor.', 'error');
+            this.buttonRegister.loading = false;
+          },
+        });
+      }
+    });
   }
 }

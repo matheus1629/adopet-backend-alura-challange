@@ -1,8 +1,6 @@
 <app-header></app-header>
 <main>
-  <p class="text">
-    Edite suas informações no formulário abaixo.
-  </p>
+  <p class="text">Edite suas informações no formulário abaixo.</p>
 
   <form [formGroup]="editAdopterForm" (keyup.enter)="submit()">
     <h1>Perfil</h1>
@@ -173,5 +171,6 @@
     </div>
 
     <app-button (click)="submit()" [buttonConfig]="buttonRegister"></app-button>
+    <app-button (click)="submitDelete()" [buttonConfig]="buttonDelete"></app-button>
   </form>
 </main>

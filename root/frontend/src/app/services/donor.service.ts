@@ -32,4 +32,8 @@ export class DonorService {
   editDonor(formData: IAccountEdit): Observable<IAccountEdit> {
     return this.http.patch<IAccountEdit>('/donor', formData);
   }
+
+  deleteDonor(): Observable<null> {
+    return this.http.delete<null>('/donor');
+  }
 }
