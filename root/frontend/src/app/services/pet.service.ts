@@ -1,7 +1,9 @@
-import { IPet, IPetPagination } from './../../shared/interfaces/pet.interface';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
 import { Observable } from 'rxjs';
+
+import { IPet, IPetPagination } from './../../shared/interfaces/pet.interface';
 
 @Injectable({
   providedIn: 'root',

@@ -43,7 +43,7 @@ export class ProfileDonorComponent implements OnInit, DoCheck {
   ) {}
 
   ngOnInit(): void {
-    this.donorService.getDonor<IAccountData>().subscribe({
+    this.donorService.getDonor().subscribe({
       next: (data: IAccountData) => {
         this.editAdopterForm.patchValue({
           picture: data.picture,
@@ -122,7 +122,7 @@ export class ProfileDonorComponent implements OnInit, DoCheck {
           dirtyFields[element[0] as keyof IAccountEdit] = element[1].value;
       }
 
-      const cleanedValuesForm = clearValues(dirtyFields as IFormRegisterAccount & IAccountEdit);
+      const cleanedValuesForm = clearValues(dirtyFields as IFormRegisterAccount);
 
       this.donorService.editDonor(cleanedValuesForm).subscribe({
         next: (data) => {

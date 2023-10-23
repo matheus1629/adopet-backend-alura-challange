@@ -1,6 +1,12 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
 import { Observable } from 'rxjs';
+
+import { IAccountData } from 'src/shared/interfaces/accountData.interface';
+import { IAccountEdit } from 'src/shared/interfaces/accountEdit.interface';
+import { IFormRegisterAccount } from 'src/shared/interfaces/formRegisterAccount.interface';
+import { IToken } from 'src/shared/interfaces/token.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +14,7 @@ import { Observable } from 'rxjs';
 export class AdopterService {
   constructor(private http: HttpClient) {}
 
-  getAdopter<IAccountData>(): Observable<IAccountData> {
+  getAdopter(): Observable<IAccountData> {
     return this.http.get<IAccountData>('/adopter/loggedUser/info');
   }
 
@@ -16,14 +22,14 @@ export class AdopterService {
     return this.http.get<{ picture: string | null }>('/adopter/loggedUser/picture');
   }
 
-  createAdopter<IFormRegisterAccount>(formData: IFormRegisterAccount): Observable<any> {
+  createAdopter(formData: IFormRegisterAccount): Observable<IToken> {
     const headers = new HttpHeaders();
     headers.set('skiptoken', 'true');
 
-    return this.http.post<IFormRegisterAccount>('/auth/signup/adopter', formData, { headers });
+    return this.http.post<IToken>('/auth/signup/adopter', formData, { headers });
   }
 
-  editAdopter<IAccountEdit>(formData: IAccountEdit): Observable<IAccountEdit> {
+  editAdopter(formData: IAccountEdit): Observable<IAccountEdit> {
     return this.http.patch<IAccountEdit>('/adopter', formData);
   }
 }

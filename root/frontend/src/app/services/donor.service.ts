@@ -1,6 +1,12 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
 import { Observable } from 'rxjs';
+
+import { IAccountData } from 'src/shared/interfaces/accountData.interface';
+import { IAccountEdit } from 'src/shared/interfaces/accountEdit.interface';
+import { IFormRegisterAccount } from 'src/shared/interfaces/formRegisterAccount.interface';
+import { IToken } from 'src/shared/interfaces/token.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +14,7 @@ import { Observable } from 'rxjs';
 export class DonorService {
   constructor(private http: HttpClient) {}
 
-  getDonor<IAccountData>(): Observable<IAccountData> {
+  getDonor(): Observable<IAccountData> {
     return this.http.get<IAccountData>('/donor/loggedUser/info');
   }
 
@@ -16,14 +22,14 @@ export class DonorService {
     return this.http.get<{ picture: string | null }>('/donor/loggedUser/picture');
   }
 
-  createDonor<IFormRegisterAccount>(formData: IFormRegisterAccount): Observable<any> {
+  createDonor(formData: IFormRegisterAccount): Observable<IToken> {
     const headers = new HttpHeaders();
     headers.set('skiptoken', 'true');
 
-    return this.http.post<IFormRegisterAccount>('/auth/signup/donor', formData, { headers });
+    return this.http.post<IToken>('/auth/signup/donor', formData, { headers });
   }
 
-  editDonor<IAccountEdit>(formData: IAccountEdit): Observable<IAccountEdit> {
+  editDonor(formData: IAccountEdit): Observable<IAccountEdit> {
     return this.http.patch<IAccountEdit>('/donor', formData);
   }
 }

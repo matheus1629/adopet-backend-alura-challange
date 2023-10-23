@@ -64,29 +64,24 @@ export class LoginComponent implements OnInit {
 
       this.loginForm.get('email')?.value.trim();
 
-      this.authService
-        .login(this.loginForm.value, this.loginForm.get('userType')?.value)
-        .subscribe({
-          next: (data) => {
-            localStorage.setItem('user_token_adopet', data.token);
-            localStorage.setItem('user_type_adopet', data.userType);
+      this.authService.login(this.loginForm.value).subscribe({
+        next: (data) => {
+          localStorage.setItem('user_token_adopet', data.token);
+          localStorage.setItem('user_type_adopet', data.userType);
 
-            if (data.userType === 'Adopter') this.router.navigate(['adopter/pets']);
-            if (data.userType === 'Donor') this.router.navigate(['donor/pets']);
-          },
-          error: (err) => {
-            if (err.status === 401) {
-              this.openPopup(
-                'Email ou senha incorreto. Verifique também o tipo da conta.',
-                'error'
-              );
-              this.loginForm.setErrors({ loginInvalid: true });
-              this.invalidLoginError = true;
-            } else this.openPopup('Ocorreu um erro em nosso servidor.', 'error');
+          if (data.userType === 'Adopter') this.router.navigate(['adopter/pets']);
+          if (data.userType === 'Donor') this.router.navigate(['donor/pets']);
+        },
+        error: (err) => {
+          if (err.status === 401) {
+            this.openPopup('Email ou senha incorreto. Verifique também o tipo da conta.', 'error');
+            this.loginForm.setErrors({ loginInvalid: true });
+            this.invalidLoginError = true;
+          } else this.openPopup('Ocorreu um erro em nosso servidor.', 'error');
 
-            this.buttonRegister.loading = false;
-          },
-        });
+          this.buttonRegister.loading = false;
+        },
+      });
     }
   }
 }

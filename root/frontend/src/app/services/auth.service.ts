@@ -1,7 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { Observable } from 'rxjs';
+
+import { ILogin } from 'src/shared/interfaces/login.interface';
+import { IToken } from 'src/shared/interfaces/token.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -9,11 +13,11 @@ import { Observable } from 'rxjs';
 export class AuthService {
   constructor(private router: Router, private http: HttpClient) {}
 
-  login<T>(loginData: T, userType: string): Observable<T> {
+  login(loginData: ILogin): Observable<IToken> {
     const headers = new HttpHeaders();
     headers.set('skiptoken', 'true');
 
-    return this.http.post<T>(`/auth/signin/${userType}`, loginData);
+    return this.http.post<IToken>(`/auth/signin/${loginData.userType}`, loginData);
   }
 
   /*  getToken(): string {

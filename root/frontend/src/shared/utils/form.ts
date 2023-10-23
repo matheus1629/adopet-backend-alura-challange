@@ -82,13 +82,14 @@ export function fileToBase64(event: any): Promise<string> {
   });
 }
 
-export function clearValues(formDirtyValues: IFormRegisterAccount & IAccountEdit) {
+export function clearValues(formDirtyValues: IFormRegisterAccount) {
   const cleanedValues = formDirtyValues;
 
-  cleanedValues.firstName = formDirtyValues.firstName?.trim();
-  cleanedValues.lastName = formDirtyValues.lastName?.trim();
-  cleanedValues.state = getStateKey(formDirtyValues?.state as States);
-  cleanedValues.city = formDirtyValues.city?.trim();
+  if ('firstName' in formDirtyValues) cleanedValues.firstName = formDirtyValues.firstName.trim();
+  if ('lastName' in formDirtyValues) cleanedValues.lastName = formDirtyValues.lastName.trim();
+  if ('state' in formDirtyValues)
+    cleanedValues.state = getStateKey(formDirtyValues.state as States);
+  if ('city' in formDirtyValues) cleanedValues.city = formDirtyValues.city.trim();
   if ('email' in formDirtyValues) cleanedValues.email = formDirtyValues.email.trim();
 
   return cleanedValues;
