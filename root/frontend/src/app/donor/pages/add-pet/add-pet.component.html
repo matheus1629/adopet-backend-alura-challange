@@ -86,8 +86,8 @@
         class="input-text"
         id="age"
         name="age"
-        type="number"
-        max="99"
+        type="text"
+        mask="99"
         formControlName="age"
         placeholder="2 anos"
         [ngClass]="{
@@ -97,9 +97,8 @@
       <ng-container
         *ngIf="
           (addPetForm.get('age')?.hasError('required') ||
-            addPetForm.get('age')?.hasError('max') ||
-            addPetForm.get('age')?.hasError('min') ||
-            addPetForm.get('age')?.hasError('validAge')) &&
+            addPetForm.get('age')?.hasError('maxlength') ||
+            addPetForm.get('age')?.hasError('minlength')) &&
           formSubmitted
         "
         ><span class="error-message">{{ errorMessages.petAge }}</span>

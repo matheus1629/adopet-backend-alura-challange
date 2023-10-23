@@ -104,7 +104,7 @@ export class ProfileDonorComponent implements OnInit, DoCheck {
   }
 
   telMaskForm(): string {
-    return telMask(this.editAdopterForm.value.phoneNumber as string);
+    return telMask(this.editAdopterForm.value.phoneNumber);
   }
 
   openPopup(message: string, icon: string) {

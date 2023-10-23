@@ -1,21 +1,13 @@
 import { AbstractControl, FormGroup } from '@angular/forms';
 import { States } from '../enums/states.enum';
 import { IFormRegisterAccount } from '../interfaces/formRegisterAccount.interface';
-import { IAccountEdit } from '../interfaces/accountEdit.interface';
-import { IPet, IPetPagination } from '../interfaces/pet.interface';
+import { IPet } from '../interfaces/pet.interface';
 import { PetSize } from '../enums/petSize.enum';
-import { IPetEdit } from '../interfaces/petEdit.interface';
 
 export function validateName(control: AbstractControl): { validName: boolean } | null {
   const regex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/;
 
   if (!regex.test(control.value)) return { validName: true };
-
-  return null;
-}
-
-export function validatePetAge(control: AbstractControl): { validAge: boolean } | null {
-  if (!Number.isInteger(control.value)) return { validAge: true };
 
   return null;
 }
