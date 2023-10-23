@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { LoginComponent } from './pages/login/login.component';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -12,11 +13,7 @@ const routes: Routes = [
     loadChildren: () => import('./adopter/adopter.module').then((m) => m.AdopterModule),
   },
   { path: 'donor', loadChildren: () => import('./donor/donor.module').then((m) => m.DonorModule) },
-  {
-    path: '',
-    redirectTo: '',
-    pathMatch: 'full',
-  },
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({

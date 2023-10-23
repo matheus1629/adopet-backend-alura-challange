@@ -24,6 +24,7 @@ import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from './pages/login/login.component';
 import { PopupComponent } from './popup/popup.component';
 import { PopupConfirmComponent } from 'src/app/popupConfirm/popup-confirmation.component';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { PopupConfirmComponent } from 'src/app/popupConfirm/popup-confirmation.c
     LoginComponent,
     PopupComponent,
     PopupConfirmComponent,
+    PageNotFoundComponent,
   ],
   providers: [
     { provide: ENVIRONMENT, useValue: environment },
