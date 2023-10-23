@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { IPet, IPetPagination } from './../../shared/interfaces/pet.interface';
+import { IPetEdit } from 'src/shared/interfaces/petEdit.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -37,7 +38,7 @@ export class PetService {
     return this.http.post<IPet>('/pet', petData);
   }
 
-  editPet(petData: IPet, idPet: number): Observable<IPet> {
+  editPet(petData: IPetEdit, idPet: number): Observable<IPet> {
     return this.http.patch<IPet>(`/pet/${idPet}`, petData);
   }
 

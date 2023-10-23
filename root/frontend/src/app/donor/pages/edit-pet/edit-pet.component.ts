@@ -14,6 +14,7 @@ import { PetService } from 'src/app/services/pet.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IPet } from 'src/shared/interfaces/pet.interface';
 import { PopupConfirmComponent } from 'src/app/popupConfirm/popup-confirmation.component';
+import { IPetEdit } from 'src/shared/interfaces/petEdit.interface';
 
 @Component({
   selector: 'app-edit-pet',
@@ -110,11 +111,19 @@ export class EditPetComponent implements OnInit {
     if (this.addPetForm.valid) {
       this.buttonRegister.loading = true;
 
-      const clearedPetValues = clearPetValues(this.addPetForm.value);
+      const dirtyFields: IPetEdit = {};
+
+      const formControlFields = Object.entries(this.addPetForm.controls);
+
+      for (let element of formControlFields) {
+        if (element[1].dirty === true) dirtyFields[element[0] as keyof IPetEdit] = element[1].value;
+      }
+
+      const clearedPetValues = clearPetValues(dirtyFields as IPet);
 
       this.petService.editPet(clearedPetValues, this.idPet).subscribe({
         next: (data) => {
-          this.openPopup('Pet adicionado para adoção!', 'check_circle');
+          this.openPopup('Pet editado!', 'check_circle');
           this.buttonRegister.loading = false;
           this.router.navigate(['/donor/pets']);
         },
