@@ -33,6 +33,23 @@ const getPetById = async (req, res) => {
   }
 };
 
+const getPetByIdLoggedDonor = async (req, res) => {
+  const idPet = req.params.id;
+  const idDonor = req.userId;
+
+  try {
+    const pet = await petService.getPetByIdAndIdDonor(idPet, idDonor);
+    return res.status(200).json(pet);
+  } catch (error) {
+    if (error.message === "Pet not found") return res.status(404).json(error.message);
+
+    if (error.message === "You can't edit a pet that was already adopted")
+      return res.status(403).json(error.message);
+
+    return res.status(500).json(error.message);
+  }
+};
+
 const getPetsByLoggedDonor = async (req, res) => {
   const { pageIndex, pageSize } = req.query;
   const idDonor = req.userId;
@@ -98,6 +115,7 @@ export default {
   getAllPetsAvailable,
   getAllPets,
   getPetById,
+  getPetByIdLoggedDonor,
   getPetsByLoggedDonor,
   createPet,
   updatePet,

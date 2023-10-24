@@ -21,6 +21,7 @@ export class PetService {
     return this.http.get<IPetPagination>('/pet', { params, headers });
   }
 
+  // todo verificar se é necessário
   getPetById(idPet: number): Observable<IPet> {
     const headers = new HttpHeaders();
     headers.set('skiptoken', 'true');
@@ -28,10 +29,14 @@ export class PetService {
     return this.http.get<IPet>(`/pet/${idPet}`);
   }
 
+  getPetsByIdAndDonor(idPet: number): Observable<IPet> {
+    return this.http.get<IPet>(`/pet/petData/${idPet}/loggedDonor`);
+  }
+
   getPetsByDonor(currentPage: number, pageSize: number): Observable<IPetPagination> {
     const params = new HttpParams().set('pageIndex', currentPage).set('pageSize', pageSize);
 
-    return this.http.get<IPetPagination>('/pet/petsData/loggedDonor', { params });
+    return this.http.get<IPetPagination>('/pet/all/loggedDonor', { params });
   }
 
   createPet(petData: IPet): Observable<IPet> {

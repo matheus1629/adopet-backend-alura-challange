@@ -8,11 +8,11 @@ import { errorMessages, inputValidations } from 'src/shared/consts';
 import { clearPetValues, fileToBase64, validateName } from 'src/shared/utils/form';
 
 import { textAreaValidation } from '../../../../shared/consts';
-import { PopupComponent } from 'src/app/popup/popup.component';
+import { PopupComponent } from 'src/app/sharedComponents/popup/popup.component';
 import { PetSize } from 'src/shared/enums/petSize.enum';
 import { PetService } from 'src/app/services/pet.service';
 import { Router } from '@angular/router';
-import { PopupConfirmComponent } from 'src/app/popupConfirm/popup-confirmation.component';
+import { PopupConfirmComponent } from 'src/app/sharedComponents/popupConfirm/popup-confirmation.component';
 import { map } from 'rxjs';
 
 @Component({
@@ -84,10 +84,11 @@ export class AddPetComponent implements OnInit {
 
       this.petService.createPet(clearedPetValues).subscribe({
         next: (data) => {
-          this.openPopup('Pet adicionado para adoção!', 'check_circle');
           this.buttonRegister.loading = false;
           this.addPetForm.markAsPristine();
           this.router.navigate(['/donor/pets']);
+          window.scrollTo(0, 0);
+          this.openPopup('Pet adicionado para adoção!', 'check_circle');
         },
         error: (err) => {
           console.error('Error: ', err);

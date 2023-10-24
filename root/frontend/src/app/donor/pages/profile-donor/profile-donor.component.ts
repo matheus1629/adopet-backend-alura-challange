@@ -15,8 +15,8 @@ import { IAccountData } from 'src/shared/interfaces/accountData.interface';
 import { IAccountEdit } from 'src/shared/interfaces/accountEdit.interface';
 import { IFormRegisterAccount } from 'src/shared/interfaces/formRegisterAccount.interface';
 import { textAreaValidation } from '../../../../shared/consts';
-import { PopupComponent } from 'src/app/popup/popup.component';
-import { PopupConfirmComponent } from 'src/app/popupConfirm/popup-confirmation.component';
+import { PopupComponent } from 'src/app/sharedComponents/popup/popup.component';
+import { PopupConfirmComponent } from 'src/app/sharedComponents/popupConfirm/popup-confirmation.component';
 import { Router } from '@angular/router';
 
 @Component({

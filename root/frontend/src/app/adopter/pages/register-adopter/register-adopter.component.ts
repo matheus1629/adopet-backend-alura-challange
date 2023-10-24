@@ -9,7 +9,7 @@ import { States } from 'src/shared/enums/states.enum';
 import { errorMessages, inputValidations } from 'src/shared/consts';
 import { clearValues, comparePassword, telMask, validateName } from 'src/shared/utils/form';
 import { Router } from '@angular/router';
-import { PopupComponent } from 'src/app/popup/popup.component';
+import { PopupComponent } from 'src/app/sharedComponents/popup/popup.component';
 import { MatDialog } from '@angular/material/dialog';
 import { IFormRegisterAccount } from 'src/shared/interfaces/formRegisterAccount.interface';
 

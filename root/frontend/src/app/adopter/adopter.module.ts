@@ -27,7 +27,7 @@ import { RegisterAdopterComponent } from './pages/register-adopter/register-adop
     ReactiveFormsModule,
     NgxMaskModule.forRoot(),
     MatIconModule,
-    MatPaginatorModule,
+    MatPaginatorModule
   ],
 })
 export class AdopterModule {}

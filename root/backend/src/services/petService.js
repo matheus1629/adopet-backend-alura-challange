@@ -45,6 +45,25 @@ const getPetById = async (id) => {
   return petData;
 };
 
+const getPetByIdAndIdDonor = async (id, idDonor) => {
+  if (!await petRepository.validateIfPetBelongsToDonor(id, idDonor)) {
+    throw new BadRequestError("Pet not found");
+  }
+console.log('jjjjjjjjj');
+if (await checkIfPetWasAdoped(id)) {
+  throw new BadRequestError("You can't edit a pet that was already adopted");
+}
+
+console.log('kkkkkkkkkk');
+  const petData = await petRepository.getPetById(id);
+
+  if (!petData) throw new BadRequestError("Pet not found");
+
+  if (petData.dataValues.picture) petData.dataValues.picture = bufferToBase64(petData.dataValues.picture);
+
+  return petData;
+};
+
 const getPetsByDonor = async (idDonor, pageIndex, pageSize) => {
   if (!pageIndex) pageIndex = 1;
   if (!pageSize || pageSize === 0) pageSize = 10;
@@ -152,6 +171,7 @@ export default {
   getAllPetsAvailable,
   getAllPet,
   getPetById,
+  getPetByIdAndIdDonor,
   getPetsByDonor,
   createPet,
   updatePet,

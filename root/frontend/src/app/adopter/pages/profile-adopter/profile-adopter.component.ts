@@ -15,8 +15,8 @@ import { clearValues, fileToBase64, telMask, validateName } from 'src/shared/uti
 import { IAccountData } from 'src/shared/interfaces/accountData.interface';
 import { IAccountEdit } from 'src/shared/interfaces/accountEdit.interface';
 import { IFormRegisterAccount } from 'src/shared/interfaces/formRegisterAccount.interface';
-import { PopupComponent } from 'src/app/popup/popup.component';
-import { PopupConfirmComponent } from 'src/app/popupConfirm/popup-confirmation.component';
+import { PopupComponent } from 'src/app/sharedComponents/popup/popup.component';
+import { PopupConfirmComponent } from 'src/app/sharedComponents/popupConfirm/popup-confirmation.component';
 import { Router } from '@angular/router';
 
 @Component({
@@ -87,11 +87,8 @@ export class ProfileAdopterComponent implements OnInit, DoCheck {
   }
 
   ngDoCheck() {
-    if (this.editAdopterForm.dirty) {
-      this.buttonRegister.disable = false;
-    } else {
-      this.buttonRegister.disable = true;
-    }
+    if (this.editAdopterForm.dirty) this.buttonRegister.disable = false;
+    else this.buttonRegister.disable = true;
   }
 
   onFileSelected(event: Event) {
@@ -138,10 +135,10 @@ export class ProfileAdopterComponent implements OnInit, DoCheck {
 
       this.adopterService.editAdopter(cleanedValuesForm).subscribe({
         next: (data) => {
-          this.openPopup('Alterações salvas!', 'check_circle');
           this.sharedService.pictureSender(data.picture);
           this.editAdopterForm.markAsPristine();
           this.buttonRegister.loading = false;
+          this.openPopup('Alterações salvas!', 'check_circle');
         },
         error: (err) => {
           console.error('Error: ', err);

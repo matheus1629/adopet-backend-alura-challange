@@ -9,12 +9,12 @@ import { errorMessages, inputValidations } from 'src/shared/consts';
 import { clearPetValues, fileToBase64, validateName } from 'src/shared/utils/form';
 
 import { textAreaValidation } from '../../../../shared/consts';
-import { PopupComponent } from 'src/app/popup/popup.component';
+import { PopupComponent } from 'src/app/sharedComponents/popup/popup.component';
 import { PetSize } from 'src/shared/enums/petSize.enum';
 import { PetService } from 'src/app/services/pet.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IPet } from 'src/shared/interfaces/pet.interface';
-import { PopupConfirmComponent } from 'src/app/popupConfirm/popup-confirmation.component';
+import { PopupConfirmComponent } from 'src/app/sharedComponents/popupConfirm/popup-confirmation.component';
 import { IPetEdit } from 'src/shared/interfaces/petEdit.interface';
 
 @Component({
@@ -53,7 +53,7 @@ export class EditPetComponent implements OnInit {
   ngOnInit(): void {
     this.idPet = this.route.snapshot.params['id'];
 
-    this.petService.getPetById(this.idPet).subscribe({
+    this.petService.getPetsByIdAndDonor(this.idPet).subscribe({
       next: (data: IPet) => {
         this.editPetForm.patchValue({
           picture: data.picture,
@@ -64,6 +64,13 @@ export class EditPetComponent implements OnInit {
         });
       },
       error: (err) => {
+        if (err.status === 404) this.router.navigate(['/**'], { skipLocationChange: true });
+
+        if (err.status === 403) {
+          this.router.navigate(['/donor/pets']);
+          this.openPopup('Você não pode editar um pet que já foi adotado.', 'error');
+        }
+
         console.error('Error: ', err);
       },
     });
@@ -124,10 +131,11 @@ export class EditPetComponent implements OnInit {
 
       this.petService.editPet(clearedPetValues, this.idPet).subscribe({
         next: (data) => {
-          this.openPopup('Pet editado!', 'check_circle');
+          this.router.navigate(['/donor/pets']);
+          window.scrollTo(0, 0);
           this.buttonRegister.loading = false;
           this.editPetForm.markAsPristine();
-          this.router.navigate(['/donor/pets']);
+          this.openPopup('Pet editado!', 'check_circle');
         },
         error: (err) => {
           console.error('Error: ', err);

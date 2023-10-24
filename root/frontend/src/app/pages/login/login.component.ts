@@ -7,7 +7,7 @@ import { errorMessages, inputValidations } from 'src/shared/consts';
 import { telMask } from 'src/shared/utils/form';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
-import { PopupComponent } from 'src/app/popup/popup.component';
+import { PopupComponent } from 'src/app/sharedComponents/popup/popup.component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({

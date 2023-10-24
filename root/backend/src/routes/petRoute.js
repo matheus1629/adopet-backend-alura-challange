@@ -9,7 +9,8 @@ router.get("/all", petController.getAllPets);
 router.get("/:id", petController.getPetById);
 
 // Private Route
-router.get("/petsData/loggedDonor", validateToken.checkToken("Donor"), petController.getPetsByLoggedDonor);
+router.get("/petData/:id/loggedDonor", validateToken.checkToken("Donor"), petController.getPetByIdLoggedDonor);
+router.get("/all/loggedDonor", validateToken.checkToken("Donor"), petController.getPetsByLoggedDonor);
 router.post("/", validateToken.checkToken("Donor"), petController.createPet);
 router.patch("/:id", validateToken.checkToken("Donor"), petController.updatePet);
 router.delete("/:id", validateToken.checkToken("Donor"), petController.deletePet);
