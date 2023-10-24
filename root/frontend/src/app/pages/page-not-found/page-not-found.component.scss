@@ -1,4 +1,47 @@
-p {
-  z-index: 55;
-  color: red;
+@import "../../../variables.scss";
+
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $white-color;
+  margin: 0 auto;
+  min-height: 93vh;
+  width: 100%;
+  flex-grow: 1;
+  z-index: -2;
+}
+
+h1 {
+  color: $blue-color;
+  font-weight: 600;
+  font-size: 40px;
+  text-align: center;
+}
+
+mat-icon {
+  @include mat-icon-size(350px);
+  color: $medium-grey-color;
+  position: absolute;
+  z-index: -1;
+}
+
+@media only screen and (max-width: $tablet-size) {
+  h1 {
+    font-size: 30px;
+  }
+
+  mat-icon {
+    @include mat-icon-size(250px);
+  }
+}
+
+@media only screen and (max-width: $mobile-size) {
+  h1 {
+    font-size: 20px;
+  }
+
+  mat-icon {
+    @include mat-icon-size(150px);
+  }
 }

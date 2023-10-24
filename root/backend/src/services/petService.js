@@ -46,15 +46,12 @@ const getPetById = async (id) => {
 };
 
 const getPetByIdAndIdDonor = async (id, idDonor) => {
-  if (!await petRepository.validateIfPetBelongsToDonor(id, idDonor)) {
+  if (!(await petRepository.validateIfPetBelongsToDonor(id, idDonor)))
     throw new BadRequestError("Pet not found");
-  }
-console.log('jjjjjjjjj');
-if (await checkIfPetWasAdoped(id)) {
-  throw new BadRequestError("You can't edit a pet that was already adopted");
-}
 
-console.log('kkkkkkkkkk');
+  if (await checkIfPetWasAdoped(id))
+    throw new BadRequestError("You can't edit a pet that was already adopted");
+
   const petData = await petRepository.getPetById(id);
 
   if (!petData) throw new BadRequestError("Pet not found");

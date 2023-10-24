@@ -4,15 +4,16 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatIconModule } from '@angular/material/icon';
 
 import { AppRoutingModule } from './app-routing.module';
 import { NgxMaskModule } from 'ngx-mask';
-import { SharedComponentsModule } from './sharedComponents/shared-components.module';
 import { ENVIRONMENT } from './environment.token';
 import { environment } from 'src/environments/environment';
 import { UrlInterceptor } from './url.interceptor';
 
 import { AppComponent } from './app.component';
+import { SharedComponentsModule } from './sharedComponents/shared-components.module';
 import { BackgroundComponent } from './background/background.component';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { FooterComponent } from './footer/footer.component';
@@ -47,6 +48,7 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
     HttpClientModule,
     BrowserAnimationsModule,
     MatRadioModule,
+    MatIconModule
   ],
 })
 export class AppModule {}
