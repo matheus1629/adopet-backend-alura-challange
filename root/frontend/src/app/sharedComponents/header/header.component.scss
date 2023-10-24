@@ -12,9 +12,8 @@
 }
 
 .nav-icon:hover {
-  @include mat-icon-size(32px);
   color: $light-grey-color;
-  transform: scale(1.05);
+  transform: scale(1.3);
   transition: 0.1s;
 }
 
