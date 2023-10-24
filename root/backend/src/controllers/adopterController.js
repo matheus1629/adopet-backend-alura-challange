@@ -1,14 +1,5 @@
 import adopterService from "../services/adopterService.js";
 
-const getAllAdopters = async (req, res) => {
-  try {
-    const allAdopters = await adopterService.getAllAdopters();
-    return res.status(200).json(allAdopters);
-  } catch (error) {
-    return res.status(500).json(error.message);
-  }
-};
-
 const getAdopterById = async (req, res) => {
   const adopterId = req.params.id;
 
@@ -16,7 +7,7 @@ const getAdopterById = async (req, res) => {
     const adopter = await adopterService.getAdopterById(adopterId);
     return res.status(200).json(adopter);
   } catch (error) {
-    if (error.name === "BadRequestError") return res.status(404).json(error.message);
+    if (error.name === "BadRequestError") return res.status(error.status).json(error.message);
 
     return res.status(500).json(error.message);
   }
@@ -40,8 +31,7 @@ const getLoggedAdopterPicture = async (req, res) => {
     const adopterPicture = await adopterService.getAdopterPictureById(adopterId);
     return res.status(200).json(adopterPicture);
   } catch (error) {
-    if (error.name === "BadRequestError") return res.status(404).json(error.message);
-
+    if (error.name === "BadRequestError") return res.status(error.status).json(error.message);
     return res.status(500).json(error.message);
   }
 };
@@ -57,7 +47,8 @@ const updateAdopter = async (req, res) => {
 
     return res.status(200).json(adopterNewInfo);
   } catch (error) {
-    return res.status(500).json(error.message);
+    if (error.name === "BadRequestError") return res.status(error.status).json(error.message);
+    return res.json(error.message);
   }
 };
 
@@ -73,7 +64,6 @@ const deleteAdopter = async (req, res) => {
 };
 
 export default {
-  getAllAdopters,
   getAdopterById,
   getLoggedAdopterPicture,
   getLoggedAdopter,

@@ -41,11 +41,8 @@ const getPetByIdLoggedDonor = async (req, res) => {
     const pet = await petService.getPetByIdAndIdDonor(idPet, idDonor);
     return res.status(200).json(pet);
   } catch (error) {
-    if (error.message === "Pet not found") return res.status(404).json(error.message);
-
-    if (error.message === "You can't edit a pet that was already adopted")
-      return res.status(403).json(error.message);
-
+    if (error.name === "IdPetidDonorConflict") return res.status(error.status).json(error.message);
+    if (error.name === "CantEditPetAdopted") return res.status(error.status).json(error.message);
     return res.status(500).json(error.message);
   }
 };
@@ -73,8 +70,7 @@ const createPet = async (req, res) => {
 
     return res.status(201).json(createdPet);
   } catch (error) {
-    if (error.name === "BadRequestError") return res.status(400).json(error.message);
-
+    if (error.name === "BadRequestError") return res.status(error.status).json(error.message);
     return res.status(500).json(error.message);
   }
 };
@@ -91,6 +87,8 @@ const updatePet = async (req, res) => {
 
     return res.status(200).json(petNewInfo);
   } catch (error) {
+    if (error.name === "IdPetidDonorConflict") return res.status(error.status).json(error.message);
+    if (error.name === "CantEditPetAdopted") return res.status(error.status).json(error.message);
     return res.status(500).json(error.message);
   }
 };
@@ -103,11 +101,8 @@ const deletePet = async (req, res) => {
     await petService.deletePet(idPet, idDonor);
     return res.sendStatus(204);
   } catch (error) {
-    if (error.name === "BadRequestError") {
-      return res.status(409).json(error.message);
-    } else {
-      return res.status(500).json(error.message);
-    }
+    if (error.name === "BadRequestError") return res.status(error.status).json(error.message);
+    return res.status(500).json(error.message);
   }
 };
 

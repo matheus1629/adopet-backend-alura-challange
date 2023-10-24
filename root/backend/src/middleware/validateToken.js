@@ -24,7 +24,7 @@ const checkToken = (model) => async (req, res, next) => {
     attributes: ["id"],
   });
 
-  if (!user) return res.status(401).json("User not found");
+  if (!user) return res.status(404).json("User not found");
 
   next();
 };

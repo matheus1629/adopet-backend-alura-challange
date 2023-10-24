@@ -19,7 +19,7 @@ const getAllDonors = async () => {
 const getDonorById = async (id) => {
   const donorData = await donorRepository.getDonorById(id);
 
-  if (!donorData) throw new BadRequestError("Donor not found");
+  if (!donorData) throw new BadRequestError("Donor not found", 404);
 
   if (donorData.dataValues.picture)
     donorData.dataValues.picture = bufferToBase64(donorData.dataValues.picture);
@@ -30,7 +30,7 @@ const getDonorById = async (id) => {
 const getDonorPictureById = async (id) => {
   const adopterData = await donorRepository.getDonorPictureById(id);
 
-  if (!adopterData) throw new BadRequestError("Adopter not found");
+  if (!adopterData) throw new BadRequestError("Adopter not found", 404);
 
   if (adopterData.dataValues.picture)
     adopterData.dataValues.picture = bufferToBase64(adopterData.dataValues.picture);
@@ -55,7 +55,7 @@ const createDonor = async (newDonor) => {
 
   if (errors.length > 0) {
     const errorMessage = `Validation errors: ${errors.join(", ")}`;
-    throw new BadRequestError(errorMessage);
+    throw new BadRequestError(errorMessage, 422);
   }
 
   const salt = await bcryptjs.genSalt(10);
@@ -89,7 +89,7 @@ const updateDonor = async (newDonorInfo, id) => {
 
   if (errors.length > 0) {
     const errorMessage = `Validation errors: ${errors.join(", ")}`;
-    throw new BadRequestError(errorMessage);
+    throw new BadRequestError(errorMessage, 422);
   }
 
   return await donorRepository.updateDonor(newDonorInfo, id);

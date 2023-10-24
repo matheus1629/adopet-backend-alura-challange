@@ -4,7 +4,6 @@ import validateToken from "../middleware/validateToken.js";
 
 const router = express.Router();
 
-router.get("/", adopterController.getAllAdopters);
 router.get("/:id", adopterController.getAdopterById);
 
 // Private Route

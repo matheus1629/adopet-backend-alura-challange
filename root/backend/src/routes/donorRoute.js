@@ -5,7 +5,6 @@ import validateToken from "../middleware/validateToken.js";
 const router = express.Router();
 
 // Public Routes
-router.get("/", donorController.getAllDonors);
 router.get("/:id", donorController.getDonorById);
 
 // Private Routes
