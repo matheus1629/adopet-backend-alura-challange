@@ -8,6 +8,14 @@
   color: $white-color;
   z-index: 3;
   cursor: pointer;
+  transition: 0.1s;
+}
+
+.nav-icon:hover {
+  @include mat-icon-size(32px);
+  color: $light-grey-color;
+  transform: scale(1.05);
+  transition: 0.1s;
 }
 
 .nav-icon:nth-child(2) {
