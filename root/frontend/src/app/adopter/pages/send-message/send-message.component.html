@@ -12,7 +12,7 @@
         type="text"
         formControlName="subject"
         placeholder="Digite seu nome"
-        [maxlength]="inputValidations.maxLengthForm"
+        maxlength=70
         [ngClass]="{
           'border-error': editAdopterForm.get('subject')?.errors && formSubmitted
         }"
@@ -42,6 +42,7 @@
         formControlName="message"
         placeholder="Fale um pouco sobre você"
         [maxlength]="textAreaValidation"
+        
         [ngClass]="{
           'border-error': editAdopterForm.get('message')?.errors && formSubmitted
         }"

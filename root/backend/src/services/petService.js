@@ -46,11 +46,10 @@ const getPetById = async (id) => {
 };
 
 const getPetByIdAndIdDonor = async (id, idDonor) => {
-  if (!(await petRepository.validateIfPetBelongsToDonor(id, idDonor)))
-    throw new BadRequestError("Pet not found", 404, "IdPetidDonorConflict");
+  if (!(await validateIfPetBelongsToDonor(id, idDonor))) throw new BadRequestError("Pet not found", 404);
 
   if (await checkIfPetWasAdoped(id))
-    throw new BadRequestError("You can't edit a pet that was already adopted", 403, "CantEditPetAdopted");
+    throw new BadRequestError("You can't edit a pet that was already adopted", 403);
 
   const petData = await petRepository.getPetById(id);
 
@@ -116,7 +115,7 @@ const updatePet = async (newPetInfo, id, idDonor) => {
   delete newPetInfo.updatedAt;
   delete newPetInfo.idDonor;
 
-  if (!(await petRepository.validateIfPetBelongsToDonor(id, idDonor)))
+  if (!(await validateIfPetBelongsToDonor(id, idDonor)))
     throw new BadRequestError("Pet not found", 404, "IdPetidDonorConflict");
 
   if (await checkIfPetWasAdoped(id))
@@ -145,12 +144,17 @@ const updatePet = async (newPetInfo, id, idDonor) => {
 };
 
 const deletePet = async (id, idDonor) => {
-  if (!(await petRepository.validateIfPetBelongsToDonor(id, idDonor))) {
+  if (!(await validateIfPetBelongsToDonor(id, idDonor))) {
     throw new BadRequestError("Pet not found", 404);
   }
 
   const wasDeleted = await petRepository.deletePet(id);
   if (wasDeleted === 0) throw new BadRequestError(`You can't delete a pet that was already adopted`, 403);
+};
+
+const validateIfPetBelongsToDonor = async (id, idDonor) => {
+  if (!(await petRepository.validateIfPetBelongsToDonor(id, idDonor))) return false;
+  return true;
 };
 
 const checkIfPetWasAdoped = async (id) => {
@@ -169,4 +173,6 @@ export default {
   createPet,
   updatePet,
   deletePet,
+  checkIfPetWasAdoped,
+  validateIfPetBelongsToDonor,
 };

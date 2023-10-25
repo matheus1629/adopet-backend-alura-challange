@@ -188,6 +188,36 @@ const description = (description) => {
   if (errors.length !== 0) return errors;
 };
 
+const subject = (subject) => {
+  const errors = [];
+
+  if (!subject) {
+    errors.push("Subject name is required");
+  } else {
+    const subjectTrim = subject.trim();
+    if (subjectTrim.length < 2 || subjectTrim.length > 70) {
+      errors.push("Contact message must have between 2 and 70 characters");
+    }
+  }
+
+  if (errors.length !== 0) return errors;
+};
+
+const contactMessage = (contactMessage) => {
+  const errors = [];
+
+  if (!contactMessage) {
+    errors.push("Subject is required");
+  } else {
+    const contactMessageTrim = contactMessage.trim();
+    if (contactMessageTrim.length < 20 || contactMessageTrim.length > 2000) {
+      errors.push("Contact message must have between 20 and 2000 characters");
+    }
+  }
+
+  if (errors.length !== 0) return errors;
+};
+
 export default {
   firstName,
   lastName,
@@ -202,4 +232,6 @@ export default {
   age,
   size,
   description,
+  subject,
+  contactMessage,
 };

@@ -87,8 +87,7 @@ const updatePet = async (req, res) => {
 
     return res.status(200).json(petNewInfo);
   } catch (error) {
-    if (error.name === "IdPetidDonorConflict") return res.status(error.status).json(error.message);
-    if (error.name === "CantEditPetAdopted") return res.status(error.status).json(error.message);
+    if (error.name === "BadRequestError") return res.status(error.status).json(error.message);
     return res.status(500).json(error.message);
   }
 };
