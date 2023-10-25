@@ -69,9 +69,6 @@ const createAdopter = async (newAdopter) => {
 const updateAdopter = async (newAdopterInfo, id) => {
   delete newAdopterInfo.email;
   delete newAdopterInfo.password;
-  delete newAdopterInfo.createdAt;
-  delete newAdopterInfo.updatedAt;
-  delete newAdopterInfo.id;
 
   let errors = [];
 

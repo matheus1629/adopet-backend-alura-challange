@@ -13,6 +13,16 @@ const checkIfEmailAlreadyExist = (model) => async (req, res, next) => {
   next();
 };
 
+const clearBody = async (req, res, next) => {
+  delete req.body.createdAt;
+  delete req.body.updatedAt;
+  delete req.body.deletedAt;
+  delete req.body.id;
+
+  next();
+};
+
 export default {
   checkIfEmailAlreadyExist,
+  clearBody,
 };

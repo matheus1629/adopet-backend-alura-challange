@@ -69,9 +69,6 @@ const createDonor = async (newDonor) => {
 const updateDonor = async (newDonorInfo, id) => {
   delete newDonorInfo.email;
   delete newDonorInfo.password;
-  delete newDonorInfo.createdAt;
-  delete newDonorInfo.updatedAt;
-  delete newDonorInfo.id;
 
   let errors = [];
 

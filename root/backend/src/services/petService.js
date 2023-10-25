@@ -111,8 +111,6 @@ const createPet = async (newPet, idDonor) => {
 const updatePet = async (newPetInfo, id, idDonor) => {
   delete newPetInfo.adoptionDate;
   delete newPetInfo.adopted;
-  delete newPetInfo.createdAt;
-  delete newPetInfo.updatedAt;
   delete newPetInfo.idDonor;
 
   if (!(await validateIfPetBelongsToDonor(id, idDonor)))
