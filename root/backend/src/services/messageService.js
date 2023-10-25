@@ -6,10 +6,10 @@ import BadRequestError from "../Errors/BadRequestError.js";
 const createMessage = async (newMessage) => {
   delete newMessage.adoption_status;
 
-  const { dataValues } = await petService.getPetById(newMessage.idPet);
+  if (!(await petService.checkIfPetExist(newMessage.idPet))) throw new BadRequestError("Pet not found", 404);
 
-  if (!(await petService.validateIfPetBelongsToDonor(newMessage.idPet, dataValues.idDonor)))
-    throw new BadRequestError("Pet not found", 404);
+  if (await checkIfAdopterAlreadySendedMessage(newMessage.idAdopter, newMessage.idPet))
+    throw new BadRequestError("You already send a message about this pet", 403);
 
   if (await petService.checkIfPetWasAdoped(newMessage.idPet))
     throw new BadRequestError("This pet was already adopted", 403);
@@ -26,8 +26,13 @@ const createMessage = async (newMessage) => {
     const errorMessage = `Validation errors: ${errors.join(", ")}`;
     throw new BadRequestError(errorMessage, 422);
   }
-  console.log(newMessage);
+  
   return await messageRepository.createMessage(newMessage);
+};
+
+const checkIfAdopterAlreadySendedMessage = async (idAdopter, idPet) => {
+  if (await messageRepository.checkIfAdopterAlreadySendedMessage(idAdopter, idPet)) return true;
+  return false;
 };
 
 export default {

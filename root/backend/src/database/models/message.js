@@ -5,13 +5,10 @@ export default (sequelize, DataTypes) => {
   class Message extends Model {
     static associate(models) {
       Message.belongsTo(models.Adopter, {
-        foreignKey: "id_adopter",
-      });
-      Message.belongsTo(models.Donor, {
-        foreignKey: "id_donor",
+        foreignKey: "idAdopter",
       });
       Message.belongsTo(models.Pet, {
-        foreignKey: "id_pet",
+        foreignKey: "idPet",
       });
     }
   }

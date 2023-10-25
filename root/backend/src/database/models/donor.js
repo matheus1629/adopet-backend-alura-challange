@@ -4,10 +4,6 @@ import { Model } from "sequelize";
 export default (sequelize, DataTypes) => {
   class Donor extends Model {
     static associate(models) {
-      Donor.hasMany(models.Message, {
-        foreignKey: "id_donor",
-        onDelete: "CASCADE",
-      });
       Donor.hasMany(models.Pet, {
         foreignKey: "idDonor",
       });

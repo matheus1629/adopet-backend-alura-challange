@@ -10,7 +10,7 @@ export default (sequelize, DataTypes) => {
         foreignKey: "idAdopter",
       });
       Pet.hasMany(models.Message, {
-        foreignKey: "id_pet",
+        foreignKey: "idPet",
         onDelete: "CASCADE",
       });
     }

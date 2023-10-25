@@ -162,6 +162,11 @@ const checkIfPetWasAdoped = async (id) => {
   return false;
 };
 
+const checkIfPetExist = async (id) => {
+  if (await petRepository.checkIfPetExist(id)) return true;
+  return false;
+};
+
 export default {
   getAllPetsAvailable,
   getAllPet,
@@ -173,4 +178,5 @@ export default {
   deletePet,
   checkIfPetWasAdoped,
   validateIfPetBelongsToDonor,
+  checkIfPetExist,
 };
