@@ -4,10 +4,9 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable("Message", {
       id: {
-        allowNull: false,
-        autoIncrement: true,
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
         primaryKey: true,
-        type: Sequelize.INTEGER,
       },
       adoption_status: {
         type: Sequelize.ENUM("not_started", "pending_confirmation", "adopted"),
@@ -25,11 +24,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.UUID,
         references: { model: "adopter", key: "id" },
-      },
-      id_donor: {
-        allowNull: false,
-        type: Sequelize.UUID,
-        references: { model: "donor", key: "id" },
       },
       id_pet: {
         allowNull: false,

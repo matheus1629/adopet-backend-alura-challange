@@ -1,7 +1,7 @@
 import database from "../database/models/index.js";
 
-const createMessage = async (messageData) => {
-  return await database.Message.create(messageData);
+const createMessage = async (newAdopter) => {
+  return await database.Message.create(newAdopter);
 };
 
 export default {

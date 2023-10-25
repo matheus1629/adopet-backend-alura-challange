@@ -6,7 +6,9 @@ import BadRequestError from "../Errors/BadRequestError.js";
 const createMessage = async (newMessage) => {
   delete newMessage.adoption_status;
 
-  if (!(await petService.validateIfPetBelongsToDonor(newMessage.idPet, newMessage.idDonor)))
+  const { dataValues } = await petService.getPetById(newMessage.idPet);
+
+  if (!(await petService.validateIfPetBelongsToDonor(newMessage.idPet, dataValues.idDonor)))
     throw new BadRequestError("Pet not found", 404);
 
   if (await petService.checkIfPetWasAdoped(newMessage.idPet))
@@ -16,7 +18,7 @@ const createMessage = async (newMessage) => {
 
   for (const key in newMessage) {
     let error;
-    error = validateData[key](newMessage[key]);
+    if (validateData[key]) error = validateData[key](newMessage[key]);
     if (error) errors.push(error);
   }
 
@@ -24,7 +26,7 @@ const createMessage = async (newMessage) => {
     const errorMessage = `Validation errors: ${errors.join(", ")}`;
     throw new BadRequestError(errorMessage, 422);
   }
-
+  console.log(newMessage);
   return await messageRepository.createMessage(newMessage);
 };
 
