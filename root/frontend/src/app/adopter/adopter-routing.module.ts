@@ -7,6 +7,7 @@ import { ProfileAdopterComponent } from './pages/profile-adopter/profile-adopter
 import { PetsAdopterComponent } from './pages/pets-adopter/pets-adopter.component';
 
 import { canDeactivateGuard } from '../guard/can-deactivate.guard';
+import { SendMessageComponent } from './pages/send-message/send-message.component';
 
 const routes: Routes = [
   { path: '', component: AdopterComponent },
@@ -17,6 +18,11 @@ const routes: Routes = [
     canDeactivate: [canDeactivateGuard],
   },
   { path: 'pets', component: PetsAdopterComponent },
+  {
+    path: 'send-message',
+    component: SendMessageComponent,
+    canDeactivate: [canDeactivateGuard],
+  },
 ];
 
 @NgModule({

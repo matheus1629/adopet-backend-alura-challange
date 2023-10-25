@@ -12,6 +12,7 @@ import { PetsAdopterComponent } from './pages/pets-adopter/pets-adopter.componen
 import { AdopterComponent } from './adopter.component';
 import { ProfileAdopterComponent } from './pages/profile-adopter/profile-adopter.component';
 import { RegisterAdopterComponent } from './pages/register-adopter/register-adopter.component';
+import { SendMessageComponent } from './pages/send-message/send-message.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { RegisterAdopterComponent } from './pages/register-adopter/register-adop
     ProfileAdopterComponent,
     RegisterAdopterComponent,
     PetsAdopterComponent,
+    SendMessageComponent,
   ],
   imports: [
     CommonModule,
