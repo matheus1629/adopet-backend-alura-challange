@@ -13,8 +13,12 @@ module.exports = {
         type: Sequelize.ENUM("not_started", "pending_confirmation", "adopted"),
         allowNull: false,
       },
+      subject: {
+        type: Sequelize.STRING(70),
+        allowNull: false,
+      },
       contact_message: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(2000),
         allowNull: false,
       },
       id_adopter: {
