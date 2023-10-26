@@ -33,14 +33,22 @@
             <p class="pet-info desc" title="{{ pet.description }}">{{ pet.description }}</p>
             <p class="pet-region">{{ pet.Donor?.city }} ({{ pet.Donor?.state }})</p>
 
-            <a
-              class="contact-donor-container"
-              routerLink="/adopter/send-message"
-              [state]="{ petData: pet }"
-            >
-              <mat-icon class="chat-icon" fontIcon="chat"></mat-icon>
-              <span class="contact-donor">Enviar mensagem</span>
-            </a>
+            <ng-container *ngIf="!messagesSendedIdPet.includes(pet.id); else messageSended">
+              <a
+                class="contact-donor-container"
+                routerLink="/adopter/send-message"
+                [state]="{ petData: pet }"
+              >
+                <mat-icon class="chat-icon" fontIcon="chat"></mat-icon>
+                <span class="contact-donor">Enviar mensagem</span>
+              </a>
+            </ng-container>
+            <ng-template #messageSended>
+              <div class="card-msg">
+                <mat-icon class="chat-icon" fontIcon="check_circle"></mat-icon>
+                <span>Mensagem enviada</span>
+              </div>
+            </ng-template>
           </div>
         </div>
       </div>

@@ -4,7 +4,15 @@ import messageRepository from "../repository/messageRepository.js";
 import BadRequestError from "../Errors/BadRequestError.js";
 
 const getMessagesByAdopter = async (idAdopter) => {
-  return await messageRepository.getMessagesByAdopter(idAdopter);
+  const messagesSendedIdPet = await messageRepository.getMessagesByAdopter(idAdopter);
+
+  const idPets = [];
+
+  for (let idPet of messagesSendedIdPet) {
+    idPets.push(idPet.idPet);
+  }
+
+  return idPets
 };
 
 const createMessage = async (newMessage) => {

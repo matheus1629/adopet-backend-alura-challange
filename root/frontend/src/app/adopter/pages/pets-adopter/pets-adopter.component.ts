@@ -1,7 +1,9 @@
+import { MessageService } from './../../../services/message.service';
 import { SharedService } from './../../../services/shared-services.service';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
+import { map } from 'rxjs';
 
 import { PaginatorIntlService } from 'src/app/services/paginator-intl.service';
 import { PetService } from 'src/app/services/pet.service';
@@ -21,12 +23,9 @@ export class PetsAdopterComponent implements OnInit {
   currentPage = 0;
   pageSize = 10;
   length = 0;
+  messagesSendedIdPet!: number[];
 
-  constructor(
-    private petService: PetService,
-    private router: Router,
-    private sharedService: SharedService
-  ) {}
+  constructor(private petService: PetService, private messageService: MessageService) {}
 
   ngOnInit(): void {
     const pageEvent: PageEvent = {
@@ -42,20 +41,29 @@ export class PetsAdopterComponent implements OnInit {
     this.currentPage = pageEvent.pageIndex;
     this.pageSize = pageEvent.pageSize;
 
-    this.petService.getAllPetsAvailable(this.currentPage + 1, this.pageSize).subscribe({
-      next: (data) => {
-        const newData: IPet[] = [];
+    this.messageService
+      .getMessagesByAdopter()
+      .subscribe((data) => (this.messagesSendedIdPet = data));
 
-        for (let pet of data.rows) {
-          newData.push({ ...pet, size: PetSize[pet.size.toUpperCase() as keyof typeof PetSize] });
-        }
-
-        this.pets = newData;
-        this.length = data.count;
-      },
-      error: (err) => {
-        console.error('Error: ', err);
-      },
-    });
+    this.petService
+      .getAllPetsAvailable(this.currentPage + 1, this.pageSize)
+      .pipe(
+        map((data) => ({
+          ...data,
+          rows: data.rows.map((pet) => ({
+            ...pet,
+            size: PetSize[pet.size.toUpperCase() as keyof typeof PetSize],
+          })),
+        }))
+      )
+      .subscribe({
+        next: (data) => {
+          this.pets = data.rows;
+          this.length = data.count;
+        },
+        error: (err) => {
+          console.error('Error: ', err);
+        },
+      });
   }
 }

@@ -9,6 +9,10 @@ import { ISendMessage } from 'src/shared/interfaces/sendMessage.interface';
 export class MessageService {
   constructor(private http: HttpClient) {}
 
+  getMessagesByAdopter(): Observable<number[]> {
+    return this.http.get<number[]>('/message/adopter');
+  }
+
   createMessage(body: ISendMessage): Observable<any> {
     return this.http.post<any>('/message', body);
   }
