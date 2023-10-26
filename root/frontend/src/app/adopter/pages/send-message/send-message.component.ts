@@ -1,81 +1,59 @@
 import { textAreaValidation } from '../../../../shared/consts';
-import { Component, OnInit, DoCheck } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { map } from 'rxjs';
+import { ActivatedRoute, Router, QueryParamsHandling } from '@angular/router';
+import { Observable, Subscription, map } from 'rxjs';
 
-import { AdopterService } from '../../../services/adopter.service';
 import { SharedService } from 'src/app/services/shared-services.service';
+import { MessageService } from 'src/app/services/message.service';
 
 import { IButtonConfig } from 'src/shared/interfaces/buttonConfig.interface';
 import { ButtonClass } from 'src/shared/enums/buttonConfig.enum';
-import { States } from 'src/shared/enums/states.enum';
 import { errorMessages, inputValidations } from 'src/shared/consts';
-import { clearValues, fileToBase64, telMask, validateName } from 'src/shared/utils/form';
-import { IAccountData } from 'src/shared/interfaces/accountData.interface';
-import { IAccountEdit } from 'src/shared/interfaces/accountEdit.interface';
-import { IFormRegisterAccount } from 'src/shared/interfaces/formRegisterAccount.interface';
+import { validateName } from 'src/shared/utils/form';
+
 import { PopupComponent } from 'src/app/sharedComponents/popup/popup.component';
 import { PopupConfirmComponent } from 'src/app/sharedComponents/popupConfirm/popup-confirmation.component';
-import { Router } from '@angular/router';
+import { ISendMessage } from 'src/shared/interfaces/sendMessage.interface';
+import { PetService } from 'src/app/services/pet.service';
+import { IPet } from 'src/shared/interfaces/pet.interface';
 
 @Component({
   selector: 'app-send-message',
   templateUrl: './send-message.component.html',
   styleUrls: ['./send-message.component.scss'],
 })
-export class SendMessageComponent implements OnInit, DoCheck {
-  statesValues = Object.values(States);
+export class SendMessageComponent implements OnInit {
   errorMessages = errorMessages;
   inputValidations = inputValidations;
   textAreaValidation = textAreaValidation;
   formSubmitted = false;
-  editAdopterForm!: FormGroup;
-
+  messsageForm!: FormGroup;
+  petData!: IPet;
   buttonRegister: IButtonConfig = {
     innerText: 'Enviar mensagem',
     class: ButtonClass.BUTTON_TYPE_2,
-    disable: true,
   };
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private fb: FormBuilder,
-    private adopterService: AdopterService,
-    public dialog: MatDialog,
-    private sharedService: SharedService
-  ) {}
-
-  ngOnInit(): void {
-    this.adopterService.getAdopter().subscribe({
-      next: (data: IAccountData) => {
-        this.editAdopterForm.patchValue({
-          picture: data.picture,
-          firstName: data.firstName,
-          lastName: data.lastName,
-          state: States[data.state as keyof typeof States].toString(),
-          city: data.city,
-          phoneNumber: data.phoneNumber,
-          personalInfo: data.personalInfo,
-        });
-      },
-      error: (err) => {
-        console.error('Error: ', err);
-      },
-    });
-
-    this.editAdopterForm = this.fb.group({
-      subject: [
-        '',
-        [Validators.required, Validators.minLength(2), Validators.maxLength(255), validateName],
-      ],
-      message: ['', [Validators.maxLength(2000)]],
-    });
+    private messageService: MessageService,
+    public dialog: MatDialog
+  ) {
+    const navigation = this.router.getCurrentNavigation();
+    this.petData = navigation?.extras.state?.['petData'];
   }
 
-  ngDoCheck() {
-    if (this.editAdopterForm.dirty) this.buttonRegister.disable = false;
-    else this.buttonRegister.disable = true;
+  ngOnInit(): void {
+    console.log(this.petData);
+
+    this.messsageForm = this.fb.group({
+      subject: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(70)]],
+      contactMessage: ['', [Validators.minLength(20), Validators.maxLength(2000)]],
+    });
   }
 
   openPopup(message: string, icon: string) {
@@ -90,17 +68,45 @@ export class SendMessageComponent implements OnInit, DoCheck {
   submit() {
     this.formSubmitted = true;
 
-    if (this.editAdopterForm.valid) {
-      this.adopterService.editAdopter(this.editAdopterForm.value).subscribe({
-        next: (data) => {
-          this.sharedService.pictureSender(data.picture);
-          this.editAdopterForm.markAsPristine();
-          this.buttonRegister.loading = false;
-          this.openPopup('Alterações salvas!', 'check_circle');
+    if (this.messsageForm.valid) {
+      this.buttonRegister.loading = true;
+
+      const body: ISendMessage = {
+        subject: this.messsageForm.value.subject,
+        contactMessage: this.messsageForm.value.contactMessage,
+        idPet: this.petData.id,
+      };
+
+      this.messageService.createMessage(body).subscribe({
+        next: () => {
+          this.messsageForm.markAsPristine();
+          this.router.navigate(['/adopter/pets']);
+          window.scrollTo(0, 0);
+          this.openPopup(
+            `Mensagem enviada! Agora é só aguardar o contato do(a) ${this.petData.Donor?.firstName} via e-mail ou telefone/celular.`,
+            'check_circle'
+          );
         },
         error: (err) => {
           console.error('Error: ', err);
-          this.openPopup('Ocorreu um erro em nosso servidor.', 'error');
+
+          if (err.error === 'You already send a message about this pet') {
+            this.messsageForm.markAsPristine();
+            this.openPopup(
+              'Você já enviou mensagem para esse contato. Por favor, aguarde o retorno',
+              'error'
+            );
+            this.router.navigate(['/adopter/pets']);
+            window.scrollTo(0, 0);
+          } else if (err.error === 'This pet was already adopted') {
+            this.messsageForm.markAsPristine();
+            this.openPopup('Esse pet já foi adotado', 'error');
+            this.router.navigate(['/adopter/pets']);
+            window.scrollTo(0, 0);
+          } else {
+            this.openPopup('Ocorreu um erro em nosso servidor.', 'error');
+          }
+
           this.buttonRegister.loading = false;
         },
       });
@@ -108,7 +114,7 @@ export class SendMessageComponent implements OnInit, DoCheck {
   }
 
   canDeactivate() {
-    if (this.editAdopterForm.dirty) {
+    if (this.messsageForm.dirty) {
       const dialogRef = this.dialog.open(PopupConfirmComponent, {
         data: {
           title: 'Você tem certeza que deseja descartar as alterações?',

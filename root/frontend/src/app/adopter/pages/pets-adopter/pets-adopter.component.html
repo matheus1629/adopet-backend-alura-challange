@@ -31,11 +31,14 @@
             <p class="pet-info">{{ pet.age }} anos</p>
             <p class="pet-info">{{ pet.size }}</p>
             <p class="pet-info desc" title="{{ pet.description }}">{{ pet.description }}</p>
-
             <p class="pet-region">{{ pet.Donor?.city }} ({{ pet.Donor?.state }})</p>
 
-            <a routerLink="/adopter/send-message"
-              ><mat-icon class="chat-icon" fontIcon="chat"></mat-icon>
+            <a
+              class="contact-donor-container"
+              routerLink="/adopter/send-message"
+              [state]="{ petData: pet }"
+            >
+              <mat-icon class="chat-icon" fontIcon="chat"></mat-icon>
               <span class="contact-donor">Enviar mensagem</span>
             </a>
           </div>

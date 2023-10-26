@@ -149,6 +149,35 @@ export class ProfileDonorComponent implements OnInit, DoCheck {
     }
   }
 
+  submitDelete() {
+    const dialogRef = this.dialog.open(PopupConfirmComponent, {
+      data: {
+        title: 'Você tem certeza que deseja deletar sua conta?',
+        content: 'Todo o seu histórico do chat e seus pets para adoção serão perdidos.',
+        yes: 'Deletar Conta',
+        no: 'Voltar',
+      },
+    });
+
+    this.buttonRegister.loading = true;
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.donorService.deleteDonor().subscribe({
+          next: (data) => {
+            this.buttonRegister.loading = false;
+            this.editAdopterForm.markAsPristine();
+            this.router.navigate(['/']);
+          },
+          error: (err) => {
+            console.error('Error: ', err);
+            this.openPopup('Ocorreu um erro em nosso servidor.', 'error');
+            this.buttonRegister.loading = false;
+          },
+        });
+      }
+    });
+  }
+
   canDeactivate() {
     if (this.editAdopterForm.dirty) {
       const dialogRef = this.dialog.open(PopupConfirmComponent, {
@@ -169,33 +198,5 @@ export class ProfileDonorComponent implements OnInit, DoCheck {
     } else {
       return true;
     }
-  }
-
-  submitDelete() {
-    const dialogRef = this.dialog.open(PopupConfirmComponent, {
-      data: {
-        title: 'Você tem certeza que deseja deletar sua conta?',
-        content: 'Todo o seu histórico do chat e seus pets para adoção serão perdidos.',
-        yes: 'Deletar Conta',
-        no: 'Voltar',
-      },
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.donorService.deleteDonor().subscribe({
-          next: (data) => {
-            this.buttonRegister.loading = false;
-            this.editAdopterForm.markAsPristine();
-            this.router.navigate(['/']);
-          },
-          error: (err) => {
-            console.error('Error: ', err);
-            this.openPopup('Ocorreu um erro em nosso servidor.', 'error');
-            this.buttonRegister.loading = false;
-          },
-        });
-      }
-    });
   }
 }

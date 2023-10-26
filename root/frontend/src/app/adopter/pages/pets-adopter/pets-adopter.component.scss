@@ -123,6 +123,10 @@ a:hover {
   @include mat-icon-size(20px);
 }
 
+.contact-donor-container{
+  cursor: pointer;
+}
+
 .contact-donor {
   color: $dark-grey-color;
   font-size: 10px;

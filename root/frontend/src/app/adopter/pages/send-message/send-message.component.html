@@ -1,7 +1,11 @@
 <app-header></app-header>
 <main>
-  <form [formGroup]="editAdopterForm" (keyup.enter)="submit()">
-    <h1>Mensagem</h1>
+  <form [formGroup]="messsageForm" (keyup.enter)="submit()">
+    <h1>
+      Envie uma mensagem para {{ petData?.Donor?.firstName }}, responsável pelo {{ petData?.name }}
+    </h1>
+
+    <img class="picture-img" [src]="petData?.picture" alt="Pet picture" />
 
     <div class="input-label">
       <label for="subject">Assunto</label>
@@ -11,43 +15,46 @@
         name="subject"
         type="text"
         formControlName="subject"
-        placeholder="Digite seu nome"
-        maxlength=70
+        placeholder="Escreva o assunto"
+        maxlength="70"
         [ngClass]="{
-          'border-error': editAdopterForm.get('subject')?.errors && formSubmitted
+          'border-error': messsageForm.get('subject')?.errors && formSubmitted
         }"
       />
       <ng-container
         *ngIf="
-          (editAdopterForm.get('subject')?.hasError('required') ||
-            editAdopterForm.get('subject')?.hasError('minlength')) &&
+          (messsageForm.get('subject')?.hasError('required') ||
+            messsageForm.get('subject')?.hasError('minlength')) &&
           formSubmitted
         "
       >
         <span class="error-message">{{ errorMessages.minlength }}</span>
       </ng-container>
-      <ng-container
-        *ngIf="editAdopterForm.get('subject')?.hasError('validName') && formSubmitted"
-      >
-        <span class="error-message">{{ errorMessages.validName }}</span>
-      </ng-container>
     </div>
 
     <div class="input-label">
-      <label for="message">Mensagem</label>
+      <label for="contactMessage">Mensagem</label>
       <textarea
         class="input-text text-area"
-        id="message"
-        name="message"
-        formControlName="message"
-        placeholder="Fale um pouco sobre você"
+        id="contactMessage"
+        name="contactMessage"
+        formControlName="contactMessage"
+        placeholder="Escreva a mensagem"
         [maxlength]="textAreaValidation"
-        
         [ngClass]="{
-          'border-error': editAdopterForm.get('message')?.errors && formSubmitted
+          'border-error': messsageForm.get('contactMessage')?.errors && formSubmitted
         }"
       >
       </textarea>
+      <ng-container
+        *ngIf="
+          (messsageForm.get('contactMessage')?.hasError('required') ||
+            messsageForm.get('contactMessage')?.hasError('minlength')) &&
+          formSubmitted
+        "
+      >
+        <span class="error-message">Este campo precisa ter no mínimo 20 caracteres.</span>
+      </ng-container>
     </div>
 
     <app-button (click)="submit()" [buttonConfig]="buttonRegister"></app-button>

@@ -6,7 +6,7 @@ const getAllPetsAvailable = async (pageSetting) => {
     attributes: { exclude: ["createdAt", "updatedAt"] },
     include: {
       model: database.Donor,
-      attributes: ["city", "state"],
+      attributes: ["firstName", "city", "state"],
     },
     ...pageSetting,
   });
@@ -28,7 +28,7 @@ const getPetById = async (id) => {
     attributes: { exclude: ["createdAt", "updatedAt"] },
     include: {
       model: database.Donor,
-      attributes: ["city", "state"],
+      attributes: ["firstName", "city", "state"],
     },
   });
 };

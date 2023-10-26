@@ -156,6 +156,7 @@ export class EditPetComponent implements OnInit {
       },
     });
 
+    this.buttonRegister.loading = true;
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.petService.deletePet(this.idPet).subscribe({
@@ -168,6 +169,7 @@ export class EditPetComponent implements OnInit {
           error: (err) => {
             console.error('Error: ', err);
             this.openPopup('Ocorreu um erro em nosso servidor.', 'error');
+            this.buttonRegister.loading = false;
             this.buttonRegister.loading = false;
           },
         });

@@ -1,8 +1,8 @@
 @import "../../../../variables.scss";
+
 main {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   align-items: center;
   color: $white-color;
   margin: 0 auto;
@@ -10,16 +10,6 @@ main {
   width: 100%;
   flex-grow: 1;
   z-index: -2;
-  
-}
-
-.text {
-  color: $blue-color;
-  margin-top: 100px;
-  margin-bottom: 50px;
-  font-weight: 400;
-  text-align: center;
-  width: 70%;
 }
 
 form {
@@ -31,13 +21,16 @@ form {
   border-radius: 5px;
   padding: 30px;
   margin-bottom: 50px;
+  margin-top: 12vh;
 }
 
 h1 {
   color: $dark-grey-color;
   align-self: center;
-  font-size: 22px;
+  font-size: 16px;
   margin-bottom: 16px;
+  text-align: center;
+  margin-top: 30px;
 }
 
 label {
@@ -54,42 +47,16 @@ label {
   min-height: 120px;
 }
 
-.input-file-container {
-  width: 120px;
-  height: 120px;
-  align-self: center;
-  border-radius: 50%;
-}
-
-.picture-text {
-  color: $green-color;
-  min-width: 240px;
-  align-self: center;
-  text-align: center;
-}
-
 .picture-img {
   @include mat-icon-size(120px);
   color: $medium-grey-color;
   align-self: center;
   border-radius: 50%;
   object-fit: cover;
-}
-
-.input-picture-box {
-  width: 100%;
-  height: 100%;
-  color: $medium-grey-color;
-  cursor: pointer;
-  border-radius: 50%;
-}
-
-.input-file {
-  display: none;
+  margin: 30px;
 }
 
 .input-text,
-select,
 textarea {
   background-color: $white-color;
   width: 90%;
@@ -119,20 +86,10 @@ app-button {
   form {
     width: 350px;
   }
-
-  .input-file-container {
-    width: 120px;
-    height: 120px;
-  }
 }
 
 @media only screen and (max-width: $mobile-size) {
   form {
     width: 250px;
-  }
-
-  .input-file-container {
-    width: 110px;
-    height: 110px;
   }
 }

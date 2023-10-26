@@ -3,6 +3,10 @@ import petService from "./petService.js";
 import messageRepository from "../repository/messageRepository.js";
 import BadRequestError from "../Errors/BadRequestError.js";
 
+const getMessagesByAdopter = async (idAdopter) => {
+  return await messageRepository.getMessagesByAdopter(idAdopter);
+};
+
 const createMessage = async (newMessage) => {
   delete newMessage.adoption_status;
 
@@ -26,7 +30,7 @@ const createMessage = async (newMessage) => {
     const errorMessage = `Validation errors: ${errors.join(", ")}`;
     throw new BadRequestError(errorMessage, 422);
   }
-  
+
   return await messageRepository.createMessage(newMessage);
 };
 
@@ -37,4 +41,5 @@ const checkIfAdopterAlreadySendedMessage = async (idAdopter, idPet) => {
 
 export default {
   createMessage,
+  getMessagesByAdopter,
 };

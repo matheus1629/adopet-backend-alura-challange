@@ -21,7 +21,6 @@ export class PetService {
     return this.http.get<IPetPagination>('/pet', { params, headers });
   }
 
-  // todo verificar se é necessário
   getPetById(idPet: number): Observable<IPet> {
     const headers = new HttpHeaders();
     headers.set('skiptoken', 'true');
