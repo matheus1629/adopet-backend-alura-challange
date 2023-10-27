@@ -26,6 +26,7 @@ export default (sequelize, DataTypes) => {
       },
       subject: { type: DataTypes.STRING, field: "subject" },
       contactMessage: { type: DataTypes.STRING, field: "contact_message" },
+      date: { type: DataTypes.DATE, field: "date" },
       idAdopter: { type: DataTypes.UUID, field: "id_adopter" },
       idPet: { type: DataTypes.INTEGER, field: "id_pet" },
     },

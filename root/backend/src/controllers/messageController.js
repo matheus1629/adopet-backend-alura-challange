@@ -10,6 +10,16 @@ const getMessagesByAdopter = async (req, res) => {
   }
 };
 
+const getAllMessagesByDonorPreView = async (req, res) => {
+  try {
+    const allMessagesByDonorPreView = await messageService.getAllMessagesByDonorPreView(req.userId);
+
+    return res.status(200).send(allMessagesByDonorPreView);
+  } catch (error) {
+    return res.status(500).json(error.message);
+  }
+};
+
 const createMessage = async (req, res) => {
   const newMessage = req.body;
   newMessage.idAdopter = req.userId;
@@ -27,4 +37,5 @@ const createMessage = async (req, res) => {
 export default {
   createMessage,
   getMessagesByAdopter,
+  getAllMessagesByDonorPreView,
 };

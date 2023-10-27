@@ -7,6 +7,26 @@ const getMessagesByAdopter = async (idAdopter) => {
   });
 };
 
+const getAllMessagesByDonorPreView = async (idDonor) => {
+  return await database.Message.findAll({
+    attributes: ["date", "adoption_status"],
+    include: [
+      {
+        model: database.Pet,
+        attributes: ["name", "picture"],
+        required: true,
+        include: [
+          {
+            where: { id: idDonor },
+            model: database.Donor,
+            attributes: ["firstName", "lastName"],
+          },
+        ],
+      },
+    ],
+  });
+};
+
 const createMessage = async (newAdopter) => {
   return await database.Message.create(newAdopter);
 };
@@ -22,4 +42,5 @@ export default {
   createMessage,
   checkIfAdopterAlreadySendedMessage,
   getMessagesByAdopter,
+  getAllMessagesByDonorPreView,
 };

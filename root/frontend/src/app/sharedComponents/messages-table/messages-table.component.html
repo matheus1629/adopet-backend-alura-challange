@@ -1,0 +1,42 @@
+<app-header></app-header>
+<main>
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr class="table-header">
+          <th class="pet-column">Pet</th>
+          <th class="name-column">Nome</th>
+          <th class="date-column">Data</th>
+          <th class="status-column">Status</th>
+          <th class="show-column"></th>
+        </tr>
+        <tr class="input-header">
+          <td class="input pet-column"><input type="text" /></td>
+          <td class="input name-column"><input type="text" /></td>
+          <td class="input date-column"><input type="text" /></td>
+          <td class="input status-column"><input type="text" /></td>
+          <td class="input show-column"></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="table-row">
+          <td class="pet-column"><p>Miguel</p></td>
+          <td class="name-column"><p>fulano da silva</p></td>
+          <td class="date-column"><p>2023/05/04</p></td>
+          <td class="status-column"><p>Não respondido</p></td>
+          <td class="show-column"><mat-icon fontIcon="navigate_next"></mat-icon></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <mat-paginator
+      [length]="paginatorConfig.length"
+      [pageSize]="paginatorConfig.pageSize"
+      [pageSizeOptions]="[10, 25, 100]"
+      [showFirstLastButtons]="true"
+      [pageIndex]="paginatorConfig.currentPage"
+      aria-label="Select page"
+    >
+    </mat-paginator>
+  </div>
+</main>

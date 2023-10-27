@@ -2,6 +2,7 @@ import validateData from "../validation/validateSignupData.js";
 import petService from "./petService.js";
 import messageRepository from "../repository/messageRepository.js";
 import BadRequestError from "../Errors/BadRequestError.js";
+import { bufferToBase64 } from "../helpers/buffer.js";
 
 const getMessagesByAdopter = async (idAdopter) => {
   const messagesSendedIdPet = await messageRepository.getMessagesByAdopter(idAdopter);
@@ -12,7 +13,19 @@ const getMessagesByAdopter = async (idAdopter) => {
     idPets.push(idPet.idPet);
   }
 
-  return idPets
+  return idPets;
+};
+
+const getAllMessagesByDonorPreView = async (idDonor) => {
+  const allMessagesByDonorPreView = await messageRepository.getAllMessagesByDonorPreView(idDonor);
+
+  for (const key in allMessagesByDonorPreView) {
+    allMessagesByDonorPreView[key].dataValues.Pet.dataValues.picture = bufferToBase64(
+      allMessagesByDonorPreView[key].dataValues.Pet.dataValues.picture
+    );
+  }
+
+  return allMessagesByDonorPreView;
 };
 
 const createMessage = async (newMessage) => {
@@ -50,4 +63,5 @@ const checkIfAdopterAlreadySendedMessage = async (idAdopter, idPet) => {
 export default {
   createMessage,
   getMessagesByAdopter,
+  getAllMessagesByDonorPreView,
 };

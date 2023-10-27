@@ -11,10 +11,24 @@ import { ButtonComponent } from './button/button.component';
 import { PopupComponent } from './popup/popup.component';
 import { PopupConfirmComponent } from './popupConfirm/popup-confirmation.component';
 import { MatButtonModule } from '@angular/material/button';
+import { MessagesTableComponent } from './messages-table/messages-table.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
-  declarations: [HeaderComponent, ButtonComponent, PopupComponent, PopupConfirmComponent],
-  exports: [HeaderComponent, ButtonComponent, PopupComponent, PopupConfirmComponent],
+  declarations: [
+    HeaderComponent,
+    ButtonComponent,
+    PopupComponent,
+    PopupConfirmComponent,
+    MessagesTableComponent,
+  ],
+  exports: [
+    HeaderComponent,
+    ButtonComponent,
+    PopupComponent,
+    PopupConfirmComponent,
+    MessagesTableComponent,
+  ],
   imports: [
     CommonModule,
     RouterModule,
@@ -23,6 +37,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatProgressSpinnerModule,
     MatDialogModule,
     MatButtonModule,
+    MatPaginatorModule,
   ],
 })
 export class SharedComponentsModule {}

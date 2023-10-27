@@ -9,7 +9,9 @@ import { PaginatorIntlService } from 'src/app/services/paginator-intl.service';
   providers: [{ provide: MatPaginatorIntl, useClass: PaginatorIntlService }],
 })
 export class MessagesComponent {
-  currentPage = 0;
-  pageSize = 10;
-  length = 0;
+  paginatorConfig: any = {
+    currentPage: 0,
+    pageSize: 10,
+    length: 0,
+  };
 }
