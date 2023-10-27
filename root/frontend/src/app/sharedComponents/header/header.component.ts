@@ -32,7 +32,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         next: (data) => {
           this.profitePicture = data.picture;
           this.linkHome = '/adopter/pets';
-          this.linkChat = '/adopter/pets';
+          this.linkChat = '/adopter/messages';
         },
         error: (err) => console.error('Error: ', err),
       });
@@ -41,7 +41,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         next: (data) => {
           this.profitePicture = data.picture;
           this.linkHome = '/donor/pets';
-          this.linkChat = '/donor/pets';
+          this.linkChat = '/donor/messages';
         },
         error: (err) => console.error('Error: ', err),
       });

@@ -48,11 +48,12 @@ export class SendMessageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.petData);
-
     this.messsageForm = this.fb.group({
       subject: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(70)]],
-      contactMessage: ['', [Validators.minLength(20), Validators.maxLength(2000)]],
+      contactMessage: [
+        '',
+        [Validators.required, Validators.minLength(20), Validators.maxLength(2000)],
+      ],
     });
   }
 
