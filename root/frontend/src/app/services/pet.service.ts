@@ -21,7 +21,7 @@ export class PetService {
 
     return this.http.get<IPetPagination>('/pet', { params, headers }).pipe(
       map((data) => ({
-        ...data,
+        count:data.count,
         rows: data.rows.map((pet) => ({
           ...pet,
           size: PetSize[pet.size.toUpperCase() as keyof typeof PetSize],

@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
+import { AuthService } from 'src/app/services/auth.service';
 import { PaginatorIntlService } from 'src/app/services/paginator-intl.service';
 import { IMessagesPreview } from 'src/shared/interfaces/messagesPreview.interface';
-import { IPaginatorConfig } from 'src/shared/interfaces/paginatorConfig.interface';
 
 @Component({
   selector: 'app-messages-table',
@@ -10,10 +10,24 @@ import { IPaginatorConfig } from 'src/shared/interfaces/paginatorConfig.interfac
   styleUrls: ['./messages-table.component.scss'],
   providers: [{ provide: MatPaginatorIntl, useClass: PaginatorIntlService }],
 })
-export class MessagesTableComponent {
+export class MessagesTableComponent implements OnInit {
   @Input() paginatorConfig!: PageEvent;
   @Input() messagesPreview!: IMessagesPreview[];
   @Output() pageEvent = new EventEmitter();
+  routeMessage!: string;
+  emptyList!: string;
+
+  constructor(public auth: AuthService) {}
+
+  ngOnInit(): void {
+    if (this.auth.getUserType() === 'Donor') {
+      this.routeMessage = '/donor/messages/details';
+      this.emptyList = 'Você ainda não recebeu mensagens...';
+    } else if (this.auth.getUserType() === 'Adopter') {
+      this.routeMessage = '/adopter/messages/details';
+      this.emptyList = 'Você ainda não enviou uma mensagem...';
+    }
+  }
 
   handlePageEvent(event: PageEvent) {
     this.pageEvent.emit(event);

@@ -17,10 +17,10 @@ main {
   background-color: $light-grey-color;
   padding: 30px 0;
   border-radius: 10px;
+  color: $dark-grey-color;
 }
 
 table {
-  color: $dark-grey-color;
   table-layout: fixed;
   text-align: center;
   border-collapse: separate;
@@ -105,6 +105,18 @@ mat-paginator {
   width: 100%;
   margin-top: 30px;
   background-color: transparent;
+}
+
+.empty-list {
+  color: $medium-grey-color;
+  margin: 70px 0;
+  text-align: center;
+}
+
+.empty-list-icon {
+  color: $medium-grey-color;
+  @include mat-icon-size(100px);
+  margin: auto 0;
 }
 
 @media only screen and (max-width: $tablet-size) {

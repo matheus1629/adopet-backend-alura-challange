@@ -2,7 +2,10 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { AdoptionStatus } from 'src/shared/enums/adoptionStatus.enum';
-import { IMessagesPreview, IMessagesPreviewPagination } from 'src/shared/interfaces/messagesPreview.interface';
+import {
+  IMessagesPreview,
+  IMessagesPreviewPagination,
+} from 'src/shared/interfaces/messagesPreview.interface';
 import { ISendMessage } from 'src/shared/interfaces/sendMessage.interface';
 
 @Injectable({
@@ -22,16 +25,15 @@ export class MessageService {
     const params = new HttpParams().set('pageIndex', currentPage).set('pageSize', pageSize);
 
     return this.http.get<IMessagesPreviewPagination>('/message/donor/preview', { params }).pipe(
-      map((data) =>
-        data.rows.map((messagePreview: IMessagesPreview) => {
-          messagePreview.date = messagePreview.date.slice(0, 10);
-          messagePreview.adoptionStatus =
-            AdoptionStatus[
-              messagePreview.adoptionStatus.toUpperCase() as keyof typeof AdoptionStatus
-            ];
-          return messagePreview;
-        })
-      )
+      map((data) => ({
+        count: data.count,
+        rows: data.rows.map((message) => ({
+          ...message,
+          date: message.date.slice(0, 10),
+          adoptionStatus:
+            AdoptionStatus[message.adoptionStatus.toUpperCase() as keyof typeof AdoptionStatus],
+        })),
+      }))
     );
   }
 
