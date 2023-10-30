@@ -47,15 +47,6 @@ export class PetsAdopterComponent implements OnInit {
 
     this.petService
       .getAllPetsAvailable(this.currentPage + 1, this.pageSize)
-      .pipe(
-        map((data) => ({
-          ...data,
-          rows: data.rows.map((pet) => ({
-            ...pet,
-            size: PetSize[pet.size.toUpperCase() as keyof typeof PetSize],
-          })),
-        }))
-      )
       .subscribe({
         next: (data) => {
           this.pets = data.rows;

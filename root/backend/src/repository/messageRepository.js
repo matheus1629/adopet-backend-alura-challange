@@ -8,8 +8,9 @@ const getMessagesByAdopter = async (idAdopter) => {
 };
 
 const getAllMessagesByDonorPreView = async (idDonor) => {
+
   return await database.Message.findAll({
-    attributes: ["date", "adoption_status"],
+    attributes: ["date", "adoptionStatus"],
     include: [
       {
         model: database.Pet,
@@ -19,9 +20,13 @@ const getAllMessagesByDonorPreView = async (idDonor) => {
           {
             where: { id: idDonor },
             model: database.Donor,
-            attributes: ["firstName", "lastName"],
+            attributes:[]
           },
         ],
+      },
+      {
+        model: database.Adopter,
+        attributes: ["firstName", "lastName"],
       },
     ],
   });

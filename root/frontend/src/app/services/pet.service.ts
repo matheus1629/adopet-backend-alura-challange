@@ -1,10 +1,11 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 import { IPet, IPetPagination } from './../../shared/interfaces/pet.interface';
 import { IPetEdit } from 'src/shared/interfaces/petEdit.interface';
+import { PetSize } from 'src/shared/enums/petSize.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +19,15 @@ export class PetService {
 
     const params = new HttpParams().set('pageIndex', currentPage).set('pageSize', pageSize);
 
-    return this.http.get<IPetPagination>('/pet', { params, headers });
+    return this.http.get<IPetPagination>('/pet', { params, headers }).pipe(
+      map((data) => ({
+        ...data,
+        rows: data.rows.map((pet) => ({
+          ...pet,
+          size: PetSize[pet.size.toUpperCase() as keyof typeof PetSize],
+        })),
+      }))
+    );
   }
 
   getPetById(idPet: number): Observable<IPet> {

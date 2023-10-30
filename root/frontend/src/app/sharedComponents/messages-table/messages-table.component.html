@@ -18,15 +18,45 @@
           <td class="input show-column"></td>
         </tr>
       </thead>
-      <tbody>
-        <tr class="table-row">
-          <td class="pet-column"><p>Miguel</p></td>
-          <td class="name-column"><p>fulano da silva</p></td>
-          <td class="date-column"><p>2023/05/04</p></td>
-          <td class="status-column"><p>Não respondido</p></td>
-          <td class="show-column"><mat-icon fontIcon="navigate_next"></mat-icon></td>
-        </tr>
-      </tbody>
+
+      <ng-container *ngIf="messagesPreview?.length === 0; else messages">
+        <div class="empty-list">
+          <p>Você ainda não recebeu mensagem...</p>
+          <mat-icon class="empty-list-icon" fontIcon="info"></mat-icon>
+        </div>
+      </ng-container>
+
+      <ng-template #messages>
+        <tbody
+          *ngFor="let message of messagesPreview; let even = even; let odd = odd"
+          [ngClass]="{ even: even, odd: odd }"
+        >
+          <tr class="table-row">
+            <td class="pet-column">
+              <div class="field-container">
+                <img src="{{ message.Pet.picture }}" alt="Pet picture" />
+                <p>{{ message.Pet.name }}</p>
+              </div>
+            </td>
+            <td class="name-column">
+              <p>{{ message.Adopter?.firstName }} {{ message.Adopter?.lastName }}</p>
+            </td>
+            <td class="date-column">
+              <p>{{ message.date }}</p>
+            </td>
+            <td class="status-column">
+              <div class="field-container">
+                <p>{{ message.adoptionStatus }}</p>
+                <mat-icon
+                  [matTooltip]="infoDisplay(message.adoptionStatus) || ''"
+                  fontIcon="help_outline"
+                ></mat-icon>
+              </div>
+            </td>
+            <td class="show-column"><mat-icon fontIcon="navigate_next"></mat-icon></td>
+          </tr>
+        </tbody>
+      </ng-template>
     </table>
 
     <mat-paginator

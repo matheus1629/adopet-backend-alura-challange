@@ -13,6 +13,7 @@ import { PopupConfirmComponent } from './popupConfirm/popup-confirmation.compone
 import { MatButtonModule } from '@angular/material/button';
 import { MessagesTableComponent } from './messages-table/messages-table.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatDialogModule,
     MatButtonModule,
     MatPaginatorModule,
+    MatTooltipModule,
   ],
 })
 export class SharedComponentsModule {}

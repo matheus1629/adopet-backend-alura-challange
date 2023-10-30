@@ -12,6 +12,7 @@ main {
 
 .table-container {
   width: 85%;
+  max-width: 1562.5px;
   height: 80%;
   background-color: $light-grey-color;
   padding: 30px 0;
@@ -31,11 +32,11 @@ td {
   vertical-align: middle;
 }
 
-.table-row:nth-child(even) {
+.even {
   background-color: $column-even;
 }
 
-.table-row:nth-child(odd) {
+.odd {
   background-color: $column-odd;
 }
 
@@ -46,6 +47,21 @@ td {
 
 .input {
   padding: 10px 0;
+}
+
+.field-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+img {
+  align-self: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .pet-column {
