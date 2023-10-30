@@ -1,6 +1,6 @@
 import { MessageService } from 'src/app/services/message.service';
 import { Component, OnInit } from '@angular/core';
-import { MatPaginatorIntl } from '@angular/material/paginator';
+import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import { PaginatorIntlService } from 'src/app/services/paginator-intl.service';
 import { IMessagesPreview } from 'src/shared/interfaces/messagesPreview.interface';
 import { IPaginatorConfig } from 'src/shared/interfaces/paginatorConfig.interface';
@@ -12,8 +12,8 @@ import { IPaginatorConfig } from 'src/shared/interfaces/paginatorConfig.interfac
   providers: [{ provide: MatPaginatorIntl, useClass: PaginatorIntlService }],
 })
 export class MessagesComponent implements OnInit {
-  paginatorConfig: IPaginatorConfig = {
-    currentPage: 0,
+  paginatorConfig: PageEvent = {
+    pageIndex: 0,
     pageSize: 10,
     length: 0,
   };
@@ -22,11 +22,24 @@ export class MessagesComponent implements OnInit {
   constructor(private messageService: MessageService) {}
 
   ngOnInit(): void {
-    this.messageService.getAllMessagesByDonorPreview().subscribe({
-      next: (data) => {
-        console.log(data);
-        this.messagesDonorPreview = data;
-      },
-    });
+    this.handlePageEvent(this.paginatorConfig);
+  }
+
+  handlePageEvent(pageEvent: PageEvent) {
+    this.paginatorConfig.pageIndex = pageEvent.pageIndex;
+    this.paginatorConfig.pageSize = pageEvent.pageSize;
+
+    this.messageService
+      .getAllMessagesByDonorPreview(
+        this.paginatorConfig.pageIndex + 1,
+        this.paginatorConfig.pageSize
+      )
+      .subscribe({
+        next: (data) => {
+          console.log(data);
+          this.messagesDonorPreview = data.rows;
+          this.paginatorConfig.length = data.count;
+        },
+      });
   }
 }

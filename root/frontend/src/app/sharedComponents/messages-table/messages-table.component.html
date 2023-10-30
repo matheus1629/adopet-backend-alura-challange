@@ -64,7 +64,8 @@
       [pageSize]="paginatorConfig.pageSize"
       [pageSizeOptions]="[10, 25, 100]"
       [showFirstLastButtons]="true"
-      [pageIndex]="paginatorConfig.currentPage"
+      [pageIndex]="paginatorConfig.pageIndex"
+      (page)="handlePageEvent($event)"
       aria-label="Select page"
     >
     </mat-paginator>

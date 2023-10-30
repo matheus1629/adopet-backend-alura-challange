@@ -10,9 +10,15 @@ const getMessagesByAdopter = async (req, res) => {
   }
 };
 
-const getAllMessagesByDonorPreView = async (req, res) => {
+const getAllMessagesByDonorPreview = async (req, res) => {
+  const { pageIndex, pageSize } = req.query;
+
   try {
-    const allMessagesByDonorPreView = await messageService.getAllMessagesByDonorPreView(req.userId);
+    const allMessagesByDonorPreView = await messageService.getAllMessagesByDonorPreView(
+      req.userId,
+      Number(pageIndex),
+      Number(pageSize)
+    );
 
     return res.status(200).send(allMessagesByDonorPreView);
   } catch (error) {
@@ -37,5 +43,5 @@ const createMessage = async (req, res) => {
 export default {
   createMessage,
   getMessagesByAdopter,
-  getAllMessagesByDonorPreView,
+  getAllMessagesByDonorPreview,
 };

@@ -1,13 +1,9 @@
 import { MessageService } from './../../../services/message.service';
-import { SharedService } from './../../../services/shared-services.service';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
-import { Router } from '@angular/router';
-import { map } from 'rxjs';
 
 import { PaginatorIntlService } from 'src/app/services/paginator-intl.service';
 import { PetService } from 'src/app/services/pet.service';
-import { PetSize } from 'src/shared/enums/petSize.enum';
 import { IPet } from 'src/shared/interfaces/pet.interface';
 
 @Component({
@@ -45,16 +41,14 @@ export class PetsAdopterComponent implements OnInit {
       .getMessagesByAdopter()
       .subscribe((data) => (this.messagesSendedIdPet = data));
 
-    this.petService
-      .getAllPetsAvailable(this.currentPage + 1, this.pageSize)
-      .subscribe({
-        next: (data) => {
-          this.pets = data.rows;
-          this.length = data.count;
-        },
-        error: (err) => {
-          console.error('Error: ', err);
-        },
-      });
+    this.petService.getAllPetsAvailable(this.currentPage + 1, this.pageSize).subscribe({
+      next: (data) => {
+        this.pets = data.rows;
+        this.length = data.count;
+      },
+      error: (err) => {
+        console.error('Error: ', err);
+      },
+    });
   }
 }

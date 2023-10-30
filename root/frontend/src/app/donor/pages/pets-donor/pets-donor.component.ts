@@ -39,6 +39,7 @@ export class PetsDonorComponent implements OnInit {
         const newData: IPet[] = [];
 
         for (let pet of data.rows) {
+          //todo
           newData.push({ ...pet, size: PetSize[pet.size.toUpperCase() as keyof typeof PetSize] });
         }
 

@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { MatPaginatorIntl } from '@angular/material/paginator';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import { PaginatorIntlService } from 'src/app/services/paginator-intl.service';
 import { IMessagesPreview } from 'src/shared/interfaces/messagesPreview.interface';
 import { IPaginatorConfig } from 'src/shared/interfaces/paginatorConfig.interface';
@@ -11,8 +11,13 @@ import { IPaginatorConfig } from 'src/shared/interfaces/paginatorConfig.interfac
   providers: [{ provide: MatPaginatorIntl, useClass: PaginatorIntlService }],
 })
 export class MessagesTableComponent {
-  @Input() paginatorConfig!: IPaginatorConfig;
+  @Input() paginatorConfig!: PageEvent;
   @Input() messagesPreview!: IMessagesPreview[];
+  @Output() pageEvent = new EventEmitter();
+
+  handlePageEvent(event: PageEvent) {
+    this.pageEvent.emit(event);
+  }
 
   infoDisplay(adoptionStatus: string) {
     let adoptionStatusInfo;

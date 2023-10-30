@@ -16,16 +16,27 @@ const getMessagesByAdopter = async (idAdopter) => {
   return idPets;
 };
 
-const getAllMessagesByDonorPreView = async (idDonor) => {
-  const allMessagesByDonorPreView = await messageRepository.getAllMessagesByDonorPreView(idDonor);
+const getAllMessagesByDonorPreView = async (idDonor, pageIndex, pageSize) => {
+  if (!pageIndex) pageIndex = 1;
+  if (!pageSize || pageSize === 0) pageSize = 10;
 
-  for (const key in allMessagesByDonorPreView) {
-    allMessagesByDonorPreView[key].dataValues.Pet.dataValues.picture = bufferToBase64(
-      allMessagesByDonorPreView[key].dataValues.Pet.dataValues.picture
+  const pageSetting = {
+    offset: (pageIndex - 1) * pageSize,
+    limit: pageSize,
+  };
+
+  const { count, rows } = await messageRepository.getAllMessagesByDonorPreView(
+    idDonor,
+    pageSetting
+  );
+
+  for (const key in rows) {
+    rows[key].dataValues.Pet.dataValues.picture = bufferToBase64(
+      rows[key].dataValues.Pet.dataValues.picture
     );
   }
 
-  return allMessagesByDonorPreView;
+  return { count, rows } ;
 };
 
 const createMessage = async (newMessage) => {

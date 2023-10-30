@@ -2,4 +2,5 @@
 <app-messages-table
   [paginatorConfig]="paginatorConfig"
   [messagesPreview]="messagesDonorPreview"
+  (pageEvent)="handlePageEvent($event)"
 ></app-messages-table>

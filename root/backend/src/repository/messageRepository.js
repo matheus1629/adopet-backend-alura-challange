@@ -7,9 +7,8 @@ const getMessagesByAdopter = async (idAdopter) => {
   });
 };
 
-const getAllMessagesByDonorPreView = async (idDonor) => {
-
-  return await database.Message.findAll({
+const getAllMessagesByDonorPreView = async (idDonor, pageSetting) => {
+  return await database.Message.findAndCountAll({
     attributes: ["date", "adoptionStatus"],
     include: [
       {
@@ -20,7 +19,7 @@ const getAllMessagesByDonorPreView = async (idDonor) => {
           {
             where: { id: idDonor },
             model: database.Donor,
-            attributes:[]
+            attributes: [],
           },
         ],
       },
@@ -29,6 +28,7 @@ const getAllMessagesByDonorPreView = async (idDonor) => {
         attributes: ["firstName", "lastName"],
       },
     ],
+    ...pageSetting,
   });
 };
 

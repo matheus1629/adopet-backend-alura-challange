@@ -14,3 +14,9 @@ export interface IMessagesPreview {
     lastName: string;
   };
 }
+
+
+export interface IMessagesPreviewPagination {
+  count: number;
+  rows: IMessagesPreview[];
+}
