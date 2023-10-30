@@ -3,23 +3,48 @@
   <div class="table-container">
     <table>
       <thead>
-        <tr class="table-header">
+        <tr>
           <th class="pet-column">Pet</th>
           <th class="name-column">Nome</th>
           <th class="date-column">Data</th>
           <th class="status-column">Status</th>
           <th class="show-column"></th>
         </tr>
-        <tr class="input-header">
-          <td class="input pet-column"><input type="text" /></td>
-          <td class="input name-column"><input type="text" /></td>
-          <td class="input date-column"><input type="text" /></td>
-          <td class="input status-column"><input type="text" /></td>
-          <td class="input show-column"></td>
+        <tr>
+          <td class="td-input pet-column"><input class="input" type="text" /></td>
+          <td class="td-input name-column"><input class="input" type="text" /></td>
+          <td class="td-input date-column">
+            <select id="dateOrder" name="dateOrder" formControlName="dateOrder">
+              <option value="asc" selected>Crescente</option>
+              <option value="desc">Decrescente</option>
+            </select>
+          </td>
+
+          <td class="td-input status-column">
+            <select id="adoptionStatus" name="adoptionStatus" formControlName="adoptionStatus">
+              <option value="" selected>Todos</option>
+              <option value="NOT_STARTED">Não iniciado</option>
+              <option value="DONOR_REFUSED">Adoção recusada pelo doador</option>
+              <option value="PENDING_CONFIRMATION">Confirmação pendente</option>
+              <option value="ADOPTER_ACCEPT">Adotado</option>
+              <option value="ADOPTER_REFUSED">Adoção recusada pelo adotant</option>
+            </select>
+          </td>
+          <td class="td-input show-column"></td>
         </tr>
+        <td colspan="5">
+          <app-button (click)="filter()" [buttonConfig]="buttonRegister"></app-button>
+        </td>
       </thead>
 
-      <ng-container *ngIf="messagesPreview?.length !== 0">
+      <ng-container *ngIf="messagesPreview?.length === 0; else messages">
+        <td colspan="5" class="empty-list">
+          <p>{{ emptyList }}</p>
+          <mat-icon class="empty-list-icon" fontIcon="info_outline"></mat-icon>
+        </td>
+      </ng-container>
+
+      <ng-template #messages>
         <tbody
           *ngFor="let message of messagesPreview; let even = even; let odd = odd"
           [ngClass]="{ even: even, odd: odd }"
@@ -49,15 +74,8 @@
             <td class="show-column"><mat-icon fontIcon="navigate_next"></mat-icon></td>
           </tr>
         </tbody>
-      </ng-container>
+      </ng-template>
     </table>
-
-    <ng-container *ngIf="messagesPreview?.length === 0">
-      <div class="empty-list">
-        <p>{{ emptyList }}</p>
-        <mat-icon class="empty-list-icon" fontIcon="info_outline"></mat-icon>
-      </div>
-    </ng-container>
 
     <mat-paginator
       [length]="paginatorConfig.length"

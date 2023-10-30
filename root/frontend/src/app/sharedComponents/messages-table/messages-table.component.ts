@@ -1,8 +1,12 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import { AuthService } from 'src/app/services/auth.service';
 import { PaginatorIntlService } from 'src/app/services/paginator-intl.service';
+import { ButtonClass } from 'src/shared/enums/buttonConfig.enum';
+import { IButtonConfig } from 'src/shared/interfaces/buttonConfig.interface';
 import { IMessagesPreview } from 'src/shared/interfaces/messagesPreview.interface';
+import { clearFilterValues } from 'src/shared/utils/form';
 
 @Component({
   selector: 'app-messages-table',
@@ -16,8 +20,14 @@ export class MessagesTableComponent implements OnInit {
   @Output() pageEvent = new EventEmitter();
   routeMessage!: string;
   emptyList!: string;
+  buttonRegister: IButtonConfig = {
+    innerText: 'Aplicar filtro',
+    class: ButtonClass.BUTTON_TYPE_2,
+    disable: false,
+  };
+  filterForm!: FormGroup;
 
-  constructor(public auth: AuthService) {}
+  constructor(public auth: AuthService, private fb: FormBuilder) {}
 
   ngOnInit(): void {
     if (this.auth.getUserType() === 'Donor') {
@@ -27,6 +37,13 @@ export class MessagesTableComponent implements OnInit {
       this.routeMessage = '/adopter/messages/details';
       this.emptyList = 'Você ainda não enviou uma mensagem...';
     }
+
+    this.filterForm = this.fb.group({
+      petName: ['', Validators.maxLength(255)],
+      adopterDonorName: ['', Validators.maxLength(255)],
+      dateOrder: [''],
+      adoptionStatus: [''],
+    });
   }
 
   handlePageEvent(event: PageEvent) {
@@ -56,5 +73,9 @@ export class MessagesTableComponent implements OnInit {
     }
 
     return adoptionStatusInfo;
+  }
+
+  filter() {
+    const cleanedFilterValues = clearFilterValues(this.filterForm.value);
   }
 }

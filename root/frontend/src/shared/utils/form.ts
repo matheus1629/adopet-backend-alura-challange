@@ -3,6 +3,7 @@ import { States } from '../enums/states.enum';
 import { IFormRegisterAccount } from '../interfaces/formRegisterAccount.interface';
 import { IPet } from '../interfaces/pet.interface';
 import { PetSize } from '../enums/petSize.enum';
+import { AdoptionStatus } from '../enums/adoptionStatus.enum';
 
 export function validateName(control: AbstractControl): { validName: boolean } | null {
   const regex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/;
@@ -45,6 +46,15 @@ function getPetSizeKey(petSizeValue: PetSize): string {
   const values = Object.values(PetSize);
 
   const index = values.indexOf(petSizeValue);
+
+  return keys[index];
+}
+
+function getAdoptionStatusKey(adoptionStatusValue: AdoptionStatus): string {
+  const keys = Object.keys(AdoptionStatus);
+  const values = Object.values(AdoptionStatus);
+
+  const index = values.indexOf(adoptionStatusValue);
 
   return keys[index];
 }
@@ -104,4 +114,17 @@ export function clearPetValues(formDirtyValues: IPet) {
     cleanedPetValues.description = formDirtyValues.description?.trim();
 
   return cleanedPetValues;
+}
+
+export function clearFilterValues(formDirtyValues: any) {
+  const cleanedFilterValues = formDirtyValues;
+
+  cleanedFilterValues.petName = formDirtyValues.petName?.trim();
+  cleanedFilterValues.adopterDonorName = formDirtyValues.adopterDonorName?.trim();
+  cleanedFilterValues.adoptionStatus = getAdoptionStatusKey(
+    formDirtyValues.adoptionStatus as AdoptionStatus
+  );
+  
+
+  return cleanedFilterValues;
 }

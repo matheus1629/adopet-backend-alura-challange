@@ -83,7 +83,7 @@ export class AddPetComponent implements OnInit {
       const clearedPetValues = clearPetValues(this.addPetForm.value);
 
       this.petService.createPet(clearedPetValues).subscribe({
-        next: (data) => {
+        next: () => {
           this.buttonRegister.loading = false;
           this.addPetForm.markAsPristine();
           this.router.navigate(['/donor/pets']);
