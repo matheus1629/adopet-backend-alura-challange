@@ -11,13 +11,17 @@ const getMessagesByAdopter = async (req, res) => {
 };
 
 const getAllMessagesByDonorPreview = async (req, res) => {
-  const { pageIndex, pageSize } = req.query;
+  const { pageIndex, pageSize, petName, adopterDonorName, dataOrder, adoptionStatus } = req.query;
 
   try {
     const allMessagesByDonorPreView = await messageService.getAllMessagesByDonorPreView(
       req.userId,
       Number(pageIndex),
-      Number(pageSize)
+      Number(pageSize),
+      petName,
+      adopterDonorName,
+      dataOrder,
+      adoptionStatus
     );
 
     return res.status(200).send(allMessagesByDonorPreView);

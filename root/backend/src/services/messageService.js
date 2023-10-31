@@ -16,7 +16,15 @@ const getMessagesByAdopter = async (idAdopter) => {
   return idPets;
 };
 
-const getAllMessagesByDonorPreView = async (idDonor, pageIndex, pageSize) => {
+const getAllMessagesByDonorPreView = async (
+  idDonor,
+  pageIndex,
+  pageSize,
+  petName,
+  adopterDonorName,
+  dataOrder,
+  adoptionStatus
+) => {
   if (!pageIndex) pageIndex = 1;
   if (!pageSize || pageSize === 0) pageSize = 10;
 
@@ -27,16 +35,18 @@ const getAllMessagesByDonorPreView = async (idDonor, pageIndex, pageSize) => {
 
   const { count, rows } = await messageRepository.getAllMessagesByDonorPreView(
     idDonor,
-    pageSetting
+    pageSetting,
+    petName,
+    adopterDonorName,
+    dataOrder,
+    adoptionStatus
   );
 
   for (const key in rows) {
-    rows[key].dataValues.Pet.dataValues.picture = bufferToBase64(
-      rows[key].dataValues.Pet.dataValues.picture
-    );
+    rows[key].dataValues.Pet.dataValues.picture = bufferToBase64(rows[key].dataValues.Pet.dataValues.picture);
   }
 
-  return { count, rows } ;
+  return { count, rows };
 };
 
 const createMessage = async (newMessage) => {

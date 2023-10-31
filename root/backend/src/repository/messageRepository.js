@@ -1,3 +1,4 @@
+import { Op, Sequelize } from "sequelize";
 import database from "../database/models/index.js";
 
 const getMessagesByAdopter = async (idAdopter) => {
@@ -7,14 +8,24 @@ const getMessagesByAdopter = async (idAdopter) => {
   });
 };
 
-const getAllMessagesByDonorPreView = async (idDonor, pageSetting) => {
+const getAllMessagesByDonorPreView = async (
+  idDonor,
+  pageSetting,
+  petName,
+  adopterDonorName,
+  dataOrder,
+  adoptionStatus
+) => {
   return await database.Message.findAndCountAll({
     attributes: ["date", "adoptionStatus"],
+    order: [["date", dataOrder]],
+    where: { adoptionStatus },
     include: [
       {
         model: database.Pet,
         attributes: ["name", "picture"],
         required: true,
+        where: { name: { [Op.like]: `%${petName}%` } },
         include: [
           {
             where: { id: idDonor },
@@ -26,6 +37,17 @@ const getAllMessagesByDonorPreView = async (idDonor, pageSetting) => {
       {
         model: database.Adopter,
         attributes: ["firstName", "lastName"],
+        where: Sequelize.where(
+          Sequelize.fn(
+            "concat",
+            Sequelize.col("Adopter.first_name"),
+            " ",
+            Sequelize.col("Adopter.last_name")
+          ),
+          {
+            [Op.like]: `%${adopterDonorName}%`,
+          }
+        ),
       },
     ],
     ...pageSetting,

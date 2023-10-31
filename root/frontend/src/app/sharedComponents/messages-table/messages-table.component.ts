@@ -76,6 +76,8 @@ export class MessagesTableComponent implements OnInit {
   }
 
   filter() {
+    this.buttonRegister.loading = true;
+    
     const cleanedFilterValues = clearFilterValues(this.filterForm.value);
   }
 }
