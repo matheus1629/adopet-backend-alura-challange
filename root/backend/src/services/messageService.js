@@ -22,7 +22,7 @@ const getAllMessagesByDonorPreView = async (
   pageSize,
   petName,
   adopterDonorName,
-  dataOrder,
+  dateOrder,
   adoptionStatus
 ) => {
   if (!pageIndex) pageIndex = 1;
@@ -33,12 +33,12 @@ const getAllMessagesByDonorPreView = async (
     limit: pageSize,
   };
 
-  const { count, rows } = await messageRepository.getAllMessagesByDonorPreView(
+  const { count, rows } = await messageRepository.getAllMessagesByDonorPreview(
     idDonor,
     pageSetting,
     petName,
     adopterDonorName,
-    dataOrder,
+    dateOrder,
     adoptionStatus
   );
 

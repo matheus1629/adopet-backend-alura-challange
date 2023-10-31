@@ -8,18 +8,20 @@ const getMessagesByAdopter = async (idAdopter) => {
   });
 };
 
-const getAllMessagesByDonorPreView = async (
+const getAllMessagesByDonorPreview = async (
   idDonor,
   pageSetting,
   petName,
   adopterDonorName,
-  dataOrder,
+  dateOrder,
   adoptionStatus
 ) => {
   return await database.Message.findAndCountAll({
     attributes: ["date", "adoptionStatus"],
-    order: [["date", dataOrder]],
-    where: { adoptionStatus },
+    order: [["date", dateOrder]],
+    where: {
+      [Op.and]: Sequelize.literal(adoptionStatus ? `adoption_Status = '${adoptionStatus}'` : "true"),
+    },
     include: [
       {
         model: database.Pet,
@@ -69,5 +71,5 @@ export default {
   createMessage,
   checkIfAdopterAlreadySendedMessage,
   getMessagesByAdopter,
-  getAllMessagesByDonorPreView,
+  getAllMessagesByDonorPreview,
 };

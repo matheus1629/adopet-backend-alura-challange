@@ -4,6 +4,7 @@ import { IFormRegisterAccount } from '../interfaces/formRegisterAccount.interfac
 import { IPet } from '../interfaces/pet.interface';
 import { PetSize } from '../enums/petSize.enum';
 import { AdoptionStatus } from '../enums/adoptionStatus.enum';
+import { IFilterMessagesPreview } from '../interfaces/filterMessagesPreview.interface';
 
 export function validateName(control: AbstractControl): { validName: boolean } | null {
   const regex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/;
@@ -116,15 +117,12 @@ export function clearPetValues(formDirtyValues: IPet) {
   return cleanedPetValues;
 }
 
-export function clearFilterValues(formDirtyValues: any) {
+export function clearFilterValues(formDirtyValues: IFilterMessagesPreview) {
   const cleanedFilterValues = formDirtyValues;
 
-  cleanedFilterValues.petName = formDirtyValues.petName?.trim();
-  cleanedFilterValues.adopterDonorName = formDirtyValues.adopterDonorName?.trim();
   cleanedFilterValues.adoptionStatus = getAdoptionStatusKey(
     formDirtyValues.adoptionStatus as AdoptionStatus
   );
-  
 
   return cleanedFilterValues;
 }

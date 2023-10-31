@@ -2,10 +2,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { AdoptionStatus } from 'src/shared/enums/adoptionStatus.enum';
-import {
-  IMessagesPreview,
-  IMessagesPreviewPagination,
-} from 'src/shared/interfaces/messagesPreview.interface';
+import { IFilterMessagesPreview } from 'src/shared/interfaces/filterMessagesPreview.interface';
+import { IMessagesPreviewPagination } from 'src/shared/interfaces/messagesPreview.interface';
 import { ISendMessage } from 'src/shared/interfaces/sendMessage.interface';
 
 @Injectable({
@@ -20,9 +18,20 @@ export class MessageService {
 
   getAllMessagesByDonorPreview(
     currentPage: number,
-    pageSize: number
+    pageSize: number,
+    petName: string | undefined = '',
+    adopterDonorName: string | undefined = '',
+    dataOrder: string | undefined = 'asc',
+    adoptionStatus: string | undefined = ''
   ): Observable<IMessagesPreviewPagination> {
-    const params = new HttpParams().set('pageIndex', currentPage).set('pageSize', pageSize);
+    const params = new HttpParams()
+      .set('pageIndex', currentPage)
+      .set('pageSize', pageSize)
+      .set('petName', petName)
+      .set('adopterDonorName', adopterDonorName)
+      .set('dateOrder', dataOrder)
+      .set('adoptionStatus', adoptionStatus);
+    console.log(dataOrder);
 
     return this.http.get<IMessagesPreviewPagination>('/message/donor/preview', { params }).pipe(
       map((data) => ({

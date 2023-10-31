@@ -11,7 +11,7 @@ const getMessagesByAdopter = async (req, res) => {
 };
 
 const getAllMessagesByDonorPreview = async (req, res) => {
-  const { pageIndex, pageSize, petName, adopterDonorName, dataOrder, adoptionStatus } = req.query;
+  const { pageIndex, pageSize, petName, adopterDonorName, dateOrder, adoptionStatus } = req.query;
 
   try {
     const allMessagesByDonorPreView = await messageService.getAllMessagesByDonorPreView(
@@ -20,7 +20,7 @@ const getAllMessagesByDonorPreview = async (req, res) => {
       Number(pageSize),
       petName,
       adopterDonorName,
-      dataOrder,
+      dateOrder,
       adoptionStatus
     );
 

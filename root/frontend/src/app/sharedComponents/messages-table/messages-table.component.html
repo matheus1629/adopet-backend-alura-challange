@@ -10,24 +10,37 @@
           <th class="status-column">Status</th>
           <th class="show-column"></th>
         </tr>
-        <tr>
-          <td class="td-input pet-column"><input class="input" type="text" /></td>
-          <td class="td-input name-column"><input class="input" type="text" /></td>
+        <tr [formGroup]="filterForm">
+          <td class="td-input pet-column">
+            <input
+              class="input"
+              type="text"
+              id="petName"
+              name="petName"
+              formControlName="petName"
+            />
+          </td>
+          <td class="td-input name-column">
+            <input
+              class="input"
+              type="text"
+              id="adopterDonorName"
+              name="adopterDonorName"
+              formControlName="adopterDonorName"
+            />
+          </td>
           <td class="td-input date-column">
             <select id="dateOrder" name="dateOrder" formControlName="dateOrder">
-              <option value="asc" selected>Crescente</option>
-              <option value="desc">Decrescente</option>
+              <option value="asc" selected>Mais recentes</option>
+              <option value="desc">Mais antigos</option>
             </select>
           </td>
-
           <td class="td-input status-column">
             <select id="adoptionStatus" name="adoptionStatus" formControlName="adoptionStatus">
               <option value="" selected>Todos</option>
-              <option value="NOT_STARTED">Não iniciado</option>
-              <option value="DONOR_REFUSED">Adoção recusada pelo doador</option>
-              <option value="PENDING_CONFIRMATION">Confirmação pendente</option>
-              <option value="ADOPTER_ACCEPT">Adotado</option>
-              <option value="ADOPTER_REFUSED">Adoção recusada pelo adotant</option>
+              <option *ngFor="let adoptionStatus of adoptionStatus" [value]="adoptionStatus">
+                {{ adoptionStatus }}
+              </option>
             </select>
           </td>
           <td class="td-input show-column"></td>
