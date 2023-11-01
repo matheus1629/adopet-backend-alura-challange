@@ -33,7 +33,7 @@ export class DonorService {
     return this.http.patch<IAccountEdit>('/donor', formData);
   }
 
-  deleteDonor(): Observable<null> {
-    return this.http.delete<null>('/donor');
+  deleteDonor(): Observable<void> {
+    return this.http.delete<void>('/donor');
   }
 }

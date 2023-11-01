@@ -15,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MessagesTableComponent } from './messages-table/messages-table.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { BindQueryParamDirective } from './bind-query-param.directive';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     PopupComponent,
     PopupConfirmComponent,
     MessagesTableComponent,
+    BindQueryParamDirective,
   ],
   exports: [
     HeaderComponent,

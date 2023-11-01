@@ -130,7 +130,7 @@ export class EditPetComponent implements OnInit {
       const clearedPetValues = clearPetValues(dirtyFields as IPet);
 
       this.petService.editPet(clearedPetValues, this.idPet).subscribe({
-        next: (data) => {
+        next: () => {
           this.router.navigate(['/donor/pets']);
           window.scrollTo(0, 0);
           this.buttonRegister.loading = false;
@@ -160,7 +160,7 @@ export class EditPetComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.petService.deletePet(this.idPet).subscribe({
-          next: (data) => {
+          next: () => {
             this.openPopup('Pet excluído!', 'check_circle');
             this.buttonRegister.loading = false;
             this.editPetForm.markAsPristine();

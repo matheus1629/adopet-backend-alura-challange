@@ -4,17 +4,17 @@
 
   <section>
     <mat-paginator
-      [length]="length"
-      [pageSize]="pageSize"
+      [length]="paginatorConfig.length"
+      [pageSize]="paginatorConfig.pageSize"
       [pageSizeOptions]="[10, 25, 100]"
       [showFirstLastButtons]="true"
-      [pageIndex]="currentPage"
+      [pageIndex]="paginatorConfig.pageIndex"
       (page)="handlePageEvent($event)"
       aria-label="Select page"
     >
     </mat-paginator>
 
-    <ng-container *ngIf="length === 0; else petsCards">
+    <ng-container *ngIf="paginatorConfig.length === 0; else petsCards">
       <div class="empty-list">
         <p>Nenhum pet encontrado para adoção :&lpar;</p>
         <mat-icon class="empty-list-icon" fontIcon="info"></mat-icon>

@@ -10,7 +10,7 @@
           <th class="status-column">Status</th>
           <th class="show-column"></th>
         </tr>
-        <tr [formGroup]="filterForm">
+        <tr [formGroup]="filterForm" (keyup.enter)="filter()">
           <td class="td-input pet-column">
             <input
               class="input"
@@ -18,6 +18,7 @@
               id="petName"
               name="petName"
               formControlName="petName"
+              bindQueryParam="petName"
             />
           </td>
           <td class="td-input name-column">
@@ -27,16 +28,27 @@
               id="adopterDonorName"
               name="adopterDonorName"
               formControlName="adopterDonorName"
+              bindQueryParam="adopterDonorName"
             />
           </td>
           <td class="td-input date-column">
-            <select id="dateOrder" name="dateOrder" formControlName="dateOrder">
-              <option value="asc" selected>Mais recentes</option>
-              <option value="desc">Mais antigos</option>
+            <select
+              id="dateOrder"
+              name="dateOrder"
+              formControlName="dateOrder"
+              bindQueryParam="dateOrder"
+            >
+              <option value="desc">Mais recentes</option>
+              <option value="asc">Mais antigos</option>
             </select>
           </td>
           <td class="td-input status-column">
-            <select id="adoptionStatus" name="adoptionStatus" formControlName="adoptionStatus">
+            <select
+              id="adoptionStatus"
+              name="adoptionStatus"
+              formControlName="adoptionStatus"
+              bindQueryParam="adoptionStatus"
+            >
               <option value="" selected>Todos</option>
               <option *ngFor="let adoptionStatus of adoptionStatus" [value]="adoptionStatus">
                 {{ adoptionStatus }}
@@ -46,7 +58,7 @@
           <td class="td-input show-column"></td>
         </tr>
         <td colspan="5">
-          <app-button (click)="filter()" [buttonConfig]="buttonRegister"></app-button>
+          <app-button (click)="filter()" [buttonConfig]="buttonFilter"></app-button>
         </td>
       </thead>
 
@@ -73,16 +85,18 @@
               <p>{{ message.Adopter?.firstName }} {{ message.Adopter?.lastName }}</p>
             </td>
             <td class="date-column">
-              <p>{{ message.date }}</p>
+              <p>{{ message.date | date : "dd/MM/yyyy" }}</p>
             </td>
             <td class="status-column">
               <div class="field-container">
                 <p>{{ message.adoptionStatus }}</p>
-                <mat-icon
-                  [matTooltip]="infoDisplay(message.adoptionStatus) || ''"
-                  fontIcon="help_outline"
-                ></mat-icon>
               </div>
+            </td>
+            <td>
+              <mat-icon
+                [matTooltip]="infoDisplay(message.adoptionStatus) || ''"
+                fontIcon="help_outline"
+              ></mat-icon>
             </td>
             <td class="show-column"><mat-icon fontIcon="navigate_next"></mat-icon></td>
           </tr>

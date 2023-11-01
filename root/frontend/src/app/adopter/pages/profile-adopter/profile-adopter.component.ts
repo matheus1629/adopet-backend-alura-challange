@@ -163,7 +163,7 @@ export class ProfileAdopterComponent implements OnInit, DoCheck {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.adopterService.deleteAdopter().subscribe({
-          next: (data) => {
+          next: () => {
             this.editAdopterForm.markAsPristine();
             this.router.navigate(['/']);
           },

@@ -21,7 +21,7 @@ export class MessageService {
     pageSize: number,
     petName: string | undefined = '',
     adopterDonorName: string | undefined = '',
-    dataOrder: string | undefined = 'asc',
+    dataOrder: string | undefined = 'desc',
     adoptionStatus: string | undefined = ''
   ): Observable<IMessagesPreviewPagination> {
     const params = new HttpParams()
@@ -31,7 +31,6 @@ export class MessageService {
       .set('adopterDonorName', adopterDonorName)
       .set('dateOrder', dataOrder)
       .set('adoptionStatus', adoptionStatus);
-    console.log(dataOrder);
 
     return this.http.get<IMessagesPreviewPagination>('/message/donor/preview', { params }).pipe(
       map((data) => ({
@@ -46,7 +45,7 @@ export class MessageService {
     );
   }
 
-  createMessage(body: ISendMessage): Observable<any> {
-    return this.http.post<any>('/message', body);
+  createMessage(body: ISendMessage): Observable<void> {
+    return this.http.post<void>('/message', body);
   }
 }

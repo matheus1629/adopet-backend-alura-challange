@@ -163,7 +163,7 @@ export class ProfileDonorComponent implements OnInit, DoCheck {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.donorService.deleteDonor().subscribe({
-          next: (data) => {
+          next: () => {
             this.buttonRegister.loading = false;
             this.editAdopterForm.markAsPristine();
             this.router.navigate(['/']);

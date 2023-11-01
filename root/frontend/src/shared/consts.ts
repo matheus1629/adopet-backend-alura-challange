@@ -1,3 +1,4 @@
+import { PageEvent } from '@angular/material/paginator';
 export const maxLengthForm = 255;
 export const maxLengthPassword = 16;
 export const inputValidations = {
@@ -14,7 +15,7 @@ export const errorMessages = {
   fileUnsupported: 'O arquivo precisa ser JPEG ou PNG',
   validName: 'Este campo só pode conter letras.',
   minlength: 'Este campo precisa ter no mínimo 2 caracteres.',
-  petAge:'Digite um valor inteiro de 0 a 99.',
+  petAge: 'Digite um valor inteiro de 0 a 99.',
   select: 'Selecione uma opção.',
   phoneNumber: 'Digite um número válido.',
   email: 'Digite um email válido.',

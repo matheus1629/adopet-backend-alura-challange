@@ -1,14 +1,17 @@
-import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
+
 import { AuthService } from 'src/app/services/auth.service';
 import { PaginatorIntlService } from 'src/app/services/paginator-intl.service';
+
 import { AdoptionStatus } from 'src/shared/enums/adoptionStatus.enum';
 import { ButtonClass } from 'src/shared/enums/buttonConfig.enum';
+
 import { IButtonConfig } from 'src/shared/interfaces/buttonConfig.interface';
-import { IFilterMessagesPreview } from 'src/shared/interfaces/filterMessagesPreview.interface';
 import { IMessagesPreview } from 'src/shared/interfaces/messagesPreview.interface';
+
 import { clearFilterValues } from 'src/shared/utils/form';
 
 @Component({
@@ -20,16 +23,12 @@ import { clearFilterValues } from 'src/shared/utils/form';
 export class MessagesTableComponent implements OnInit {
   @Input() paginatorConfig!: PageEvent;
   @Input() messagesPreview!: IMessagesPreview[];
-  @Output() pageEvent = new EventEmitter();
-  @Output() filterPageEvent = new EventEmitter();
-  cleanedFilterValues?: IFilterMessagesPreview;
   adoptionStatus = Object.values(AdoptionStatus);
   routeMessage!: string;
   emptyList!: string;
-  buttonRegister: IButtonConfig = {
+  buttonFilter: IButtonConfig = {
     innerText: 'Aplicar filtro',
     class: ButtonClass.BUTTON_TYPE_2,
-    disable: false,
   };
   filterForm!: FormGroup;
 
@@ -47,14 +46,16 @@ export class MessagesTableComponent implements OnInit {
     this.filterForm = this.fb.group({
       petName: ['', Validators.maxLength(255)],
       adopterDonorName: ['', Validators.maxLength(255)],
-      dateOrder: ['asc'],
+      dateOrder: ['desc'],
       adoptionStatus: [''],
     });
   }
 
   handlePageEvent(event: PageEvent) {
-    this.paginatorConfig = event;
-    this.urlParams();
+    this.router.navigate([], {
+      queryParams: { pageIndex: event.pageIndex + 1, pageSize: event.pageSize },
+      queryParamsHandling: 'merge',
+    });
   }
 
   infoDisplay(adoptionStatus: string) {
@@ -83,15 +84,21 @@ export class MessagesTableComponent implements OnInit {
   }
 
   filter() {
-    // this.buttonRegister.loading = true;
+   // this.buttonFilter.loading = true;
+   
+    const cleanedFilterValues = clearFilterValues(this.filterForm.value);
 
-    this.cleanedFilterValues = clearFilterValues(this.filterForm.value);
-    this.urlParams();
-    //this.router.navigate(['/donor/messages'], { queryParams: cleanedFilterValues });
-  }
 
-  urlParams() {
-    const teste = { page: this.paginatorConfig, filter: this.cleanedFilterValues };
-    this.filterPageEvent.emit(teste);
+    this.router.navigate([], {
+      queryParams: {
+        petName: cleanedFilterValues.petName,
+        adopterDonorName: cleanedFilterValues.adopterDonorName,
+        dateOrder: cleanedFilterValues.dateOrder,
+        adoptionStatus: cleanedFilterValues.adoptionStatus,
+        pageIndex: 1,
+        pageSize: 10,
+      },
+      queryParamsHandling: 'merge',
+    });
   }
 }

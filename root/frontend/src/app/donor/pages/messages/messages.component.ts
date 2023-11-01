@@ -1,10 +1,11 @@
-import { IFilterMessagesPreview } from './../../../../shared/interfaces/filterMessagesPreview.interface';
-import { MessageService } from 'src/app/services/message.service';
 import { Component, OnInit } from '@angular/core';
 import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
-import { PaginatorIntlService } from 'src/app/services/paginator-intl.service';
-import { IMessagesPreview } from 'src/shared/interfaces/messagesPreview.interface';
 import { ActivatedRoute } from '@angular/router';
+
+import { MessageService } from 'src/app/services/message.service';
+import { PaginatorIntlService } from 'src/app/services/paginator-intl.service';
+
+import { IMessagesPreview } from 'src/shared/interfaces/messagesPreview.interface';
 
 @Component({
   selector: 'app-messages',
@@ -24,8 +25,9 @@ export class MessagesComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
-      this.filterPageEvent(
-        this.paginatorConfig,
+      this.handleFilterPage(
+        params['pageIndex'],
+        params['pageSize'],
         params['petName'],
         params['adopterDonorName'],
         params['dateOrder'],
@@ -34,25 +36,21 @@ export class MessagesComponent implements OnInit {
     });
   }
 
-
-  setUrlParams(teste:any){
-
-  }
-
-  filterPageEvent(
-    pageEvent: PageEvent,
+  handleFilterPage(
+    pageIndex: number,
+    pageSize: number,
     petName: string,
     adopterDonorName: string,
     dateOrder: string,
     adoptionStatus: string
   ) {
-    this.paginatorConfig.pageIndex = pageEvent.pageIndex;
-    this.paginatorConfig.pageSize = pageEvent.pageSize;
+    this.paginatorConfig.pageIndex = pageIndex - 1;
+    this.paginatorConfig.pageSize = pageSize;
 
     this.messageService
       .getAllMessagesByDonorPreview(
-        this.paginatorConfig.pageIndex + 1,
-        this.paginatorConfig.pageSize,
+        pageIndex,
+        pageSize,
         petName,
         adopterDonorName,
         dateOrder,

@@ -64,8 +64,9 @@ app-button {
 .field-container {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 10px;
+  padding-left: 10px;
 }
 
 img {
@@ -89,7 +90,7 @@ img {
 }
 
 .status-column {
-  width: 25%;
+  width: 20%;
 }
 
 .show-column {
@@ -156,11 +157,12 @@ mat-paginator {
 
 @media only screen and (max-width: $mobile-size) {
   img {
+    display: none;
     width: 30px;
     height: 30px;
   }
 
   .field-container {
-    gap: 5px;
+    justify-content: space-around;
   }
 }

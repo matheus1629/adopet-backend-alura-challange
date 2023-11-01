@@ -1,5 +1,5 @@
 export interface IFilterMessagesPreview {
-  dataOrder: string;
+  dateOrder: string;
   adopterDonorName: string;
   petName: string;
   adoptionStatus: string;

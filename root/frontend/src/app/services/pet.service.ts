@@ -55,7 +55,7 @@ export class PetService {
     return this.http.patch<IPet>(`/pet/${idPet}`, petData);
   }
 
-  deletePet(idPet: number): Observable<IPet> {
-    return this.http.delete<IPet>(`/pet/${idPet}`);
+  deletePet(idPet: number): Observable<void> {
+    return this.http.delete<void>(`/pet/${idPet}`);
   }
 }
