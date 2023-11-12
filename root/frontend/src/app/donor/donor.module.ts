@@ -15,6 +15,7 @@ import { PetsDonorComponent } from './pages/pets-donor/pets-donor.component';
 import { AddPetComponent } from './pages/add-pet/add-pet.component';
 import { EditPetComponent } from './pages/edit-pet/edit-pet.component';
 import { MessagesComponent } from './pages/messages/messages.component';
+import { MessageDetailsComponent } from './pages/message-details/message-details.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { MessagesComponent } from './pages/messages/messages.component';
     AddPetComponent,
     EditPetComponent,
     MessagesComponent,
+    MessageDetailsComponent,
   ],
   imports: [
     CommonModule,

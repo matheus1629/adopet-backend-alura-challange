@@ -13,6 +13,7 @@ import { AdopterComponent } from './adopter.component';
 import { ProfileAdopterComponent } from './pages/profile-adopter/profile-adopter.component';
 import { RegisterAdopterComponent } from './pages/register-adopter/register-adopter.component';
 import { SendMessageComponent } from './pages/send-message/send-message.component';
+import { MessagesComponent } from './pages/messages/messages.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { SendMessageComponent } from './pages/send-message/send-message.componen
     RegisterAdopterComponent,
     PetsAdopterComponent,
     SendMessageComponent,
+    MessagesComponent,
   ],
   imports: [
     CommonModule,
@@ -29,7 +31,7 @@ import { SendMessageComponent } from './pages/send-message/send-message.componen
     ReactiveFormsModule,
     NgxMaskModule.forRoot(),
     MatIconModule,
-    MatPaginatorModule
+    MatPaginatorModule,
   ],
 })
 export class AdopterModule {}

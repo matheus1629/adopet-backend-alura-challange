@@ -7,7 +7,6 @@ module.exports = {
       "Pet",
       [
         {
-          id: 1,
           name: "Maria",
           age: 7,
           size: "porte_pequeno",
@@ -19,7 +18,6 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          id: 2,
           name: "Miguel",
           age: 3,
           size: "porte_pequeno",
@@ -31,7 +29,6 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          id: 3,
           name: "Katarina",
           age: 4,
           size: "porte_pequeno",
@@ -43,7 +40,6 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          id: 4,
           name: "Maya",
           age: 2,
           size: "porte_pequeno",

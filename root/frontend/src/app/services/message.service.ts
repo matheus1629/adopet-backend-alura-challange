@@ -45,6 +45,35 @@ export class MessageService {
     );
   }
 
+  getAllMessagesByAdopterPreview(
+    currentPage: number,
+    pageSize: number,
+    petName: string | undefined = '',
+    adopterDonorName: string | undefined = '',
+    dataOrder: string | undefined = 'desc',
+    adoptionStatus: string | undefined = ''
+  ): Observable<IMessagesPreviewPagination> {
+    const params = new HttpParams()
+      .set('pageIndex', currentPage)
+      .set('pageSize', pageSize)
+      .set('petName', petName)
+      .set('adopterDonorName', adopterDonorName)
+      .set('dateOrder', dataOrder)
+      .set('adoptionStatus', adoptionStatus);
+
+    return this.http.get<IMessagesPreviewPagination>('/message/adopter/preview', { params }).pipe(
+      map((data) => ({
+        count: data.count,
+        rows: data.rows.map((message) => ({
+          ...message,
+          date: message.date.slice(0, 10),
+          adoptionStatus:
+            AdoptionStatus[message.adoptionStatus.toUpperCase() as keyof typeof AdoptionStatus],
+        })),
+      }))
+    );
+  }
+
   createMessage(body: ISendMessage): Observable<void> {
     return this.http.post<void>('/message', body);
   }

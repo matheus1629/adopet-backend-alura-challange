@@ -9,6 +9,7 @@ import { AddPetComponent } from './pages/add-pet/add-pet.component';
 import { EditPetComponent } from './pages/edit-pet/edit-pet.component';
 import { canDeactivateGuard } from '../guard/can-deactivate.guard';
 import { MessagesComponent } from './pages/messages/messages.component';
+import { MessageDetailsComponent } from './pages/message-details/message-details.component';
 
 const routes: Routes = [
   { path: '', component: DonorComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'add-pet', component: AddPetComponent, canDeactivate: [canDeactivateGuard] },
   { path: 'edit-pet/:id', component: EditPetComponent, canDeactivate: [canDeactivateGuard] },
   { path: 'messages', component: MessagesComponent },
+  { path: 'message-details/:id', component: MessageDetailsComponent },
 ];
 
 @NgModule({

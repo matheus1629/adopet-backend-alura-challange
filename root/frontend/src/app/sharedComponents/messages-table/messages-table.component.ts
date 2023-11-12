@@ -24,8 +24,7 @@ export class MessagesTableComponent implements OnInit {
   @Input() paginatorConfig!: PageEvent;
   @Input() messagesPreview!: IMessagesPreview[];
   adoptionStatus = Object.values(AdoptionStatus);
-  routeMessage!: string;
-  emptyList!: string;
+  routeMessageDetails!: string;
   buttonFilter: IButtonConfig = {
     innerText: 'Aplicar filtro',
     class: ButtonClass.BUTTON_TYPE_2,
@@ -35,13 +34,8 @@ export class MessagesTableComponent implements OnInit {
   constructor(public auth: AuthService, private fb: FormBuilder, private router: Router) {}
 
   ngOnInit(): void {
-    if (this.auth.getUserType() === 'Donor') {
-      this.routeMessage = '/donor/messages/details';
-      this.emptyList = 'Você ainda não recebeu mensagens...';
-    } else if (this.auth.getUserType() === 'Adopter') {
-      this.routeMessage = '/adopter/messages/details';
-      this.emptyList = 'Você ainda não enviou uma mensagem...';
-    }
+    if (this.auth.getUserType() === 'Donor') this.routeMessageDetails = '/donor/message-details/';
+    else if (this.auth.getUserType() === 'Adopter') this.routeMessageDetails = '/adopter/message-details/';
 
     this.filterForm = this.fb.group({
       petName: ['', Validators.maxLength(255)],
@@ -52,6 +46,7 @@ export class MessagesTableComponent implements OnInit {
   }
 
   handlePageEvent(event: PageEvent) {
+    console.log(this.messagesPreview);
     this.router.navigate([], {
       queryParams: { pageIndex: event.pageIndex + 1, pageSize: event.pageSize },
       queryParamsHandling: 'merge',
@@ -84,10 +79,9 @@ export class MessagesTableComponent implements OnInit {
   }
 
   filter() {
-   // this.buttonFilter.loading = true;
-   
-    const cleanedFilterValues = clearFilterValues(this.filterForm.value);
+    // this.buttonFilter.loading = true;
 
+    const cleanedFilterValues = clearFilterValues(this.filterForm.value);
 
     this.router.navigate([], {
       queryParams: {

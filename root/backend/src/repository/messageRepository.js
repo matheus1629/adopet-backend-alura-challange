@@ -17,7 +17,7 @@ const getAllMessagesByDonorPreview = async (
   adoptionStatus
 ) => {
   return await database.Message.findAndCountAll({
-    attributes: ["date", "adoptionStatus"],
+    attributes: ["id", "date", "adoptionStatus"],
     order: [["date", dateOrder]],
     where: {
       [Op.and]: Sequelize.literal(adoptionStatus ? `adoption_Status = '${adoptionStatus}'` : "true"),
@@ -56,6 +56,53 @@ const getAllMessagesByDonorPreview = async (
   });
 };
 
+const getAllMessagesByAdopterPreview = async (
+  idAdopter,
+  pageSetting,
+  petName,
+  adopterDonorName,
+  dateOrder,
+  adoptionStatus
+) => {
+  console.log("swwwww");
+  return await database.Message.findAndCountAll({
+    attributes: ["id", "date", "adoptionStatus"],
+    order: [["date", dateOrder]],
+    where: {
+      [Op.and]: [
+        Sequelize.literal(adoptionStatus ? `adoption_Status = '${adoptionStatus}'` : "true"),
+        { idAdopter: idAdopter },
+      ],
+    },
+    include: [
+      {
+        model: database.Pet,
+        attributes: ["name", "picture"],
+        required: true,
+        where: { name: { [Op.like]: `%${petName}%` } },
+        include: [
+          {
+            model: database.Donor,
+            attributes: ["firstName", "lastName"],
+            where: Sequelize.where(
+              Sequelize.fn(
+                "concat",
+                Sequelize.col("Pet.Donor.first_name"),
+                " ",
+                Sequelize.col("Pet.Donor.last_name")
+              ),
+              {
+                [Op.like]: `%${adopterDonorName}%`,
+              }
+            ),
+          },
+        ],
+      },
+    ],
+    ...pageSetting,
+  });
+};
+
 const createMessage = async (newAdopter) => {
   return await database.Message.create(newAdopter);
 };
@@ -70,6 +117,7 @@ const checkIfAdopterAlreadySendedMessage = async (idAdopter, idPet) => {
 export default {
   createMessage,
   checkIfAdopterAlreadySendedMessage,
+  getAllMessagesByAdopterPreview,
   getMessagesByAdopter,
   getAllMessagesByDonorPreview,
 };

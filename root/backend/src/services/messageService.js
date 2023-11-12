@@ -49,6 +49,39 @@ const getAllMessagesByDonorPreView = async (
   return { count, rows };
 };
 
+const getAllMessagesByAdopterPreview = async (
+  idAdopter,
+  pageIndex,
+  pageSize,
+  petName,
+  adopterDonorName,
+  dateOrder,
+  adoptionStatus
+) => {
+  if (!pageIndex) pageIndex = 1;
+  if (!pageSize || pageSize === 0) pageSize = 10;
+
+  const pageSetting = {
+    offset: (pageIndex - 1) * pageSize,
+    limit: pageSize,
+  };
+
+  const { count, rows } = await messageRepository.getAllMessagesByAdopterPreview(
+    idAdopter,
+    pageSetting,
+    petName,
+    adopterDonorName,
+    dateOrder,
+    adoptionStatus
+  );
+
+  for (const key in rows) {
+    rows[key].dataValues.Pet.dataValues.picture = bufferToBase64(rows[key].dataValues.Pet.dataValues.picture);
+  }
+
+  return { count, rows };
+};
+
 const createMessage = async (newMessage) => {
   delete newMessage.adoption_status;
 
@@ -85,4 +118,5 @@ export default {
   createMessage,
   getMessagesByAdopter,
   getAllMessagesByDonorPreView,
+  getAllMessagesByAdopterPreview,
 };

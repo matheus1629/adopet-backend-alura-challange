@@ -1,0 +1,92 @@
+@import "../../../../variables.scss";
+
+main {
+  color: $white-color;
+  min-height: 93vh;
+  width: 100%;
+  z-index: -2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.table-container {
+  width: 85%;
+  height: 80%;
+  background-color: $light-grey-color;
+  padding: 30px 0;
+  border-radius: 10px;
+}
+
+table {
+  color: $dark-grey-color;
+  table-layout: fixed;
+  text-align: center;
+  border-collapse: separate;
+}
+
+td {
+  border-bottom: 1px solid $medium-grey-color;
+  padding: 20px 0;
+  vertical-align: middle;
+}
+
+.table-row:nth-child(even) {
+  background-color: $column-even;
+}
+
+.table-row:nth-child(odd) {
+  background-color: $column-odd;
+}
+
+.table-row:hover {
+  background-color: $column-hover;
+  cursor: pointer;
+}
+
+.input {
+  padding: 10px 0;
+}
+
+.pet-row {
+  width: 25%;
+}
+
+.name-row {
+  width: 30%;
+}
+
+.date-row {
+  width: 15%;
+}
+
+.status-row {
+  width: 25%;
+}
+
+.show-row {
+  width: 5%;
+}
+
+.show-row mat-icon {
+  display: none;
+}
+
+.table-row:hover .show-row mat-icon {
+  display: block;
+}
+
+input {
+  width: 80%;
+  background-color: $white-color;
+  padding: 5px 0px 5px 10px;
+  border-radius: 5px;
+  color: $dark-grey-color;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.15);
+}
+
+mat-paginator {
+  width: 100%;
+  margin-top: 30px;
+  background-color: transparent;
+}

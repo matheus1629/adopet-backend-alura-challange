@@ -64,7 +64,7 @@
 
       <ng-container *ngIf="messagesPreview?.length === 0; else messages">
         <td colspan="5" class="empty-list">
-          <p>{{ emptyList }}</p>
+          <p>Nenhuma mensagem encontrada...</p>
           <mat-icon class="empty-list-icon" fontIcon="info_outline"></mat-icon>
         </td>
       </ng-container>
@@ -74,7 +74,7 @@
           *ngFor="let message of messagesPreview; let even = even; let odd = odd"
           [ngClass]="{ even: even, odd: odd }"
         >
-          <tr class="table-row">
+          <tr class="table-row" routerLink="{{ routeMessageDetails }}{{ message.id }}">
             <td class="pet-column">
               <div class="field-container">
                 <img src="{{ message.Pet.picture }}" alt="Pet picture" />
@@ -82,7 +82,10 @@
               </div>
             </td>
             <td class="name-column">
-              <p>{{ message.Adopter?.firstName }} {{ message.Adopter?.lastName }}</p>
+              <p>
+                {{ message.Adopter?.firstName || message.Pet.Donor?.firstName }}
+                {{ message.Adopter?.lastName || message.Pet.Donor?.lastName }}
+              </p>
             </td>
             <td class="date-column">
               <p>{{ message.date | date : "dd/MM/yyyy" }}</p>
