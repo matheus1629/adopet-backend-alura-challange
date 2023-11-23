@@ -29,13 +29,18 @@ export class MessagesTableComponent implements OnInit {
     innerText: 'Aplicar filtro',
     class: ButtonClass.BUTTON_TYPE_2,
   };
+  buttonClearFilter: IButtonConfig = {
+    innerText: 'Limpar filtro',
+    class: ButtonClass.BUTTON_TYPE_2,
+  };
   filterForm!: FormGroup;
 
   constructor(public auth: AuthService, private fb: FormBuilder, private router: Router) {}
 
   ngOnInit(): void {
     if (this.auth.getUserType() === 'Donor') this.routeMessageDetails = '/donor/message-details/';
-    else if (this.auth.getUserType() === 'Adopter') this.routeMessageDetails = '/adopter/message-details/';
+    else if (this.auth.getUserType() === 'Adopter')
+      this.routeMessageDetails = '/adopter/message-details/';
 
     this.filterForm = this.fb.group({
       petName: ['', Validators.maxLength(255)],
@@ -93,6 +98,16 @@ export class MessagesTableComponent implements OnInit {
         pageSize: 10,
       },
       queryParamsHandling: 'merge',
+    });
+  }
+
+  clearFilter() {
+    // this.buttonFilter.loading = true;
+
+    const cleanedFilterValues = clearFilterValues(this.filterForm.value);
+
+    this.router.navigate([], {
+      queryParams: {},
     });
   }
 }

@@ -58,7 +58,10 @@
           <td class="td-input show-column"></td>
         </tr>
         <td colspan="5">
-          <app-button (click)="filter()" [buttonConfig]="buttonFilter"></app-button>
+          <div class="button-filter-container">
+            <app-button (click)="filter()" [buttonConfig]="buttonFilter"></app-button>
+            <app-button (click)="clearFilter()" [buttonConfig]="buttonClearFilter"></app-button>
+          </div>
         </td>
       </thead>
 

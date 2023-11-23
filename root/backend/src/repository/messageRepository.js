@@ -64,7 +64,6 @@ const getAllMessagesByAdopterPreview = async (
   dateOrder,
   adoptionStatus
 ) => {
-  console.log("swwwww");
   return await database.Message.findAndCountAll({
     attributes: ["id", "date", "adoptionStatus"],
     order: [["date", dateOrder]],

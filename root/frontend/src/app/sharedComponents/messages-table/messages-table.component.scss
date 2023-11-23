@@ -131,6 +131,12 @@ select {
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.15);
 }
 
+.button-filter-container {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+}
+
 mat-paginator {
   width: 100%;
   margin-top: 30px;
@@ -152,6 +158,11 @@ mat-paginator {
 @media only screen and (max-width: $tablet-size) {
   .table-container {
     width: 100%;
+  }
+
+  .button-filter-container {
+    flex-direction: column;
+    gap: 20px;
   }
 }
 
