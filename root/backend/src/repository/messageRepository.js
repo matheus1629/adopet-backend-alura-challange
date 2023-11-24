@@ -1,31 +1,29 @@
 import { Op, Sequelize, where } from "sequelize";
 import database from "../database/models/index.js";
 
-const getMessagesByAdopter = async (idAdopter) => {
-  return await database.Message.findAll({
+const getMessagesByAdopter = async (idAdopter) =>
+  await database.Message.findAll({
     where: { idAdopter: idAdopter },
     attributes: ["idPet"],
   });
-};
 
-const getMessageDetailsById = async (messageId) => {
-  return await database.Message.findOne({
+const getMessageDetailsById = async (messageId) =>
+  await database.Message.findOne({
     where: { id: messageId },
     attributes: { exclude: ["idAdopter"] },
     include: [
       {
         model: database.Pet,
         attributes: {
-          exclude: ["idDonor", "idAdopter", "password", "createdAt", "updatedAt", "deletedAt"],
+          exclude: ["idDonor", "idAdopter"],
         },
       },
       {
         model: database.Adopter,
-        attributes: { exclude: ["id", "password", "createdAt", "updatedAt", "deletedAt"] },
+        attributes: { exclude: ["id"] },
       },
     ],
   });
-};
 
 const getAllMessagesByDonorPreview = async (
   idDonor,
@@ -34,8 +32,8 @@ const getAllMessagesByDonorPreview = async (
   adopterDonorName,
   dateOrder,
   adoptionStatus
-) => {
-  return await database.Message.findAndCountAll({
+) =>
+  await database.Message.findAndCountAll({
     attributes: ["id", "date", "adoptionStatus"],
     order: [["date", dateOrder]],
     where: {
@@ -73,7 +71,6 @@ const getAllMessagesByDonorPreview = async (
     ],
     ...pageSetting,
   });
-};
 
 const getAllMessagesByAdopterPreview = async (
   idAdopter,
@@ -82,8 +79,8 @@ const getAllMessagesByAdopterPreview = async (
   adopterDonorName,
   dateOrder,
   adoptionStatus
-) => {
-  return await database.Message.findAndCountAll({
+) =>
+  await database.Message.findAndCountAll({
     attributes: ["id", "date", "adoptionStatus"],
     order: [["date", dateOrder]],
     where: {
@@ -119,15 +116,13 @@ const getAllMessagesByAdopterPreview = async (
     ],
     ...pageSetting,
   });
-};
 
 const createMessage = async (newAdopter) => await database.Message.create(newAdopter);
-const checkIfAdopterAlreadySendedMessage = async (idAdopter, idPet) => {
-  return await database.Message.findOne({
+const checkIfAdopterAlreadySendedMessage = async (idAdopter, idPet) =>
+  await database.Message.findOne({
     where: { idAdopter: idAdopter, idPet: idPet },
     attributes: ["id"],
   });
-};
 
 const updateMessageAdoptionStatus = async (id, adoptionStatus) => {
   await database.Message.update({ adoptionStatus: adoptionStatus }, { where: { id } });

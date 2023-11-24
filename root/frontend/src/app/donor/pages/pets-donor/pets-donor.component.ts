@@ -46,14 +46,7 @@ export class PetsDonorComponent implements OnInit {
 
     this.petService.getPetsByDonor(pageIndex, pageSize).subscribe({
       next: (data) => {
-        const newData: IPet[] = [];
-
-        for (let pet of data.rows) {
-          //todo
-          newData.push({ ...pet, size: PetSize[pet.size.toUpperCase() as keyof typeof PetSize] });
-        }
-
-        this.pets = newData;
+        this.pets = data.rows;
         this.paginatorConfig.length = data.count;
       },
       error: (err) => {

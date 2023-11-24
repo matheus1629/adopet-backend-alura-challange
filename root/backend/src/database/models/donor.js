@@ -85,6 +85,12 @@ export default (sequelize, DataTypes) => {
       sequelize,
       modelName: "Donor",
       paranoid: true,
+
+      defaultScope: {
+        attributes: {
+          exclude: ["password", "email", "createdAt", "updatedAt", "deletedAt"],
+        },
+      },
     }
   );
   return Donor;

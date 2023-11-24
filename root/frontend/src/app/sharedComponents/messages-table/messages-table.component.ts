@@ -25,14 +25,8 @@ export class MessagesTableComponent implements OnInit {
   @Input() messagesPreview!: IMessagesPreview[];
   adoptionStatus = Object.values(AdoptionStatus);
   routeMessageDetails!: string;
-  buttonFilter: IButtonConfig = {
-    innerText: 'Aplicar filtro',
-    class: ButtonClass.BUTTON_TYPE_2,
-  };
-  buttonClearFilter: IButtonConfig = {
-    innerText: 'Limpar filtro',
-    class: ButtonClass.BUTTON_TYPE_2,
-  };
+  @Input() buttonFilter!: IButtonConfig;
+  @Input() buttonClearFilter!: IButtonConfig;
   filterForm!: FormGroup;
 
   constructor(public auth: AuthService, private fb: FormBuilder, private router: Router) {}
@@ -78,8 +72,6 @@ export class MessagesTableComponent implements OnInit {
   }
 
   filter() {
-    // this.buttonFilter.loading = true;
-
     const cleanedFilterValues = clearFilterValues(this.filterForm.value);
 
     this.router.navigate([], {
@@ -96,10 +88,6 @@ export class MessagesTableComponent implements OnInit {
   }
 
   clearFilter() {
-    // this.buttonFilter.loading = true;
-
-    const cleanedFilterValues = clearFilterValues(this.filterForm.value);
-
     this.router.navigate([], {
       queryParams: {},
     });

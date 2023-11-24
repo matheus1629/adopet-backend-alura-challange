@@ -21,7 +21,7 @@ export class PetService {
 
     return this.http.get<IPetPagination>('/pet', { params, headers }).pipe(
       map((data) => ({
-        count:data.count,
+        count: data.count,
         rows: data.rows.map((pet) => ({
           ...pet,
           size: PetSize[pet.size.toUpperCase() as keyof typeof PetSize],
@@ -44,7 +44,15 @@ export class PetService {
   getPetsByDonor(currentPage: number, pageSize: number): Observable<IPetPagination> {
     const params = new HttpParams().set('pageIndex', currentPage).set('pageSize', pageSize);
 
-    return this.http.get<IPetPagination>('/pet/all/loggedDonor', { params });
+    return this.http.get<IPetPagination>('/pet/all/loggedDonor', { params }).pipe(
+      map((data) => ({
+        count: data.count,
+        rows: data.rows.map((pet) => ({
+          ...pet,
+          size: PetSize[pet.size.toUpperCase() as keyof typeof PetSize],
+        })),
+      }))
+    );
   }
 
   createPet(petData: IPet): Observable<IPet> {

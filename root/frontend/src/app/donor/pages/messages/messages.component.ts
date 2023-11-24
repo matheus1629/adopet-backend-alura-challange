@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 
 import { MessageService } from 'src/app/services/message.service';
 import { PaginatorIntlService } from 'src/app/services/paginator-intl.service';
+import { ButtonClass } from 'src/shared/enums/buttonConfig.enum';
+import { IButtonConfig } from 'src/shared/interfaces/buttonConfig.interface';
 
 import { IMessagesPreview } from 'src/shared/interfaces/messagesPreview.interface';
 
@@ -20,6 +22,14 @@ export class MessagesComponent implements OnInit {
     length: 0,
   };
   messagesDonorPreview!: IMessagesPreview[];
+  buttonFilter: IButtonConfig = {
+    innerText: 'Aplicar filtro',
+    class: ButtonClass.BUTTON_TYPE_2,
+  };
+  buttonClearFilter: IButtonConfig = {
+    innerText: 'Limpar filtro',
+    class: ButtonClass.BUTTON_TYPE_2,
+  };
 
   constructor(private messageService: MessageService, private route: ActivatedRoute) {}
 
@@ -44,6 +54,8 @@ export class MessagesComponent implements OnInit {
     dateOrder: string,
     adoptionStatus: string
   ) {
+    this.buttonFilter.loading = true;
+    this.buttonClearFilter.loading = true;
     this.paginatorConfig.pageIndex = pageIndex - 1;
     this.paginatorConfig.pageSize = pageSize;
 
@@ -60,6 +72,8 @@ export class MessagesComponent implements OnInit {
         next: (data) => {
           this.messagesDonorPreview = data.rows;
           this.paginatorConfig.length = data.count;
+          this.buttonFilter.loading = false;
+          this.buttonClearFilter.loading = false;
         },
       });
   }

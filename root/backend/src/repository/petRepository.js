@@ -1,30 +1,27 @@
-import { where } from "sequelize";
 import database from "../database/models/index.js";
 
-const getAllPetsAvailable = async (pageSetting) => {
-  return await database.Pet.findAndCountAll({
+const getAllPetsAvailable = async (pageSetting) =>
+  await database.Pet.findAndCountAll({
     where: { adopted: 0 },
     attributes: { exclude: ["createdAt", "updatedAt"] },
     include: {
       model: database.Donor,
-      attributes: ["firstName", "city", "state"],
+      attributes: [ "city", "state"],
     },
     ...pageSetting,
   });
-};
 
-const getAllPets = async () => {
-  return await database.Pet.findAll({
+const getAllPets = async () =>
+  await database.Pet.findAll({
     attributes: { exclude: ["createdAt", "updatedAt"] },
     include: {
       model: database.Donor,
       attributes: ["city", "state"],
     },
   });
-};
 
-const getPetById = async (id) => {
-  return await database.Pet.findOne({
+const getPetById = async (id) =>
+  await database.Pet.findOne({
     where: { id },
     attributes: { exclude: ["createdAt", "updatedAt"] },
     include: {
@@ -32,25 +29,20 @@ const getPetById = async (id) => {
       attributes: ["firstName", "city", "state"],
     },
   });
-};
 
-const getPetsByDonor = async (idDonor, pageSetting) => {
-  return await database.Pet.findAndCountAll({
+const getPetsByDonor = async (idDonor, pageSetting) =>
+  await database.Pet.findAndCountAll({
     where: { id_donor: idDonor },
     attributes: { exclude: ["createdAt", "updatedAt"] },
     ...pageSetting,
   });
-};
 
-const createPet = async (newPet) => {
-  return await database.Pet.create(newPet);
-};
+const createPet = async (newPet) => await database.Pet.create(newPet);
 
-const updatePet = async (petData, id) => {
-  return await database.Pet.update(petData, {
+const updatePet = async (petData, id) =>
+  await database.Pet.update(petData, {
     where: { id },
   });
-};
 
 const petAdopted = async (id, adopterId, adoptionDate) => {
   await database.Pet.update({ adopterId, adoptionDate, adopted: 1 }, { where: { id } });
@@ -66,26 +58,23 @@ const deletePet = async (id) => {
   return wasDeleted;
 };
 
-const validateIfPetBelongsToDonor = async (id, donorId) => {
-  return await database.Pet.findOne({
+const validateIfPetBelongsToDonor = async (id, donorId) =>
+  await database.Pet.findOne({
     where: { id, idDonor: donorId },
     attributes: ["id"],
   });
-};
 
-const checkIfPetWasAdoped = async (id) => {
-  return await database.Pet.findOne({
+const checkIfPetWasAdoped = async (id) =>
+  await database.Pet.findOne({
     where: { id },
     attributes: ["adopted"],
   });
-};
 
-const checkIfPetExist = async (id) => {
-  return await database.Pet.findOne({
+const checkIfPetExist = async (id) =>
+  await database.Pet.findOne({
     where: { id },
     attributes: ["id"],
   });
-};
 
 export default {
   getAllPetsAvailable,

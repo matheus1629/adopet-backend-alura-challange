@@ -1,38 +1,24 @@
 import database from "../database/models/index.js";
 
-const getAllDonors = async () => {
-  return await database.Donor.findAll({
-    attributes: {
-      exclude: ["password", "createdAt", "updatedAt", "deletedAt"],
-    },
-  });
-};
+const getAllDonors = async () => await database.Donor.findAll({});
 
-const getDonorById = async (id) => {
-  return await database.Donor.findOne({
+const getDonorById = async (id) =>
+  await database.Donor.findOne({
     where: { id },
-    attributes: {
-      exclude: ["password", "createdAt", "updatedAt", "deletedAt"],
-    },
   });
-};
 
-const getDonorPictureById = async (id) => {
-  return await database.Donor.findOne({
+const getDonorPictureById = async (id) =>
+  await database.Donor.findOne({
     where: { id },
     attributes: ["picture"],
   });
-};
 
-const createDonor = async (newDonor) => {
-  return await database.Donor.create(newDonor);
-};
+const createDonor = async (newDonor) => await database.Donor.create(newDonor);
 
-const updateDonor = async (donorData, id) => {
-  return await database.Donor.update(donorData, {
+const updateDonor = async (donorData, id) =>
+  await database.Donor.update(donorData, {
     where: { id },
   });
-};
 
 const deleteDonor = async (id) =>
   database.sequelize.transaction(async (transaction) => {
@@ -41,7 +27,7 @@ const deleteDonor = async (id) =>
 
     await database.Donor.destroy({ where: { id } }, { transaction });
   });
-  
+
 export default {
   getAllDonors,
   getDonorById,
