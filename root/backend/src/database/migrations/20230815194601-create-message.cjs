@@ -9,7 +9,7 @@ module.exports = {
         primaryKey: true,
       },
       adoption_status: {
-        type: Sequelize.ENUM("not_started", "pending_confirmation", "adopter_accept", "adopter_refused"),
+        type: Sequelize.ENUM("pending_confirmation", "donor_accepted", "donor_refused"),
         allowNull: false,
       },
       subject: {
@@ -20,7 +20,7 @@ module.exports = {
         type: Sequelize.STRING(2000),
         allowNull: false,
       },
-      date: { type: Sequelize.DATE, allowNull: false, defaultValue: Sequelize.fn('now') },
+      date: { type: Sequelize.DATE, allowNull: false, defaultValue: Sequelize.fn("now") },
       id_adopter: {
         allowNull: false,
         type: Sequelize.UUID,

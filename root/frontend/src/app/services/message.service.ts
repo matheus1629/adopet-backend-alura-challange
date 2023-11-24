@@ -2,7 +2,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { AdoptionStatus } from 'src/shared/enums/adoptionStatus.enum';
-import { IFilterMessagesPreview } from 'src/shared/interfaces/filterMessagesPreview.interface';
+import { PetSize } from 'src/shared/enums/petSize.enum';
+import { IMessageDetails } from 'src/shared/interfaces/messageDetails.interface';
 import { IMessagesPreviewPagination } from 'src/shared/interfaces/messagesPreview.interface';
 import { ISendMessage } from 'src/shared/interfaces/sendMessage.interface';
 
@@ -70,6 +71,18 @@ export class MessageService {
           adoptionStatus:
             AdoptionStatus[message.adoptionStatus.toUpperCase() as keyof typeof AdoptionStatus],
         })),
+      }))
+    );
+  }
+
+  getMessageDetailsById(id: number): Observable<IMessageDetails> {
+    return this.http.get<IMessageDetails>(`/message/donor/${id}/message-details`).pipe(
+      map((data) => ({
+        ...data,
+        Pet: {
+          ...data.Pet,
+          size: PetSize[data.Pet.size.toUpperCase() as keyof typeof PetSize],
+        },
       }))
     );
   }

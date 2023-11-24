@@ -1,0 +1,93 @@
+@import "../../../../variables.scss";
+
+main {
+  color: $white-color;
+  min-height: 93vh;
+  width: 100%;
+  z-index: -2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+section {
+  background-color: $light-grey-color;
+  width: 90%;
+  margin-bottom: 30px;
+  border-radius: 5px;
+  padding: 30px;
+}
+
+.text {
+  color: $blue-color;
+  margin-top: 100px;
+  margin-bottom: 30px;
+  font-weight: 400;
+  text-align: center;
+  width: 70%;
+}
+
+.container-adopter-pet {
+  display: flex;
+  gap: 30px;
+}
+
+.container-adopter,
+.container-pet {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 50%;
+}
+
+.adopter-title {
+  font-size: 24px;
+  color: $blue-color;
+}
+
+.container-field {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.label {
+  color: $blue-color;
+}
+
+.field {
+  color: $dark-grey-color;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.personal-info {
+  text-align: justify;
+  font-weight: normal;
+  max-height: 200px;
+  overflow-y: scroll;
+}
+
+.picture-img {
+  @include mat-icon-size(120px);
+  color: $medium-grey-color;
+  align-self: center;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.message-send {
+  font-size: 18px;
+  font-weight: 700;
+  color: $blue-color;
+  margin-top: 20px;
+}
+
+.container-button {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  margin-top: 60px;
+}

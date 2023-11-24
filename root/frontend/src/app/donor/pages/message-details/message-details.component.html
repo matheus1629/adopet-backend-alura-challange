@@ -1,1 +1,82 @@
-<p>message-details works!</p>
+<app-header></app-header>
+<main>
+  <p class="text">
+    Esta pessoa se interessou pelo seu pet, verifique seus dados cuidadosamente antes de decidir se
+    você aceita ou não doar seu pet para ele(a).
+  </p>
+  <section>
+    <div class="container-adopter-pet">
+      <div class="container-adopter">
+        <h2 class="adopter-title">Dados do adotante</h2>
+
+        <img class="picture-img" [src]="messageDetails.Adopter.picture" alt="Picture selected" />
+
+        <div class="container-field">
+          <span class="label">Nome</span>
+          <span class="field"
+            >{{ messageDetails.Adopter.firstName }} {{ messageDetails.Adopter.lastName }}</span
+          >
+        </div>
+
+        <div class="container-field">
+          <span class="label">Estado e Cidade</span>
+          <span class="field"
+            >{{ messageDetails.Adopter.state }} - {{ messageDetails.Adopter.city }}</span
+          >
+        </div>
+
+        <div class="container-field">
+          <span class="label">Telefone/Celular</span>
+          <span class="field">{{ messageDetails.Adopter.phoneNumber }}</span>
+        </div>
+
+        <div class="container-field">
+          <span class="label">Descrição pessoal</span>
+          <span class="field personal-info">{{ messageDetails.Adopter.personalInfo }}</span>
+        </div>
+
+        <h3 class="message-send">Mensagem enviada</h3>
+
+        <div class="container-field">
+          <span class="label">Assunto</span>
+          <span class="field">{{ messageDetails.subject }}</span>
+        </div>
+
+        <div class="container-field">
+          <span class="label">Mensagem</span>
+          <span class="field personal-info">{{ messageDetails.contactMessage }}</span>
+        </div>
+      </div>
+
+      <div class="container-pet">
+        <h2 class="adopter-title">Pet para doar</h2>
+        <img class="picture-img" [src]="messageDetails.Pet.picture" alt="Picture selected" />
+
+        <div class="container-field">
+          <span class="label">Nome</span>
+          <span class="field">{{ messageDetails.Pet.name }}</span>
+        </div>
+
+        <div class="container-field">
+          <span class="label">Idade</span>
+          <span class="field">{{ messageDetails.Pet.age }}</span>
+        </div>
+
+        <div class="container-field">
+          <span class="label">Tamanho do pet</span>
+          <span class="field">{{ messageDetails.Pet.size }}</span>
+        </div>
+
+        <div class="container-field">
+          <span class="label">Descrição</span>
+          <span class="field">{{ messageDetails.Pet.description }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-button">
+      <app-button (click)="refuseAdoption()" [buttonConfig]="buttonRefuse"></app-button>
+      <app-button (click)="acceptAdoption()" [buttonConfig]="buttonAccept"></app-button>
+    </div>
+  </section>
+</main>

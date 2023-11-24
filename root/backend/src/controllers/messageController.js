@@ -10,6 +10,17 @@ const getMessagesByAdopter = async (req, res) => {
   }
 };
 
+const getMessageDetailsById = async (req, res) => {
+  try {
+    const messageId = req.params.id;
+    const messageDetailsById = await messageService.getMessageDetailsById(messageId);
+
+    return res.status(200).send(messageDetailsById);
+  } catch (error) {
+    return res.status(500).json(error.message);
+  }
+};
+
 const getAllMessagesByDonorPreview = async (req, res) => {
   const { pageIndex, pageSize, petName, adopterDonorName, dateOrder, adoptionStatus } = req.query;
 
@@ -69,4 +80,5 @@ export default {
   getMessagesByAdopter,
   getAllMessagesByDonorPreview,
   getAllMessagesByAdopterPreview,
+  getMessageDetailsById,
 };

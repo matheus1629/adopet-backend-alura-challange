@@ -1,15 +1,5 @@
 @import "../../../../variables.scss";
 
-main {
-  color: $white-color;
-  min-height: 93vh;
-  width: 100%;
-  z-index: -2;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .table-container {
   width: 85%;
   height: 80%;

@@ -16,6 +16,15 @@ const getMessagesByAdopter = async (idAdopter) => {
   return idPets;
 };
 
+const getMessageDetailsById = async (messageId) => {
+  const messageDetailsById = await messageRepository.getMessageDetailsById(messageId);
+
+  messageDetailsById.Pet.picture = bufferToBase64(messageDetailsById.Pet.picture);
+  messageDetailsById.Adopter.picture = bufferToBase64(messageDetailsById.Adopter.picture);
+
+  return messageDetailsById;
+};
+
 const getAllMessagesByDonorPreView = async (
   idDonor,
   pageIndex,
@@ -117,6 +126,7 @@ const checkIfAdopterAlreadySendedMessage = async (idAdopter, idPet) => {
 export default {
   createMessage,
   getMessagesByAdopter,
+  getMessageDetailsById,
   getAllMessagesByDonorPreView,
   getAllMessagesByAdopterPreview,
 };

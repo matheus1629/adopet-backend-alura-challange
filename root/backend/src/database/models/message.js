@@ -20,9 +20,9 @@ export default (sequelize, DataTypes) => {
         primaryKey: true,
       },
       adoptionStatus: {
-        type: DataTypes.ENUM("not_started", "pending_confirmation", "adopter_accept", "adopter_refused"),
+        type: DataTypes.ENUM("pending_confirmation", "donor_accepted", "donor_refused"),
         field: "adoption_status",
-        defaultValue: "not_started",
+        defaultValue: "pending_confirmation",
       },
       subject: { type: DataTypes.STRING, field: "subject" },
       contactMessage: { type: DataTypes.STRING, field: "contact_message" },

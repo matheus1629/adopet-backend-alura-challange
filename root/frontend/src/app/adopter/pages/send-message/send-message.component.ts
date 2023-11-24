@@ -38,7 +38,6 @@ export class SendMessageComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
     private fb: FormBuilder,
     private messageService: MessageService,
     public dialog: MatDialog
@@ -84,7 +83,7 @@ export class SendMessageComponent implements OnInit {
           this.router.navigate(['/adopter/pets']);
           window.scrollTo(0, 0);
           this.openPopup(
-            `Mensagem enviada! Agora é só aguardar o contato do(a) ${this.petData.Donor?.firstName} via e-mail ou telefone/celular.`,
+            `Mensagem enviada! Agora é só aguardar a resposta do(a) ${this.petData.Donor?.firstName}.`,
             'check_circle'
           );
         },

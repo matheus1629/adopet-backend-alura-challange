@@ -61,20 +61,14 @@ export class MessagesTableComponent implements OnInit {
   infoDisplay(adoptionStatus: string) {
     let adoptionStatusInfo;
     switch (adoptionStatus) {
-      case 'Não iniciado':
-        adoptionStatusInfo = 'Solicitação ainda não respondida.';
+      case 'Confirmação pendente':
+        adoptionStatusInfo = 'Solicitação pendende para aprovação do doador.';
         break;
       case 'Adoção recusada pelo doador':
-        adoptionStatusInfo = 'Solicitação recusada pelo doador.';
+        adoptionStatusInfo = 'Solicitação de adoção recusada pelo doador.';
         break;
-      case 'Confirmação pendente':
-        adoptionStatusInfo = 'Solicitação pendende para aprovação do adotante.';
-        break;
-      case 'Adotado':
-        adoptionStatusInfo = 'Adotante aceitou adotar o pet.';
-        break;
-      case 'Adoção recusada pelo adotante':
-        adoptionStatusInfo = 'Adotante recusou adotar o pet.';
+      case 'Adoção aceitada pelo doador':
+        adoptionStatusInfo = 'Solicitação de adoção aceita pelo doador.';
         break;
       default:
         adoptionStatus = '';
