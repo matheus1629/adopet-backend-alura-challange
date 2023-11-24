@@ -21,6 +21,7 @@ export class UrlInterceptor<T> implements HttpInterceptor {
       headers = headers.set('Authorization', 'Bearer ' + token);
 
       const newReq = newReqApiUrl.clone({ headers });
+
       return next.handle(newReq);
     }
   }

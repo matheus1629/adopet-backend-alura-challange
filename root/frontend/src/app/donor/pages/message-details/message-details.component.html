@@ -1,6 +1,6 @@
 <app-header></app-header>
 <main>
-  <p class="text">
+  <p class="title">
     Esta pessoa se interessou pelo seu pet, verifique seus dados cuidadosamente antes de decidir se
     você aceita ou não doar seu pet para ele(a).
   </p>
@@ -32,7 +32,7 @@
 
         <div class="container-field">
           <span class="label">Descrição pessoal</span>
-          <span class="field personal-info">{{ messageDetails.Adopter.personalInfo }}</span>
+          <span class="field text">{{ messageDetails.Adopter.personalInfo }}</span>
         </div>
 
         <h3 class="message-send">Mensagem enviada</h3>
@@ -44,12 +44,14 @@
 
         <div class="container-field">
           <span class="label">Mensagem</span>
-          <span class="field personal-info">{{ messageDetails.contactMessage }}</span>
+          <span class="field text">{{ messageDetails.contactMessage }}</span>
         </div>
       </div>
 
+      <div class="row"></div>
+
       <div class="container-pet">
-        <h2 class="adopter-title">Pet para doar</h2>
+        <h2 class="pet-title">Pet para doar</h2>
         <img class="picture-img" [src]="messageDetails.Pet.picture" alt="Picture selected" />
 
         <div class="container-field">
@@ -75,8 +77,8 @@
     </div>
 
     <div class="container-button">
-      <app-button (click)="refuseAdoption()" [buttonConfig]="buttonRefuse"></app-button>
-      <app-button (click)="acceptAdoption()" [buttonConfig]="buttonAccept"></app-button>
+      <app-button (click)="adoptionRefused()" [buttonConfig]="buttonRefuse"></app-button>
+      <app-button (click)="adoptionAccepted()" [buttonConfig]="buttonAccept"></app-button>
     </div>
   </section>
 </main>

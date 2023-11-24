@@ -23,6 +23,11 @@ router.get(
 );
 router.get("/adopter", validateToken.checkToken("Adopter"), messageController.getMessagesByAdopter);
 router.post(
+  "/donor/:id/adoption-status",
+  validateToken.checkToken("Donor"),
+  messageController.updateMessageAdoptionStatus
+);
+router.post(
   "/",
   validateToken.checkToken("Adopter"),
   validateData.clearBody,

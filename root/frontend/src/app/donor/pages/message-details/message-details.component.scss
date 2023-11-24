@@ -19,7 +19,7 @@ section {
   padding: 30px;
 }
 
-.text {
+.title {
   color: $blue-color;
   margin-top: 100px;
   margin-bottom: 30px;
@@ -42,7 +42,8 @@ section {
   width: 50%;
 }
 
-.adopter-title {
+.adopter-title,
+.pet-title {
   font-size: 24px;
   color: $blue-color;
 }
@@ -51,6 +52,8 @@ section {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
+  max-width: 100%;
 }
 
 .label {
@@ -63,9 +66,10 @@ section {
   font-size: 16px;
 }
 
-.personal-info {
+.text {
   text-align: justify;
   font-weight: normal;
+  max-width: 100%;
   max-height: 200px;
   overflow-y: scroll;
 }
@@ -85,9 +89,36 @@ section {
   margin-top: 20px;
 }
 
+.row {
+  background-color: $dark-grey-color;
+  width: 1px;
+}
+
 .container-button {
   display: flex;
   justify-content: center;
   gap: 60px;
   margin-top: 60px;
+}
+
+@media only screen and (max-width: $tablet-size) {
+  section {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .container-adopter-pet {
+    gap: 10px;
+  }
+
+  .adopter-title,
+  .pet-title {
+    font-size: 18px;
+  }
+  
+  .container-button{
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
 }

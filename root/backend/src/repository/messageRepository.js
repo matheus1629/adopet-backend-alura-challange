@@ -1,4 +1,4 @@
-import { Op, Sequelize } from "sequelize";
+import { Op, Sequelize, where } from "sequelize";
 import database from "../database/models/index.js";
 
 const getMessagesByAdopter = async (idAdopter) => {
@@ -121,16 +121,20 @@ const getAllMessagesByAdopterPreview = async (
   });
 };
 
-const createMessage = async (newAdopter) => {
-  return await database.Message.create(newAdopter);
-};
-
+const createMessage = async (newAdopter) => await database.Message.create(newAdopter);
 const checkIfAdopterAlreadySendedMessage = async (idAdopter, idPet) => {
   return await database.Message.findOne({
     where: { idAdopter: idAdopter, idPet: idPet },
     attributes: ["id"],
   });
 };
+
+const updateMessageAdoptionStatus = async (id, adoptionStatus) => {
+  await database.Message.update({ adoptionStatus: adoptionStatus }, { where: { id } });
+};
+
+const checkIfMessageExist = async (id) =>
+  await database.Message.findOne({ where: { id }, attributes: ["id"] });
 
 export default {
   createMessage,
@@ -139,4 +143,6 @@ export default {
   getAllMessagesByAdopterPreview,
   getMessagesByAdopter,
   getAllMessagesByDonorPreview,
+  updateMessageAdoptionStatus,
+  checkIfMessageExist,
 };

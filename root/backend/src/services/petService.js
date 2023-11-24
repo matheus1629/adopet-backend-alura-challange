@@ -141,8 +141,17 @@ const updatePet = async (newPetInfo, id, idDonor) => {
   return await petRepository.updatePet(newPetInfo, id);
 };
 
-const deletePet = async (id, idDonor) => {
-  if (!(await validateIfPetBelongsToDonor(id, idDonor))) {
+const petAdopted = async (idPet, idAdopter, adoptionDate) => {
+  
+  console.log('ssssssss');
+  console.log(idPet);
+  console.log(idAdopter);
+  console.log(adoptionDate);
+  await petRepository.petAdopted(idPet, idAdopter, adoptionDate);
+};
+
+const deletePet = async (id, donorId) => {
+  if (!(await validateIfPetBelongsToDonor(id, donorId))) {
     throw new BadRequestError("Pet not found", 404);
   }
 
@@ -175,6 +184,7 @@ export default {
   getPetsByDonor,
   createPet,
   updatePet,
+  petAdopted,
   deletePet,
   checkIfPetWasAdoped,
   validateIfPetBelongsToDonor,

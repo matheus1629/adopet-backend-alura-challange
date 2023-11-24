@@ -1,3 +1,4 @@
+import { where } from "sequelize";
 import database from "../database/models/index.js";
 
 const getAllPetsAvailable = async (pageSetting) => {
@@ -51,6 +52,10 @@ const updatePet = async (petData, id) => {
   });
 };
 
+const petAdopted = async (id, adopterId, adoptionDate) => {
+  await database.Pet.update({ adopterId, adoptionDate, adopted: 1 }, { where: { id } });
+};
+
 const deletePet = async (id) => {
   let wasDeleted;
   await database.sequelize.transaction(async (transaction) => {
@@ -61,9 +66,9 @@ const deletePet = async (id) => {
   return wasDeleted;
 };
 
-const validateIfPetBelongsToDonor = async (id, idDonor) => {
+const validateIfPetBelongsToDonor = async (id, donorId) => {
   return await database.Pet.findOne({
-    where: { id, idDonor: idDonor },
+    where: { id, idDonor: donorId },
     attributes: ["id"],
   });
 };
@@ -89,6 +94,7 @@ export default {
   getPetsByDonor,
   createPet,
   updatePet,
+  petAdopted,
   deletePet,
   validateIfPetBelongsToDonor,
   checkIfPetWasAdoped,

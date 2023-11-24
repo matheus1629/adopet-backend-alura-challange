@@ -75,10 +75,24 @@ const createMessage = async (req, res) => {
   }
 };
 
+const updateMessageAdoptionStatus = async (req, res) => {
+  try {
+    const idMessage = req.params.id;
+    const { adoptionStatus, idPet } = req.body;
+
+    await messageService.updateMessageAdoptionStatus(idMessage, adoptionStatus, idPet);
+    return res.status(200).json({ message: adoptionStatus });
+  } catch (error) {
+    if (error.name === "BadRequestError") return res.status(error.status).json(error.message);
+    return res.status(500).json(error.message);
+  }
+};
+
 export default {
   createMessage,
   getMessagesByAdopter,
   getAllMessagesByDonorPreview,
   getAllMessagesByAdopterPreview,
   getMessageDetailsById,
+  updateMessageAdoptionStatus,
 };

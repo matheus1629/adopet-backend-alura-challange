@@ -34,15 +34,14 @@ const updateDonor = async (donorData, id) => {
   });
 };
 
-const deleteDonor = async (id) => {
-  return database.sequelize.transaction(async (transaction) => {
+const deleteDonor = async (id) =>
+  database.sequelize.transaction(async (transaction) => {
     await database.Message.destroy({ where: { idDonor: id } }, { transaction });
     await database.Pet.destroy({ where: { idDonor: id, adopted: 0 } }, { transaction });
 
     await database.Donor.destroy({ where: { id } }, { transaction });
   });
-};
-
+  
 export default {
   getAllDonors,
   getDonorById,
