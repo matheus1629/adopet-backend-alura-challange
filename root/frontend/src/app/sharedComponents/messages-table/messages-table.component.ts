@@ -45,7 +45,6 @@ export class MessagesTableComponent implements OnInit {
   }
 
   handlePageEvent(event: PageEvent) {
-    console.log(this.messagesPreview);
     this.router.navigate([], {
       queryParams: { pageIndex: event.pageIndex + 1, pageSize: event.pageSize },
       queryParamsHandling: 'merge',

@@ -16,6 +16,7 @@ import { MessagesTableComponent } from './messages-table/messages-table.componen
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { BindQueryParamDirective } from './bind-query-param.directive';
+import { LodingComponent } from './loding/loding.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { BindQueryParamDirective } from './bind-query-param.directive';
     PopupConfirmComponent,
     MessagesTableComponent,
     BindQueryParamDirective,
+    LodingComponent,
   ],
   exports: [
     HeaderComponent,
@@ -32,6 +34,7 @@ import { BindQueryParamDirective } from './bind-query-param.directive';
     PopupComponent,
     PopupConfirmComponent,
     MessagesTableComponent,
+    LodingComponent,
   ],
   imports: [
     CommonModule,
