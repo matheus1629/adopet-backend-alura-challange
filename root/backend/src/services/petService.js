@@ -142,11 +142,6 @@ const updatePet = async (newPetInfo, id, idDonor) => {
 };
 
 const petAdopted = async (idPet, idAdopter, adoptionDate) => {
-  
-  console.log('ssssssss');
-  console.log(idPet);
-  console.log(idAdopter);
-  console.log(adoptionDate);
   await petRepository.petAdopted(idPet, idAdopter, adoptionDate);
 };
 

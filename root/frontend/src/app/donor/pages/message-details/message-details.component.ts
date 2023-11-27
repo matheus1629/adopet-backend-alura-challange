@@ -38,8 +38,7 @@ export class MessageDetailsComponent {
     this.messageService.getMessageDetailsById(this.idMessage).subscribe({
       next: (data) => {
         this.messageDetails = data;
-        console.log(this.messageDetails);
-      },
+        },
       error: (err) => {
         this.router.navigate(['/donor/messages']);
         this.openPopup('Mensagem não encontrada.', 'error');

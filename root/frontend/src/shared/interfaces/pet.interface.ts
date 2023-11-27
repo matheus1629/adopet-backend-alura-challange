@@ -9,7 +9,7 @@ export interface IPet {
   adopted: number;
   idDonor: number;
   idAdopter: number;
-  Donor?: { firstName: string; city: string; state: string };
+  Donor?: { firstName: string; lastName: string; city: string; state: string };
 }
 
 export interface IPetPagination {

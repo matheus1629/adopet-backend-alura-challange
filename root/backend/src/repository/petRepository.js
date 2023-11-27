@@ -6,7 +6,7 @@ const getAllPetsAvailable = async (pageSetting) =>
     attributes: { exclude: ["createdAt", "updatedAt"] },
     include: {
       model: database.Donor,
-      attributes: [ "city", "state"],
+      attributes: ["firstName", "lastName", "city", "state"],
     },
     ...pageSetting,
   });
@@ -16,7 +16,7 @@ const getAllPets = async () =>
     attributes: { exclude: ["createdAt", "updatedAt"] },
     include: {
       model: database.Donor,
-      attributes: ["city", "state"],
+      attributes: ["firstName", "lastName", "city", "state"],
     },
   });
 
@@ -44,8 +44,8 @@ const updatePet = async (petData, id) =>
     where: { id },
   });
 
-const petAdopted = async (id, adopterId, adoptionDate) => {
-  await database.Pet.update({ adopterId, adoptionDate, adopted: 1 }, { where: { id } });
+const petAdopted = async (id, idAdopter, adoptionDate) => {
+  await database.Pet.update({ idAdopter, adoptionDate, adopted: 1 }, { where: { id } });
 };
 
 const deletePet = async (id) => {

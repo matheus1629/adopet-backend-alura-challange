@@ -91,7 +91,7 @@ export class MessageService {
     return this.http.post<void>('/message', body);
   }
 
-  updateMessageAdoptionStatus(idMessage: number, body: {}): Observable<{message:string}> {
-    return this.http.post<{message:string}>(`/message/donor/${idMessage}/adoption-status`, body);
+  updateMessageAdoptionStatus(idMessage: number, body: {}): Observable<{ message: string }> {
+    return this.http.post<{ message: string }>(`/message/donor/${idMessage}/adoption-status`, body);
   }
 }

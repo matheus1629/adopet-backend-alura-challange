@@ -2,7 +2,7 @@ import { PageEvent } from '@angular/material/paginator';
 export const maxLengthForm = 255;
 export const maxLengthPassword = 16;
 export const inputValidations = {
-  maxLengthForm: 225,
+  maxLengthForm: 50,
   maxLengthPassword: 16,
 };
 export const textAreaValidation = 2000;

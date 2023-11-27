@@ -9,11 +9,18 @@
       <div class="container-adopter">
         <h2 class="adopter-title">Dados do adotante</h2>
 
-        <img class="picture-img" [src]="messageDetails.Adopter.picture" alt="Picture selected" />
+        <ng-container *ngIf="!messageDetails.Adopter.picture; else imageTemplate">
+          <mat-icon class="picture-img" fontIcon="account_circle"></mat-icon>
+        </ng-container>
+        <ng-template #imageTemplate>
+          <img class="picture-img" [src]="messageDetails.Adopter.picture" alt="Picture selected" />
+        </ng-template>
 
         <div class="container-field">
           <span class="label">Nome</span>
-          <span class="field"
+          <span
+            class="field"
+            title="{{ messageDetails.Adopter.firstName }} {{ messageDetails.Adopter.lastName }}"
             >{{ messageDetails.Adopter.firstName }} {{ messageDetails.Adopter.lastName }}</span
           >
         </div>
@@ -56,7 +63,9 @@
 
         <div class="container-field">
           <span class="label">Nome</span>
-          <span class="field">{{ messageDetails.Pet.name }}</span>
+          <span class="field" title="{{ messageDetails.Pet.name}}">{{
+            messageDetails.Pet.name
+          }}</span>
         </div>
 
         <div class="container-field">

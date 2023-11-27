@@ -9,19 +9,13 @@ const createUser = (userType) => async (req, res) => {
   const newUser = req.body;
 
   try {
-    let createdUser;
+    let createdUserId;
 
-    if (userType === "Adopter") {
-      const createdUserId = await adopterService.createAdopter(newUser);
-      createdUser = await adopterService.getAdopterById(createdUserId);
-    }
+    if (userType === "Adopter") createdUserId = await adopterService.createAdopter(newUser);
 
-    if (userType === "Donor") {
-      const createdUserId = await donorService.createDonor(newUser);
-      createdUser = await donorService.getDonorById(createdUserId);
-    }
+    if (userType === "Donor") createdUserId = await donorService.createDonor(newUser);
 
-    const payload = { userId: createdUser.id };
+    const payload = { userId: createdUserId };
     const token = jwt.sign(payload, authConfig.secret, { expiresIn: "24h" });
 
     return res.status(201).json({ token: token, userType: userType });

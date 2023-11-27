@@ -1,22 +1,19 @@
 import { textAreaValidation } from '../../../../shared/consts';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router, QueryParamsHandling } from '@angular/router';
-import { Observable, Subscription, map } from 'rxjs';
+import { Router } from '@angular/router';
+import { map } from 'rxjs';
 
-import { SharedService } from 'src/app/services/shared-services.service';
 import { MessageService } from 'src/app/services/message.service';
 
 import { IButtonConfig } from 'src/shared/interfaces/buttonConfig.interface';
 import { ButtonClass } from 'src/shared/enums/buttonConfig.enum';
 import { errorMessages, inputValidations } from 'src/shared/consts';
-import { validateName } from 'src/shared/utils/form';
 
 import { PopupComponent } from 'src/app/sharedComponents/popup/popup.component';
 import { PopupConfirmComponent } from 'src/app/sharedComponents/popupConfirm/popup-confirmation.component';
 import { ISendMessage } from 'src/shared/interfaces/sendMessage.interface';
-import { PetService } from 'src/app/services/pet.service';
 import { IPet } from 'src/shared/interfaces/pet.interface';
 
 @Component({
@@ -26,7 +23,6 @@ import { IPet } from 'src/shared/interfaces/pet.interface';
 })
 export class SendMessageComponent implements OnInit {
   errorMessages = errorMessages;
-  inputValidations = inputValidations;
   textAreaValidation = textAreaValidation;
   formSubmitted = false;
   messsageForm!: FormGroup;

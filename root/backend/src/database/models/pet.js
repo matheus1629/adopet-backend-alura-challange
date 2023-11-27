@@ -45,7 +45,7 @@ export default (sequelize, DataTypes) => {
       modelName: "Pet",
       defaultScope: {
         attributes: {
-          exclude: ["createdAt", "updatedAt"],
+          exclude: ["idDonor", "idAdopter", "createdAt", "updatedAt"],
         },
       },
     }

@@ -64,6 +64,9 @@ section {
   color: $dark-grey-color;
   font-weight: 600;
   font-size: 16px;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .text {
@@ -115,8 +118,8 @@ section {
   .pet-title {
     font-size: 18px;
   }
-  
-  .container-button{
+
+  .container-button {
     flex-direction: column;
     align-items: center;
     gap: 30px;

@@ -11,18 +11,7 @@ const getMessageDetailsById = async (messageId) =>
   await database.Message.findOne({
     where: { id: messageId },
     attributes: { exclude: ["idAdopter"] },
-    include: [
-      {
-        model: database.Pet,
-        attributes: {
-          exclude: ["idDonor", "idAdopter"],
-        },
-      },
-      {
-        model: database.Adopter,
-        attributes: { exclude: ["id"] },
-      },
-    ],
+    include: [{ model: database.Pet }, { model: database.Adopter }],
   });
 
 const getAllMessagesByDonorPreview = async (
@@ -118,6 +107,7 @@ const getAllMessagesByAdopterPreview = async (
   });
 
 const createMessage = async (newAdopter) => await database.Message.create(newAdopter);
+
 const checkIfAdopterAlreadySendedMessage = async (idAdopter, idPet) =>
   await database.Message.findOne({
     where: { idAdopter: idAdopter, idPet: idPet },
@@ -128,10 +118,14 @@ const updateMessageAdoptionStatus = async (id, adoptionStatus) => {
   await database.Message.update({ adoptionStatus: adoptionStatus }, { where: { id } });
 };
 
-const checkIfMessageExist = async (id) =>
-  await database.Message.findOne({ where: { id }, attributes: ["id"] });
+const getidAdopterByMessage = async (id) =>
+  await database.Message.findOne({
+    where: { id },
+    attributes: ["idAdopter"],
+  });
 
 export default {
+  getidAdopterByMessage,
   createMessage,
   checkIfAdopterAlreadySendedMessage,
   getMessageDetailsById,
@@ -139,5 +133,4 @@ export default {
   getMessagesByAdopter,
   getAllMessagesByDonorPreview,
   updateMessageAdoptionStatus,
-  checkIfMessageExist,
 };

@@ -30,13 +30,6 @@ export class PetService {
     );
   }
 
-  getPetById(idPet: number): Observable<IPet> {
-    const headers = new HttpHeaders();
-    headers.set('skiptoken', 'true');
-
-    return this.http.get<IPet>(`/pet/${idPet}`);
-  }
-
   getPetsByIdAndDonor(idPet: number): Observable<IPet> {
     return this.http.get<IPet>(`/pet/petData/${idPet}/loggedDonor`);
   }

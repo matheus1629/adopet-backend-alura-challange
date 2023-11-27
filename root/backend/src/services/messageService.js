@@ -22,7 +22,8 @@ const getMessageDetailsById = async (messageId) => {
   if (!messageDetailsById) throw new BadRequestError("Message not found", 404);
 
   messageDetailsById.Pet.picture = bufferToBase64(messageDetailsById.Pet.picture);
-  messageDetailsById.Adopter.picture = bufferToBase64(messageDetailsById.Adopter.picture);
+  if (messageDetailsById.Adopter.picture)
+    messageDetailsById.Adopter.picture = bufferToBase64(messageDetailsById.Adopter.picture);
 
   return messageDetailsById;
 };
@@ -121,15 +122,18 @@ const createMessage = async (newMessage) => {
 };
 
 const updateMessageAdoptionStatus = async (idMessage, adoptionStatus, idPet) => {
-  if(await petService.checkIfPetWasAdoped(idPet)) throw new BadRequestError("This pet was already adopted.", 403);
+  if (await petService.checkIfPetWasAdoped(idPet))
+    throw new BadRequestError("This pet was already adopted.", 403);
 
-  if (!(await messageRepository.checkIfMessageExist(idMessage)))
-    throw new BadRequestError("Message not found", 404);
+  const idAdopterMessage = await messageRepository.getidAdopterByMessage(idMessage);
+  if (!idAdopterMessage) throw new BadRequestError("Message not found", 404);
 
   if (!(await petService.checkIfPetExist(idPet))) throw new BadRequestError("Pet not found", 404);
 
   await messageRepository.updateMessageAdoptionStatus(idMessage, adoptionStatus);
-  if ((adoptionStatus = "DONOR_ACCEPTED")) await petService.petAdopted(idPet, adoptionStatus, new Date());
+
+  if ((adoptionStatus = "DONOR_ACCEPTED"))
+    await petService.petAdopted(idPet, idAdopterMessage.idAdopter, new Date());
 };
 
 const checkIfAdopterAlreadySendedMessage = async (idAdopter, idPet) => {

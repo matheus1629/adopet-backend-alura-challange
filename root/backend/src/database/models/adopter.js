@@ -95,7 +95,7 @@ export default (sequelize, DataTypes) => {
       paranoid: true,
       defaultScope: {
         attributes: {
-          exclude: ["password", "email", "createdAt", "updatedAt", "deletedAt"],
+          exclude: ["id","password", "email", "createdAt", "updatedAt", "deletedAt"],
         },
       },
     }

@@ -6,8 +6,6 @@ import validateData from "../middleware/validateData.js";
 const router = express.Router();
 
 router.get("/", petController.getAllPetsAvailable);
-router.get("/all", petController.getAllPets);
-router.get("/:id", petController.getPetById);
 
 // Private Route
 router.get(

@@ -2,7 +2,7 @@
 <main>
   <form [formGroup]="messsageForm" (keyup.enter)="submit()">
     <h1>
-      Envie uma mensagem para {{ petData.Donor?.firstName }}, responsável pelo {{ petData.name }}
+      Envie uma mensagem para {{ petData.Donor?.firstName }} {{ petData.Donor?.lastName }}, responsável pelo {{ petData.name }}
     </h1>
 
     <img class="picture-img" [src]="petData.picture" alt="Pet picture" />

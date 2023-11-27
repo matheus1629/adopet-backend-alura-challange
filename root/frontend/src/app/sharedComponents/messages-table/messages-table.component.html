@@ -81,11 +81,14 @@
             <td class="pet-column">
               <div class="field-container">
                 <img src="{{ message.Pet.picture }}" alt="Pet picture" />
-                <p>{{ message.Pet.name }}</p>
+                <p title="{{ message.Pet.name }}">{{ message.Pet.name }}</p>
               </div>
             </td>
             <td class="name-column">
-              <p>
+              <p
+                title="{{ message.Adopter?.firstName || message.Pet.Donor?.firstName }}
+                {{ message.Adopter?.lastName || message.Pet.Donor?.lastName }}"
+              >
                 {{ message.Adopter?.firstName || message.Pet.Donor?.firstName }}
                 {{ message.Adopter?.lastName || message.Pet.Donor?.lastName }}
               </p>

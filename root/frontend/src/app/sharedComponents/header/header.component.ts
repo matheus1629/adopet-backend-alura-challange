@@ -55,8 +55,4 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.subscriptionPicture.unsubscribe();
   }
-
-  navigateTo(route: string): void {
-    this.router.navigate([route]);
-  }
 }

@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { PaginatorIntlService } from 'src/app/services/paginator-intl.service';
 import { PetService } from 'src/app/services/pet.service';
-import { PetSize } from 'src/shared/enums/petSize.enum';
 import { IPet } from 'src/shared/interfaces/pet.interface';
 
 @Component({
@@ -20,6 +19,7 @@ export class PetsDonorComponent implements OnInit {
     pageSize: 10,
     length: 0,
   };
+  isLoading = true;
 
   constructor(
     private petService: PetService,
@@ -48,9 +48,11 @@ export class PetsDonorComponent implements OnInit {
       next: (data) => {
         this.pets = data.rows;
         this.paginatorConfig.length = data.count;
+        this.isLoading = false;
       },
       error: (err) => {
         console.error('Error: ', err);
+        this.isLoading = false;
       },
     });
   }

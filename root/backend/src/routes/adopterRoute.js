@@ -5,8 +5,6 @@ import validateData from "../middleware/validateData.js";
 
 const router = express.Router();
 
-router.get("/:id", adopterController.getAdopterById);
-
 // Private Route
 router.get("/loggedUser/info", validateToken.checkToken("Adopter"), adopterController.getLoggedAdopter);
 router.get(

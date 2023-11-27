@@ -71,18 +71,27 @@ app-button {
 
 img {
   align-self: center;
-  width: 50px;
+  min-width: 50px;
   height: 50px;
   border-radius: 50%;
   object-fit: cover;
 }
 
+td p {
+  width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .pet-column {
   width: 20%;
+  max-width: 150px;
 }
 
 .name-column {
   width: 30%;
+  max-width: 150px;
 }
 
 .date-column {
@@ -156,6 +165,11 @@ mat-paginator {
 }
 
 @media only screen and (max-width: $tablet-size) {
+  img {
+    min-width: 30px;
+    height: 30px;
+  }
+
   .table-container {
     width: 100%;
   }
@@ -164,16 +178,34 @@ mat-paginator {
     flex-direction: column;
     gap: 20px;
   }
+
+  .pet-column {
+    max-width: 100px;
+  }
+
+  .name-column {
+    max-width: 100px;
+  }
 }
 
 @media only screen and (max-width: $mobile-size) {
   img {
     display: none;
-    width: 30px;
-    height: 30px;
   }
 
   .field-container {
     justify-content: space-around;
+  }
+
+  .pet-column {
+    max-width: 50px;
+  }
+
+  .name-column {
+    max-width: 50px;
+  }
+
+  .show-column {
+    display: none;
   }
 }

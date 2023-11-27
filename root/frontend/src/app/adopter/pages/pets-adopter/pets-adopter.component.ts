@@ -22,7 +22,7 @@ export class PetsAdopterComponent implements OnInit {
     pageSize: 10,
     length: 0,
   };
-
+  isLoading = true;
   messagesSendedIdPet!: number[];
 
   constructor(
@@ -55,11 +55,15 @@ export class PetsAdopterComponent implements OnInit {
 
     this.petService.getAllPetsAvailable(pageIndex, pageSize).subscribe({
       next: (data) => {
+        console.log(data.rows);
+        
         this.pets = data.rows;
         this.paginatorConfig.length = data.count;
+        this.isLoading = false;
       },
       error: (err) => {
         console.error('Error: ', err);
+        this.isLoading = false;
       },
     });
   }

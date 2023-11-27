@@ -33,6 +33,11 @@ export default (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "Message",
+      defaultScope: {
+        attributes: {
+          exclude: ["idAdopter"],
+        },
+      },
     }
   );
   return Message;

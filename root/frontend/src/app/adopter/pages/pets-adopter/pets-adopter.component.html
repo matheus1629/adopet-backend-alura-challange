@@ -14,44 +14,48 @@
     >
     </mat-paginator>
 
-    <ng-container *ngIf="paginatorConfig.length === 0; else petsCards">
-      <div class="empty-list">
-        <p>Nenhum pet encontrado para adoção :&lpar;</p>
-        <mat-icon class="empty-list-icon" fontIcon="info"></mat-icon>
-      </div>
-    </ng-container>
+    <ng-container *ngIf="isLoading; else notLoading"> <app-loding> </app-loding> </ng-container>
 
-    <ng-template #petsCards>
-      <div class="card-container">
-        <div class="card" *ngFor="let pet of pets">
-          <img src="{{ pet.picture }}" alt="Pet picture" />
+    <ng-template #notLoading>
+      <ng-container *ngIf="paginatorConfig.length === 0; else petsCards">
+        <div class="empty-list">
+          <p>Nenhum pet encontrado para adoção :&lpar;</p>
+          <mat-icon class="empty-list-icon" fontIcon="info"></mat-icon>
+        </div>
+      </ng-container>
 
-          <div class="card-info">
-            <p class="pet-name" title="{{ pet.name }}">{{ pet.name }}</p>
-            <p class="pet-info">{{ pet.age }} anos</p>
-            <p class="pet-info">{{ pet.size }}</p>
-            <p class="pet-info desc" title="{{ pet.description }}">{{ pet.description }}</p>
-            <p class="pet-region">{{ pet.Donor?.city }} ({{ pet.Donor?.state }})</p>
+      <ng-template #petsCards>
+        <div class="card-container">
+          <div class="card" *ngFor="let pet of pets">
+            <img src="{{ pet.picture }}" alt="Pet picture" />
 
-            <ng-container *ngIf="!messagesSendedIdPet.includes(pet.id); else messageSended">
-              <a
-                class="contact-donor-container"
-                routerLink="/adopter/send-message"
-                [state]="{ petData: pet }"
-              >
-                <mat-icon class="chat-icon" fontIcon="chat"></mat-icon>
-                <span class="contact-donor">Quero adotar!</span>
-              </a>
-            </ng-container>
-            <ng-template #messageSended>
-              <div class="card-msg">
-                <mat-icon class="chat-icon" fontIcon="check_circle"></mat-icon>
-                <span>Mensagem enviada</span>
-              </div>
-            </ng-template>
+            <div class="card-info">
+              <p class="pet-name" title="{{ pet.name }}">{{ pet.name }}</p>
+              <p class="pet-info">{{ pet.age }} anos</p>
+              <p class="pet-info">{{ pet.size }}</p>
+              <p class="pet-info desc" title="{{ pet.description }}">{{ pet.description }}</p>
+              <p class="pet-region">{{ pet.Donor?.city }} ({{ pet.Donor?.state }})</p>
+
+              <ng-container *ngIf="!messagesSendedIdPet.includes(pet.id); else messageSended">
+                <a
+                  class="contact-donor-container"
+                  routerLink="/adopter/send-message"
+                  [state]="{ petData: pet }"
+                >
+                  <mat-icon class="chat-icon" fontIcon="chat"></mat-icon>
+                  <span class="contact-donor">Quero adotar!</span>
+                </a>
+              </ng-container>
+              <ng-template #messageSended>
+                <div class="card-msg">
+                  <mat-icon class="chat-icon" fontIcon="check_circle"></mat-icon>
+                  <span>Mensagem enviada</span>
+                </div>
+              </ng-template>
+            </div>
           </div>
         </div>
-      </div>
+      </ng-template>
     </ng-template>
   </section>
 </main>
