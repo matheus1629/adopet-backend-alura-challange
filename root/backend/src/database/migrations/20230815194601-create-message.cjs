@@ -9,7 +9,12 @@ module.exports = {
         primaryKey: true,
       },
       adoption_status: {
-        type: Sequelize.ENUM("pending_confirmation", "donor_accepted", "donor_refused"),
+        type: Sequelize.ENUM(
+          "pending_confirmation",
+          "donor_accepted",
+          "donor_refused",
+          "pet_already_adopted"
+        ),
         allowNull: false,
       },
       subject: {

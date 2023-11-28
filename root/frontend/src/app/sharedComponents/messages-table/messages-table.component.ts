@@ -60,8 +60,11 @@ export class MessagesTableComponent implements OnInit {
       case 'Adoção recusada pelo doador':
         adoptionStatusInfo = 'Solicitação de adoção recusada pelo doador.';
         break;
-      case 'Adoção aceitada pelo doador':
+      case 'Adoção aceita pelo doador':
         adoptionStatusInfo = 'Solicitação de adoção aceita pelo doador.';
+        break;
+      case 'Pet já adotado por outra pessoa':
+        adoptionStatusInfo = 'Este pet já foi adotado por outra pessoa.';
         break;
       default:
         adoptionStatus = '';

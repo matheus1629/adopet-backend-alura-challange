@@ -63,7 +63,7 @@
 
         <div class="container-field">
           <span class="label">Nome</span>
-          <span class="field" title="{{ messageDetails.Pet.name}}">{{
+          <span class="field" title="{{ messageDetails.Pet.name }}">{{
             messageDetails.Pet.name
           }}</span>
         </div>
@@ -85,9 +85,18 @@
       </div>
     </div>
 
-    <div class="container-button">
-      <app-button (click)="adoptionRefused()" [buttonConfig]="buttonRefuse"></app-button>
-      <app-button (click)="adoptionAccepted()" [buttonConfig]="buttonAccept"></app-button>
-    </div>
+    <ng-container
+      *ngIf="messageDetails.adoptionStatus === adoptionStatus.PENDING_CONFIRMATION; else statusTemplate"
+    >
+      <div class="container-button">
+        <app-button (click)="adoptionRefused()" [buttonConfig]="buttonRefuse"></app-button>
+        <app-button (click)="adoptionAccepted()" [buttonConfig]="buttonAccept"></app-button>
+      </div>
+    </ng-container>
+    <ng-template #statusTemplate>
+      <p class="status">
+        Status da solicitação:<b>{{ messageDetails.adoptionStatus }}</b>
+      </p>
+    </ng-template>
   </section>
 </main>

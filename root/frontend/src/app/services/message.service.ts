@@ -79,6 +79,8 @@ export class MessageService {
     return this.http.get<IMessageDetails>(`/message/donor/${id}/message-details`).pipe(
       map((data) => ({
         ...data,
+        adoptionStatus:
+          AdoptionStatus[data.adoptionStatus.toUpperCase() as keyof typeof AdoptionStatus],
         Pet: {
           ...data.Pet,
           size: PetSize[data.Pet.size.toUpperCase() as keyof typeof PetSize],

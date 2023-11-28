@@ -104,6 +104,15 @@ section {
   margin-top: 60px;
 }
 
+.status {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 60px;
+  color: $green-color;
+  font: 22px;
+}
+
 @media only screen and (max-width: $tablet-size) {
   section {
     width: 100%;
@@ -123,5 +132,15 @@ section {
     flex-direction: column;
     align-items: center;
     gap: 30px;
+  }
+
+  .status {
+    gap: 5px;
+  }
+}
+
+@media only screen and (max-width: $mobile-size) {
+  .picture-img {
+    @include mat-icon-size(80px);
   }
 }

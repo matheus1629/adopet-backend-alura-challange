@@ -122,18 +122,29 @@ const createMessage = async (newMessage) => {
 };
 
 const updateMessageAdoptionStatus = async (idMessage, adoptionStatus, idPet) => {
+  if (!(await petService.checkIfPetExist(idPet))) throw new BadRequestError("Pet not found", 404);
+
   if (await petService.checkIfPetWasAdoped(idPet))
     throw new BadRequestError("This pet was already adopted.", 403);
 
   const idAdopterMessage = await messageRepository.getidAdopterByMessage(idMessage);
   if (!idAdopterMessage) throw new BadRequestError("Message not found", 404);
 
-  if (!(await petService.checkIfPetExist(idPet))) throw new BadRequestError("Pet not found", 404);
+  if (!(await checkIfAdoptionStatusIsPendingConfirmation(idMessage)))
+    throw new BadRequestError("You can't update a message that is not 'pending_confirmation'", 404);
 
   await messageRepository.updateMessageAdoptionStatus(idMessage, adoptionStatus);
 
-  if ((adoptionStatus = "DONOR_ACCEPTED"))
+  if (adoptionStatus === "DONOR_ACCEPTED") {
     await petService.petAdopted(idPet, idAdopterMessage.idAdopter, new Date());
+    await messageRepository.changeOtherMessageAdoptionStatusAlreadyAdopted(idPet, idAdopterMessage.idAdopter);
+  }
+};
+
+const checkIfAdoptionStatusIsPendingConfirmation = async (idMessage) => {
+  const messageAdoptionStatus = await messageRepository.checkIfAdoptionStatusIsPendingConfirmation(idMessage);
+  if (messageAdoptionStatus.adoptionStatus === "pending_confirmation") return true;
+  return false;
 };
 
 const checkIfAdopterAlreadySendedMessage = async (idAdopter, idPet) => {

@@ -1,4 +1,4 @@
-import { Op, Sequelize, where } from "sequelize";
+import { Op, Sequelize } from "sequelize";
 import database from "../database/models/index.js";
 
 const getMessagesByAdopter = async (idAdopter) =>
@@ -118,10 +118,23 @@ const updateMessageAdoptionStatus = async (id, adoptionStatus) => {
   await database.Message.update({ adoptionStatus: adoptionStatus }, { where: { id } });
 };
 
+const changeOtherMessageAdoptionStatusAlreadyAdopted = async (idPet, idAdopter) => {
+  await database.Message.update(
+    { adoptionStatus: "pet_already_adopted" },
+    { where: { adoptionStatus: "pending_confirmation", idPet, idAdopter: { [Op.ne]: idAdopter } } }
+  );
+};
+
 const getidAdopterByMessage = async (id) =>
   await database.Message.findOne({
     where: { id },
     attributes: ["idAdopter"],
+  });
+
+const checkIfAdoptionStatusIsPendingConfirmation = async (id) =>
+  await database.Message.findOne({
+    where: { id },
+    attributes: ["adoptionStatus"],
   });
 
 export default {
@@ -131,6 +144,8 @@ export default {
   getMessageDetailsById,
   getAllMessagesByAdopterPreview,
   getMessagesByAdopter,
+  changeOtherMessageAdoptionStatusAlreadyAdopted,
   getAllMessagesByDonorPreview,
   updateMessageAdoptionStatus,
+  checkIfAdoptionStatusIsPendingConfirmation,
 };

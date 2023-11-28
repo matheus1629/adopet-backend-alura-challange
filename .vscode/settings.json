@@ -1,0 +1,5 @@
+{
+    "javascript.referencesCodeLens.enabled": true,
+    "javascript.referencesCodeLens.showOnAllFunctions": true,
+    "diffEditor.codeLens": true
+}
