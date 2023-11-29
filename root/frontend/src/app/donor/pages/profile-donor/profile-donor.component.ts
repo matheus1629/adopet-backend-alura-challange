@@ -159,7 +159,6 @@ export class ProfileDonorComponent implements OnInit, DoCheck {
       },
     });
 
-    this.buttonRegister.loading = true;
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.donorService.deleteDonor().subscribe({
