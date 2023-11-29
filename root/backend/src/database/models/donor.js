@@ -88,10 +88,11 @@ export default (sequelize, DataTypes) => {
 
       defaultScope: {
         attributes: {
-          exclude: ["id","password", "email", "createdAt", "updatedAt", "deletedAt"],
+          exclude: ["id", "password", "email", "createdAt", "updatedAt", "deletedAt"],
         },
       },
     }
   );
+
   return Donor;
 };

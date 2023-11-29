@@ -1,3 +1,4 @@
+import { Op } from "sequelize";
 import database from "../database/models/index.js";
 
 const getAllDonors = async () => await database.Donor.findAll({});
@@ -22,7 +23,12 @@ const updateDonor = async (donorData, id) =>
 
 const deleteDonor = async (id) =>
   database.sequelize.transaction(async (transaction) => {
-    await database.Message.destroy({ where: { idDonor: id } }, { transaction });
+    const pets = await database.Pet.findAll({ where: { idDonor: id }, transaction });
+
+    pets.forEach(async (pet) => {
+      await database.Message.destroy({ where: { idPet: pet.id }, transaction });
+    });
+
     await database.Pet.destroy({ where: { idDonor: id, adopted: 0 } }, { transaction });
 
     await database.Donor.destroy({ where: { id } }, { transaction });

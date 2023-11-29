@@ -21,8 +21,10 @@ const updateAdopter = async (adopterData, id) =>
   });
 
 const deleteAdopter = async (id) =>
-  database.Adopter.destroy({
-    where: { id },
+  database.sequelize.transaction(async (transaction) => {
+    await database.Message.destroy({ where: { idAdopter: id } }, { transaction });
+
+    await database.Adopter.destroy({ where: { id } }, { transaction });
   });
 
 export default {

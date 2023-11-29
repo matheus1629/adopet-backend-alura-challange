@@ -160,20 +160,23 @@ export class ProfileDonorComponent implements OnInit, DoCheck {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
+      this.buttonDelete.loading = true;
       if (result) {
         this.donorService.deleteDonor().subscribe({
           next: () => {
-            this.buttonRegister.loading = false;
             this.editAdopterForm.markAsPristine();
+            localStorage.removeItem('user_token_adopet');
+            localStorage.removeItem('user_type_adopet');
             this.router.navigate(['/']);
           },
           error: (err) => {
             console.error('Error: ', err);
             this.openPopup('Ocorreu um erro em nosso servidor.', 'error');
-            this.buttonRegister.loading = false;
+            this.buttonDelete.loading = false;
           },
         });
       }
+      this.buttonDelete.loading = false;
     });
   }
 

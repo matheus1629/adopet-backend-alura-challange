@@ -156,24 +156,23 @@ export class EditPetComponent implements OnInit {
       },
     });
 
-    this.buttonRegister.loading = true;
     dialogRef.afterClosed().subscribe((result) => {
+      this.buttonDelete.loading = true;
       if (result) {
         this.petService.deletePet(this.idPet).subscribe({
           next: () => {
             this.openPopup('Pet excluído!', 'check_circle');
-            this.buttonRegister.loading = false;
             this.editPetForm.markAsPristine();
             this.router.navigate(['/donor/pets']);
           },
           error: (err) => {
             console.error('Error: ', err);
             this.openPopup('Ocorreu um erro em nosso servidor.', 'error');
-            this.buttonRegister.loading = false;
-            this.buttonRegister.loading = false;
+            this.buttonDelete.loading = false;
           },
         });
       }
+      this.buttonDelete.loading = false;
     });
   }
 

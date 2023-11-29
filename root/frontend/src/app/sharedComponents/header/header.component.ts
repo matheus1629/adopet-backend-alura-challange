@@ -19,7 +19,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   linkChat!: string;
 
   constructor(
-    private router: Router,
     public auth: AuthService,
     private adopterService: AdopterService,
     private donorService: DonorService,

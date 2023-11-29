@@ -20,14 +20,6 @@ export class AuthService {
     return this.http.post<IToken>(`/auth/signin/${loginData.userType}`, loginData);
   }
 
-  /*  getToken(): string {
-    return localStorage.getItem('user_token_adopet');
-  } */
-
-  /*  isAuthenticated(): boolean {
-    return this.getToken() != null;
-  } */
-
   getUserType(): string | null {
     return localStorage.getItem('user_type_adopet');
   }
