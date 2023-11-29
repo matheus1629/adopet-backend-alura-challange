@@ -38,8 +38,6 @@ export class MessageDetailsComponent {
 
     this.messageService.getDonorMessageDetailsById(this.idMessage).subscribe({
       next: (data) => {
-        console.log(data);
-
         this.messageDetails = data;
       },
       error: (err) => {

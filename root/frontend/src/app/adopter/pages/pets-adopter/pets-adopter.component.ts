@@ -55,8 +55,6 @@ export class PetsAdopterComponent implements OnInit {
 
     this.petService.getAllPetsAvailable(pageIndex, pageSize).subscribe({
       next: (data) => {
-        console.log(data.rows);
-        
         this.pets = data.rows;
         this.paginatorConfig.length = data.count;
         this.isLoading = false;

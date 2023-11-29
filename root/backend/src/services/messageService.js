@@ -30,9 +30,7 @@ const getDonorMessageDetailsById = async (messageId, idDonor) => {
 
 const getAdopterMessageDetailsById = async (messageId, idAdopter) => {
   const messageDetailsById = await messageRepository.getAdopterMessageDetailsById(messageId, idAdopter);
-  console.log('messageId=>',messageId);
-  console.log('idAdopter=>',idAdopter);
-  console.log('messageDetailsById=>',messageDetailsById.Pet.Donor.picture);
+
   if (!messageDetailsById) throw new BadRequestError("Message not found", 404);
 
   messageDetailsById.Pet.picture = bufferToBase64(messageDetailsById.Pet.picture);
