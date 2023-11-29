@@ -14,6 +14,7 @@ import { ProfileAdopterComponent } from './pages/profile-adopter/profile-adopter
 import { RegisterAdopterComponent } from './pages/register-adopter/register-adopter.component';
 import { SendMessageComponent } from './pages/send-message/send-message.component';
 import { MessagesComponent } from './pages/messages/messages.component';
+import { MessageDetailsComponent } from './pages/message-details/message-details.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { MessagesComponent } from './pages/messages/messages.component';
     PetsAdopterComponent,
     SendMessageComponent,
     MessagesComponent,
+    MessageDetailsComponent,
   ],
   imports: [
     CommonModule,

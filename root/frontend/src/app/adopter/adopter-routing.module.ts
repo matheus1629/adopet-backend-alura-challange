@@ -7,6 +7,7 @@ import { ProfileAdopterComponent } from './pages/profile-adopter/profile-adopter
 import { PetsAdopterComponent } from './pages/pets-adopter/pets-adopter.component';
 import { SendMessageComponent } from './pages/send-message/send-message.component';
 import { MessagesComponent } from './pages/messages/messages.component';
+import { MessageDetailsComponent } from './pages/message-details/message-details.component';
 
 import { canDeactivateGuard } from '../guard/can-deactivate.guard';
 
@@ -17,7 +18,7 @@ const routes: Routes = [
   { path: 'pets', component: PetsAdopterComponent },
   { path: 'send-message', component: SendMessageComponent, canDeactivate: [canDeactivateGuard] },
   { path: 'messages', component: MessagesComponent },
-
+  { path: 'message-details/:id', component: MessageDetailsComponent },
 ];
 
 @NgModule({

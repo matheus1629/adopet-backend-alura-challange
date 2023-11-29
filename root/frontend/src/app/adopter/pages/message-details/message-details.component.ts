@@ -36,10 +36,8 @@ export class MessageDetailsComponent {
   ngOnInit(): void {
     this.idMessage = this.route.snapshot.params['id'];
 
-    this.messageService.getDonorMessageDetailsById(this.idMessage).subscribe({
+    this.messageService.getAdopterMessageDetailsById(this.idMessage).subscribe({
       next: (data) => {
-        console.log(data);
-
         this.messageDetails = data;
       },
       error: (err) => {

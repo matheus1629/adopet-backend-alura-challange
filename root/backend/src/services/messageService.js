@@ -16,14 +16,28 @@ const getMessagesByAdopter = async (idAdopter) => {
   return idPets;
 };
 
-const getMessageDetailsById = async (messageId) => {
-  const messageDetailsById = await messageRepository.getMessageDetailsById(messageId);
+const getDonorMessageDetailsById = async (messageId, idDonor) => {
+  const messageDetailsById = await messageRepository.getDonorMessageDetailsById(messageId, idDonor);
 
   if (!messageDetailsById) throw new BadRequestError("Message not found", 404);
 
   messageDetailsById.Pet.picture = bufferToBase64(messageDetailsById.Pet.picture);
   if (messageDetailsById.Adopter.picture)
     messageDetailsById.Adopter.picture = bufferToBase64(messageDetailsById.Adopter.picture);
+
+  return messageDetailsById;
+};
+
+const getAdopterMessageDetailsById = async (messageId, idAdopter) => {
+  const messageDetailsById = await messageRepository.getAdopterMessageDetailsById(messageId, idAdopter);
+  console.log('messageId=>',messageId);
+  console.log('idAdopter=>',idAdopter);
+  console.log('messageDetailsById=>',messageDetailsById.Pet.Donor.picture);
+  if (!messageDetailsById) throw new BadRequestError("Message not found", 404);
+
+  messageDetailsById.Pet.picture = bufferToBase64(messageDetailsById.Pet.picture);
+  if (messageDetailsById.Pet.Donor.picture)
+    messageDetailsById.Pet.Donor.picture = bufferToBase64(messageDetailsById.Pet.Donor.picture);
 
   return messageDetailsById;
 };
@@ -155,7 +169,8 @@ const checkIfAdopterAlreadySendedMessage = async (idAdopter, idPet) => {
 export default {
   createMessage,
   getMessagesByAdopter,
-  getMessageDetailsById,
+  getDonorMessageDetailsById,
+  getAdopterMessageDetailsById,
   getAllMessagesByDonorPreView,
   updateMessageAdoptionStatus,
   getAllMessagesByAdopterPreview,

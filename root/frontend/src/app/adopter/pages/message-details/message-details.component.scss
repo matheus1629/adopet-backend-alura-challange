@@ -1,0 +1,146 @@
+@import "../../../../variables.scss";
+
+main {
+  color: $white-color;
+  min-height: 93vh;
+  width: 100%;
+  z-index: -2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+section {
+  background-color: $light-grey-color;
+  width: 90%;
+  margin-bottom: 30px;
+  border-radius: 5px;
+  padding: 30px;
+}
+
+.title {
+  color: $blue-color;
+  margin-top: 100px;
+  margin-bottom: 30px;
+  font-weight: 400;
+  text-align: center;
+  width: 70%;
+}
+
+.container-adopter-pet {
+  display: flex;
+  gap: 30px;
+}
+
+.container-adopter,
+.container-pet {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 50%;
+}
+
+.adopter-title,
+.pet-title {
+  font-size: 24px;
+  color: $blue-color;
+}
+
+.container-field {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 100%;
+}
+
+.label {
+  color: $blue-color;
+}
+
+.field {
+  color: $dark-grey-color;
+  font-weight: 600;
+  font-size: 16px;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.text {
+  text-align: justify;
+  font-weight: normal;
+  max-width: 100%;
+  max-height: 200px;
+  overflow-y: scroll;
+}
+
+.picture-img {
+  @include mat-icon-size(120px);
+  color: $medium-grey-color;
+  align-self: center;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.message-send {
+  font-size: 18px;
+  font-weight: 700;
+  color: $blue-color;
+  margin-top: 20px;
+}
+
+.row {
+  background-color: $dark-grey-color;
+  width: 1px;
+}
+
+.container-button {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  margin-top: 60px;
+}
+
+.status {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 60px;
+  color: $green-color;
+  font: 22px;
+}
+
+@media only screen and (max-width: $tablet-size) {
+  section {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .container-adopter-pet {
+    gap: 10px;
+  }
+
+  .adopter-title,
+  .pet-title {
+    font-size: 18px;
+  }
+
+  .container-button {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .status {
+    gap: 5px;
+  }
+}
+
+@media only screen and (max-width: $mobile-size) {
+  .picture-img {
+    @include mat-icon-size(80px);
+  }
+}

@@ -12,14 +12,19 @@ router.get(
   messageController.getAllMessagesByDonorPreview
 );
 router.get(
-  "/donor/:id/message-details",
-  validateToken.checkToken("Donor"),
-  messageController.getMessageDetailsById
-);
-router.get(
   "/adopter/preview",
   validateToken.checkToken("Adopter"),
   messageController.getAllMessagesByAdopterPreview
+);
+router.get(
+  "/donor/:id/message-details",
+  validateToken.checkToken("Donor"),
+  messageController.getDonorMessageDetailsById
+);
+router.get(
+  "/adopter/:id/message-details",
+  validateToken.checkToken("Adopter"),
+  messageController.getAdopterMessageDetailsById
 );
 router.get("/adopter", validateToken.checkToken("Adopter"), messageController.getMessagesByAdopter);
 router.post(

@@ -10,10 +10,25 @@ const getMessagesByAdopter = async (req, res) => {
   }
 };
 
-const getMessageDetailsById = async (req, res) => {
+const getDonorMessageDetailsById = async (req, res) => {
   try {
     const messageId = req.params.id;
-    const messageDetailsById = await messageService.getMessageDetailsById(messageId);
+    const idDonor = req.userId;
+
+    const messageDetailsById = await messageService.getDonorMessageDetailsById(messageId, idDonor);
+
+    return res.status(200).send(messageDetailsById);
+  } catch (error) {
+    return res.status(500).json(error.message);
+  }
+};
+
+const getAdopterMessageDetailsById = async (req, res) => {
+  try {
+    const messageId = req.params.id;
+    const idAdopter = req.userId;
+
+    const messageDetailsById = await messageService.getAdopterMessageDetailsById(messageId, idAdopter);
 
     return res.status(200).send(messageDetailsById);
   } catch (error) {
@@ -93,6 +108,7 @@ export default {
   getMessagesByAdopter,
   getAllMessagesByDonorPreview,
   getAllMessagesByAdopterPreview,
-  getMessageDetailsById,
+  getDonorMessageDetailsById,
+  getAdopterMessageDetailsById,
   updateMessageAdoptionStatus,
 };

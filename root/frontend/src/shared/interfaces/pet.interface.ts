@@ -1,3 +1,5 @@
+import { IAccountData } from "./accountData.interface";
+
 export interface IPet {
   id: number;
   name: string;
@@ -7,9 +9,7 @@ export interface IPet {
   picture: string;
   adoptionDate: string;
   adopted: number;
-  idDonor: number;
-  idAdopter: number;
-  Donor?: { firstName: string; lastName: string; city: string; state: string };
+  Donor?:IAccountData
 }
 
 export interface IPetPagination {

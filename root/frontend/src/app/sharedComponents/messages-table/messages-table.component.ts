@@ -90,6 +90,12 @@ export class MessagesTableComponent implements OnInit {
   }
 
   clearFilter() {
+    this.filterForm.setValue({
+      petName: '',
+      adopterDonorName: '',
+      dateOrder: 'desc',
+      adoptionStatus: '',
+    });
     this.router.navigate([], {
       queryParams: {},
     });
