@@ -35,6 +35,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: { model: "pet", key: "id" },
+        onDelete: "cascade",
       },
       createdAt: {
         allowNull: false,

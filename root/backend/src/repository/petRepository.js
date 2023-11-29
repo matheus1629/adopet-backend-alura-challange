@@ -51,7 +51,6 @@ const petAdopted = async (id, idAdopter, adoptionDate) => {
 const deletePet = async (id) => {
   let wasDeleted;
   await database.sequelize.transaction(async (transaction) => {
-    await database.Message.destroy({ where: { idPet: id } }, { transaction });
     const deletedCount = await database.Pet.destroy({ where: { id, adopted: 0 } }, { transaction });
     wasDeleted = deletedCount;
   });
