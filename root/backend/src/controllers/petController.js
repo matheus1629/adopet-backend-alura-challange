@@ -41,8 +41,8 @@ const getPetByIdLoggedDonor = async (req, res) => {
     const pet = await petService.getPetByIdAndIdDonor(idPet, idDonor);
     return res.status(200).json(pet);
   } catch (error) {
-    if (error.name === "IdPetidDonorConflict") return res.status(error.status).json(error.message);
-    if (error.name === "CantEditPetAdopted") return res.status(error.status).json(error.message);
+    if (error.name === "BadRequestError") return res.status(error.status).json(error.message);
+
     return res.status(500).json(error.message);
   }
 };
