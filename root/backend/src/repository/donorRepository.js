@@ -1,4 +1,3 @@
-import { Op } from "sequelize";
 import database from "../database/models/index.js";
 
 const getAllDonors = async () => await database.Donor.findAll({});
