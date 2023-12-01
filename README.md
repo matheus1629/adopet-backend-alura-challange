@@ -22,13 +22,13 @@ Todos os pets disponíveis para adoção ficam visíveis para os usuários que p
  <li><code>Sistema de segurança: </code>Após se autenticar com as credenciais (email e senha), é armazenado no localstorage um token JWT que será utilizado em todas as requisições que necessitam de validação de usuário e também para fazer as validações das regras de negócio</li>
  </ul>
 
+<img src="https://github.com/matheus1629/adopet-fullstack-alura-challange/assets/89110918/678fe687-385a-428b-a673-82de026be0b1" width="600" height="273"/>
+
 <h2>:open_file_folder: Acesso ao projeto</h2>
 
 Criar o Schema 'adopet' no MySql.
 
-Dentro do diretório backend executar `npm run db:all`
-
-Dentro do diretório backend executar `npm start` (porta 8000).
+Dentro do diretório backend executar `npm run db:all` e `npm start` (porta 8000).
 
 Dentro do diretório frontend executar `npm start` (porta 4200).
 

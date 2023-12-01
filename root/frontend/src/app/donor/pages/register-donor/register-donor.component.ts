@@ -40,31 +40,31 @@ export class RegisterDonorComponent implements OnInit {
     this.registerDonorForm = this.fb.group(
       {
         firstName: [
-          'Fulano',
+          '',
           [Validators.required, Validators.minLength(2), Validators.maxLength(255), validateName],
         ],
         lastName: [
-          'Silva',
+          '',
           [Validators.required, Validators.minLength(2), Validators.maxLength(255), validateName],
         ],
         phoneNumber: [
-          '2222222222',
+          '',
           [Validators.required, Validators.minLength(10), Validators.maxLength(11)],
         ],
-        state: ['Santa Catarina', [Validators.required]],
+        state: ['', [Validators.required]],
         city: [
-          'joinville',
+          '',
           [Validators.required, Validators.minLength(2), Validators.maxLength(255)],
         ],
         email: [
-          'jonh@email.com',
+          '',
           [Validators.required, Validators.email, Validators.maxLength(255)],
         ],
         password: [
-          'qweqwe12',
+          '',
           [Validators.required, Validators.pattern('^(?=.*[A-Za-z])(?=.*\\d).{8,16}$')],
         ],
-        confirmPassword: ['qweqwe12', [Validators.required]],
+        confirmPassword: ['', [Validators.required]],
       },
       {
         validator: comparePassword('password', 'confirmPassword'),
