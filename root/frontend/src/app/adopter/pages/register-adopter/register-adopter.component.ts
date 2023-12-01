@@ -7,7 +7,13 @@ import { IButtonConfig } from 'src/shared/interfaces/buttonConfig.interface';
 import { ButtonClass } from 'src/shared/enums/buttonConfig.enum';
 import { States } from 'src/shared/enums/states.enum';
 import { errorMessages, inputValidations } from 'src/shared/consts';
-import { clearValues, comparePassword, telMask, validateName } from 'src/shared/utils/form';
+import {
+  clearValues,
+  comparePassword,
+  telMask,
+  validateName,
+  validateNoWhiteSpace,
+} from 'src/shared/utils/form';
 import { Router } from '@angular/router';
 import { PopupComponent } from 'src/app/sharedComponents/popup/popup.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -41,11 +47,23 @@ export class RegisterAdopterComponent implements OnInit {
       {
         firstName: [
           '',
-          [Validators.required, Validators.minLength(2), Validators.maxLength(255), validateName],
+          [
+            Validators.required,
+            Validators.minLength(2),
+            Validators.maxLength(255),
+            validateName,
+            validateNoWhiteSpace,
+          ],
         ],
         lastName: [
           '',
-          [Validators.required, Validators.minLength(2), Validators.maxLength(255), validateName],
+          [
+            Validators.required,
+            Validators.minLength(2),
+            Validators.maxLength(255),
+            validateName,
+            validateNoWhiteSpace,
+          ],
         ],
         phoneNumber: [
           '',
@@ -54,12 +72,14 @@ export class RegisterAdopterComponent implements OnInit {
         state: ['', [Validators.required]],
         city: [
           '',
-          [Validators.required, Validators.minLength(2), Validators.maxLength(255)],
+          [
+            Validators.required,
+            Validators.minLength(2),
+            Validators.maxLength(255),
+            validateNoWhiteSpace,
+          ],
         ],
-        email: [
-          '',
-          [Validators.required, Validators.email, Validators.maxLength(255)],
-        ],
+        email: ['', [Validators.required, Validators.email, Validators.maxLength(255)]],
         password: [
           '',
           [Validators.required, Validators.pattern('^(?=.*[A-Za-z])(?=.*\\d).{8,16}$')],
@@ -87,6 +107,7 @@ export class RegisterAdopterComponent implements OnInit {
 
   submit() {
     this.formSubmitted = true;
+    console.log(this.registerAdopterForm);
 
     if (this.registerAdopterForm.valid) {
       this.buttonRegister.loading = true;

@@ -6,7 +6,12 @@ import { map } from 'rxjs';
 import { IButtonConfig } from 'src/shared/interfaces/buttonConfig.interface';
 import { ButtonClass } from 'src/shared/enums/buttonConfig.enum';
 import { errorMessages, inputValidations } from 'src/shared/consts';
-import { clearPetValues, fileToBase64, validateName } from 'src/shared/utils/form';
+import {
+  clearPetValues,
+  fileToBase64,
+  validateName,
+  validateNoWhiteSpace,
+} from 'src/shared/utils/form';
 
 import { textAreaValidation } from '../../../../shared/consts';
 import { PopupComponent } from 'src/app/sharedComponents/popup/popup.component';
@@ -79,11 +84,17 @@ export class EditPetComponent implements OnInit {
       picture: [null, Validators.required],
       name: [
         '',
-        [Validators.required, Validators.minLength(2), Validators.maxLength(255), validateName],
+        [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(255),
+          validateName,
+          validateNoWhiteSpace,
+        ],
       ],
       age: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(2)]],
       size: ['', [Validators.required]],
-      description: ['', [Validators.required, Validators.maxLength(25)]],
+      description: ['', [Validators.required, Validators.maxLength(25), validateNoWhiteSpace]],
     });
   }
 

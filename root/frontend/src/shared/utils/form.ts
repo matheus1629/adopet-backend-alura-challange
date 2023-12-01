@@ -6,6 +6,12 @@ import { PetSize } from '../enums/petSize.enum';
 import { AdoptionStatus } from '../enums/adoptionStatus.enum';
 import { IFilterMessagesPreview } from '../interfaces/filterMessagesPreview.interface';
 
+export function validateNoWhiteSpace(control: AbstractControl) {
+  const trimmedValue = control.value.trim();
+  const isBlank = trimmedValue.length < 2;
+  return isBlank ? { minlength: true } : null;
+}
+
 export function validateName(control: AbstractControl): { validName: boolean } | null {
   const regex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/;
 

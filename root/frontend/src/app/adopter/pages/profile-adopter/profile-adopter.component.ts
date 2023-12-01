@@ -12,7 +12,13 @@ import { IButtonConfig } from 'src/shared/interfaces/buttonConfig.interface';
 import { ButtonClass } from 'src/shared/enums/buttonConfig.enum';
 import { States } from 'src/shared/enums/states.enum';
 import { errorMessages, inputValidations } from 'src/shared/consts';
-import { clearValues, fileToBase64, telMask, validateName } from 'src/shared/utils/form';
+import {
+  clearValues,
+  fileToBase64,
+  telMask,
+  validateName,
+  validateNoWhiteSpace,
+} from 'src/shared/utils/form';
 import { IAccountData } from 'src/shared/interfaces/accountData.interface';
 import { IAccountEdit } from 'src/shared/interfaces/accountEdit.interface';
 import { IFormRegisterAccount } from 'src/shared/interfaces/formRegisterAccount.interface';
@@ -73,14 +79,34 @@ export class ProfileAdopterComponent implements OnInit, DoCheck {
       picture: [null],
       firstName: [
         '',
-        [Validators.required, Validators.minLength(2), Validators.maxLength(255), validateName],
+        [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(255),
+          validateName,
+          validateNoWhiteSpace,
+        ],
       ],
       lastName: [
         '',
-        [Validators.required, Validators.minLength(2), Validators.maxLength(255), validateName],
+        [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(255),
+          validateName,
+          validateNoWhiteSpace,
+        ],
       ],
       state: ['', [Validators.required]],
-      city: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(255)]],
+      city: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(255),
+          validateNoWhiteSpace,
+        ],
+      ],
       phoneNumber: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(11)]],
       personalInfo: ['', [Validators.maxLength(2000)]],
     });
