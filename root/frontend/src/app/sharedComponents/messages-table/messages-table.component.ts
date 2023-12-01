@@ -7,7 +7,6 @@ import { AuthService } from 'src/app/services/auth.service';
 import { PaginatorIntlService } from 'src/app/services/paginator-intl.service';
 
 import { AdoptionStatus } from 'src/shared/enums/adoptionStatus.enum';
-import { ButtonClass } from 'src/shared/enums/buttonConfig.enum';
 
 import { IButtonConfig } from 'src/shared/interfaces/buttonConfig.interface';
 import { IMessagesPreview } from 'src/shared/interfaces/messagesPreview.interface';

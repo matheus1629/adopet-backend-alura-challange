@@ -1,7 +1,7 @@
 import { DonorService } from 'src/app/services/donor.service';
 import { AdopterService } from './../../services/adopter.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+
 import { AuthService } from '../../services/auth.service';
 import { SharedService } from 'src/app/services/shared-services.service';
 import { Subscription } from 'rxjs/internal/Subscription';

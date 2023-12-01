@@ -2,6 +2,7 @@ import { textAreaValidation } from '../../../../shared/consts';
 import { Component, OnInit, DoCheck } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { map } from 'rxjs';
 
 import { AdopterService } from '../../../services/adopter.service';
@@ -17,7 +18,6 @@ import { IAccountEdit } from 'src/shared/interfaces/accountEdit.interface';
 import { IFormRegisterAccount } from 'src/shared/interfaces/formRegisterAccount.interface';
 import { PopupComponent } from 'src/app/sharedComponents/popup/popup.component';
 import { PopupConfirmComponent } from 'src/app/sharedComponents/popupConfirm/popup-confirmation.component';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile-adopter',

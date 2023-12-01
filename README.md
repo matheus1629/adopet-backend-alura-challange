@@ -22,12 +22,22 @@ Todos os pets disponíveis para adoção ficam visíveis para os usuários que p
  <li><code>Sistema de segurança: </code>Após se autenticar com as credenciais (email e senha), é armazenado no localstorage um token JWT que será utilizado em todas as requisições que necessitam de validação de usuário e também para fazer as validações das regras de negócio</li>
  </ul>
 
- <img src="https://github.com/matheus1629/alura-challenge-front-end-5edicao/assets/89110918/0fcc9733-457d-4376-b22d-0ee962f2271a" width="600" height="336"/>
-
 <h2>:open_file_folder: Acesso ao projeto</h2>
 
-Para rodar o projeto localmente, é preciso utilizar os seguintes comandos: 
+Criar o Schema 'adopet' no MySql.
 
-`yarn start`: subir o projeto na porta 3000.
+Dentro do diretório backend executar `npm run db:all`
 
-`yarn backend`: subir o json-server (fake API) na porta 5000.
+Dentro do diretório backend executar `npm start` (porta 8000).
+
+Dentro do diretório frontend executar `npm start` (porta 4200).
+
+<h2>:hammer_and_wrench: Build</h2>
+
+Dentro do diretório backend executar `npm run build:dev`.
+
+Dentro do diretório frontend executar `npm run build:dev`.
+
+<h2>Licença</h2>
+
+- Alura Geek possui [MIT license](./LICENSE)

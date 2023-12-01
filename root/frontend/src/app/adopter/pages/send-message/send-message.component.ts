@@ -9,7 +9,7 @@ import { MessageService } from 'src/app/services/message.service';
 
 import { IButtonConfig } from 'src/shared/interfaces/buttonConfig.interface';
 import { ButtonClass } from 'src/shared/enums/buttonConfig.enum';
-import { errorMessages, inputValidations } from 'src/shared/consts';
+import { errorMessages } from 'src/shared/consts';
 
 import { PopupComponent } from 'src/app/sharedComponents/popup/popup.component';
 import { PopupConfirmComponent } from 'src/app/sharedComponents/popupConfirm/popup-confirmation.component';
