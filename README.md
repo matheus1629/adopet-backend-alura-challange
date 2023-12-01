@@ -5,11 +5,11 @@
  <img alt="Static Badge" src="https://img.shields.io/badge/MIT-red?style=for-the-badge&label=license">
 
 <h2>Descrição do Projeto</h2>
-<p>Projeto full-stack de uma plataforma de adoção e doação de pets. O modelo desse projeto foi baseado em um challange da Alura, porém, foi adicionado mais end points, regras de negócio, sistema de autenticação, mais páginas e outras funcionalidades que serão mencionados abaixo a fim de deixar o projeto o mais próximo de um sistema real.
+<p>Projeto full-stack de uma plataforma de adoção e doação de pets. O modelo desse projeto foi baseado em um challange da Alura, porém foi adicionado mais end points, regras de negócio, sistema de autenticação, mais páginas e outras funcionalidades que serão mencionados abaixo a fim de deixar o projeto o mais próximo de um sistema real.
 
 O usuário pode criar uma conta na intenção de doar ou de adotar um pet. O usuário que irá doar o pet pode cadastra-lo no sistema, não tendo limite para pets cadastrados.
 
-Todos os pets disponíveis para adoção ficam visíveis para os usuários que possuem uma conta para adotar um pet, não tendo limite para pets adotados. Eles podem enviar uma mensagem para a pessoa que está doando o pet, que será avaliada por ela e decidirá se aceita ou não doar para a pessoa interessada.
+Todos os pets disponíveis para adoção ficam visíveis para os usuários que possuem uma conta para adotar um pet, não tendo limite para pets adotados. Eles podem enviar uma mensagem para a pessoa que está doando o pet que será avaliada por ela e decidirá se aceita ou não doar para a pessoa interessada.
 
 </p>
 
@@ -19,7 +19,7 @@ Todos os pets disponíveis para adoção ficam visíveis para os usuários que p
  <li><code>CRUD Usuario: </code>Cadastrar, visualizar os dados, editar os dados e exclusão da conta.</li>
  <li><code>Listagem paginada dos pets: </code>Os usuários que tem conta para adotar pet(s) podem visualizar todos os pets que ainda não foram adotados. Já os usuários que tem conta para doar pet(s), podem visualizar todos os seus pets que foram cadastrados.</li>
   <li><code>Sistema de filtragem de mensagens: </code>As mensagens enviadas pelo usuário que quer adotar e as mensagens recebidas pelo usuário que está doando são listadas e paginadas e podem ser filtradas por nome do pet, nome de usuário, ordem crescente ou decrescente e por status da adoção.</li>
- <li><code>Sistema de segurança: </code>Após se autenticar com as credenciais (email e senha), é armazenado no localstorage um token JWT que será utilizado em todas as requisições que necessitam de validação de usuário e também para fazer as validações das regras de negócio</li>
+ <li><code>Sistema de segurança: </code>Após se autenticar com as credenciais (email e senha), é armazenado no localstorage um token JWT que será utilizado em todas as requisições que necessitam de validação de usuário e também para fazer as validações das regras de negócio.</li>
  </ul>
 
 <img src="https://github.com/matheus1629/adopet-fullstack-alura-challange/assets/89110918/678fe687-385a-428b-a673-82de026be0b1" width="600" height="273"/>
