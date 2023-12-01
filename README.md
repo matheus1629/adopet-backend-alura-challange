@@ -5,11 +5,11 @@
  <img alt="Static Badge" src="https://img.shields.io/badge/MIT-red?style=for-the-badge&label=license">
 
 <h2>Descrição do Projeto</h2>
-<p>Projeto full-stack de uma plataforma de adoção e doação de pets. O modelo desse projeto foi baseado em um challange da Alura, porém, foi adicionado mais end points, regras de negócio, sistema de autenticação, mais páginas e outras funcionalidades que serão mencionados abaixo a fim de deixar o projeto o mais próximo de um sistema real.
+<p>Projeto full-stack de uma plataforma de adoção e doação de pets. O modelo desse projeto foi baseado em um challange da Alura, porém foi adicionado mais end points, regras de negócio, sistema de autenticação, mais páginas e outras funcionalidades que serão mencionados abaixo a fim de deixar o projeto o mais próximo de um sistema real.
 
 O usuário pode criar uma conta na intenção de doar ou de adotar um pet. O usuário que irá doar o pet pode cadastra-lo no sistema, não tendo limite para pets cadastrados.
 
-Todos os pets disponíveis para adoção ficam visíveis para os usuários que possuem uma conta para adotar um pet, não tendo limite para pets adotados. Eles podem enviar uma mensagem para a pessoa que está doando o pet, que será avaliada por ela e decidirá se aceita ou não doar para a pessoa interessada.
+Todos os pets disponíveis para adoção ficam visíveis para os usuários que possuem uma conta para adotar um pet, não tendo limite para pets adotados. Eles podem enviar uma mensagem para a pessoa que está doando o pet que será avaliada por ela e decidirá se aceita ou não doar para a pessoa interessada.
 
 </p>
 
@@ -26,7 +26,7 @@ Todos os pets disponíveis para adoção ficam visíveis para os usuários que p
 
 Criar o Schema 'adopet' no MySql.
 
-Dentro do diretório backend executar `npm run db:all`
+Dentro do diretório backend executar `npm run db:all`.
 
 Dentro do diretório backend executar `npm start` (porta 8000).
 
