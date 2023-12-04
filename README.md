@@ -12,9 +12,11 @@ O modelo desse projeto foi baseado em um challange da Alura, porém foi adiciona
 O usuário pode criar uma conta na intenção de doar ou de adotar um pet. O usuário que irá doar o pet pode cadastra-lo no sistema, não tendo limite para pets cadastrados.
 
 Todos os pets disponíveis para adoção ficam visíveis para os usuários que possuem uma conta para adotar um pet, não tendo limite para pets adotados. Eles podem enviar uma mensagem para a pessoa que está doando o pet que será avaliada por ela e decidirá se aceita ou não doar para a pessoa interessada.
+
 </p>
 
 <h1>Diagrama de Entidade e Relacionamento (Banco de Dados)</h1>
+<img src="database-diagram/database-diagram.png">
 
 <h1>:hammer: Funcionalidades do projeto</h1>
  <ul> 
