@@ -11,6 +11,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { ENVIRONMENT } from './environment.token';
 import { environment } from 'src/environments/environment';
 import { UrlInterceptor } from './url.interceptor';
+import { ErrorInterceptor } from './error.interceptor';
 
 import { AppComponent } from './app.component';
 import { SharedComponentsModule } from './sharedComponents/shared-components.module';
@@ -37,6 +38,11 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
       useClass: UrlInterceptor,
       multi: true,
     },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
   imports: [
@@ -48,7 +54,7 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
     HttpClientModule,
     BrowserAnimationsModule,
     MatRadioModule,
-    MatIconModule
+    MatIconModule,
   ],
 })
 export class AppModule {}
