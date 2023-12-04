@@ -7,7 +7,7 @@ export interface IMessageDetails {
   subject: string;
   contactMessage: String;
   idPet: number;
-  date: string;
+  createdAt: string;
   Pet: IPet;
   Adopter: IAccountData;
 }

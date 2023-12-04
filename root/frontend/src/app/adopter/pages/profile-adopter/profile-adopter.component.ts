@@ -179,7 +179,7 @@ export class ProfileAdopterComponent implements OnInit, DoCheck {
     const dialogRef = this.dialog.open(PopupConfirmComponent, {
       data: {
         title: 'Você tem certeza que deseja deletar sua conta?',
-        content: 'Todo o seu histórico do chat e seus pets para adoção serão perdidos.',
+        content: 'Todas as suas mensagens enviadas serão excluídas.',
         yes: 'Deletar Conta',
         no: 'Voltar',
       },

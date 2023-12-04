@@ -107,7 +107,6 @@ export class RegisterAdopterComponent implements OnInit {
 
   submit() {
     this.formSubmitted = true;
-    console.log(this.registerAdopterForm);
 
     if (this.registerAdopterForm.valid) {
       this.buttonRegister.loading = true;

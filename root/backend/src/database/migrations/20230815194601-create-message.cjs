@@ -25,7 +25,6 @@ module.exports = {
         type: Sequelize.STRING(2000),
         allowNull: false,
       },
-      date: { type: Sequelize.DATE, allowNull: false, defaultValue: Sequelize.fn("now") },
       id_adopter: {
         allowNull: false,
         type: Sequelize.UUID,

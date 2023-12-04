@@ -1,6 +1,6 @@
 export interface IMessagesPreview {
   id: number;
-  date: string;
+  createdAt: string;
   adoptionStatus: string;
   Pet: {
     name: string;

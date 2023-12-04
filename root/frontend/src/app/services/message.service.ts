@@ -38,7 +38,7 @@ export class MessageService {
         count: data.count,
         rows: data.rows.map((message) => ({
           ...message,
-          date: message.date.slice(0, 10),
+          createdAt: message.createdAt.slice(0, 10),
           adoptionStatus:
             AdoptionStatus[message.adoptionStatus.toUpperCase() as keyof typeof AdoptionStatus],
         })),
@@ -67,7 +67,7 @@ export class MessageService {
         count: data.count,
         rows: data.rows.map((message) => ({
           ...message,
-          date: message.date.slice(0, 10),
+          createdAt: message.createdAt.slice(0, 10),
           adoptionStatus:
             AdoptionStatus[message.adoptionStatus.toUpperCase() as keyof typeof AdoptionStatus],
         })),

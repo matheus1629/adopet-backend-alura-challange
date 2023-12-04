@@ -129,7 +129,6 @@ const createMessage = async (newMessage) => {
     const errorMessage = `Validation errors: ${errors.join(", ")}`;
     throw new BadRequestError(errorMessage, 422);
   }
-
   return await messageRepository.createMessage(newMessage);
 };
 

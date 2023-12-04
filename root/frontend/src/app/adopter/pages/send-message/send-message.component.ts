@@ -15,6 +15,7 @@ import { PopupComponent } from 'src/app/sharedComponents/popup/popup.component';
 import { PopupConfirmComponent } from 'src/app/sharedComponents/popupConfirm/popup-confirmation.component';
 import { ISendMessage } from 'src/shared/interfaces/sendMessage.interface';
 import { IPet } from 'src/shared/interfaces/pet.interface';
+import { validateNoWhiteSpace } from 'src/shared/utils/form';
 
 @Component({
   selector: 'app-send-message',
@@ -44,7 +45,15 @@ export class SendMessageComponent implements OnInit {
 
   ngOnInit(): void {
     this.messsageForm = this.fb.group({
-      subject: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(70)]],
+      subject: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(70),
+          validateNoWhiteSpace,
+        ],
+      ],
       contactMessage: [
         '',
         [Validators.required, Validators.minLength(20), Validators.maxLength(2000)],

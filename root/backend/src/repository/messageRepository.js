@@ -36,8 +36,8 @@ const getAllMessagesByDonorPreview = async (
   adoptionStatus
 ) =>
   await database.Message.findAndCountAll({
-    attributes: ["id", "date", "adoptionStatus"],
-    order: [["date", dateOrder]],
+    attributes: ["id", "createdAt", "adoptionStatus"],
+    order: [["createdAt", dateOrder]],
     where: {
       [Op.and]: Sequelize.literal(adoptionStatus ? `adoption_Status = '${adoptionStatus}'` : "true"),
     },
@@ -83,8 +83,8 @@ const getAllMessagesByAdopterPreview = async (
   adoptionStatus
 ) =>
   await database.Message.findAndCountAll({
-    attributes: ["id", "date", "adoptionStatus"],
-    order: [["date", dateOrder]],
+    attributes: ["id", "createdAt", "adoptionStatus"],
+    order: [["createdAt", dateOrder]],
     where: {
       [Op.and]: [
         Sequelize.literal(adoptionStatus ? `adoption_Status = '${adoptionStatus}'` : "true"),
