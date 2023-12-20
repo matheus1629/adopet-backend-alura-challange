@@ -4,8 +4,6 @@ services:
     container_name: mysqlcontainer
     command: --default-authentication-plugin=mysql_native_password
     restart: unless-stopped
-    env_file:
-      - root\backend\.env
     ports:
       - 3306:3306
     expose:
@@ -21,11 +19,11 @@ services:
       - mysql-data:/var/lib/mysql
 
   api:
-    container_name: adopter-api
+    container_name: adopet-api
     depends_on: 
       - mysqldb
     build: root\backend
-    image: nodeapi:v1
+    image: matheusp16/adopetnodeapi:v1
     environment:
       DB_NAME: adopet
       DB_USER: admin
@@ -40,11 +38,11 @@ services:
       - adopetnet
 
   web:
-    container_name: adopter-web
+    container_name: adopet-web
     depends_on: 
       - api
     build: root\frontend
-    image: web:v1
+    image: matheusp16/adopetweb:v1
     ports:
       - 80:80
     expose:
