@@ -38,11 +38,11 @@ module.exports = {
       id_donor: {
         allowNull: false,
         type: Sequelize.UUID,
-        references: { model: "donor", key: "id" },
+        references: { model: "Donor", key: "id" },
       },
       id_adopter: {
         type: Sequelize.UUID,
-        references: { model: "adopter", key: "id" },
+        references: { model: "Adopter", key: "id" },
       },
       createdAt: {
         allowNull: false,

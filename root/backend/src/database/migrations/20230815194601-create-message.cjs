@@ -28,12 +28,12 @@ module.exports = {
       id_adopter: {
         allowNull: false,
         type: Sequelize.UUID,
-        references: { model: "adopter", key: "id" },
+        references: { model: "Adopter", key: "id" },
       },
       id_pet: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: { model: "pet", key: "id" },
+        references: { model: "Pet", key: "id" },
         onDelete: "cascade",
       },
       createdAt: {
