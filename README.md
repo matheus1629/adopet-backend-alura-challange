@@ -43,6 +43,10 @@ Dentro do diretório backend executar `npm run build:dev`.
 
 Dentro do diretório frontend executar `npm run build:dev`.
 
+<h2>:whale: Docker</h2>
+
+Para inicializar o projeto em containers, executar `docker-compose up`.
+
 <h2>Licença</h2>
 
 - Alura Geek possui [MIT license](./LICENSE)
