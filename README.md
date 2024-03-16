@@ -49,4 +49,4 @@ Para inicializar o projeto em containers, executar `docker-compose up`.
 
 <h2>Licença</h2>
 
-- Alura Geek possui [MIT license](./LICENSE)
+- Adopet possui [MIT license](./LICENSE)
