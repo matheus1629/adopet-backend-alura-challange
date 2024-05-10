@@ -47,6 +47,16 @@ Dentro do diretório frontend executar `npm run build:dev`.
 
 Para inicializar o projeto em containers, executar `docker-compose up`.
 
+## 🦸 Autor
+
+<a href="https://github.com/matheus1629">
+ <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/89110918?v=4" width="100px;" alt="avatar github"/>
+ <br />
+ <sub><b>Matheus Palermo</b></sub></a>
+ <br />
+
+[![Linkedin Badge](https://img.shields.io/badge/-Matheus-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/matheus-palermo/)](https://www.linkedin.com/in/matheus-palermo/)
+
 <h2>Licença</h2>
 
 - Alura Geek possui [MIT license](./LICENSE)
